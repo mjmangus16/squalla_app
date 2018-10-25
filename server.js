@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const users = require("./routes/api/users");
-const profile = require("./routes/api/profile");
-const submitRound = require("./routes/api/submitRound");
+const profile = require("./routes/api/profiles");
+const submitRound = require("./routes/api/rounds");
 const leagues = require("./routes/api/leagues");
 const courses = require("./routes/api/courses");
 const achievements = require("./routes/api/achievements");
@@ -23,8 +23,8 @@ app.get("/", (req, res) => res.send("Hello"));
 
 // Use Routes
 app.use("/api/users", users);
-app.use("/api/profile", profile);
-app.use("/api/submitRound", submitRound);
+app.use("/api/profiles", profile);
+app.use("/api/rounds", submitRound);
 app.use("/api/leagues", leagues);
 app.use("/api/courses", courses);
 app.use("/api/achievements", achievements);
