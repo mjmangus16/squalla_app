@@ -15,7 +15,7 @@ const ProfileSchema = new Schema({
     coursesPlayed: {
       type: Number
     },
-    achievements: {
+    achievement: {
       type: Object
     },
     recentRound: {
