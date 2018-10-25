@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const keys = require("../../config/keys");
 
 const User = require("../../models/User");
 const Profile = require("../../models/Profile");
@@ -10,7 +12,7 @@ const Profile = require("../../models/Profile");
 // @access  Public
 router.get("/test", (rez, res) => res.json({ msg: "Users Works" }));
 
-// @route   GET api/users/register
+// @route   POST api/users/register
 // @desc    Register User
 // @access  Public
 router.post("/register", (req, res) => {
@@ -53,6 +55,46 @@ router.post("/register", (req, res) => {
         });
       });
     }
+  });
+});
+
+// @route   POST api/users/login
+// @desc    Login User
+// @access  Public
+router.post("/login", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  User.findOne({ email }).then(user => {
+    if (!user) {
+      return res.status(404).json({ eail: "User not found" });
+    }
+
+    bcrypt.compare(password, user.password).then(isMatch => {
+      if (isMatch) {
+        // User Matched
+
+        const payload = {
+          id: user.id,
+          username: user.username
+        };
+
+        // Sign Token
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          { expiresIn: 7200 },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token
+            });
+          }
+        );
+      } else {
+        return res.status(400).json({ password: "Password incorrect" });
+      }
+    });
   });
 });
 
