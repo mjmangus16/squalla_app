@@ -10,6 +10,39 @@ const Profile = require("../../models/Profile");
 // @access  Public
 router.get("/test", (req, res) => res.json({ msg: "Profile Works" }));
 
+// @route   GET api/profiles/home/dashboard
+// @desc    Get dashboard data
+// @access  Private
+router.get(
+  "/home/dashboard",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ username: req.user.username }).then(profile => {
+      const myScore = () => {
+        for (let i = 0; i < profile.rounds[0].scores.length; i++) {
+          if (profile.rounds[0].scores[i].player === profile.username) {
+            return profile.rounds[0].scores[i].score;
+          }
+        }
+      };
+
+      let dashboard = {
+        username: profile.username,
+        roundsPlayed: profile.rounds.length,
+        coursesPlayed: profile.courses.length,
+        recentAchieve: profile.achievements[0],
+        recentRound: {
+          date: profile.rounds[0].date,
+          course: profile.rounds[0].course.name,
+          tees: profile.rounds[0].course.tees,
+          score: myScore()
+        }
+      };
+      res.json(dashboard);
+    });
+  }
+);
+
 // @route   POST api/profiles/courses/add
 // @desc    Post a course to user profile
 // @access  Private
