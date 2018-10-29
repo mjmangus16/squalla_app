@@ -7,8 +7,7 @@ const RoundSchema = new Schema({
     required: true
   },
   league: {
-    type: Boolean,
-    default: false,
+    type: String,
     required: true
   },
   date: {

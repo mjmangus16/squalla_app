@@ -21,39 +21,45 @@ router.post("/register", (req, res) => {
     if (email) {
       return res.status(400).json({ email: "Email already in use" });
     } else {
-      const newUser = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
-      });
+      User.findOne({ username: req.body.username }).then(username => {
+        if (username) {
+          return res.status(400).json({ email: "Username already in use" });
+        } else {
+          const newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password
+          });
 
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err;
-          newUser.password = hash;
-          newUser
-            .save()
-            .then(user => {
-              const newProfile = new Profile({
-                username: user.username,
-                dashboard: {
-                  nickname: "",
-                  roundsPlayed: 0,
-                  coursesPlayed: 0,
-                  achievement: {},
-                  recentRound: {}
-                },
-                courses: [],
-                friends: [],
-                rounds: [],
-                leagues: [],
-                achievements: []
-              });
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) throw err;
+              newUser.password = hash;
+              newUser
+                .save()
+                .then(user => {
+                  const newProfile = new Profile({
+                    username: user.username,
+                    dashboard: {
+                      nickname: "",
+                      roundsPlayed: 0,
+                      coursesPlayed: 0,
+                      achievement: {},
+                      recentRound: {}
+                    },
+                    courses: [],
+                    friends: [],
+                    rounds: [],
+                    leagues: [],
+                    achievements: []
+                  });
 
-              newProfile.save().then(profile => res.json(profile));
-            })
-            .catch(err => console.log(err));
-        });
+                  newProfile.save().then(profile => res.json(profile));
+                })
+                .catch(err => console.log(err));
+            });
+          });
+        }
       });
     }
   });
@@ -109,5 +115,15 @@ router.get(
     res.json(req.user);
   }
 );
+
+// @route   GET api/users/all
+// @desc    Get all users
+// @access  Public
+router.get("/all", (req, res) => {
+  User.find().then(users => {
+    let usernames = users.map(user => user.username);
+    res.json({ usernames });
+  });
+});
 
 module.exports = router;
