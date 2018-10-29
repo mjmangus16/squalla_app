@@ -73,6 +73,29 @@ router.get(
   }
 );
 
+// @route   GET api/profiles/courses/name/:name
+// @desc    Get a specific course by name
+// @access  Private
+router.get(
+  "/courses/name/:name",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ username: req.user.username }).then(profile => {
+      for (let i = 0; i < profile.courses.length; i++) {
+        if (profile.courses[i].name === req.params.name) {
+          let course = profile.courses[i];
+          for (let j = 0; j < profile.rounds.length; j++) {
+            if (profile.rounds[j].course.name === course.name) {
+              course.history.push(profile.rounds[j]);
+            }
+          }
+        }
+      }
+      res.json(profile);
+    });
+  }
+);
+
 // @route   POST api/profiles/friends/add
 // @desc    Post a friend to user profile
 // @access  Private
@@ -131,6 +154,33 @@ router.get(
           });
           res.json(myFriendsData);
         });
+      }
+    });
+  }
+);
+
+// @route   GET api/profiles/friends/name/:name
+// @desc    Get a specific friend
+// @access  Private
+router.get(
+  "/friends/name/:name",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ username: req.user.username }).then(profile => {
+      let myFriendsData = [];
+      for (let i = 0; i < profile.friends.length; i++) {
+        if (profile.friends[i] === req.params.name) {
+          Profile.findOne({ username: profile.friends[i] }).then(friend => {
+            myFriendsData.push({
+              username: profile.friends[i],
+              roundsPlayed: friend.rounds.length,
+              coursesPlayed: friend.courses.length,
+              recentAchieve: friend.achievements[0],
+              recentRound: friend.rounds[0]
+            });
+            res.json(myFriendsData);
+          });
+        }
       }
     });
   }
