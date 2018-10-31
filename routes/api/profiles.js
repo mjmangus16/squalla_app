@@ -4,11 +4,16 @@ const passport = require("passport");
 
 const Course = require("../../models/Course");
 const Profile = require("../../models/Profile");
+const levels = require("../../functions/leveling/levels");
+
+const bestScores = require("../../functions/bestScores");
 
 // @route   GET api/profile/test
 // @desc    Tests profile route
 // @access  Public
 router.get("/test", (req, res) => res.json({ msg: "Profile Works" }));
+
+//                        ************* HOME **************
 
 // @route   GET api/profiles/home/dashboard
 // @desc    Get dashboard data
@@ -26,22 +31,75 @@ router.get(
         }
       };
 
+      profile.level = levels(profile.exp);
+
       let dashboard = {
+        level: profile.level,
         username: profile.username,
         roundsPlayed: profile.rounds.length,
         coursesPlayed: profile.courses.length,
-        recentAchieve: profile.achievements[0],
-        recentRound: {
+        recentAchieve: profile.achievements[0]
+      };
+
+      if (profile.rounds[0]) {
+        dashboard.recentRound = {
           date: profile.rounds[0].date,
           course: profile.rounds[0].course.name,
           tees: profile.rounds[0].course.tees,
           score: myScore()
-        }
-      };
-      res.json(dashboard);
+        };
+      }
+
+      profile.save().then(profile => res.json(dashboard));
     });
   }
 );
+
+// @route   GET api/profiles/home/achievements/all
+// @desc    Get all achievements earned
+// @access  Private
+router.get(
+  "/home/achievements/all",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ username: req.user.username }).then(profile => {
+      res.json(profile.achievements);
+    });
+  }
+);
+
+// @route   GET api/profiles/home/rounds/all
+// @desc    Get all rounds
+// @access  Private
+router.get(
+  "/home/rounds/all",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ username: req.user.username }).then(profile => {
+      let myScore = i => {
+        for (let j = 0; j < profile.rounds[i].scores.length; j++) {
+          if (profile.rounds[i].scores[j].player === profile.username) {
+            return profile.rounds[i].scores[j].score;
+          }
+        }
+      };
+      let roundsData = [];
+      for (let i = 0; i < profile.rounds.length; i++) {
+        roundsData.push({
+          date: profile.rounds[i].date,
+          course: profile.rounds[i].course.name,
+          tees: profile.rounds[i].course.tees,
+          myScore: myScore(i),
+          players: profile.rounds[i].scores.length,
+          roundScores: profile.rounds[i].scores
+        });
+      }
+      res.json(roundsData);
+    });
+  }
+);
+
+//                        ************* COURSES **************
 
 // @route   POST api/profiles/courses/add
 // @desc    Post a course to user profile
@@ -97,9 +155,13 @@ router.get(
       for (let i = 0; i < profile.courses.length; i++) {
         for (let j = 0; j < profile.rounds.length; j++) {
           if (profile.courses[i].name === profile.rounds[j].course.name) {
-            profile.courses[i].history.push(profile.rounds[j]);
+            profile.courses[i].history.unshift(profile.rounds[j]);
           }
         }
+        profile.courses[i].bestScores = bestScores(
+          profile.courses[i],
+          profile.username
+        );
       }
       res.json(profile);
     });
@@ -128,6 +190,8 @@ router.get(
     });
   }
 );
+
+//                        ************* FRIENDS **************
 
 // @route   POST api/profiles/friends/add
 // @desc    Post a friend to user profile
@@ -218,6 +282,8 @@ router.get(
     });
   }
 );
+
+//                        ************* LEAGUES **************
 
 // @route   GET api/profiles/leagues
 // @desc    Get all user leagues

@@ -5,6 +5,21 @@ const ProfileSchema = new Schema({
   username: {
     type: String
   },
+  level: {
+    type: Number,
+    required: true,
+    default: 1
+  },
+  exp: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  achievePoints: {
+    type: Number,
+    required: true,
+    default: 0
+  },
   dashboard: {
     nickname: {
       type: String

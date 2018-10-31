@@ -51,7 +51,9 @@ router.post("/register", (req, res) => {
                     friends: [],
                     rounds: [],
                     leagues: [],
-                    achievements: []
+                    achievements: [],
+                    level: 1,
+                    exp: 0
                   });
 
                   newProfile.save().then(profile => res.json(profile));
