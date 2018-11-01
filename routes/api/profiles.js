@@ -7,6 +7,7 @@ const Profile = require("../../models/Profile");
 const levels = require("../../functions/leveling/levels");
 
 const bestScores = require("../../functions/bestScores");
+const avgScores = require("../../functions/avgScores");
 
 // @route   GET api/profile/test
 // @desc    Tests profile route
@@ -124,11 +125,36 @@ router.post(
               }
             }
 
+            let averageScores = {};
+            let bestScores = {};
+
+            if (course.par.gold) {
+              averageScores.gold = "N/A";
+              bestScores.gold = "N/A";
+            }
+
+            if (course.par.blue) {
+              averageScores.blue = "N/A";
+              bestScores.blue = "N/A";
+            }
+
+            if (course.par.white) {
+              averageScores.white = "N/A";
+              bestScores.white = "N/A";
+            }
+
+            if (course.par.red) {
+              averageScores.red = "N/A";
+              bestScores.red = "N/A";
+            }
+
             const myCourse = {
               id: course._id,
               name: course.name,
               holes: course.holes,
               par: course.par,
+              avgScores: averageScores,
+              bestScores: bestScores,
               history: []
             };
 
@@ -159,6 +185,11 @@ router.get(
           }
         }
         profile.courses[i].bestScores = bestScores(
+          profile.courses[i],
+          profile.username
+        );
+
+        profile.courses[i].avgScores = avgScores(
           profile.courses[i],
           profile.username
         );
