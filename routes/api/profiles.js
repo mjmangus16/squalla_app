@@ -9,6 +9,9 @@ const levels = require("../../functions/leveling/levels");
 const bestScores = require("../../functions/bestScores");
 const avgScores = require("../../functions/avgScores");
 
+// Load Input Validation
+const validateProfileInput = require("../../validation/profile");
+
 // @route   GET api/profile/test
 // @desc    Tests profile route
 // @access  Public
@@ -32,13 +35,30 @@ router.get(
         }
       };
 
+      for (let j = 0; j < profile.rounds.length; j++) {
+        for (let k = 0; k < profile.courses.length; k++) {
+          if (profile.rounds[j].course.name === profile.courses[k].name) {
+            profile.courses[k].history.unshift(profile.rounds[j]);
+          }
+        }
+      }
+
+      let coursesPlayed = 0;
+
+      for (let y = 0; y < profile.courses.length; y++) {
+        if (profile.courses[y].history.length > 0) {
+          coursesPlayed++;
+        }
+      }
+
       profile.level = levels(profile.exp);
 
       let dashboard = {
         level: profile.level,
+        exp: profile.exp,
         username: profile.username,
         roundsPlayed: profile.rounds.length,
-        coursesPlayed: profile.courses.length,
+        coursesPlayed: coursesPlayed,
         recentAchieve: profile.achievements[0]
       };
 
@@ -109,19 +129,24 @@ router.post(
   "/courses/add",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    const { errors, isValid } = validateProfileInput.course(req.body);
+    // Check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
     Course.findOne({ name: req.body.name })
       .then(course => {
         if (!course) {
-          res
-            .status(404)
-            .json({ course: "That course is not in our database" });
+          errors.course = "That course does not exist in our database";
+          res.status(404).json(errors);
         } else {
           Profile.findOne({ username: req.user.username }).then(profile => {
             for (let i = 0; i < profile.courses.length; i++) {
               if (req.body.name === profile.courses[i].name) {
-                return res.json({
-                  course: "You have already added that course to your profile."
-                });
+                errors.course =
+                  "You have already added that course to your profile";
+                return res.json(errors);
               }
             }
 
@@ -207,17 +232,28 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOne({ username: req.user.username }).then(profile => {
+      let selectedCourse;
       for (let i = 0; i < profile.courses.length; i++) {
         if (profile.courses[i].name === req.params.name) {
+          selectedCourse = profile.courses[i];
           let course = profile.courses[i];
           for (let j = 0; j < profile.rounds.length; j++) {
             if (profile.rounds[j].course.name === course.name) {
               course.history.push(profile.rounds[j]);
             }
           }
+          profile.courses[i].bestScores = bestScores(
+            profile.courses[i],
+            profile.username
+          );
+
+          profile.courses[i].avgScores = avgScores(
+            profile.courses[i],
+            profile.username
+          );
         }
       }
-      res.json(profile);
+      res.json(selectedCourse);
     });
   }
 );
@@ -231,17 +267,24 @@ router.post(
   "/friends/add",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    const { errors, isValid } = validateProfileInput.friend(req.body);
+    // Check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
     Profile.findOne({ username: req.body.username }).then(username => {
       if (!username) {
-        res.status(404).json({ user: "That user does not exist." });
+        errors.user = "That user does not exist";
+        res.status(404).json(errors);
       } else {
         Profile.findOne({ username: req.user.username })
           .then(profile => {
             for (let i = 0; i < profile.friends.length; i++) {
               if (req.body.username === profile.friends[i]) {
-                return res.json({
-                  user: "That user has already been added to your friends."
-                });
+                errors.friend =
+                  "That user has already been added to you friends";
+                return res.json(errors);
               }
             }
             if (req.body.username !== req.user.username) {
@@ -251,9 +294,8 @@ router.post(
                 .then(profile => res.json(profile))
                 .catch(err => res.json(err));
             } else {
-              res.json({
-                user: "You do not need to add yourself to your profile."
-              });
+              errors.self = "You do not need to add yourself to your profile";
+              res.json(errors);
             }
           })
           .catch(err => res.json(err));
@@ -300,7 +342,8 @@ router.get(
         if (profile.friends[i] === req.params.name) {
           Profile.findOne({ username: profile.friends[i] }).then(friend => {
             myFriendsData.push({
-              username: profile.friends[i],
+              username: friend.username,
+              level: friend.level,
               roundsPlayed: friend.rounds.length,
               coursesPlayed: friend.courses.length,
               recentAchieve: friend.achievements[0],

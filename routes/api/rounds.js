@@ -9,6 +9,9 @@ const Course = require("../../models/Course");
 const expGained = require("../../functions/leveling/expGained");
 const levels = require("../../functions/leveling/levels");
 
+// Load Input Validation
+const validateRoundsInput = require("../../validation/rounds");
+
 // @route   GET api/rounds/test
 // @desc    Tests rounds route
 // @access  Public
@@ -64,6 +67,12 @@ router.post(
       } else {
         scores = [req.body.scores];
       }
+    }
+
+    const { errors, isValid } = validateRoundsInput(req.body, players, scores);
+    // Check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
     }
 
     let roundScores = [];
