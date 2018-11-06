@@ -1,0 +1,34 @@
+.home-container {
+  display: grid;
+  grid-template-rows: 3fr 2fr;
+  height: 100%;
+}
+
+#home-heading1 {
+  font-family: "Patua One", cursive;
+  color: var(--lightGrey);
+  margin: auto;
+  font-size: 3em;
+}
+
+#home-heading2-container {
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  grid-template-columns: 1fr 1fr;
+}
+
+#home-heading2 {
+  color: var(--lightGrey);
+  text-align: center;
+  font-size: 3em;
+  font-weight: 300;
+  grid-column: 1/3;
+}
+
+#home-heading2-leftArrow {
+  margin: auto;
+}
+
+#home-heading2-rightArrow {
+  margin: auto;
+}

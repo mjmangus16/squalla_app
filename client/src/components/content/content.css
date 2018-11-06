@@ -1,0 +1,8 @@
+.content-container {
+  width: 100%;
+  height: 100%;
+  background-image: url("../../img/showcase.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right;
+}

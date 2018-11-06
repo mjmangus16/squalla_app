@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700");
+@import url("https://fonts.googleapis.com/css?family=Patua+One");
+
+:root {
+  --orange: #ff6100;
+  --green: #33ae18;
+  --border: #f2f2f2;
+  --lightGrey: #bfbfbf;
+  --darkGrey: #404040;
+  --filterButton: #d9d9d9;
+}
+
+/* font-family: 'Patua One', cursive; */
+
+body {
+  background-color: #bfbfbf;
+  font-family: "Roboto", sans-serif;
+}
+
+.App {
+  height: 100vh;
+}
+
+#orange-q {
+  color: var(--orange);
+}
