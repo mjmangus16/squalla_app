@@ -10,6 +10,7 @@ const content = () => {
     <Router>
       <div className="content-container">
         <Route exact path="/" component={Home} />
+        <Route exact path="/home" component={Home} />
       </div>
     </Router>
   );

@@ -24,3 +24,5 @@ body {
 #orange-q {
   color: var(--orange);
 }
+
+/* mobile view will shift at width: 800px, height: 700px */
