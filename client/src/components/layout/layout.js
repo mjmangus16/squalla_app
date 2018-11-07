@@ -40,7 +40,10 @@ class Layout extends Component {
             alt="hamburger menu icon"
             onClick={this.showMenuHandler}
           />
-          <MobileMenu showMenu={this.state.showMenu} />
+          <MobileMenu
+            showMenu={this.state.showMenu}
+            showMenuHandler={this.showMenuHandler}
+          />
           <div className="layout-sidebar-nav">
             <button id="squalla-app-button">SQUALLA APP</button>
             <button id="squalla-search-button">DISC SEARCH</button>

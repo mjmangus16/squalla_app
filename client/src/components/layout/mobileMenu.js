@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import expandArrow from "../../img/expandArrow.png";
 import collapseArrow from "../../img/collapseArrow.png";
+import hamburger from "../../img/hamburger.png";
 
 import "./mobileMenu.css";
 
@@ -9,7 +10,7 @@ class MobileMenu extends Component {
   state = {
     expandFunction: true,
     expandFunction2: true,
-    loggedIn: true
+    loggedIn: false
   };
 
   expandMenuHandler = () => {
@@ -29,49 +30,56 @@ class MobileMenu extends Component {
   };
 
   render() {
-    let expand1;
-    let expand2;
-    let expand3;
-    let expand4;
-    let expand5;
-    let expand7;
+    let squallaAppExpand;
+    let squallaAppCollapse;
+    let squallaAppSubMenu;
+    let profileExpand;
+    let profileCollapse;
+    let profileSubMenu;
 
     if (this.state.expandFunction === true) {
-      expand1 = "";
-      expand2 = "item-hide";
-      expand3 = "item-hide";
+      squallaAppExpand = "";
+      squallaAppCollapse = "item-hide";
+      squallaAppSubMenu = "item-hide";
     } else if (this.state.expandFunction === false) {
-      expand2 = "";
-      expand1 = "item-hide";
-      expand3 = "sub-menu";
+      squallaAppCollapse = "";
+      squallaAppExpand = "item-hide";
+      squallaAppSubMenu = "sub-menu";
     }
 
     if (this.state.expandFunction2 === true) {
-      expand4 = "";
-      expand5 = "item-hide";
-      expand7 = "item-hide";
+      profileExpand = "";
+      profileCollapse = "item-hide";
+      profileSubMenu = "item-hide";
     } else if (this.state.expandFunction2 === false) {
-      expand4 = "item-hide";
-      expand5 = "";
-      expand7 = "sub-menu2";
+      profileExpand = "item-hide";
+      profileCollapse = "";
+      profileSubMenu = "sub-menu2";
     }
 
     let loggedIn;
-    let hide;
-    let hide2;
+    let showLogout;
+    let hideLogout;
 
     if (this.state.loggedIn === true) {
       loggedIn = "Logout";
-      hide = "";
-      hide2 = "item-hide";
-    } else {
+      showLogout = "";
+      hideLogout = "item-hide";
+    } else if (this.state.loggedIn === false) {
       loggedIn = "Login";
-      hide = "item-hide";
-      hide2 = "";
+      showLogout = "item-hide";
+      hideLogout = "";
     }
 
     return (
       <div className="mobile-menu-container" id={this.props.showMenu}>
+        <input
+          type="image"
+          src={hamburger}
+          id="hamburger-menu"
+          alt="hamburger menu icon"
+          onClick={this.props.showMenuHandler}
+        />
         <nav>
           <ul>
             <li>Home</li>
@@ -84,22 +92,22 @@ class MobileMenu extends Component {
                 type="image"
                 src={expandArrow}
                 className="mobile-menu-expand-arrow"
-                id={expand1}
+                id={squallaAppExpand}
                 alt="expand menu item icon"
               />
               <input
                 type="image"
                 src={collapseArrow}
                 className="mobile-menu-collapse-arrow"
-                id={expand2}
+                id={squallaAppCollapse}
                 alt="collapse menu item icon"
               />
             </li>
-            <li id={expand3}>
+            <li id={squallaAppSubMenu}>
               <ul id="logged-in-subMenu">
-                <li id={hide2}>{loggedIn}</li>
+                <li id={hideLogout}>{loggedIn}</li>
                 <li
-                  id={hide}
+                  id={showLogout}
                   onClick={this.expandMenuHandler2}
                   className="border-bottom"
                 >
@@ -108,18 +116,18 @@ class MobileMenu extends Component {
                     type="image"
                     src={expandArrow}
                     className="mobile-menu-expand-arrow"
-                    id={expand4}
+                    id={profileExpand}
                     alt="expand menu item icon"
                   />
                   <input
                     type="image"
                     src={collapseArrow}
                     className="mobile-menu-collapse-arrow"
-                    id={expand5}
+                    id={profileCollapse}
                     alt="collapse menu item icon"
                   />
                 </li>
-                <li id={expand7}>
+                <li id={profileSubMenu}>
                   <ul id="profile-subMenu">
                     <li className="border-bottom">Home</li>
                     <li className="border-bottom">Courses</li>
@@ -128,13 +136,13 @@ class MobileMenu extends Component {
                   </ul>
                 </li>
 
-                <li id={hide} className="border-bottom">
+                <li id={showLogout} className="border-bottom">
                   Submit Round
                 </li>
-                <li id={hide} className="border-bottom">
+                <li id={showLogout} className="border-bottom">
                   Settings
                 </li>
-                <li id={hide}>{loggedIn}</li>
+                <li id={showLogout}>{loggedIn}</li>
               </ul>
             </li>
           </ul>

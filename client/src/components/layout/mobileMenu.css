@@ -3,7 +3,11 @@
   width: 64%;
   height: 100%;
   background-color: #1a1a1a;
-  overflow: scroll;
+  overflow-y: scroll;
+}
+
+.mobile-menu-container::-webkit-scrollbar {
+  width: 0px;
 }
 
 .mobile-menu-container nav ul {
