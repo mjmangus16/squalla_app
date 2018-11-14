@@ -4,23 +4,22 @@ h1 {
 
 .layout-container-out {
   width: 90%;
-  max-width: 1300px;
+  max-width: 1200px;
   margin: auto;
   height: 90%;
-  max-height: 900px;
+  max-height: 825px;
   position: relative;
   top: 50%;
   transform: perspective(1px) translateY(-50%);
-  position: relative;
   display: grid;
   grid-template-rows: 15px auto;
 }
 
 .layout-container-in {
-  height: 100%;
+  height: auto;
   background-color: #242021;
   display: grid;
-  grid-template-rows: 95% 5%;
+  grid-template-rows: auto 23px;
   grid-template-columns: 125px auto;
   z-index: -1;
   position: relative;
@@ -44,6 +43,7 @@ h1 {
 
 .nav-logo {
   width: 165px;
+  margin: auto;
 }
 
 .layout-sidebar-nav {
@@ -77,6 +77,18 @@ h1 {
   grid-row: 3;
 }
 
+#squalla-app-button button {
+  color: var(--orange);
+  text-decoration: none;
+  border: none;
+}
+
+#squalla-search-button button {
+  color: var(--green);
+  text-decoration: none;
+  border: none;
+}
+
 .layout-content-container {
   width: auto;
   height: 100%;
@@ -92,7 +104,34 @@ h1 {
   font-size: 10px;
 }
 
-@media only screen and (min-width: 601px) {
+.layout-trademark p {
+  margin: auto;
+}
+
+.menu-link {
+  text-decoration: none;
+  color: black;
+}
+
+@media only screen and (max-height: 650px) {
+  .layout-sidebar-nav {
+    grid-template-rows: repeat(7, 1fr);
+  }
+}
+
+@media only screen and (max-height: 500px) {
+  .layout-container-out {
+    height: 99%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .layout-container-out {
+    width: 99%;
+  }
+}
+
+@media only screen and (min-width: 601px) and (min-height: 421px) {
   #hamburger-menu {
     display: none;
   }
@@ -103,6 +142,7 @@ h1 {
     position: absolute;
     margin: 20px;
     width: 35px;
+    z-index: 3;
   }
 
   #squalla-search-button {
@@ -126,6 +166,10 @@ h1 {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
+  .layout-sidebar-nav {
+    display: none;
+  }
+
   .nav-logo {
     grid-column: 2;
   }
@@ -133,6 +177,65 @@ h1 {
   .layout-container-in {
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
+  }
+
+  .layout-content-container {
+    grid-column: 1;
+  }
+
+  .layout-trademark {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 825px) and (max-height: 420px) {
+  #hamburger-menu {
+    position: absolute;
+    margin: 20px;
+    width: 35px;
+    z-index: 3;
+  }
+
+  .mobile-menu-container {
+    display: block;
+  }
+
+  #squalla-search-button {
+    display: none;
+  }
+
+  #squalla-app-button {
+    display: none;
+  }
+
+  .layout-top-nav div {
+    display: none;
+  }
+
+  .layout-container-out {
+    width: 100%;
+    height: 100%;
+  }
+
+  .layout-top-nav {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .layout-sidebar-nav {
+    display: none;
+  }
+
+  .nav-logo {
+    grid-column: 2;
+  }
+
+  .layout-container-in {
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .layout-content-container {
+    grid-column: 1;
   }
 
   .layout-trademark {

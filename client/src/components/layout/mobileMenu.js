@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import expandArrow from "../../img/expandArrow.png";
 import collapseArrow from "../../img/collapseArrow.png";
-import hamburger from "../../img/hamburger.png";
 
 import "./mobileMenu.css";
 
@@ -73,16 +72,14 @@ class MobileMenu extends Component {
 
     return (
       <div className="mobile-menu-container" id={this.props.showMenu}>
-        <input
-          type="image"
-          src={hamburger}
-          id="hamburger-menu"
-          alt="hamburger menu icon"
-          onClick={this.props.showMenuHandler}
-        />
         <nav>
           <ul>
-            <li>Home</li>
+            <li>
+              <a className="mobile-menu-link" href="/home">
+                Home
+              </a>
+            </li>
+
             <li>About</li>
             <li>Blog</li>
             <li id="mobile-menu-dst">Disc Search Tool</li>

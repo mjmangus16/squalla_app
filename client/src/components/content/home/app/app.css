@@ -1,0 +1,31 @@
+.home-boxes-box-side {
+  min-height: 200px;
+}
+
+.home-boxes-container3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 25px auto;
+  width: 70%;
+}
+
+#app-page3-p {
+  font-size: 1.5em;
+  text-align: center;
+  margin: 50px auto;
+  width: 70%;
+}
+
+@media only screen and (max-width: 600px) {
+  .home-boxes-box-side {
+    min-height: 130px;
+  }
+
+  .home-boxes-container3 img {
+    width: 50%;
+  }
+
+  #app-page3-p {
+    font-size: 1em;
+  }
+}

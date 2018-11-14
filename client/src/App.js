@@ -17,6 +17,4 @@ class App extends Component {
   }
 }
 
-// <Route exact path="/" component={ Landing } />
-
 export default App;

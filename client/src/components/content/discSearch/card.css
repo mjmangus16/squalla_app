@@ -1,0 +1,94 @@
+.search-card {
+  width: 144px;
+  height: 185px;
+  margin: auto;
+  background-image: url("../../../img/cardBackground.png");
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+}
+
+.search-card-name {
+  margin: 3px;
+  color: var(--orange);
+  font-weight: 400;
+}
+
+.search-card-logo-container {
+  width: 90%;
+  height: 60px;
+  margin: auto;
+}
+
+.search-card-logo {
+  max-width: 95%;
+  max-height: 90%;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: perspective(1px) translateY(-50%);
+}
+
+.search-card-details {
+  height: 90px;
+  width: 129px;
+  margin: auto;
+  display: grid;
+  grid-template-rows: 1fr auto 1fr 1fr;
+}
+
+.search-card-distance-heading {
+  font-size: 0.75em;
+  font-weight: 500;
+  margin: 5px auto 5px;
+  color: var(--lightGrey);
+}
+
+.search-card-ratings-heading {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 127.5px;
+}
+
+.search-card-ratings-heading p {
+  margin: auto;
+  font-size: 0.9em;
+  border-top: solid 1px #8c8c8c;
+  border-bottom: solid 1px #8c8c8c;
+  width: 100%;
+  height: auto;
+  color: var(--orange);
+  font-weight: 400;
+  padding: 4px 0;
+}
+
+.search-card-ratings-speed {
+  border-left: solid 1px #8c8c8c;
+  border-right: solid 1px #8c8c8c;
+}
+
+.search-card-ratings-glide {
+  border-right: solid 1px #8c8c8c;
+}
+
+.search-card-ratings-turn {
+  border-right: solid 1px #8c8c8c;
+}
+
+.search-card-ratings-fade {
+  border-right: solid 1px #8c8c8c;
+}
+
+.search-card-stability-heading {
+  font-size: 0.75em;
+  font-weight: 500;
+  margin: 8px auto;
+  color: var(--lightGrey);
+}
+
+.search-card-more-info {
+  font-size: 0.5em;
+  margin: 0 auto;
+  color: var(--orange);
+  text-decoration: underline;
+}
