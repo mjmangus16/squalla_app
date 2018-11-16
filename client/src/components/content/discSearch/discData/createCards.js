@@ -3,24 +3,7 @@ import React from "react";
 import logoFunction from "./cardsLogo";
 
 const createCards = discsArray => {
-  const shuffledArray = array => {
-    let currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
-
-    while (0 !== currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-  };
-
-  const cardsArray = shuffledArray(discsArray).map((disc, index) => (
+  const cardsArray = discsArray.map((disc, index) => (
     <div className="search-card" key={index}>
       <p className="search-card-name">{disc.Name}</p>
       <div className="search-card-logo-container">

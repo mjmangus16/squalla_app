@@ -2,7 +2,7 @@ import React from "react";
 
 const glide = () => (
   <select className="filter-select-menu" id="search-glide">
-    <option value="selected">GLIDE</option>
+    <option value="selected">Glide</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>

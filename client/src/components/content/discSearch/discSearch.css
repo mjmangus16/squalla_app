@@ -50,6 +50,7 @@
   display: grid;
   grid-template-columns: 1fr;
   font-weight: 300;
+  font-size: 0.9em;
 }
 
 .filter-container1-selected-filters-in p {

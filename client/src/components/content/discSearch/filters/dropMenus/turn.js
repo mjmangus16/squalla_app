@@ -2,7 +2,7 @@ import React from "react";
 
 const turn = () => (
   <select className="filter-select-menu" id="search-turn">
-    <option value="selected">TURN</option>
+    <option value="selected">Turn</option>
     <option value="t+1">+1</option>
     <option value="t0">0</option>
     <option value="t-1">-1</option>

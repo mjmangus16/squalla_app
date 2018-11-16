@@ -1,16 +1,20 @@
 import React from "react";
 
-const manufacture = () => (
-  <select className="filter-select-menu" id="manufacture-select">
-    <option value="selected">MANUFACTURE</option>
+const manufacture = props => (
+  <select
+    onChange={props.handler}
+    className="filter-select-menu"
+    id="manufacture-select"
+  >
+    <option value="selected">Manufacture</option>
     <option value="agl">Above Ground Level</option>
     <option value="aerobie">Aerobie</option>
-    <option value="aqua">Aqua</option>
+    <option value="aqua">AquaFlight</option>
     <option value="axiom">Axiom</option>
     <option value="ching">Ching</option>
     <option value="daredevil">Daredevil</option>
     <option value="dga">DGA</option>
-    <option value="discMania">Disc Mania</option>
+    <option value="discmania">Disc Mania</option>
     <option value="discraft">Discraft</option>
     <option value="dynamic">Dynamic</option>
     <option value="element">Element</option>

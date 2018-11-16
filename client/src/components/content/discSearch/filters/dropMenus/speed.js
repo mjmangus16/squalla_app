@@ -2,7 +2,7 @@ import React from "react";
 
 const speed = () => (
   <select className="filter-select-menu" id="search-speed">
-    <option value="selected">SPEED</option>
+    <option value="selected">Speed</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
