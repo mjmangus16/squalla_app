@@ -1,7 +1,11 @@
 import React from "react";
 
-const speed = () => (
-  <select className="filter-select-menu" id="search-speed">
+const speed = props => (
+  <select
+    onChange={props.handler}
+    className="filter-select-menu"
+    id="search-speed"
+  >
     <option value="selected">Speed</option>
     <option value="1">1</option>
     <option value="2">2</option>

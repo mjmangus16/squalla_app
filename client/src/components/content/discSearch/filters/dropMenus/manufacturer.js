@@ -1,12 +1,12 @@
 import React from "react";
 
-const manufacture = props => (
+const manufacturer = props => (
   <select
     onChange={props.handler}
     className="filter-select-menu"
-    id="manufacture-select"
+    id="manufacturer-select"
   >
-    <option value="selected">Manufacture</option>
+    <option value="selected">Manufacturer</option>
     <option value="agl">Above Ground Level</option>
     <option value="aerobie">Aerobie</option>
     <option value="aqua">AquaFlight</option>
@@ -46,4 +46,4 @@ const manufacture = props => (
   </select>
 );
 
-export default manufacture;
+export default manufacturer;

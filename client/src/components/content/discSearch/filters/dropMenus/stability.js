@@ -1,7 +1,11 @@
 import React from "react";
 
-const stability = () => (
-  <select className="filter-select-menu" id="stability-select">
+const stability = props => (
+  <select
+    onChange={props.handler}
+    className="filter-select-menu"
+    id="stability-select"
+  >
     <option value="selected">Stability</option>
     <option value="veryOverstable">Very Overstable</option>
     <option value="overstable">Overstable</option>

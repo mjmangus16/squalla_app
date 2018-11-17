@@ -1,7 +1,11 @@
 import React from "react";
 
-const glide = () => (
-  <select className="filter-select-menu" id="search-glide">
+const glide = props => (
+  <select
+    onChange={props.handler}
+    className="filter-select-menu"
+    id="search-glide"
+  >
     <option value="selected">Glide</option>
     <option value="1">1</option>
     <option value="2">2</option>
