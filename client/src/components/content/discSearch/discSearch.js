@@ -92,6 +92,7 @@ class discSearch extends Component {
   };
 
   stability = {
+    stability: false,
     veryOverstable: false,
     overstable: false,
     stable: false,
@@ -99,6 +100,7 @@ class discSearch extends Component {
   };
 
   speed = {
+    speed: false,
     _1: false,
     _2: false,
     _3: false,
@@ -117,6 +119,7 @@ class discSearch extends Component {
   };
 
   glide = {
+    glide: false,
     _1: false,
     _2: false,
     _3: false,
@@ -127,6 +130,7 @@ class discSearch extends Component {
   };
 
   turn = {
+    turn: false,
     _p1: false,
     _0: false,
     _m1: false,
@@ -137,6 +141,7 @@ class discSearch extends Component {
   };
 
   fade = {
+    fade: false,
     _0: false,
     _1: false,
     _2: false,
@@ -361,18 +366,22 @@ class discSearch extends Component {
   filterStabilityHandler = e => {
     if (e.target.value === "veryOverstable") {
       this.stability.veryOverstable = true;
+      this.stability.stability = true;
       this.filterSelections.push(<p key="veryOverstable">Very Overstable</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "overstable") {
       this.stability.overstable = true;
+      this.stability.stability = true;
       this.filterSelections.push(<p key="overstable">Overstable</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "stable") {
       this.stability.stable = true;
+      this.stability.stability = true;
       this.filterSelections.push(<p key="stable">Stable</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "understable") {
       this.stability.understable = true;
+      this.stability.stability = true;
       this.filterSelections.push(<p key="understable">Understable</p>);
       this.setState({ filterSelections: this.filterSelections });
     }
@@ -381,62 +390,77 @@ class discSearch extends Component {
   filterSpeedHandler = e => {
     if (e.target.value === "1") {
       this.speed._1 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_1">Speed: 1</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "2") {
       this.speed._2 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_2">Speed: 2</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "3") {
       this.speed._3 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_3">Speed: 3</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "4") {
       this.speed._4 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_4">Speed: 4</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "5") {
       this.speed._5 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_5">Speed: 5</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "6") {
       this.speed._6 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_6">Speed: 6</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "7") {
       this.speed._7 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_7">Speed: 7</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "8") {
       this.speed._8 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_8">Speed: 8</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "9") {
       this.speed._9 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_9">Speed: 9</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "10") {
       this.speed._10 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_10">Speed: 10</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "11") {
       this.speed._11 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_11">Speed: 11</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "12") {
       this.speed._12 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_12">Speed: 12</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "13") {
       this.speed._13 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_13">Speed: 13</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "14") {
       this.speed._14 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_14">Speed: 14</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "15") {
       this.speed._15 = true;
+      this.speed.speed = true;
       this.filterSelections.push(<p key="speed_15">Speed: 15</p>);
       this.setState({ filterSelections: this.filterSelections });
     }
@@ -445,30 +469,37 @@ class discSearch extends Component {
   filterGlideHandler = e => {
     if (e.target.value === "1") {
       this.glide._1 = true;
+      this.glide.glide = true;
       this.filterSelections.push(<p key="glide_1">Glide: 1</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "2") {
       this.glide._2 = true;
+      this.glide.glide = true;
       this.filterSelections.push(<p key="glide_2">Glide: 2</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "3") {
       this.glide._3 = true;
+      this.glide.glide = true;
       this.filterSelections.push(<p key="glide_3">Glide: 3</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "4") {
       this.glide._4 = true;
+      this.glide.glide = true;
       this.filterSelections.push(<p key="glide_4">Glide: 4</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "5") {
       this.glide._5 = true;
+      this.glide.glide = true;
       this.filterSelections.push(<p key="glide_5">Glide: 5</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "6") {
       this.glide._6 = true;
+      this.glide.glide = true;
       this.filterSelections.push(<p key="glide_6">Glide: 6</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "7") {
       this.glide._7 = true;
+      this.glide.glide = true;
       this.filterSelections.push(<p key="glide_7">Glide: 7</p>);
       this.setState({ filterSelections: this.filterSelections });
     }
@@ -477,30 +508,37 @@ class discSearch extends Component {
   filterTurnHandler = e => {
     if (e.target.value === "+1") {
       this.turn._p1 = true;
+      this.turn.turn = true;
       this.filterSelections.push(<p key="turn_1">Turn: 1</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "0") {
       this.turn._0 = true;
+      this.turn.turn = true;
       this.filterSelections.push(<p key="turn_2">Turn: 0</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "-1") {
       this.turn._m1 = true;
+      this.turn.turn = true;
       this.filterSelections.push(<p key="turn_3">Turn: -1</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "-2") {
       this.turn._m2 = true;
+      this.turn.turn = true;
       this.filterSelections.push(<p key="turn_4">Turn: -2</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "-3") {
       this.turn._m3 = true;
+      this.turn.turn = true;
       this.filterSelections.push(<p key="turn_5">Turn: -3</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "-4") {
       this.turn._m4 = true;
+      this.turn.turn = true;
       this.filterSelections.push(<p key="turn_6">Turn: -4</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "-5") {
       this.turn._m5 = true;
+      this.turn.turn = true;
       this.filterSelections.push(<p key="turn_7">Turn: -5</p>);
       this.setState({ filterSelections: this.filterSelections });
     }
@@ -509,26 +547,32 @@ class discSearch extends Component {
   filterFadeHandler = e => {
     if (e.target.value === "0") {
       this.fade._0 = true;
+      this.fade.fade = true;
       this.filterSelections.push(<p key="fade_1">Fade: 0</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "1") {
       this.fade._1 = true;
-      this.filterSelections.push(<p key="fade_2">Fade: </p>);
+      this.fade.fade = true;
+      this.filterSelections.push(<p key="fade_2">Fade: 1</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "2") {
       this.fade._2 = true;
+      this.fade.fade = true;
       this.filterSelections.push(<p key="fade_3">Fade: 2</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "3") {
       this.fade._3 = true;
+      this.fade.fade = true;
       this.filterSelections.push(<p key="fade_4">Fade: 3</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "4") {
       this.fade._4 = true;
+      this.fade.fade = true;
       this.filterSelections.push(<p key="fade_5">Fade: 4</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "5") {
       this.fade._5 = true;
+      this.fade.fade = true;
       this.filterSelections.push(<p key="fade_6">Fade: 5</p>);
       this.setState({ filterSelections: this.filterSelections });
     }
@@ -543,6 +587,30 @@ class discSearch extends Component {
         this.filteredArray,
         this.manufacturer
       );
+    }
+    if (this.stability.stability === true) {
+      this.filteredArray = filterFunctions.stability(
+        this.filteredArray,
+        this.stability
+      );
+    }
+    if (this.speed.speed === true) {
+      this.filteredArray = filterFunctions.speed(
+        this.filteredArray,
+        this.speed
+      );
+    }
+    if (this.glide.glide === true) {
+      this.filteredArray = filterFunctions.glide(
+        this.filteredArray,
+        this.glide
+      );
+    }
+    if (this.turn.turn === true) {
+      this.filteredArray = filterFunctions.turn(this.filteredArray, this.turn);
+    }
+    if (this.fade.fade === true) {
+      this.filteredArray = filterFunctions.fade(this.filteredArray, this.fade);
     }
 
     this.setState({ discs: this.filteredArray });
@@ -608,6 +676,7 @@ class discSearch extends Component {
     };
 
     this.stability = {
+      stability: false,
       veryOverstable: false,
       overstable: false,
       stable: false,

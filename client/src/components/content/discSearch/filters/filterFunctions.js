@@ -287,6 +287,292 @@ const filterFunctions = {
       }
     }
     return newArray;
+  },
+  stability: (array, object) => {
+    let newArray = [];
+    if (object.veryOverstable === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Stability === "Very Overstable") {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object.overstable === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Stability === "Overstable") {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object.stable === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Stability === "Stable") {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object.understable === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Stability === "Understable") {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    return newArray;
+  },
+  speed: (array, object) => {
+    let newArray = [];
+    if (object._1 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 0 && array[i].Speed <= 1.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._2 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 1.6 && array[i].Speed <= 2.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._3 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 2.6 && array[i].Speed <= 3.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._4 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 3.6 && array[i].Speed <= 4.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._5 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 4.6 && array[i].Speed <= 5.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._6 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 5.6 && array[i].Speed <= 6.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._7 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 6.6 && array[i].Speed <= 7.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._8 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 7.6 && array[i].Speed <= 8.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._9 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 8.6 && array[i].Speed <= 9.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._10 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 9.6 && array[i].Speed <= 10.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._11 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 10.6 && array[i].Speed <= 11.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._12 === true) {
+      for (let i = 0; i <= array.length; i++) {
+        if (array[i].Speed > 11.6 && array[i].Speed <= 12.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._13 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 12.6 && array[i].Speed <= 13.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._14 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 13.6 && array[i].Speed <= 14.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._15 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Speed >= 14.6 && array[i].Speed <= 15.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    return newArray;
+  },
+  glide: (array, object) => {
+    let newArray = [];
+    if (object._1 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Glide > 0 && array[i].Glide <= 1.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._2 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Glide >= 1.6 && array[i].Glide <= 2.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._3 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Glide >= 2.6 && array[i].Glide <= 3.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._4 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Glide >= 3.6 && array[i].Glide <= 4.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._5 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Glide >= 4.6 && array[i].Glide <= 5.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._6 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Glide >= 5.6 && array[i].Glide <= 6.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._7 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Glide >= 6.6 && array[i].Glide <= 7.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    return newArray;
+  },
+  turn: (array, object) => {
+    let newArray = [];
+    if (object._p1 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Turn <= 1.6 && array[i].Turn >= 0.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._0 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Turn <= 0.6 && array[i].Turn >= -0.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._m1 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Turn <= -0.6 && array[i].Turn >= -1.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._m2 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Turn <= -1.6 && array[i].Turn >= -2.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._m3 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Turn <= -2.6 && array[i].Turn >= -3.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._m4 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Turn <= -3.6 && array[i].Turn >= -4.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._m5 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Turn <= -4.6 && array[i].Turn >= -5.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    return newArray;
+  },
+  fade: (array, object) => {
+    let newArray = [];
+    if (object._1 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Fade > 0 && array[i].Fade <= 1.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._2 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Fade >= 1.6 && array[i].Fade <= 2.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._3 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Fade >= 2.6 && array[i].Fade <= 3.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._4 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Fade >= 3.6 && array[i].Fade <= 4.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object._5 === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Fade >= 4.6 && array[i].Fade <= 5.5) {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    return newArray;
   }
 };
 
