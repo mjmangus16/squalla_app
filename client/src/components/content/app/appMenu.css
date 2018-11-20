@@ -1,0 +1,36 @@
+.app-menu-container-background {
+  height: 100%;
+  background-color: black;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.app-menu-container {
+  border-right: solid 1px var(--lightGrey);
+  height: 100%;
+  width: 200px;
+}
+
+.app-menu-content {
+  color: var(--lightGrey);
+  padding-top: 100px;
+  padding-left: 15px;
+  position: relative;
+  top: 0;
+}
+
+.app-menu-content-username {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 80%;
+}
+
+.app-menu-content-username p {
+  margin: auto;
+}
+
+.app-menu-content-username h3 {
+  color: var(--orange);
+  margin: auto;
+  font-weight: 300;
+}

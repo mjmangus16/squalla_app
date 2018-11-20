@@ -7,8 +7,7 @@ import progressIcon from "../../../../img/progressIcon.png";
 import continueButton from "../../../../img/continueButton.png";
 import backButton from "../../../../img/backButton.png";
 
-import "../search/search.css";
-import "./app.css";
+import "../home.css";
 
 const app1 = () => {
   return (
@@ -34,7 +33,7 @@ const app1 = () => {
               <h2>Track Progress</h2>
               <p>Keeps track of course stats and how much you are improving</p>
             </div>
-            <div className="home-boxes-box-side">
+            <div className="home-boxes-box-side" id="home-boxes-box-middle">
               <img
                 className="home-box-icon"
                 src={competeIcon}

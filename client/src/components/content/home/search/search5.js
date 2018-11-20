@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import backButton from "../../../../img/backButton.png";
 
-import "./search.css";
+import "../home.css";
 
 const search5 = () => {
   return (

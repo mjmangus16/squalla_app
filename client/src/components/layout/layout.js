@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import HomeContent from "../content/homeContent";
 import DiscSearch from "../content/discSearch/discSearch";
+import SquallaApp from "../content/app/app";
 
 import MobileMenu from "./mobileMenu";
 import logo from "../../img/logo.png";
@@ -63,6 +64,7 @@ class Layout extends Component {
               <Route exact path="/" component={HomeContent} />
               <Route exact path="/home" component={HomeContent} />
               <Route exact path="/discSearch" component={DiscSearch} />
+              <Route exact path="/squallaApp" component={SquallaApp} />
             </div>
           </Router>
           <div className="layout-trademark">

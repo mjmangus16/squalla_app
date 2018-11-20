@@ -7,7 +7,7 @@ import compareIcon from "../../../../img/compareIcon.png";
 import continueButton from "../../../../img/continueButton.png";
 import backButton from "../../../../img/backButton.png";
 
-import "./search.css";
+import "../home.css";
 
 const search1 = () => {
   return (
@@ -33,7 +33,7 @@ const search1 = () => {
               <h2>Compare</h2>
               <p>Place discs side by side to easily compare the differences</p>
             </div>
-            <div className="home-boxes-box-middle">
+            <div className="home-boxes-box-side" id="home-boxes-box-middle">
               <img
                 className="home-box-icon"
                 src={searchIcon}

@@ -7,8 +7,7 @@ import threeIcon from "../../../../img/3Icon.png";
 import continueButton from "../../../../img/continueButton.png";
 import backButton from "../../../../img/backButton.png";
 
-import "../search/search.css";
-import "./app.css";
+import "../home.css";
 
 const app2 = () => {
   return (
@@ -30,7 +29,7 @@ const app2 = () => {
               <h2>Create Account</h2>
               <p>Username, Email and password is all you need to get started</p>
             </div>
-            <div className="home-boxes-box-side">
+            <div className="home-boxes-box-side" id="home-boxes-box-middle">
               <img className="home-box-icon" src={twoIcon} alt="search icon" />
               <h2>Add Friends & Courses</h2>
               <p>Add your friends and local courses to your profile</p>

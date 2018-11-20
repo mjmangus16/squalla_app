@@ -5,7 +5,7 @@ import continueButton from "../../../../img/continueButton.png";
 import backButton from "../../../../img/backButton.png";
 import filterExample from "../../../../img/filterExample.png";
 
-import "./search.css";
+import "../home.css";
 
 const search3 = () => {
   return (

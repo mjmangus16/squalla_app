@@ -7,8 +7,7 @@ import progressIcon from "../../../../img/progressIcon.png";
 import continueButton from "../../../../img/continueButton.png";
 import backButton from "../../../../img/backButton.png";
 
-import "../search/search.css";
-import "./app.css";
+import "../home.css";
 
 const app3 = () => {
   return (

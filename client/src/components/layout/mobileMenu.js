@@ -82,7 +82,9 @@ class MobileMenu extends Component {
 
             <li>About</li>
             <li>Blog</li>
-            <li id="mobile-menu-dst">Disc Search Tool</li>
+            <a href="/discSearch">
+              <li id="mobile-menu-dst">Disc Search Tool</li>
+            </a>
             <li id="mobile-menu-sa" onClick={this.expandMenuHandler}>
               Squalla App
               <input

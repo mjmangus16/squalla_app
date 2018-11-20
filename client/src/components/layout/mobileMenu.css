@@ -3,6 +3,9 @@
     display: none;
   }
 }
+.mobile-menu-container a {
+  text-decoration: none;
+}
 
 .mobile-menu-container {
   position: absolute;

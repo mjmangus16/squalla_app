@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 
 import backButton from "../../../../img/backButton.png";
 
-import "../search/search.css";
-import "./app.css";
+import "../home.css";
 
 const app4 = () => {
   return (

@@ -16,7 +16,7 @@ h1 {
 }
 
 .layout-container-in {
-  height: auto;
+  height: 100%;
   background-color: #242021;
   display: grid;
   grid-template-rows: auto 23px;

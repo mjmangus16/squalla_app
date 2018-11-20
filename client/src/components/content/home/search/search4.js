@@ -7,7 +7,7 @@ import compareCard1 from "../../../../img/compareCard1.png";
 import compareCard2 from "../../../../img/compareCard2.png";
 import compareCard3 from "../../../../img/compareCard3.png";
 
-import "./search.css";
+import "../home.css";
 
 const search4 = () => {
   return (
