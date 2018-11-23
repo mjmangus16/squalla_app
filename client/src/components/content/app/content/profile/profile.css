@@ -1,0 +1,71 @@
+.app-home-dashboard-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: auto;
+}
+
+.app-home-courses-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.app-home-nav-middle {
+  border-left: 1px solid var(--lightGrey);
+  border-right: 1px solid var(--lightGrey);
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--lightGrey);
+  font-size: 1em;
+}
+
+.app-home-nav-right {
+  border-left: 1px solid var(--lightGrey);
+  border-right: none;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--lightGrey);
+  font-size: 1em;
+}
+
+.app-home-dashboard-nav a {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  color: var(--lightGrey);
+  text-align: center;
+  text-decoration: none;
+}
+
+.app-home-nav-button {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--lightGrey);
+  border-left: none;
+  border-right: none;
+  font-size: 1em;
+}
+
+.squalla-app-content-container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto 50px;
+}
+
+#app-home-nav-selected {
+  background-color: var(--darkGrey);
+  color: var(--orange);
+}
+
+@media only screen and (max-width: 600px) {
+  .app-home-nav-button {
+    border-bottom: none;
+  }
+  .app-home-nav-middle {
+    border-bottom: none;
+  }
+}

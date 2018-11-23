@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import HomeContent from "../content/homeContent";
-import DiscSearch from "../content/discSearch/discSearch";
-import SquallaApp from "../content/app/app";
+import Content from "./content";
 
 import MobileMenu from "./mobileMenu";
 import logo from "../../img/logo.png";
 import hamburger from "../../img/hamburger.png";
 
 import "./layout.css";
+import "../content/app/app.css";
 
 class Layout extends Component {
   state = {
@@ -51,22 +49,18 @@ class Layout extends Component {
             showMenu={this.state.showMenu}
             showMenuHandler={this.showMenuHandler}
           />
+
           <div className="layout-sidebar-nav">
-            <a id="squalla-app-button" href="/squallaApp">
+            <a id="squalla-app-button" href="/squallaApp/profile/dashboard">
               <button>SQUALLA APP</button>
             </a>
+
             <a id="squalla-search-button" href="/discSearch">
               <button>DISC SEARCH</button>
             </a>
+            <p>Login / Register</p>
           </div>
-          <Router>
-            <div className="layout-content-container">
-              <Route exact path="/" component={HomeContent} />
-              <Route exact path="/home" component={HomeContent} />
-              <Route exact path="/discSearch" component={DiscSearch} />
-              <Route exact path="/squallaApp" component={SquallaApp} />
-            </div>
-          </Router>
+          <Content />
           <div className="layout-trademark">
             <p>SQUALLA DISC GOLF Ⓒ 2018</p>
           </div>

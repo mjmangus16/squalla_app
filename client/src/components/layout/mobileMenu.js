@@ -9,7 +9,7 @@ class MobileMenu extends Component {
   state = {
     expandFunction: true,
     expandFunction2: true,
-    loggedIn: false
+    loggedIn: true
   };
 
   expandMenuHandler = () => {
@@ -65,87 +65,89 @@ class MobileMenu extends Component {
       showLogout = "";
       hideLogout = "item-hide";
     } else if (this.state.loggedIn === false) {
-      loggedIn = "Login";
+      loggedIn = "Login / Register";
       showLogout = "item-hide";
       hideLogout = "";
     }
 
     return (
       <div className="mobile-menu-container" id={this.props.showMenu}>
-        <nav>
-          <ul>
-            <li>
-              <a className="mobile-menu-link" href="/home">
-                Home
+        <div className="mobile-menu-container2">
+          <nav>
+            <ul>
+              <li>
+                <a className="mobile-menu-link" href="/home">
+                  Home
+                </a>
+              </li>
+
+              <li>About</li>
+              <li>Blog</li>
+              <a href="/discSearch">
+                <li id="mobile-menu-dst">Disc Search Tool</li>
               </a>
-            </li>
+              <li id="mobile-menu-sa" onClick={this.expandMenuHandler}>
+                Squalla App
+                <input
+                  type="image"
+                  src={expandArrow}
+                  className="mobile-menu-expand-arrow"
+                  id={squallaAppExpand}
+                  alt="expand menu item icon"
+                />
+                <input
+                  type="image"
+                  src={collapseArrow}
+                  className="mobile-menu-collapse-arrow"
+                  id={squallaAppCollapse}
+                  alt="collapse menu item icon"
+                />
+              </li>
+              <li id={squallaAppSubMenu}>
+                <ul id="logged-in-subMenu">
+                  <li id={hideLogout}>{loggedIn}</li>
+                  <li
+                    id={showLogout}
+                    onClick={this.expandMenuHandler2}
+                    className="border-bottom"
+                  >
+                    Profile
+                    <input
+                      type="image"
+                      src={expandArrow}
+                      className="mobile-menu-expand-arrow"
+                      id={profileExpand}
+                      alt="expand menu item icon"
+                    />
+                    <input
+                      type="image"
+                      src={collapseArrow}
+                      className="mobile-menu-collapse-arrow"
+                      id={profileCollapse}
+                      alt="collapse menu item icon"
+                    />
+                  </li>
+                  <li id={profileSubMenu}>
+                    <ul id="profile-subMenu">
+                      <li className="border-bottom">
+                        <a href="/squallaApp/profile/dashboard">Dashboard</a>
+                      </li>
+                      <li className="border-bottom">Courses</li>
+                      <li className="border-bottom">Friends</li>
+                      <li>Leagues</li>
+                    </ul>
+                  </li>
 
-            <li>About</li>
-            <li>Blog</li>
-            <a href="/discSearch">
-              <li id="mobile-menu-dst">Disc Search Tool</li>
-            </a>
-            <li id="mobile-menu-sa" onClick={this.expandMenuHandler}>
-              Squalla App
-              <input
-                type="image"
-                src={expandArrow}
-                className="mobile-menu-expand-arrow"
-                id={squallaAppExpand}
-                alt="expand menu item icon"
-              />
-              <input
-                type="image"
-                src={collapseArrow}
-                className="mobile-menu-collapse-arrow"
-                id={squallaAppCollapse}
-                alt="collapse menu item icon"
-              />
-            </li>
-            <li id={squallaAppSubMenu}>
-              <ul id="logged-in-subMenu">
-                <li id={hideLogout}>{loggedIn}</li>
-                <li
-                  id={showLogout}
-                  onClick={this.expandMenuHandler2}
-                  className="border-bottom"
-                >
-                  Profile
-                  <input
-                    type="image"
-                    src={expandArrow}
-                    className="mobile-menu-expand-arrow"
-                    id={profileExpand}
-                    alt="expand menu item icon"
-                  />
-                  <input
-                    type="image"
-                    src={collapseArrow}
-                    className="mobile-menu-collapse-arrow"
-                    id={profileCollapse}
-                    alt="collapse menu item icon"
-                  />
-                </li>
-                <li id={profileSubMenu}>
-                  <ul id="profile-subMenu">
-                    <li className="border-bottom">Home</li>
-                    <li className="border-bottom">Courses</li>
-                    <li className="border-bottom">Friends</li>
-                    <li>Leagues</li>
-                  </ul>
-                </li>
-
-                <li id={showLogout} className="border-bottom">
-                  Submit Round
-                </li>
-                <li id={showLogout} className="border-bottom">
-                  Settings
-                </li>
-                <li id={showLogout}>{loggedIn}</li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
+                  <li id={showLogout} className="border-bottom">
+                    Submit Round
+                  </li>
+                  <li id={showLogout}>Settings</li>
+                </ul>
+              </li>
+              <li id={showLogout}>{loggedIn}</li>
+            </ul>
+          </nav>
+        </div>
       </div>
     );
   }

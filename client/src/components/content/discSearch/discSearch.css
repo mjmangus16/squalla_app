@@ -358,11 +358,6 @@
     max-width: 200px;
   }
 
-  .filter-card-search input {
-    width: 100px;
-    margin: auto;
-  }
-
   .search-content-cards {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -395,6 +390,7 @@
 
   #filter-card-search input {
     height: 20px;
+    margin: auto;
   }
 
   .search-content-cards {

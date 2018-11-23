@@ -1,6 +1,5 @@
 .app-menu-container-background {
   height: 100%;
-  background-color: black;
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
 }
@@ -8,13 +7,12 @@
 .app-menu-container {
   border-right: solid 1px var(--lightGrey);
   height: 100%;
-  width: 200px;
+  width: auto;
 }
 
 .app-menu-content {
   color: var(--lightGrey);
   padding-top: 100px;
-  padding-left: 15px;
   position: relative;
   top: 0;
 }
@@ -23,14 +21,51 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 80%;
-}
-
-.app-menu-content-username p {
-  margin: auto;
+  margin-left: 10px;
 }
 
 .app-menu-content-username h3 {
   color: var(--orange);
   margin: auto;
   font-weight: 300;
+}
+
+.app-menu-content-options {
+  overflow: hidden;
+}
+
+.app-menu-content-options a {
+  color: var(--lightGrey);
+  text-decoration: none;
+}
+
+.app-menu-content-options ul {
+  list-style-type: none;
+  padding: 0px 25px;
+  width: 100%;
+}
+
+.app-menu-content-options li {
+  padding: 7px 0;
+  margin-left: 5px;
+  border-bottom: 1px solid var(--lightGrey);
+}
+
+#no-border-li {
+  border-bottom: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .app-menu-container-background {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 825px) and (max-height: 425px) {
+  .app-menu-container-background {
+    display: none;
+  }
+  .squalla-app-container {
+    grid-template-columns: 1fr;
+  }
 }
