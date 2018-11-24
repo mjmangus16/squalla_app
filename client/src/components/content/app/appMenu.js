@@ -3,7 +3,25 @@ import { Link } from "react-router-dom";
 
 import "./appMenu.css";
 
-const appMenu = () => {
+const appMenu = props => {
+  let profileSelected = "not-selected";
+  let homeSelected = "not-selected";
+  let coursesSelected = "not-selected";
+  let friendsSelected = "not-selected";
+  let leaguesSelected = "not-selected";
+  let submitSelected = "not-selected";
+  let settingsSelected = "not-selected";
+
+  if (props.link === "home") {
+    homeSelected = "is-selected";
+  } else if (props.link === "courses") {
+    coursesSelected = "is-selected";
+  } else if (props.link === "friends") {
+    friendsSelected = "is-selected";
+  } else if (props.link === "leagues") {
+    leaguesSelected = "is-selected";
+  }
+
   return (
     <div className="app-menu-container-background">
       <div className="app-menu-container">
@@ -13,23 +31,41 @@ const appMenu = () => {
           </div>
           <div className="app-menu-content-options">
             <ul>
-              <li>Profile</li>
+              <li className="li-with-padding">Profile</li>
               <li id="no-border-li">
                 <ul>
-                  <Link to="/squallaApp/profile/dashboard" exact="true">
-                    <li>Dashboard</li>
+                  <Link
+                    to="/squallaApp/profile/dashboard"
+                    exact="true"
+                    id={homeSelected}
+                  >
+                    <li className="li-with-padding">Home</li>
                   </Link>
-                  <Link to="/squallaApp/profile/courses" exact="true">
-                    <li>Courses</li>
+                  <Link
+                    to="/squallaApp/profile/courses"
+                    exact="true"
+                    id={coursesSelected}
+                  >
+                    <li className="li-with-padding">Courses</li>
                   </Link>
-                  <Link to="/squallaApp/profile/friends" exact="true">
-                    <li>Friends</li>
+                  <Link
+                    to="/squallaApp/profile/friends"
+                    exact="true"
+                    id={friendsSelected}
+                  >
+                    <li className="li-with-padding">Friends</li>
                   </Link>
-                  <li>Leagues</li>
+                  <Link
+                    to="/squallaApp/profile/leagues"
+                    exact="true"
+                    id={leaguesSelected}
+                  >
+                    <li className="li-with-padding">Leagues</li>
+                  </Link>
                 </ul>
               </li>
-              <li>Submit Round</li>
-              <li>Settings</li>
+              <li className="li-with-padding">Submit Round</li>
+              <li className="li-with-padding">Settings</li>
             </ul>
           </div>
         </div>

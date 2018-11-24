@@ -8,7 +8,7 @@ import "../profile.css";
 const friends = () => {
   return (
     <div className="squalla-app-container">
-      <AppMenu />
+      <AppMenu link={"friends"} />
       <div className="squalla-app-content-container">
         <div className="app-home-courses-content" />
         <div className="app-home-courses-nav">

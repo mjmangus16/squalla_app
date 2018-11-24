@@ -45,7 +45,7 @@
   width: 100%;
 }
 
-.app-menu-content-options li {
+.li-with-padding {
   padding: 7px 0;
   margin-left: 5px;
   border-bottom: 1px solid var(--lightGrey);
@@ -53,6 +53,15 @@
 
 #no-border-li {
   border-bottom: none;
+  padding: none;
+}
+
+#not-selected {
+  color: var(--lightGrey);
+}
+
+#is-selected {
+  color: var(--orange);
 }
 
 @media only screen and (max-width: 600px) {

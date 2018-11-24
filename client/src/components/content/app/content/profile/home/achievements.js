@@ -8,10 +8,10 @@ import "../profile.css";
 const achievements = () => {
   return (
     <div className="squalla-app-container">
-      <AppMenu />
+      <AppMenu link={"home"} />
       <div className="squalla-app-content-container">
         <div className="app-home-dashboard-content" />
-        <div className="app-home-dashboard-nav">
+        <div className="app-home-home-nav">
           <Link to="/squallaApp/profile/dashboard" exact="true">
             <button className="app-home-nav-button">Dashboard</button>
           </Link>
