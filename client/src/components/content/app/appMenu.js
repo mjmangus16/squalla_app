@@ -20,6 +20,8 @@ const appMenu = props => {
     friendsSelected = "is-selected";
   } else if (props.link === "leagues") {
     leaguesSelected = "is-selected";
+  } else if (props.link === "submitRound") {
+    submitSelected = "is-selected";
   }
 
   return (
@@ -64,7 +66,13 @@ const appMenu = props => {
                   </Link>
                 </ul>
               </li>
-              <li className="li-with-padding">Submit Round</li>
+              <Link
+                to="/squallaApp/submitRound/recent"
+                exact="true"
+                id={submitSelected}
+              >
+                <li className="li-with-padding">Submit Round</li>
+              </Link>
               <li className="li-with-padding">Settings</li>
             </ul>
           </div>

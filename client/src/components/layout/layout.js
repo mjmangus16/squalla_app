@@ -11,7 +11,8 @@ import "../content/app/app.css";
 
 class Layout extends Component {
   state = {
-    showMenu: "item-hide"
+    showMenu: "item-hide",
+    user: true
   };
 
   showMenuHandler = () => {
@@ -23,6 +24,14 @@ class Layout extends Component {
   };
 
   render() {
+    let displayLogin;
+
+    if (this.state.user === false) {
+      displayLogin = "/login";
+    } else if (this.state.user === true) {
+      displayLogin = "/squallaApp/profile/dashboard";
+    }
+
     return (
       <div className="layout-container-out">
         <div className="layout-top-nav">
@@ -48,17 +57,17 @@ class Layout extends Component {
           <MobileMenu
             showMenu={this.state.showMenu}
             showMenuHandler={this.showMenuHandler}
+            displayLogin={displayLogin}
           />
 
           <div className="layout-sidebar-nav">
-            <a id="squalla-app-button" href="/squallaApp/profile/dashboard">
+            <a id="squalla-app-button" href={displayLogin}>
               <button>SQUALLA APP</button>
             </a>
 
             <a id="squalla-search-button" href="/discSearch">
               <button>DISC SEARCH</button>
             </a>
-            <p>Login / Register</p>
           </div>
           <Content />
           <div className="layout-trademark">

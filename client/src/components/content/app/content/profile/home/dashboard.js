@@ -32,8 +32,13 @@ const dashboard = () => {
           </div>
           <div className="app-home-dashboard-recentAchieve">
             <h4>Recent Achievement</h4>
+
             <p>Date</p>
             <p>Description</p>
+          </div>
+          <div className="app-home-dashboard-achievePoints">
+            <h4>Achievement Points</h4>
+            <p>34</p>
           </div>
           <div className="app-home-dashboard-recentRound">
             <h4>Recent Round</h4>

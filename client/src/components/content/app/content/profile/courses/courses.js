@@ -19,7 +19,7 @@ class Courses extends Component {
 
   selectCourseHandler = e => {
     this.setState({ courseSelected: !this.state.courseSelected });
-    console.log(e.target.parentElement.firstChild.textContent);
+
     this.selectedCourseData.course =
       e.target.parentElement.firstChild.textContent;
   };
@@ -79,7 +79,7 @@ class Courses extends Component {
           <h4>Red</h4>
         </div>
         <div className="app-courses-course-data-heading">
-          <h4>Course Par</h4>
+          <h4>Par</h4>
           <p>N/A</p>
           <p>N/A</p>
           <p>N/A</p>

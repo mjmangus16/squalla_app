@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import addButton from "../../../../../../img/addButton.png";
-
 import AppMenu from "../../../appMenu";
 
 import "../profile.css";
@@ -11,12 +9,6 @@ const addCourse = () => {
   let course = (
     <div className="app-courses-course-database">
       <h3>Joseph Davis State Park</h3>
-      {/* <input
-        type="image"
-        src={addButton}
-        className="app-courses-course-addButton"
-        alt="expand course item icon"
-      /> */}
       <div className="add-course-button">
         <h5>ADD</h5>
         <h5>COURSE</h5>

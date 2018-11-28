@@ -9,7 +9,7 @@ class MobileMenu extends Component {
   state = {
     expandFunction: true,
     expandFunction2: true,
-    loggedIn: true
+    loggedIn: false
   };
 
   expandMenuHandler = () => {
@@ -65,7 +65,7 @@ class MobileMenu extends Component {
       showLogout = "";
       hideLogout = "item-hide";
     } else if (this.state.loggedIn === false) {
-      loggedIn = "Login / Register";
+      loggedIn = <a href="/login">Log In / Register</a>;
       showLogout = "item-hide";
       hideLogout = "";
     }
@@ -135,13 +135,15 @@ class MobileMenu extends Component {
                       <li className="border-bottom">
                         <a href="/squallaApp/profile/courses">Courses</a>
                       </li>
-                      <li className="border-bottom">Friends</li>
+                      <li className="border-bottom">
+                        <a href="/squallaApp/profile/friends">Friends</a>
+                      </li>
                       <li>Leagues</li>
                     </ul>
                   </li>
 
                   <li id={showLogout} className="border-bottom">
-                    Submit Round
+                    <a href="/squallaApp/submitRound/recent">Submit Round</a>
                   </li>
                   <li id={showLogout}>Settings</li>
                 </ul>

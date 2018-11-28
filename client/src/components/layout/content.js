@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+import Register from "../auth/register";
+import Login from "../auth/login";
+
 import Home from "../content/home/home";
 import App1 from "../content/home/app/app1";
 import App2 from "../content/home/app/app2";
@@ -21,6 +24,9 @@ import AddCourse from "../content/app/content/profile/courses/addCourse";
 import Friends from "../content/app/content/profile/friends/friends";
 import AddFriend from "../content/app/content/profile/friends/addFriend";
 
+import submitRoundRecent from "../content/app/content/submitRound/recent/recent";
+import submitContent from "../content/app/content/submitRound/submit/submitContent";
+
 import "../content/app/app.css";
 
 class Content extends Component {
@@ -28,6 +34,8 @@ class Content extends Component {
     return (
       <Router>
         <div className="layout-content-container">
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/home/app/page1" component={App1} />
@@ -62,6 +70,16 @@ class Content extends Component {
             exact
             path="/squallaApp/profile/friends/add"
             component={AddFriend}
+          />
+          <Route
+            exact
+            path="/squallaApp/submitRound/recent"
+            component={submitRoundRecent}
+          />
+          <Route
+            exact
+            path="/squallaApp/submitRound/submit"
+            component={submitContent}
           />
         </div>
       </Router>
