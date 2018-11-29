@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
+
 import Content from "./content";
 
 import MobileMenu from "./mobileMenu";
@@ -11,8 +15,7 @@ import "../content/app/app.css";
 
 class Layout extends Component {
   state = {
-    showMenu: "item-hide",
-    user: true
+    showMenu: "item-hide"
   };
 
   showMenuHandler = () => {
@@ -23,14 +26,19 @@ class Layout extends Component {
     }
   };
 
+  onLogoutClick(e) {
+    e.preventDefault();
+    this.props.logoutUser();
+    window.location.href = "/login";
+  }
+
   render() {
     let displayLogin;
 
-    if (this.state.user === false) {
-      displayLogin = "/login";
-    } else if (this.state.user === true) {
-      displayLogin = "/squallaApp/profile/dashboard";
-    }
+    const { isAuthenticated, user } = this.props.auth;
+
+    const auth = "/squallaApp/profile/dashboard";
+    const guest = "/login";
 
     return (
       <div className="layout-container-out">
@@ -58,10 +66,12 @@ class Layout extends Component {
             showMenu={this.state.showMenu}
             showMenuHandler={this.showMenuHandler}
             displayLogin={displayLogin}
+            logout={this.onLogoutClick.bind(this)}
+            auth={isAuthenticated}
           />
 
           <div className="layout-sidebar-nav">
-            <a id="squalla-app-button" href={displayLogin}>
+            <a id="squalla-app-button" href={isAuthenticated ? auth : guest}>
               <button>SQUALLA APP</button>
             </a>
 
@@ -79,4 +89,16 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+Layout.proptypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Layout);

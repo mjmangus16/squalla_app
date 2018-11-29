@@ -8,8 +8,7 @@ import "./mobileMenu.css";
 class MobileMenu extends Component {
   state = {
     expandFunction: true,
-    expandFunction2: true,
-    loggedIn: false
+    expandFunction2: true
   };
 
   expandMenuHandler = () => {
@@ -59,15 +58,51 @@ class MobileMenu extends Component {
     let loggedIn;
     let showLogout;
     let hideLogout;
+    let loginLink;
+    let squallaApp;
 
-    if (this.state.loggedIn === true) {
-      loggedIn = "Logout";
+    if (this.props.auth) {
+      loggedIn = (
+        <li onClick={this.props.logout} id={showLogout}>
+          Logout
+        </li>
+      );
       showLogout = "";
       hideLogout = "item-hide";
-    } else if (this.state.loggedIn === false) {
-      loggedIn = <a href="/login">Log In / Register</a>;
+      loginLink = "/login";
+      squallaApp = (
+        <li
+          id="mobile-menu-sa"
+          onClick={this.props.auth ? this.expandMenuHandler : null}
+        >
+          Squalla App
+          <input
+            type="image"
+            src={expandArrow}
+            className="mobile-menu-expand-arrow"
+            id={squallaAppExpand}
+            alt="expand menu item icon"
+          />
+          <input
+            type="image"
+            src={collapseArrow}
+            className="mobile-menu-collapse-arrow"
+            id={squallaAppCollapse}
+            alt="collapse menu item icon"
+          />
+        </li>
+      );
+    } else if (!this.props.auth) {
+      loggedIn = "";
       showLogout = "item-hide";
       hideLogout = "";
+      loginLink = null;
+      squallaAppExpand = "item-hide";
+      squallaApp = (
+        <a href="/login">
+          <li id="mobile-menu-sa">Squalla App</li>
+        </a>
+      );
     }
 
     return (
@@ -86,26 +121,9 @@ class MobileMenu extends Component {
               <a href="/discSearch">
                 <li id="mobile-menu-dst">Disc Search Tool</li>
               </a>
-              <li id="mobile-menu-sa" onClick={this.expandMenuHandler}>
-                Squalla App
-                <input
-                  type="image"
-                  src={expandArrow}
-                  className="mobile-menu-expand-arrow"
-                  id={squallaAppExpand}
-                  alt="expand menu item icon"
-                />
-                <input
-                  type="image"
-                  src={collapseArrow}
-                  className="mobile-menu-collapse-arrow"
-                  id={squallaAppCollapse}
-                  alt="collapse menu item icon"
-                />
-              </li>
+              {squallaApp}
               <li id={squallaAppSubMenu}>
                 <ul id="logged-in-subMenu">
-                  <li id={hideLogout}>{loggedIn}</li>
                   <li
                     id={showLogout}
                     onClick={this.expandMenuHandler2}
@@ -148,7 +166,7 @@ class MobileMenu extends Component {
                   <li id={showLogout}>Settings</li>
                 </ul>
               </li>
-              <li id={showLogout}>{loggedIn}</li>
+              {loggedIn}
             </ul>
           </nav>
         </div>

@@ -82,3 +82,16 @@
     height: 35px;
   }
 }
+
+.is-invalid {
+  box-shadow: 0 0 1px white;
+  border-color: var(--orange);
+}
+
+.invalid-feedback {
+  color: var(--lightGrey);
+  font-size: 13px;
+  width: auto;
+  margin: auto;
+  font-weight: 400;
+}
