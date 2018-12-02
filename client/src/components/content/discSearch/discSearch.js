@@ -578,6 +578,21 @@ class discSearch extends Component {
     }
   };
 
+  searchByNameHandler = () => {
+    let input = document.getElementById("name-search");
+    let filter = input.value.toUpperCase();
+    let cards = document.querySelectorAll(".search-card");
+
+    for (let i = 0; i < cards.length; i++) {
+      let name = cards[i].firstChild.textContent;
+      if (name.toUpperCase().indexOf(filter) > -1) {
+        cards[i].style.display = "";
+      } else {
+        cards[i].style.display = "none";
+      }
+    }
+  };
+
   submitButton = () => {
     if (this.type.type === true) {
       this.filteredArray = filterFunctions.type(this.filteredArray, this.type);
@@ -784,6 +799,7 @@ class discSearch extends Component {
                 id="name-search"
                 type="text"
                 placeholder="Search By Name"
+                onChange={this.searchByNameHandler}
               />
             </div>
           </div>

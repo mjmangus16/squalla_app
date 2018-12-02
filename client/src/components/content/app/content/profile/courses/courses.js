@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import selectArrow from "../../../../../../img/selectArrow.png";
 
@@ -10,93 +11,65 @@ import "../profile.css";
 
 class Courses extends Component {
   state = {
-    courseSelected: false
+    courseSelected: false,
+    courses: [],
+    courseData: {}
   };
 
-  selectedCourseData = {
-    course: ""
+  gridTemplateColumns = "gridTemplateColumns";
+
+  componentDidMount() {
+    axios.get("/api/profiles/courses/all").then(res => {
+      this.setState({
+        courses: res.data.map(course => (
+          <div className="app-courses-course" key={res.data.indexOf(course)}>
+            <h3>{course.name}</h3>
+            <input
+              type="image"
+              src={selectArrow}
+              className="app-courses-course-selectArrow"
+              alt="expand course item icon"
+              onClick={() =>
+                this.setState({
+                  courseSelected: !this.state.courseSelected,
+                  courseData: course
+                })
+              }
+            />
+            <div
+              className="app-courses-course-data"
+              style={{
+                gridTemplateColumns: `repeat(${course.tees.length + 1}, auto)`,
+                gridTemplateRows: "30px 30px"
+              }}
+            >
+              <div />
+              {course.tees.map(tee => (
+                <h4 key={course.tees.indexOf(tee)}>{tee.tee}</h4>
+              ))}
+
+              <h4 id="extra-padding-h4">Par</h4>
+              {course.tees.map(tee => (
+                <p key={course.tees.indexOf(tee)}>{tee.par}</p>
+              ))}
+              {/* <div className="app-courses-course-data-heading">
+                <h4>Best</h4>
+                
+              </div> */}
+            </div>
+          </div>
+        ))
+      });
+      console.log(res.data);
+    });
+  }
+
+  selectCourseHandler = courseData => {
+    this.setState({
+      courseSelected: !this.state.courseSelected,
+      courseData: courseData
+    });
   };
-
-  selectCourseHandler = e => {
-    this.setState({ courseSelected: !this.state.courseSelected });
-
-    this.selectedCourseData.course =
-      e.target.parentElement.firstChild.textContent;
-  };
-
-  course = (
-    <div className="app-courses-course">
-      <h3>Joseph Davis State Park</h3>
-      <input
-        type="image"
-        src={selectArrow}
-        className="app-courses-course-selectArrow"
-        alt="expand course item icon"
-        onClick={this.selectCourseHandler}
-      />
-      <div className="app-courses-course-data">
-        <div className="app-courses-course-data-heading">
-          <div />
-          <h4>Gold</h4>
-          <h4>Blue</h4>
-          <h4>White</h4>
-          <h4>Red</h4>
-        </div>
-        <div className="app-courses-course-data-heading">
-          <h4>Par</h4>
-          <p>N/A</p>
-          <p>N/A</p>
-          <p>N/A</p>
-          <p>N/A</p>
-        </div>
-        <div className="app-courses-course-data-heading">
-          <h4>Best</h4>
-          <p>N/A</p>
-          <p>N/A</p>
-          <p>N/A</p>
-          <p>N/A</p>
-        </div>
-      </div>
-    </div>
-  );
-
-  course2 = (
-    <div className="app-courses-course">
-      <h3>Beaver Island State Park</h3>
-      <input
-        type="image"
-        src={selectArrow}
-        className="app-courses-course-selectArrow"
-        alt="expand course item icon"
-        onClick={this.selectCourseHandler}
-      />
-      <div className="app-courses-course-data">
-        <div className="app-courses-course-data-heading">
-          <div />
-          <h4>Gold</h4>
-          <h4>Blue</h4>
-          <h4>White</h4>
-          <h4>Red</h4>
-        </div>
-        <div className="app-courses-course-data-heading">
-          <h4>Par</h4>
-          <p>N/A</p>
-          <p>N/A</p>
-          <p>N/A</p>
-          <p>N/A</p>
-        </div>
-        <div className="app-courses-course-data-heading">
-          <h4>Best</h4>
-          <p>N/A</p>
-          <p>N/A</p>
-          <p>N/A</p>
-          <p>N/A</p>
-        </div>
-      </div>
-    </div>
-  );
-
-  courses = [this.course, this.course2];
 
   render() {
     let displayContent;
@@ -113,7 +86,7 @@ class Courses extends Component {
             <input id="course-search" type="text" placeholder="Search..." />
           </div>
           <div className="app-home-courses-data-container">
-            <div className="app-home-courses-data">{this.courses}</div>
+            <div className="app-home-courses-data">{this.state.courses}</div>
           </div>
         </div>
       );
@@ -121,7 +94,7 @@ class Courses extends Component {
       displayContent = (
         <SelectedCourse
           handler={this.selectCourseHandler}
-          data={this.selectedCourseData}
+          data={this.state.courseData}
         />
       );
     }

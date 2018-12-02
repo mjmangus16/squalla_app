@@ -58,6 +58,13 @@ class Friends extends Component {
     this.friend,
     this.friend2,
     this.friend,
+    this.friend2,
+    this.friend2,
+    this.friend,
+    this.friend2,
+    this.friend,
+    this.friend2,
+    this.friend,
     this.friend2
   ];
 

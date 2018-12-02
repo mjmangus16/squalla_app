@@ -83,24 +83,41 @@ router.post(
       });
     }
 
+    const getDate = () => {
+      let today = new Date();
+      let d, m, y;
+
+      d = today.getDate();
+      m = today.getMonth() + 1;
+      y = today.getFullYear();
+
+      if (d < 10) {
+        d = "0" + d;
+      }
+
+      if (m < 10) {
+        m = "0" + m;
+      }
+
+      return `${m}/${d}`;
+    };
+
     const newRound = new Round({
       owner: req.user.username,
       league: league,
       course: playedCourse,
-      scores: roundScores
+      scores: roundScores,
+      date: getDate()
     });
 
     newRound.save().then(round => {
       Course.findOne({ name: req.body.course }).then(course => {
         let coursePar;
-        if (round.course.tees === "gold") {
-          coursePar = course.par.gold;
-        } else if (round.course.tees === "blue") {
-          coursePar = course.par.blue;
-        } else if (round.course.tees === "white") {
-          coursePar = course.par.white;
-        } else if (round.course.tees == "red") {
-          coursePar = course.par.red;
+
+        for (let i = 0; i < course.tees.length; i++) {
+          if (course.tees[i].tee === req.body.tees) {
+            coursePar = course.tees[i].par;
+          }
         }
 
         course.history.push(round);
@@ -185,7 +202,6 @@ router.post(
           }
         });
       });
-      res.json(round);
     });
   }
 );

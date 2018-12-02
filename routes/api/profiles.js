@@ -59,7 +59,8 @@ router.get(
         username: profile.username,
         roundsPlayed: profile.rounds.length,
         coursesPlayed: coursesPlayed,
-        recentAchieve: profile.achievements[0]
+        recentAchieve: profile.achievements[0],
+        achievePoints: profile.achievePoints
       };
 
       if (profile.rounds[0]) {
@@ -150,37 +151,20 @@ router.post(
               }
             }
 
-            let averageScores = {};
-            let bestScores = {};
-
-            if (course.par.gold) {
-              averageScores.gold = "N/A";
-              bestScores.gold = "N/A";
-            }
-
-            if (course.par.blue) {
-              averageScores.blue = "N/A";
-              bestScores.blue = "N/A";
-            }
-
-            if (course.par.white) {
-              averageScores.white = "N/A";
-              bestScores.white = "N/A";
-            }
-
-            if (course.par.red) {
-              averageScores.red = "N/A";
-              bestScores.red = "N/A";
+            for (let j = 0; j < course.tees.length; j++) {
+              course.tees[j].avg = "N/A";
+              course.tees[j].best = "N/A";
             }
 
             const myCourse = {
               id: course._id,
               name: course.name,
               holes: course.holes,
-              par: course.par,
-              avgScores: averageScores,
-              bestScores: bestScores,
-              history: []
+              tees: course.tees,
+              history: [],
+              terrain: course.terrain,
+              landscape: course.landscape,
+              latLong: course.latLong
             };
 
             profile.courses.unshift(myCourse);
@@ -209,17 +193,17 @@ router.get(
             profile.courses[i].history.unshift(profile.rounds[j]);
           }
         }
-        profile.courses[i].bestScores = bestScores(
-          profile.courses[i],
-          profile.username
-        );
+        // profile.courses[i].bestScores = bestScores(
+        //   profile.courses[i],
+        //   profile.username
+        // );
 
-        profile.courses[i].avgScores = avgScores(
-          profile.courses[i],
-          profile.username
-        );
+        // profile.courses[i].avgScores = avgScores(
+        //   profile.courses[i],
+        //   profile.username
+        // );
       }
-      res.json(profile);
+      res.json(profile.courses);
     });
   }
 );
@@ -242,18 +226,29 @@ router.get(
               course.history.push(profile.rounds[j]);
             }
           }
-          profile.courses[i].bestScores = bestScores(
-            profile.courses[i],
-            profile.username
-          );
 
-          profile.courses[i].avgScores = avgScores(
-            profile.courses[i],
-            profile.username
-          );
+          // profile.courses[i].bestScores = bestScores(
+          //   profile.courses[i],
+          //   profile.username
+          // );
+
+          // profile.courses[i].avgScores = avgScores(
+          //   profile.courses[i],
+          //   profile.username
+          // );
         }
       }
-      res.json(selectedCourse);
+      for (let i = 0; i < selectedCourse.history.length; i++) {
+        for (let y = 0; y < selectedCourse.history[i].scores.length; y++) {
+          if (
+            selectedCourse.history[i].scores[y].player === req.user.username
+          ) {
+            selectedCourse.history[i].myScore =
+              selectedCourse.history[i].scores[y].score;
+          }
+        }
+      }
+      res.json(selectedCourse.history);
     });
   }
 );

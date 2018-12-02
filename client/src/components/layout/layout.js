@@ -37,6 +37,8 @@ class Layout extends Component {
 
     const { isAuthenticated, user } = this.props.auth;
 
+    // const isAuthenticated = true;
+
     const auth = "/squallaApp/profile/dashboard";
     const guest = "/login";
 

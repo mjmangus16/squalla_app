@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import AppMenu from "../../../appMenu";
 
@@ -9,6 +10,48 @@ import collapseArrow from "../../../../../../img/collapseArrow.png";
 import "../profile.css";
 
 class Rounds extends Component {
+  state = {
+    rounds: []
+  };
+
+  componentDidMount() {
+    axios.get("/api/profiles/home/rounds/all").then(res => {
+      this.setState({
+        rounds: res.data.map(round => (
+          <div className="app-home-rounds-round">
+            <p>{round.date}</p>
+            <p className="app-home-rounds-round-course-p">{round.course}</p>
+            <p>{round.tees}</p>
+            <p>{round.myScore}</p>
+            <p>{round.roundScores.length}</p>
+            <input
+              type="image"
+              src={expandArrow}
+              className="rounds-expand-arrow"
+              alt="expand menu item icon"
+              onClick={this.expandRoundHandler}
+            />
+            <div className="app-home-rounds-round-more" id="item-hide">
+              <div className="app-home-rounds-round-more-heading">
+                <h4>Username</h4>
+                <h4>Score</h4>
+              </div>
+              <div>
+                {round.roundScores.map(playerScore => (
+                  <div className="app-home-rounds-round-more-data">
+                    <p>{playerScore.player}</p>
+                    <p>{playerScore.score}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))
+      });
+      console.log(this.state.rounds);
+    });
+  }
+
   expandRoundHandler = e => {
     if (e.target.parentElement.children[6].id === "item-hide") {
       e.target.parentElement.children[6].id = "";
@@ -20,41 +63,6 @@ class Rounds extends Component {
       e.target.className = "rounds-expand-arrow";
     }
   };
-
-  playerScore = (
-    <div className="app-home-rounds-round-more-data">
-      <p>mjmangus16</p>
-      <p>63</p>
-    </div>
-  );
-
-  playerScores = [this.playerScore, this.playerScore, this.playerScore];
-
-  round = (
-    <div className="app-home-rounds-round">
-      <p>10/21/18</p>
-      <p className="app-home-rounds-round-course-p">Beaver Island State Park</p>
-      <p>White</p>
-      <p>63</p>
-      <p>4</p>
-      <input
-        type="image"
-        src={expandArrow}
-        className="rounds-expand-arrow"
-        alt="expand menu item icon"
-        onClick={this.expandRoundHandler}
-      />
-      <div className="app-home-rounds-round-more" id="item-hide">
-        <div className="app-home-rounds-round-more-heading">
-          <h4>Username</h4>
-          <h4>Score</h4>
-        </div>
-        <div>{this.playerScores}</div>
-      </div>
-    </div>
-  );
-
-  rounds = [this.round, this.round, this.round, this.round];
 
   render() {
     return (
@@ -70,7 +78,7 @@ class Rounds extends Component {
               <h3>Players</h3>
             </div>
             <div className="app-home-rounds-data-container">
-              <div className="app-home-rounds-data">{this.rounds}</div>
+              <div className="app-home-rounds-data">{this.state.rounds}</div>
             </div>
           </div>
           <div className="app-home-home-nav">
