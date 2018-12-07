@@ -15,37 +15,39 @@ const getExperiencePercent = (exp, lvl) => {
     case 3:
       return getPercent(225, 450);
     case 4:
-      return 750;
+      return getPercent(450, 750);
     case 5:
-      return 1125;
+      return getPercent(750, 1125);
     case 6:
-      return 1575;
+      return getPercent(1125, 1575);
     case 7:
-      return 2100;
+      return getPercent(1575, 2100);
     case 8:
-      return 2700;
+      return getPercent(2100, 2700);
     case 9:
-      return 3375;
+      return getPercent(2700, 3375);
     case 10:
-      return 4125;
+      return getPercent(3375, 4125);
     case 11:
-      return 4950;
+      return getPercent(4125, 4950);
     case 12:
-      return 5850;
+      return getPercent(4950, 5850);
     case 13:
-      return 6825;
+      return getPercent(5850, 6825);
     case 14:
-      return 7875;
+      return getPercent(6825, 7875);
     case 15:
-      return 9000;
+      return getPercent(7875, 9000);
     case 16:
-      return 10200;
+      return getPercent(9000, 10200);
     case 17:
-      return 11475;
+      return getPercent(10200, 11475);
     case 18:
-      return 12825;
+      return getPercent(11475, 12825);
     case 19:
-      return 14250;
+      return getPercent(12825, 14250);
+    case 20:
+      return getPercent(14250, 15750);
   }
 };
 

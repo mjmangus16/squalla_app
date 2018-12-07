@@ -59,7 +59,6 @@ router.get(
         username: profile.username,
         roundsPlayed: profile.rounds.length,
         coursesPlayed: coursesPlayed,
-        recentAchieve: profile.achievements[0],
         achievePoints: profile.achievePoints
       };
 
@@ -70,6 +69,19 @@ router.get(
           tees: profile.rounds[0].course.tees,
           score: myScore()
         };
+      } else {
+        dashboard.recentRound = {
+          date: "N/A",
+          course: "N/A",
+          tees: "N/A",
+          score: "N/A"
+        };
+      }
+
+      if (profile.achievements[0]) {
+        dashboard.recentAchieve = profile.achievements[0];
+      } else {
+        dashboard.recentAchieve = "N/A";
       }
 
       profile.save().then(profile => res.json(dashboard));

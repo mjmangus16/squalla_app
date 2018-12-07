@@ -1,62 +1,40 @@
-const expGained = (
-  userLevel,
-  userAchievePoints,
-  coursePar,
-  holes,
-  averageScore,
-  bestScore,
-  score
-) => {
-  const baseExp = 50;
-  let totalExp = 0;
-  let levelExp = 0;
-  let achieveExp = 0;
-  let difficultyExp = 0;
-  let parExp = 0;
-  let averageExp = 0;
-  let bestExp = 0;
+const getExp = (courseRating, courseStats, userInfo, score) => {
+  let userExp, levelExp, achieveExp, averageExp, bestExp;
+  const expInfo = {
+    rating: courseRating,
+    level: userInfo.level,
+    achievePoints: 50,
+    average: courseStats.average,
+    best: courseStats.best,
+    score: score,
+    holes: courseStats.holes
+  };
 
-  let container;
+  levelExp = expInfo.level * 2;
+  achieveExp = expInfo.achievePoints * 0.5;
 
-  container = userLevel * 0.01;
-  levelExp = baseExp * container;
-
-  container = userAchievePoints * 0.01;
-  achieveExp = container * baseExp;
-
-  container = coursePar / holes;
-  container = container * 0.1;
-  difficultyExp = container * baseExp;
-
-  if (score >= coursePar) {
-    container = score - coursePar;
-    container = container * 0.01;
-    parExp = container * baseExp;
-    totalExp = totalExp - parExp;
-  } else if (score < coursePar) {
-    container = coursePar - score;
-    container = container * 0.01;
-    parExp = container * baseExp;
-    totalExp = totalExp + parExp;
+  if (score == expInfo.average || expInfo.average === "N/A") {
+    averageExp = expInfo.rating * 0.1;
+  } else if (score < expInfo.average) {
+    averageExp = expInfo.rating * 0.2;
+  } else {
+    averageExp = 0;
   }
 
-  if (score < averageScore) {
-    averageExp = 10;
+  if (score == expInfo.best || expInfo.best === "N/A") {
+    bestExp = expInfo.rating * 0.25;
+  } else if (score < expInfo.best) {
+    bestExp = expInfo.rating * 0.5;
+  } else {
+    bestExp = 0;
   }
 
-  if (score < bestScore) {
-    bestExp = 15;
-  }
+  userExp = expInfo.rating + levelExp + achieveExp + averageExp + bestExp;
 
-  totalExp =
-    totalExp +
-    baseExp +
-    levelExp +
-    achieveExp +
-    difficultyExp +
-    averageExp +
-    bestExp;
-  return totalExp;
+  userExp = userExp / 10;
+  userExp = userExp * expInfo.holes;
+
+  return Math.ceil(userExp);
 };
 
-module.exports = expGained;
+module.exports = getExp;

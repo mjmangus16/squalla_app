@@ -6,7 +6,8 @@ const Round = require("../../models/Round");
 const Profile = require("../../models/Profile");
 const Course = require("../../models/Course");
 
-const expGained = require("../../functions/leveling/expGained");
+const getCourseRating = require("../../functions/getCourseRating");
+const getExp = require("../../functions/leveling/expGained");
 const levels = require("../../functions/leveling/levels");
 
 // Load Input Validation
@@ -112,91 +113,63 @@ router.post(
 
     newRound.save().then(round => {
       Course.findOne({ name: req.body.course }).then(course => {
-        let coursePar;
-
-        for (let i = 0; i < course.tees.length; i++) {
-          if (course.tees[i].tee === req.body.tees) {
-            coursePar = course.tees[i].par;
-          }
-        }
-
         course.history.push(round);
         course.save().then(course => {
           for (let i = 0; i < round.scores.length; i++) {
             Profile.findOne({ username: round.scores[i].player })
               .then(profile => {
-                let courseAverage = 0;
-                let userScore = round.scores[i].score;
-                let bestScore = 0;
-
-                for (let j = 0; j < profile.courses.length; j++) {
-                  if (profile.courses[j].name === round.course.name) {
-                    // Pushes rounds into the course history
-                    for (let k = 0; k < profile.rounds.length; k++) {
-                      if (profile.rounds[k].course.name === round.course.name) {
-                        profile.courses[j].history.push(profile.rounds[k]);
-                      }
-                    }
-
-                    // Gets averages and best from course history
-                    let parCount = 0;
-                    let roundCount = 0;
-
-                    for (
-                      let h = 0;
-                      h < profile.courses[j].history.length;
-                      h++
-                    ) {
-                      if (
-                        profile.courses[j].history[h].course.tees ===
-                        round.course.tees
-                      ) {
-                        roundCount = roundCount + 1;
-                        for (
-                          let p = 0;
-                          p < profile.courses[j].history[h].scores.length;
-                          p++
-                        ) {
-                          if (
-                            profile.courses[j].history[h].scores[p].player ===
-                            round.scores[i].player
-                          ) {
-                            if (
-                              bestScore === 0 ||
-                              bestScore >
-                                parseInt(
-                                  profile.courses[j].history[h].scores[p].score
-                                )
-                            ) {
-                              bestScore =
-                                profile.courses[j].history[h].scores[p].score;
-                            }
-
-                            parCount += parseInt(
-                              profile.courses[j].history[h].scores[p].score
-                            );
-                          }
-                        }
-                      }
-                    }
-                    courseAverage = parCount / roundCount;
-                  }
-                }
-                profile.exp = Math.round(
-                  profile.exp +
-                    expGained(
-                      profile.level,
-                      profile.achievePoints,
-                      coursePar,
-                      course.holes,
-                      Math.round(courseAverage),
-                      Math.round(bestScore),
-                      userScore
-                    )
-                );
                 profile.rounds.unshift(round);
-                profile.level = levels(profile.exp);
-                profile.save();
+                profile.save().then(profile => {
+                  if (profile.courses) {
+                    let courseExists = doesCourseExist(
+                      profile.courses,
+                      round.course.name
+                    );
+                    console.log(courseExists);
+                    if (!courseExists) {
+                      addCourseToProfile(req, res, errors);
+                    }
+
+                    let coursePlayed = getCoursePlayed(course);
+
+                    coursePlayed.history = collectCourseHistory(
+                      coursePlayed,
+                      profile.rounds,
+                      profile.username
+                    );
+
+                    let courseStats = getCourseStats(
+                      coursePlayed.history,
+                      round.course.tees,
+                      coursePlayed.tees,
+                      coursePlayed.terrain,
+                      coursePlayed.landscape,
+                      coursePlayed.holes
+                    );
+
+                    let courseRating = Math.ceil(getCourseRating(courseStats));
+
+                    let userInfo = {
+                      level: profile.level,
+                      achievePoints: profile.achievePoints
+                    };
+
+                    let userScore = getUserScore(
+                      round.scores,
+                      profile.username
+                    );
+
+                    let userExp = getExp(
+                      courseRating,
+                      courseStats,
+                      userInfo,
+                      userScore
+                    );
+
+                    profile.exp = profile.exp + userExp;
+                    profile.save().then(profile => res.json(profile));
+                  }
+                });
               })
               .catch(err => console.log(err));
           }
@@ -207,3 +180,153 @@ router.post(
 );
 
 module.exports = router;
+
+const doesCourseExist = (courses, name) => {
+  let exists = false;
+  for (let i = 0; i < courses.length; i++) {
+    if (courses[i].name === name) {
+      exists = true;
+      break;
+    }
+  }
+  return exists;
+};
+
+const getCoursePlayed = course => {
+  const myCourse = {
+    id: course._id,
+    name: course.name,
+    holes: course.holes,
+    tees: course.tees,
+    history: [],
+    terrain: course.terrain,
+    landscape: course.landscape
+  };
+  return myCourse;
+};
+
+const addCourseToProfile = (req, res, errors) => {
+  Course.findOne({ name: req.body.course })
+    .then(course => {
+      if (!course) {
+        errors.course = "That course does not exist in our database";
+        res.status(404).json(errors);
+      } else {
+        Profile.findOne({ username: req.user.username }).then(profile => {
+          for (let i = 0; i < profile.courses.length; i++) {
+            if (req.body.course === profile.courses[i].name) {
+              errors.course =
+                "You have already added that course to your profile";
+              return res.json(errors);
+            }
+          }
+
+          for (let j = 0; j < course.tees.length; j++) {
+            course.tees[j].avg = "N/A";
+            course.tees[j].best = "N/A";
+          }
+
+          const myCourse = {
+            id: course._id,
+            name: course.name,
+            holes: course.holes,
+            tees: course.tees,
+            history: [],
+            terrain: course.terrain,
+            landscape: course.landscape,
+            latLong: course.latLong
+          };
+
+          profile.courses.unshift(myCourse);
+          profile.save().catch(err => console.log(err));
+        });
+      }
+    })
+    .catch(err => console.log(err));
+};
+
+const collectCourseHistory = (course, roundHistory, username) => {
+  let courseHistory = [];
+
+  for (let j = 0; j < roundHistory.length; j++) {
+    let round = {};
+    if (roundHistory[j].course.name === course.name) {
+      round.id = roundHistory[j]._id;
+      round.date = roundHistory[j].date;
+      round.league = roundHistory[j].league;
+      round.tees = roundHistory[j].course.tees;
+
+      for (let i = 0; i < roundHistory[j].scores.length; i++) {
+        if (roundHistory[j].scores[i].player === username) {
+          round.score = roundHistory[j].scores[i].score;
+        }
+      }
+
+      courseHistory.push(round);
+    }
+  }
+  return courseHistory;
+};
+
+const getCourseStats = (
+  courseHistory,
+  teesPlayed,
+  courseTees,
+  terrain,
+  landscape,
+  holes
+) => {
+  let stats = {};
+  let scoresTotal = 0;
+  let count = 0;
+  let average;
+  let best = 999;
+  let teesHistory = [];
+  let distance;
+  let par;
+
+  stats.tees = teesPlayed;
+
+  for (let i = 0; i < courseTees.length; i++) {
+    if (courseTees[i].tee === teesPlayed) {
+      distance = courseTees[i].distance;
+      par = courseTees[i].par;
+    }
+  }
+
+  for (let i = 0; i < courseHistory.length; i++) {
+    if (courseHistory[i].tees === teesPlayed) {
+      teesHistory.push(courseHistory[i]);
+    }
+  }
+
+  if (teesHistory.length <= 1) {
+    stats.average = "N/A";
+    stats.best = "N/A";
+  } else {
+    for (let i = 1; i < teesHistory.length; i++) {
+      scoresTotal = scoresTotal + parseInt(teesHistory[i].score);
+      count++;
+      if (teesHistory[i].score < best) {
+        best = teesHistory[i].score;
+      }
+    }
+    average = scoresTotal / count;
+    stats.average = Math.ceil(average);
+    stats.best = best;
+  }
+  stats.distance = parseInt(distance);
+  stats.par = parseInt(par);
+  stats.terrain = terrain;
+  stats.landscape = landscape;
+  stats.holes = holes;
+  return stats;
+};
+
+const getUserScore = (scores, username) => {
+  for (let i = 0; i < scores.length; i++) {
+    if (scores[i].player === username) {
+      return parseInt(scores[i].score);
+    }
+  }
+};
