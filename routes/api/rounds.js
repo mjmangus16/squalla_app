@@ -125,9 +125,8 @@ router.post(
                       profile.courses,
                       round.course.name
                     );
-                    console.log(courseExists);
                     if (!courseExists) {
-                      addCourseToProfile(req, res, errors);
+                      addCourseToProfile(req, res, errors, profile.username);
                     }
 
                     let coursePlayed = getCoursePlayed(course);
@@ -167,7 +166,8 @@ router.post(
                     );
 
                     profile.exp = profile.exp + userExp;
-                    profile.save().then(profile => res.json(profile));
+                    profile.level = levels(profile.exp);
+                    profile.save();
                   }
                 });
               })
@@ -205,14 +205,14 @@ const getCoursePlayed = course => {
   return myCourse;
 };
 
-const addCourseToProfile = (req, res, errors) => {
+const addCourseToProfile = (req, res, errors, username) => {
   Course.findOne({ name: req.body.course })
     .then(course => {
       if (!course) {
         errors.course = "That course does not exist in our database";
         res.status(404).json(errors);
       } else {
-        Profile.findOne({ username: req.user.username }).then(profile => {
+        Profile.findOne({ username: username }).then(profile => {
           for (let i = 0; i < profile.courses.length; i++) {
             if (req.body.course === profile.courses[i].name) {
               errors.course =

@@ -4,10 +4,6 @@ const passport = require("passport");
 
 const Course = require("../../models/Course");
 const Profile = require("../../models/Profile");
-const levels = require("../../functions/leveling/levels");
-
-const bestScores = require("../../functions/bestScores");
-const avgScores = require("../../functions/avgScores");
 
 // Load Input Validation
 const validateProfileInput = require("../../validation/profile");
@@ -50,8 +46,6 @@ router.get(
           coursesPlayed++;
         }
       }
-
-      profile.level = levels(profile.exp);
 
       let dashboard = {
         level: profile.level,
@@ -205,15 +199,6 @@ router.get(
             profile.courses[i].history.unshift(profile.rounds[j]);
           }
         }
-        // profile.courses[i].bestScores = bestScores(
-        //   profile.courses[i],
-        //   profile.username
-        // );
-
-        // profile.courses[i].avgScores = avgScores(
-        //   profile.courses[i],
-        //   profile.username
-        // );
       }
       res.json(profile.courses);
     });
@@ -238,16 +223,6 @@ router.get(
               course.history.push(profile.rounds[j]);
             }
           }
-
-          // profile.courses[i].bestScores = bestScores(
-          //   profile.courses[i],
-          //   profile.username
-          // );
-
-          // profile.courses[i].avgScores = avgScores(
-          //   profile.courses[i],
-          //   profile.username
-          // );
         }
       }
       for (let i = 0; i < selectedCourse.history.length; i++) {
@@ -295,7 +270,7 @@ router.post(
               }
             }
             if (req.body.username !== req.user.username) {
-              profile.friends.push(req.body.username);
+              profile.friends.push(username.username);
               profile
                 .save()
                 .then(profile => res.json(profile))
@@ -318,21 +293,70 @@ router.get(
   "/friends/all",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ username: req.user.username }).then(profile => {
-      let myFriendsData = [];
-      for (let i = 0; i < profile.friends.length; i++) {
-        Profile.findOne({ username: profile.friends[i] }).then(friend => {
-          myFriendsData.push({
-            username: profile.friends[i],
-            roundsPlayed: friend.rounds.length,
-            coursesPlayed: friend.courses.length,
-            recentAchieve: friend.achievements[0],
-            recentRound: friend.rounds[0]
+    Profile.findOne({ username: req.user.username })
+      .then(user => {
+        let allFriendsData = [];
+        for (let i = 0; i < user.friends.length; i++) {
+          Profile.findOne({ username: user.friends[i] }).then(profile => {
+            const myScore = () => {
+              for (let i = 0; i < profile.rounds[0].scores.length; i++) {
+                if (profile.rounds[0].scores[i].player === profile.username) {
+                  return profile.rounds[0].scores[i].score;
+                }
+              }
+            };
+
+            for (let j = 0; j < profile.rounds.length; j++) {
+              for (let k = 0; k < profile.courses.length; k++) {
+                if (profile.rounds[j].course.name === profile.courses[k].name) {
+                  profile.courses[k].history.unshift(profile.rounds[j]);
+                }
+              }
+            }
+
+            let coursesPlayed = 0;
+
+            for (let y = 0; y < profile.courses.length; y++) {
+              if (profile.courses[y].history.length > 0) {
+                coursesPlayed++;
+              }
+            }
+
+            let dashboard = {
+              level: profile.level,
+              exp: profile.exp,
+              username: profile.username,
+              roundsPlayed: profile.rounds.length,
+              coursesPlayed: coursesPlayed,
+              achievePoints: profile.achievePoints
+            };
+
+            if (profile.rounds[0]) {
+              dashboard.recentRound = {
+                date: profile.rounds[0].date,
+                course: profile.rounds[0].course.name,
+                tees: profile.rounds[0].course.tees,
+                score: myScore()
+              };
+            } else {
+              dashboard.recentRound = {
+                date: "N/A",
+                course: "N/A",
+                tees: "N/A",
+                score: "N/A"
+              };
+            }
+
+            if (profile.achievements[0]) {
+              dashboard.recentAchieve = profile.achievements[0];
+            } else {
+              dashboard.recentAchieve = "N/A";
+            }
+            allFriendsData.push(dashboard);
           });
-          res.json(myFriendsData);
-        });
-      }
-    });
+        }
+      })
+      .then(() => res.json(allFriendsData));
   }
 );
 
@@ -343,23 +367,63 @@ router.get(
   "/friends/name/:name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ username: req.user.username }).then(profile => {
-      let myFriendsData = [];
-      for (let i = 0; i < profile.friends.length; i++) {
-        if (profile.friends[i] === req.params.name) {
-          Profile.findOne({ username: profile.friends[i] }).then(friend => {
-            myFriendsData.push({
-              username: friend.username,
-              level: friend.level,
-              roundsPlayed: friend.rounds.length,
-              coursesPlayed: friend.courses.length,
-              recentAchieve: friend.achievements[0],
-              recentRound: friend.rounds[0]
-            });
-            res.json(myFriendsData);
-          });
+    Profile.findOne({ username: req.params.name }).then(profile => {
+      const myScore = () => {
+        for (let i = 0; i < profile.rounds[0].scores.length; i++) {
+          if (profile.rounds[0].scores[i].player === profile.username) {
+            return profile.rounds[0].scores[i].score;
+          }
+        }
+      };
+
+      for (let j = 0; j < profile.rounds.length; j++) {
+        for (let k = 0; k < profile.courses.length; k++) {
+          if (profile.rounds[j].course.name === profile.courses[k].name) {
+            profile.courses[k].history.unshift(profile.rounds[j]);
+          }
         }
       }
+
+      let coursesPlayed = 0;
+
+      for (let y = 0; y < profile.courses.length; y++) {
+        if (profile.courses[y].history.length > 0) {
+          coursesPlayed++;
+        }
+      }
+
+      let dashboard = {
+        level: profile.level,
+        exp: profile.exp,
+        username: profile.username,
+        roundsPlayed: profile.rounds.length,
+        coursesPlayed: coursesPlayed,
+        achievePoints: profile.achievePoints
+      };
+
+      if (profile.rounds[0]) {
+        dashboard.recentRound = {
+          date: profile.rounds[0].date,
+          course: profile.rounds[0].course.name,
+          tees: profile.rounds[0].course.tees,
+          score: myScore()
+        };
+      } else {
+        dashboard.recentRound = {
+          date: "N/A",
+          course: "N/A",
+          tees: "N/A",
+          score: "N/A"
+        };
+      }
+
+      if (profile.achievements[0]) {
+        dashboard.recentAchieve = profile.achievements[0];
+      } else {
+        dashboard.recentAchieve = "N/A";
+      }
+
+      res.json(dashboard);
     });
   }
 );

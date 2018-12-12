@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -8,6 +9,18 @@ import { logoutUser } from "../../../actions/authActions";
 import "./appMenu.css";
 
 class AppMenu extends Component {
+  state = {
+    username: ""
+  };
+
+  componentDidMount() {
+    axios.get("/api/profiles/home/dashboard").then(res => {
+      this.setState({
+        username: res.data.username
+      });
+    });
+  }
+
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
@@ -39,7 +52,7 @@ class AppMenu extends Component {
         <div className="app-menu-container">
           <div className="app-menu-content">
             <div className="app-menu-content-username">
-              <h3>Username</h3>
+              <h3>{this.state.username}</h3>
             </div>
             <div className="app-menu-content-options">
               <ul>

@@ -3,7 +3,7 @@ const getExp = (courseRating, courseStats, userInfo, score) => {
   const expInfo = {
     rating: courseRating,
     level: userInfo.level,
-    achievePoints: 50,
+    achievePoints: userInfo.achievePoints,
     average: courseStats.average,
     best: courseStats.best,
     score: score,

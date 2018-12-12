@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import selectArrow from "../../../../../../img/selectArrow.png";
 
@@ -11,62 +12,47 @@ import "../profile.css";
 
 class Friends extends Component {
   state = {
-    friendSelected: false
+    friendSelected: false,
+    friends: [],
+    selectedFriend: {}
   };
 
-  selectedFriendData = {
-    friend: ""
-  };
+  componentDidMount() {
+    axios.get("/api/profiles/friends/all").then(res => {
+      if (res.data) {
+        console.log(res.data);
+        this.setState({
+          friends: res.data.map(friend => (
+            <div className="app-friends-friend">
+              <div className="app-friends-friend-data">
+                <p className="app-friends-friend-lvl">(lvl: {friend.level})</p>
+                <p className="app-friends-friend-username">{friend.username}</p>
+              </div>
+              <input
+                type="image"
+                src={selectArrow}
+                className="app-courses-course-selectArrow"
+                alt="expand course item icon"
+                onClick={this.selectFriendHandler}
+              />
+            </div>
+          ))
+        });
+      }
+    });
+  }
 
   selectFriendHandler = e => {
-    this.setState({ friendSelected: !this.state.friendSelected });
-    console.log(e.target.parentElement.firstChild.textContent);
-    this.selectedFriendData.friend =
-      e.target.parentElement.firstChild.textContent;
+    if (this.state.friendSelected === false) {
+      let username = e.target.parentElement.firstChild.children[1].textContent;
+      axios.get(`/api/profiles/friends/name/${username}`).then(res => {
+        console.log(res.data);
+        this.setState({ selectedFriend: res.data, friendSelected: true });
+      });
+    } else {
+      this.setState({ friendSelected: true });
+    }
   };
-
-  friend = (
-    <div className="app-friends-friend">
-      <p>Player1</p>
-      <input
-        type="image"
-        src={selectArrow}
-        className="app-courses-course-selectArrow"
-        alt="expand course item icon"
-        onClick={this.selectFriendHandler}
-      />
-    </div>
-  );
-
-  friend2 = (
-    <div className="app-friends-friend">
-      <p>Player2</p>
-      <input
-        type="image"
-        src={selectArrow}
-        className="app-courses-course-selectArrow"
-        alt="expand course item icon"
-        onClick={this.selectFriendHandler}
-      />
-    </div>
-  );
-
-  friends = [
-    this.friend2,
-    this.friend,
-    this.friend2,
-    this.friend,
-    this.friend2,
-    this.friend,
-    this.friend2,
-    this.friend2,
-    this.friend,
-    this.friend2,
-    this.friend,
-    this.friend2,
-    this.friend,
-    this.friend2
-  ];
 
   render() {
     let displayContent;
@@ -77,19 +63,21 @@ class Friends extends Component {
           <div className="app-home-courses-heading">
             <div className="app-home-courses-heading-total">
               <h2>
-                Total Friends: <span>12</span>
+                Total Friends: <span>{this.state.friends.length}</span>
               </h2>
             </div>
             <input id="course-search" type="text" placeholder="Search..." />
           </div>
-          <div className="app-home-courses-data-container">{this.friends}</div>
+          <div className="app-home-courses-data-container">
+            {this.state.friends}
+          </div>
         </div>
       );
     } else {
       displayContent = (
         <SelectedFriend
           handler={this.selectFriendHandler}
-          data={this.selectedFriendData}
+          data={this.state.selectedFriend}
         />
       );
     }
