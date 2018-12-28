@@ -7,7 +7,7 @@ import AppMenu from "../../../appMenu";
 import expandArrow from "../../../../../../img/expandArrow.png";
 import collapseArrow from "../../../../../../img/collapseArrow.png";
 
-import "../profile.css";
+import "./rounds.css";
 
 class Rounds extends Component {
   state = {

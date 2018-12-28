@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import selectArrowBack from "../../../../../../img/selectArrowBack.png";
 import getExperiencePercent from "../home/functions/getExperiencePercent";
 
-import "../profile.css";
+import "./friends.css";
 
 class SelectedFriend extends Component {
   state = {

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import AppMenu from "../../../appMenu";
 
-import "../profile.css";
+import "./achievements.css";
 
 const achievements = () => {
   return (

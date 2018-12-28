@@ -35,7 +35,7 @@ class Layout extends Component {
   render() {
     let displayLogin;
 
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
 
     // const isAuthenticated = true;
 

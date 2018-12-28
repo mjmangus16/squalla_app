@@ -241,7 +241,7 @@ module.exports = [
     "Speed": '7',
     "Glide": '4',
     "Turn": '0',
-    "Fade": '2.1',
+    "Fade": '2.2',
     "Difficulty": '2.5',
     'Manufacture_Ratings': {
       Speed: 7,
@@ -9198,15 +9198,15 @@ module.exports = [
     "Name": "Slayer",
     "Distance": "Distance Driver",
     "Stability": "Stable",
-    "Speed": '13',
-    "Glide": '4.8',
-    "Turn": '-2',
+    "Speed": '12.9',
+    "Glide": '4.9',
+    "Turn": '-1.9',
     "Fade": '2.1',
     "Difficulty": '3',
     'Manufacture_Ratings': {
-      Speed: 12,
-      Glide: 6,
-      Turn: -1,
+      Speed: 13,
+      Glide: 5,
+      Turn: -2,
       Fade: 2
     },
     "Link": 'https://infinitediscs.com/Gateway-Slayer'
@@ -12216,5 +12216,311 @@ module.exports = [
       Fade: 4
     },
     "Link": 'https://infinitediscs.com/Westside-War-Horse'
+  },
+  {
+    "Manufacturer": "Latitude 64",
+    "Name": "Musket",
+    "Distance": "Distance Driver",
+    "Stability": "Overstable",
+    "Speed": '10',
+    "Glide": '5',
+    "Turn": '-0.9',
+    "Fade": '2.9',
+    "Difficulty": '2',
+    'Manufacture_Ratings': {
+      Speed: 10,
+      Glide: 5,
+      Turn: -1,
+      Fade: 3
+    },
+    "Link": 'https://infinitediscs.com/Latitude-64-Musket'
+  },
+  {
+    "Manufacturer": "Legacy Discs",
+    "Name": "Pursuit",
+    "Distance": "Mid Range",
+    "Stability": "Very Overstable",
+    "Speed": '4.9',
+    "Glide": '3.3',
+    "Turn": '0',
+    "Fade": '3.1',
+    "Difficulty": '2.5',
+    'Manufacture_Ratings': {
+      Speed: 5,
+      Glide: 3,
+      Turn: 0,
+      Fade: 3
+    },
+    "Link": 'https://infinitediscs.com/Legacy-Pursuit'
+  },
+  {
+    "Manufacturer": "Infinite Discs",
+    "Name": "Slab",
+    "Distance": "Distance Driver",
+    "Stability": "Very Overstable",
+    "Speed": '11.9',
+    "Glide": '3.1',
+    "Turn": '0',
+    "Fade": '4',
+    "Difficulty": '2.5',
+    'Manufacture_Ratings': {
+      Speed: 12,
+      Glide: 3,
+      Turn: 0,
+      Fade: 4
+    },
+    "Link": 'https://infinitediscs.com/Infinite-Discs-Slab'
+  },
+  {
+    "Manufacturer": "Gateway",
+    "Name": "Apex",
+    "Distance": "Distance Driver",
+    "Stability": "Stable",
+    "Speed": '12',
+    "Glide": '5.9',
+    "Turn": '-1',
+    "Fade": '2',
+    "Difficulty": '1',
+    'Manufacture_Ratings': {
+      Speed: 12,
+      Glide: 6,
+      Turn: -1,
+      Fade: 2
+    },
+    "Link": 'https://infinitediscs.com/Gateway-Apex'
+  },
+  {
+    "Manufacturer": "DGA",
+    "Name": "Steady BL",
+    "Distance": "Putter",
+    "Stability": "Stable",
+    "Speed": '2',
+    "Glide": '4',
+    "Turn": '0',
+    "Fade": '1.9',
+    "Difficulty": '1',
+    'Manufacture_Ratings': {
+      Speed: 2,
+      Glide: 4,
+      Turn: 0,
+      Fade: 2
+    },
+    "Link": 'https://infinitediscs.com/DGA-Steady-BL'
+  },
+  {
+    "Manufacturer": "Innova",
+    "Name": "Gator3",
+    "Distance": "Mid Range",
+    "Stability": "Very Overstable",
+    "Speed": '5',
+    "Glide": '2',
+    "Turn": '0',
+    "Fade": '3',
+    "Difficulty": '2',
+    'Manufacture_Ratings': {
+      Speed: 5,
+      Glide: 2,
+      Turn: 0,
+      Fade: 3
+    },
+    "Link": 'https://infinitediscs.com/Innova-Gator3'
+  },
+  {
+    "Manufacturer": "Streamline Discs",
+    "Name": "Runway",
+    "Distance": "Mid Range",
+    "Stability": "Very Overstable",
+    "Speed": '5',
+    "Glide": '4',
+    "Turn": '0',
+    "Fade": '3.5',
+    "Difficulty": '2',
+    'Manufacture_Ratings': {
+      Speed: 5,
+      Glide: 4,
+      Turn: 0,
+      Fade: 3.5
+    },
+    "Link": 'https://infinitediscs.com/Streamline-Runway'
+  },
+  {
+    "Manufacturer": "Yikun",
+    "Name": "Hammer (Chui)",
+    "Distance": "Putter",
+    "Stability": "Overstable",
+    "Speed": '2',
+    "Glide": '3',
+    "Turn": '0',
+    "Fade": '3',
+    "Difficulty": '1',
+    'Manufacture_Ratings': {
+      Speed: 2,
+      Glide: 3,
+      Turn: 0,
+      Fade: 3
+    },
+    "Link": 'https://infinitediscs.com/Yikun-Hammer-(Chui)'
+  },
+  {
+    "Manufacturer": "Yikun",
+    "Name": "Crossbow (Nu)",
+    "Distance": "Mid Range",
+    "Stability": "Very Overstable",
+    "Speed": '4',
+    "Glide": '2',
+    "Turn": '0.5',
+    "Fade": '4',
+    "Difficulty": '2.5',
+    'Manufacture_Ratings': {
+      Speed: 4,
+      Glide: 3,
+      Turn: 0.5,
+      Fade: 4
+    },
+    "Link": 'https://infinitediscs.com/Yikun-Crossbow-(Nu)'
+  },
+  {
+    "Manufacturer": "DGA",
+    "Name": "Tempest",
+    "Distance": "Distance Driver",
+    "Stability": "Understable",
+    "Speed": '13',
+    "Glide": '5',
+    "Turn": '-3',
+    "Fade": '2',
+    "Difficulty": '1',
+    'Manufacture_Ratings': {
+      Speed: 13,
+      Glide: 5,
+      Turn: -3,
+      Fade: 2
+    },
+    "Link": 'https://infinitediscs.com/DGA-Tempest'
+  },
+  {
+    "Manufacturer": "Infinite Discs",
+    "Name": "Ra",
+    "Distance": "Mid Range",
+    "Stability": "Overstable",
+    "Speed": '5',
+    "Glide": '4.1',
+    "Turn": '0',
+    "Fade": '2.8',
+    "Difficulty": '2',
+    'Manufacture_Ratings': {
+      Speed: 5,
+      Glide: 4,
+      Turn: 0,
+      Fade: 3
+    },
+    "Link": 'https://infinitediscs.com/Infinite-Discs-Ra'
+  },
+  {
+    "Manufacturer": "Innova",
+    "Name": "Bullfrog",
+    "Distance": "Putter",
+    "Stability": "Stable",
+    "Speed": '3',
+    "Glide": '1.1',
+    "Turn": '0',
+    "Fade": '1',
+    "Difficulty": '1.5',
+    'Manufacture_Ratings': {
+      Speed: 3,
+      Glide: 1,
+      Turn: 0,
+      Fade: 1
+    },
+    "Link": 'https://infinitediscs.com/Innova-Bullfrog'
+  },
+  {
+    "Manufacturer": "DiscMania",
+    "Name": "MD5",
+    "Distance": "Mid Range",
+    "Stability": "Very Overstable",
+    "Speed": '5',
+    "Glide": '3',
+    "Turn": '0',
+    "Fade": '4',
+    "Difficulty": '2.5',
+    'Manufacture_Ratings': {
+      Speed: 5,
+      Glide: 3,
+      Turn: 0,
+      Fade: 4
+    },
+    "Link": 'https://infinitediscs.com/Discmania-MD5'
+  },
+  {
+    "Manufacturer": "Innova",
+    "Name": "Caiman",
+    "Distance": "Mid Range",
+    "Stability": "Very Overstable",
+    "Speed": '5',
+    "Glide": '2.3',
+    "Turn": '0',
+    "Fade": '3.7',
+    "Difficulty": '2',
+    'Manufacture_Ratings': {
+      Speed: 5,
+      Glide: 2,
+      Turn: 0,
+      Fade: 4
+    },
+    "Link": 'https://infinitediscs.com/Innova-Caiman'
+  },
+  {
+    "Manufacturer": "MVP",
+    "Name": "Deflector",
+    "Distance": "Mid Range",
+    "Stability": "Very Overstable",
+    "Speed": '5',
+    "Glide": '3',
+    "Turn": '0.1',
+    "Fade": '4',
+    "Difficulty": '2',
+    'Manufacture_Ratings': {
+      Speed: 5,
+      Glide: 3,
+      Turn: 0,
+      Fade: 4
+    },
+    "Link": 'https://infinitediscs.com/MVP-Deflector'
+  },
+  {
+    "Manufacturer": "Westside Discs",
+    "Name": "Maiden",
+    "Distance": "Putter",
+    "Stability": "Stable",
+    "Speed": '3.1',
+    "Glide": '3.3',
+    "Turn": '-0.9',
+    "Fade": '0.9',
+    "Difficulty": '1',
+    'Manufacture_Ratings': {
+      Speed: 3,
+      Glide: 3,
+      Turn: -1,
+      Fade: 1
+    },
+    "Link": 'https://infinitediscs.com/Westside-Maiden'
+  },
+  {
+    "Manufacturer": "Infinite Discs",
+    "Name": "Anubis",
+    "Distance": "Mid Range",
+    "Stability": "Understable",
+    "Speed": '5',
+    "Glide": '5',
+    "Turn": '-0.3',
+    "Fade": '0.3',
+    "Difficulty": '1',
+    'Manufacture_Ratings': {
+      Speed: 5,
+      Glide: 5,
+      Turn: 0,
+      Fade: 0
+    },
+    "Link": 'https://infinitediscs.com/Infinite-Discs-Anubis'
   },
 ]

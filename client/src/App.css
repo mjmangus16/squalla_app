@@ -15,15 +15,10 @@
 body {
   background-color: #bfbfbf;
   font-family: "Roboto", sans-serif;
-  height: 100vh;
 }
 
 .App {
-  height: 90%;
-  position: absolute;
-  top: 0;
-  bottom: 0%;
-  margin: auto;
+  height: 100vh;
 }
 
 #orange-q {

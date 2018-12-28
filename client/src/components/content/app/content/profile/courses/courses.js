@@ -7,7 +7,7 @@ import selectArrow from "../../../../../../img/selectArrow.png";
 import AppMenu from "../../../appMenu";
 import SelectedCourse from "./selectedCourse";
 
-import "../profile.css";
+import "./courses.css";
 
 class Courses extends Component {
   state = {

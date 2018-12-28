@@ -1,45 +1,72 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import AppMenu from "../../../appMenu";
 
-import "../profile.css";
+import "./friends.css";
 
-const addFriends = () => {
-  let friend = (
-    <div className="app-friends-friend">
-      <p>Player1</p>
-      <div className="add-friend-button">
-        <h5>ADD</h5>
-        <h5>PLAYER</h5>
-      </div>
-    </div>
-  );
+class AddFriend extends Component {
+  state = {
+    friend: []
+  };
+  getFriend = () => {
+    const username = document.getElementById("add-friend-search").value;
 
-  return (
-    <div className="squalla-app-container">
-      <AppMenu link={"friends"} />
-      <div className="squalla-app-content-container">
-        <div className="app-home-friends-content">
-          <input id="course-search" type="text" placeholder="Search..." />
-          <div className="app-home-courses-data-container">
-            {[friend, friend, friend, friend]}
+    if (username) {
+      axios
+        .get(`/api/profiles/friends/name/${username}`)
+        .then(res => {
+          console.log(res.data);
+          let user = res.data;
+          this.setState({
+            friend: (
+              <div className="app-home-addfriend-friend">
+                <h3>{user.username}</h3>
+                <button>Add Friend</button>
+              </div>
+            )
+          });
+        })
+        .catch(err => console.log(err));
+    }
+  };
+  render() {
+    return (
+      <div className="squalla-app-container">
+        <AppMenu link={"friends"} />
+        <div className="squalla-app-content-container">
+          <div className="app-home-friends-content">
+            <div className="add-friend-search-container">
+              <input
+                id="add-friend-search"
+                type="text"
+                placeholder="Username..."
+              />
+              <button id="add-friend-submit" onClick={this.getFriend}>
+                Search
+              </button>
+            </div>
+
+            <div className="app-home-addFriend-container">
+              {this.state.friend}
+            </div>
+          </div>
+          <div className="app-home-courses-nav">
+            <Link to="/squallaApp/profile/friends" exact="true">
+              <button className="app-home-nav-button">Friends</button>
+            </Link>
+
+            <Link to="/squallaApp/profile/friends/add" exact="true">
+              <button className="app-home-nav-right" id="app-home-nav-selected">
+                Add Friend
+              </button>
+            </Link>
           </div>
         </div>
-        <div className="app-home-courses-nav">
-          <Link to="/squallaApp/profile/friends" exact="true">
-            <button className="app-home-nav-button">Friends</button>
-          </Link>
-
-          <Link to="/squallaApp/profile/friends/add" exact="true">
-            <button className="app-home-nav-right" id="app-home-nav-selected">
-              Add Friend
-            </button>
-          </Link>
-        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default addFriends;
+export default AddFriend;

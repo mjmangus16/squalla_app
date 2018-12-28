@@ -4,7 +4,7 @@ import axios from "axios";
 
 import AppMenu from "../../../appMenu";
 
-import "../profile.css";
+import "./addCourse.css";
 
 class AddCourse extends Component {
   state = {

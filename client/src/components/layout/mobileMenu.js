@@ -57,8 +57,7 @@ class MobileMenu extends Component {
 
     let loggedIn;
     let showLogout;
-    let hideLogout;
-    let loginLink;
+
     let squallaApp;
 
     if (this.props.auth) {
@@ -68,8 +67,7 @@ class MobileMenu extends Component {
         </li>
       );
       showLogout = "";
-      hideLogout = "item-hide";
-      loginLink = "/login";
+
       squallaApp = (
         <li
           id="mobile-menu-sa"
@@ -95,8 +93,7 @@ class MobileMenu extends Component {
     } else if (!this.props.auth) {
       loggedIn = "";
       showLogout = "item-hide";
-      hideLogout = "";
-      loginLink = null;
+
       squallaAppExpand = "item-hide";
       squallaApp = (
         <a href="/login">

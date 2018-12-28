@@ -6,7 +6,7 @@ import getExperiencePercent from "./functions/getExperiencePercent";
 
 import AppMenu from "../../../appMenu";
 
-import "../profile.css";
+import "./dashboard.css";
 
 class Dashboard extends Component {
   state = {

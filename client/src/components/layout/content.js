@@ -29,6 +29,8 @@ import submitContent from "../content/app/content/submitRound/submit/submitConte
 
 import "../content/app/app.css";
 
+import "../content/app/content/profile/profile.css";
+
 class Content extends Component {
   render() {
     return (

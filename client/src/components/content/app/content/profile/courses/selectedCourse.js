@@ -7,7 +7,7 @@ import selectArrowBack from "../../../../../../img/selectArrowBack.png";
 import expandArrow from "../../../../../../img/expandArrow.png";
 import collapseArrow from "../../../../../../img/collapseArrow.png";
 
-import "../profile.css";
+import "./selectedCourse.css";
 
 class selectedCourse extends Component {
   state = {

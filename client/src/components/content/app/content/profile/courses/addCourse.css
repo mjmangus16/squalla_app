@@ -1,0 +1,32 @@
+.add-course-button {
+  color: var(--green);
+  grid-column: 3;
+  margin: auto;
+  background: none;
+  border: none;
+  height: 75%;
+  width: 75px;
+  font-size: 0.75em;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.add-course-button h5 {
+  margin: 0px auto;
+  font-weight: 400;
+}
+
+.app-courses-course-database {
+  border-top: solid 1px var(--darkGrey);
+  padding-bottom: 10px;
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+}
+
+.app-courses-course-database h3 {
+  color: var(--orange);
+  font-weight: 300;
+  grid-column: 2;
+  margin: 10px auto;
+}

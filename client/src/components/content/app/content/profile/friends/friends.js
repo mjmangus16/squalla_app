@@ -8,7 +8,7 @@ import SelectedFriend from "./selectedFriend";
 
 import AppMenu from "../../../appMenu";
 
-import "../profile.css";
+import "./friends.css";
 
 class Friends extends Component {
   state = {
@@ -68,8 +68,12 @@ class Friends extends Component {
             </div>
             <input id="course-search" type="text" placeholder="Search..." />
           </div>
-          <div className="app-home-courses-data-container">
-            {this.state.friends}
+          <div className="app-home-friends-data-container">
+            {this.state.friends.length === 0 ? (
+              <p>You have not added any friends yet.</p>
+            ) : (
+              this.state.friends
+            )}
           </div>
         </div>
       );
