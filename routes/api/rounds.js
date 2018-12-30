@@ -108,7 +108,7 @@ router.post(
       league: league,
       course: playedCourse,
       scores: roundScores,
-      date: getDate()
+      date: req.body.date
     });
 
     newRound.save().then(round => {
@@ -171,6 +171,7 @@ router.post(
                   }
                 });
               })
+
               .catch(err => console.log(err));
           }
         });

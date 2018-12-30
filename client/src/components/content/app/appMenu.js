@@ -13,14 +13,6 @@ class AppMenu extends Component {
     username: ""
   };
 
-  componentDidMount() {
-    axios.get("/api/profiles/home/dashboard").then(res => {
-      this.setState({
-        username: res.data.username
-      });
-    });
-  }
-
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
@@ -97,14 +89,13 @@ class AppMenu extends Component {
                   <li className="li-with-padding">Submit Round</li>
                 </Link>
                 <li className="li-with-padding">Settings</li>
-                <a href="">
-                  <li
-                    className="li-with-padding"
-                    onClick={this.onLogoutClick.bind(this)}
-                  >
-                    Logout
-                  </li>
-                </a>
+                <li
+                  className="li-with-padding"
+                  id="logoutLink"
+                  onClick={this.onLogoutClick.bind(this)}
+                >
+                  Logout
+                </li>
               </ul>
             </div>
           </div>

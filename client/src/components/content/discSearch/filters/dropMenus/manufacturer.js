@@ -20,6 +20,7 @@ const manufacturer = props => (
     <option value="element">Element</option>
     <option value="fullturn">Full Turn</option>
     <option value="gateway">Gateway</option>
+    <option value="galaxy">Galaxy</option>
     <option value="hyzerbomb">Hyzer Bomb</option>
     <option value="infinite">Infinite</option>
     <option value="innova">Innova</option>
@@ -36,13 +37,14 @@ const manufacturer = props => (
     <option value="reptilian">Reptilian</option>
     <option value="rpm">RPM</option>
     <option value="salient">Salient</option>
+    <option value="storm">Storm</option>
     <option value="streamline">Streamline</option>
     <option value="tobu">Tobu</option>
     <option value="handcandy">UB Hand Candy</option>
     <option value="vibram">Vibram</option>
     <option value="viking">Viking</option>
     <option value="westside">Westside</option>
-    <option value="yikun">Yikun</option>
+    <option value="yikun">YiKun</option>
   </select>
 );
 

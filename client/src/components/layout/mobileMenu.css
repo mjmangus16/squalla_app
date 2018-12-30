@@ -102,3 +102,7 @@
   color: var(--lightGrey);
   text-decoration: none;
 }
+
+#logoutLink {
+  cursor: pointer;
+}

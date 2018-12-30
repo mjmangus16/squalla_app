@@ -125,6 +125,13 @@ const filterFunctions = {
         }
       }
     }
+    if (object.galaxy === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Manufacturer === "Galaxy Disc Golf") {
+          newArray.push(array[i]);
+        }
+      }
+    }
     if (object.hyzerbomb === true) {
       for (let i = 0; i < array.length; i++) {
         if (array[i].Manufacturer === "Hyzer Bomb") {
@@ -233,6 +240,13 @@ const filterFunctions = {
     if (object.salient === true) {
       for (let i = 0; i < array.length; i++) {
         if (array[i].Manufacturer === "Salient Discs") {
+          newArray.push(array[i]);
+        }
+      }
+    }
+    if (object.storm === true) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].Manufacturer === "Storm Disc Golf") {
           newArray.push(array[i]);
         }
       }

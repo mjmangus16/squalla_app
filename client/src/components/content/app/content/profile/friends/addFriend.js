@@ -23,7 +23,9 @@ class AddFriend extends Component {
             friend: (
               <div className="app-home-addfriend-friend">
                 <h3>{user.username}</h3>
-                <button>Add Friend</button>
+                <button onClick={() => this.addFriend(user.username)}>
+                  Add Friend
+                </button>
               </div>
             )
           });
@@ -31,6 +33,17 @@ class AddFriend extends Component {
         .catch(err => console.log(err));
     }
   };
+
+  addFriend = username => {
+    let friend = {};
+    friend.username = username;
+    console.log(friend);
+    axios
+      .post("/api/profiles/friends/add", friend)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+  };
+
   render() {
     return (
       <div className="squalla-app-container">
@@ -49,7 +62,15 @@ class AddFriend extends Component {
             </div>
 
             <div className="app-home-addFriend-container">
-              {this.state.friend}
+              {this.state.friend.length === 0 ? (
+                <p>
+                  Use the search box to find and add a friend to you profile.
+                  Anyone you want to include in rounds you want to submit, must
+                  be added to your friends list first.
+                </p>
+              ) : (
+                this.state.friend
+              )}
             </div>
           </div>
           <div className="app-home-courses-nav">

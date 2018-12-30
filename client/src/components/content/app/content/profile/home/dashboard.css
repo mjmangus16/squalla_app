@@ -98,6 +98,13 @@
   grid-template-columns: 1fr 2fr 1fr 1fr;
 }
 
+.app-home-dashboard-recentRound-data time {
+  font-weight: 300;
+  margin: auto;
+  color: var(--orange);
+  font-size: 0.8em;
+}
+
 .app-home-dashboard-recentRound-data h5 {
   color: var(--lightGrey);
   text-decoration: underline;

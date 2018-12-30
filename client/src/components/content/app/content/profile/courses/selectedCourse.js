@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Moment from "react-moment";
 
 import selectArrowBack from "../../../../../../img/selectArrowBack.png";
 
@@ -34,7 +35,7 @@ class selectedCourse extends Component {
                 className="app-home-rounds-round-selected"
                 key={res.data.indexOf(round)}
               >
-                <p>{round.date}</p>
+                <Moment format="MM/DD/YY">{round.date}</Moment>
                 <p>{round.course.tees}</p>
                 <p>{round.myScore}</p>
                 <p>{round.scores.length}</p>

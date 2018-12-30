@@ -10,7 +10,9 @@ const achievements = () => {
     <div className="squalla-app-container">
       <AppMenu link={"home"} />
       <div className="squalla-app-content-container">
-        <div className="app-home-dashboard-content" />
+        <div className="app-home-dashboard-content">
+          <h2>Achievements are not yet available</h2>
+        </div>
         <div className="app-home-home-nav">
           <Link to="/squallaApp/profile/dashboard" exact="true">
             <button className="app-home-nav-button">Dashboard</button>

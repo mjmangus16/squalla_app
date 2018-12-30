@@ -1,6 +1,6 @@
-.app-home-dashboard-content h2 {
-  margin: auto;
+#leagues-h2 {
   color: var(--orange);
+  margin: auto;
   font-weight: 300;
   grid-column: 1/3;
 }

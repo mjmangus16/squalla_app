@@ -184,6 +184,11 @@
     padding: 0px 10px;
   }
 
+  .app-home-dashboard-content-friend-container {
+    width: 100%;
+    max-height: 65%;
+  }
+
   .app-home-courses-data-container {
     margin-top: 15px;
     max-height: 69vh;
@@ -325,15 +330,19 @@
     padding: 0px 10px;
   }
 
+  .app-home-dashboard-content-friend-container {
+    width: 100%;
+    max-height: 65%;
+  }
+
+  .app-friends-friend-backArrow {
+    position: relative;
+    left: 0;
+  }
+
   .app-home-courses-data-container {
     margin-top: 15px;
     max-height: 60vh;
-  }
-}
-
-@media only screen and (max-width: 925px) {
-  .app-home-courses-content {
-    width: 100%;
   }
 }
 

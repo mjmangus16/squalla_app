@@ -42,11 +42,6 @@ class Login extends Component {
     };
 
     this.props.loginUser(userData);
-
-    // axios
-    //   .post("/api/users/login", user)
-    //   .then(res => console.log(res.data))
-    //   .catch(err => this.setState({ errors: err.response.data }));
   };
 
   render() {

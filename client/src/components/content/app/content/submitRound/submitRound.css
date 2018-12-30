@@ -41,13 +41,14 @@
 }
 
 .app-submitRound-recent-round-data {
-  grid-column: 2;
+  grid-column: 1/4;
   grid-row: 2;
+  margin: auto 10px;
 }
 
 .app-submitRound-recent-round-data-heading {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   border-bottom: 1px solid var(--darkGrey);
 }
@@ -60,7 +61,7 @@
 
 .app-submitRound-recent-round-data-content {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
 }
 
@@ -98,13 +99,28 @@
 
 .app-submitRound-submit-summary-container {
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-columns: 75px 4fr 75px;
+}
+
+.app-submitRound-submit-summary-content {
+  grid-column: 2;
+  color: var(--orange);
+}
+
+.app-submitRound-submit-summary-content time {
+  font-weight: 300;
+}
+
+.app-submitRound-submit-summary-content p {
+  font-weight: 300;
+  margin: 5px auto;
+  text-transform: capitalize;
 }
 
 .app-submitRound-submit-summary-container button {
   background-color: #1a1a1a;
-  width: 100px;
-  margin: auto;
+  width: 70px;
+  margin: auto auto 15px;
   height: 40px;
   font-size: 1em;
 }
@@ -170,6 +186,13 @@
   font-size: 1em;
 }
 
+#submitRound-player-search {
+  width: 175px;
+  height: 25px;
+  margin: auto auto 25px;
+  font-size: 1em;
+}
+
 .app-submitRound-submit-content-courses-container {
   width: 100%;
   height: 100%;
@@ -201,23 +224,37 @@
   border-top: solid 1px var(--darkGrey);
   display: grid;
   color: var(--orange);
+  grid-template-rows: 30px 30px;
 }
 
 .app-submitRound-submit-content-course-course:last-child {
   border-bottom: solid 1px var(--darkGrey);
 }
 
-.app-submitRound-submit-content-course-course:nth-child(odd) {
-  background: rgba(255, 255, 255, 0.1);
+.app-submitRound-submit-content-course-course div {
+  margin: auto;
 }
 
-.app-submitRound-submit-content-course-course h3 {
-  font-weight: 400;
+.app-submitRound-submit-content-course-course h4 {
+  font-weight: 300;
+  margin: auto;
+}
+
+.app-submitRound-submit-content-course-course button {
+  background: var(--darkGrey);
+  color: var(--lightGrey);
+  font-size: 0.9em;
+  cursor: pointer;
+  margin: auto 10px;
+  height: 20px;
+  text-transform: capitalize;
+  border: none;
 }
 
 .app-submitRound-players-player {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: 1fr 1fr;
   border-top: solid 1px var(--darkGrey);
   font-size: 0.9em;
 }
@@ -226,16 +263,20 @@
   border-bottom: solid 1px var(--darkGrey);
 }
 
-.app-submitRound-players-player:nth-child(odd) {
-  background: rgba(255, 255, 255, 0.1);
-}
-
 .app-submitRound-players-player p {
   font-size: 1.5em;
   padding: 0;
   margin: 10px auto;
   color: var(--orange);
   font-weight: 300;
+  grid-column: 1;
+  grid-row: 1/3;
+}
+
+.app-submitRound-players-player button {
+  width: 75%;
+  height: 80%;
+  margin: auto;
 }
 
 .app-submitRound-players-score {
@@ -255,10 +296,6 @@
   border-bottom: solid 1px var(--darkGrey);
 }
 
-.app-submitRound-players-score:nth-child(odd) {
-  background: rgba(255, 255, 255, 0.1);
-}
-
 .app-submitRound-players-score p {
   font-size: 1.25em;
   padding: 0;
@@ -267,7 +304,7 @@
   font-weight: 300;
 }
 
-#submitRound-score {
+.submitRound-score {
   width: 50px;
   height: 25px;
   margin: auto;
@@ -279,6 +316,10 @@
   color: var(--orange);
   font-weight: 300;
   margin: 10px auto;
+}
+
+.app-submitRound-submit-content-summary-p {
+  text-transform: capitalize;
 }
 
 .app-submitRound-submit-content-summary p {
@@ -327,6 +368,23 @@
     font-size: 1em;
     margin: auto 5px;
   }
+
+  .app-submitRound-submit-summary-container {
+    display: grid;
+    grid-template-columns: 60px 4fr 60px;
+  }
+
+  .app-submitRound-submit-summary-container button {
+    width: 50px;
+    height: 30px;
+    font-size: 0.75em;
+    margin: auto 5px;
+  }
+
+  .app-submitRound-submit-summary-content {
+    font-size: 0.75em;
+  }
+
   .app-submitRound-submit-topNav {
     font-size: 0.8em;
   }
@@ -379,12 +437,22 @@
     font-size: 0.8em;
   }
 
+  .app-submitRound-submit-summary-container {
+    display: grid;
+    grid-template-columns: 60px 4fr 60px;
+  }
+
   .app-submitRound-submit-summary-container button {
-    width: 75px;
-    height: 35px;
-    font-size: 1em;
+    width: 50px;
+    height: 30px;
+    font-size: 0.75em;
     margin: auto 5px;
   }
+
+  .app-submitRound-submit-summary-content {
+    font-size: 0.75em;
+  }
+
   .app-submitRound-submit-topNav {
     font-size: 0.8em;
   }

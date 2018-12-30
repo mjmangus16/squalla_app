@@ -25,26 +25,12 @@ class AddCourse extends Component {
     axios.get("/api/courses/all").then(res => {
       this.setState({
         courses: res.data.map(course => (
-          <div className="app-courses-course" key={res.data.indexOf(course)}>
+          <div
+            className="app-courses-course-add"
+            key={res.data.indexOf(course)}
+          >
             <h3>{course.name}</h3>
 
-            <div
-              className="app-courses-course-data"
-              style={{
-                gridTemplateColumns: `repeat(${course.tees.length + 1}, 40px)`,
-                gridTemplateRows: "20px 20px"
-              }}
-            >
-              <h4 id="extra-padding-h4-2">Tees:</h4>
-              {course.tees.map(tee => (
-                <h4 key={course.tees.indexOf(tee)}>{tee.tee}</h4>
-              ))}
-
-              <h4 id="extra-padding-h4">Pars:</h4>
-              {course.tees.map(tee => (
-                <p key={course.tees.indexOf(tee)}>{tee.par}</p>
-              ))}
-            </div>
             <button
               className="add-course-button"
               onClick={this.addCourseHandler}
@@ -60,7 +46,7 @@ class AddCourse extends Component {
   searchByNameHandler = () => {
     let input = document.getElementById("course-search");
     let filter = input.value.toUpperCase();
-    let courses = document.querySelectorAll(".app-courses-course");
+    let courses = document.querySelectorAll(".app-courses-course-add");
 
     for (let i = 0; i < courses.length; i++) {
       let name = courses[i].firstChild.textContent;

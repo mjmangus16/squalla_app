@@ -93,36 +93,38 @@ router.post("/login", (req, res) => {
   const password = req.body.password;
 
   User.findOne({ email }).then(user => {
-    if (!user) {
-      errors.login = "User not found";
-      return res.status(404).json(errors);
-    }
-
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        // User Matched
-
-        const payload = {
-          id: user.id,
-          username: user.username
-        };
-
-        // Sign Token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          { expiresIn: 7200 },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            });
-          }
-        );
-      } else {
-        errors.password = "Password is incorrect";
-        return res.status(400).json(errors);
+    Profile.findOne({ username: user.username }).then(profile => {
+      if (!user) {
+        errors.login = "User not found";
+        return res.status(404).json(errors);
       }
+
+      bcrypt.compare(password, user.password).then(isMatch => {
+        if (isMatch) {
+          // User Matched
+
+          const payload = {
+            id: user.id,
+            username: user.username
+          };
+
+          // Sign Token
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            { expiresIn: 7200 },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token
+              });
+            }
+          );
+        } else {
+          errors.password = "Password is incorrect";
+          return res.status(400).json(errors);
+        }
+      });
     });
   });
 });

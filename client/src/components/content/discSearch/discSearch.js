@@ -66,6 +66,7 @@ class discSearch extends Component {
     element: false,
     fullturn: false,
     gateway: false,
+    galaxy: false,
     hyzerbomb: false,
     infinite: false,
     innova: false,
@@ -82,6 +83,7 @@ class discSearch extends Component {
     reptilian: false,
     rpm: false,
     salient: false,
+    storm: false,
     streamline: false,
     tobu: false,
     handcandy: false,
@@ -240,6 +242,11 @@ class discSearch extends Component {
       this.manufacturer.manufacturer = true;
       this.filterSelections.push(<p key="gateway">Gateway</p>);
       this.setState({ filterSelections: this.filterSelections });
+    } else if (e.target.value === "galaxy") {
+      this.manufacturer.galaxy = true;
+      this.manufacturer.manufacturer = true;
+      this.filterSelections.push(<p key="galaxy">Galaxy</p>);
+      this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "hyzerbomb") {
       this.manufacturer.hyzerbomb = true;
       this.manufacturer.manufacturer = true;
@@ -319,6 +326,11 @@ class discSearch extends Component {
       this.manufacturer.salient = true;
       this.manufacturer.manufacturer = true;
       this.filterSelections.push(<p key="salient">Salient</p>);
+      this.setState({ filterSelections: this.filterSelections });
+    } else if (e.target.value === "storm") {
+      this.manufacturer.storm = true;
+      this.manufacturer.manufacturer = true;
+      this.filterSelections.push(<p key="storm">Storm</p>);
       this.setState({ filterSelections: this.filterSelections });
     } else if (e.target.value === "streamline") {
       this.manufacturer.streamline = true;

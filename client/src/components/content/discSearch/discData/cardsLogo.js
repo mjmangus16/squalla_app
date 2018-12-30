@@ -11,6 +11,7 @@ import dynamic from "../../../../img/logo/dynamic.png";
 import element from "../../../../img/logo/element.png";
 import fullTurn from "../../../../img/logo/fullturn.png";
 import gateway from "../../../../img/logo/gateway.png";
+import galaxy from "../../../../img/logo/galaxy.png";
 import handCandy from "../../../../img/logo/handCandy.png";
 import hyzerBomb from "../../../../img/logo/hyzerbomb.png";
 import infinite from "../../../../img/logo/infinite.png";
@@ -29,6 +30,7 @@ import reptilian from "../../../../img/logo/reptilian.png";
 import rpm from "../../../../img/logo/rpm.png";
 import salient from "../../../../img/logo/salient.png";
 import streamline from "../../../../img/logo/streamline.png";
+import storm from "../../../../img/logo/storm.png";
 import tobu from "../../../../img/logo/tobu.png";
 import vibram from "../../../../img/logo/vibram.png";
 import viking from "../../../../img/logo/viking.png";
@@ -108,6 +110,10 @@ const logoFunction = manufacturer => {
     return ozone;
   } else if (manufacturer === "Streamline Discs") {
     return streamline;
+  } else if (manufacturer === "Storm Disc Golf") {
+    return storm;
+  } else if (manufacturer === "Galaxy Disc Golf") {
+    return galaxy;
   }
 };
 
