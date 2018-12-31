@@ -1,26 +1,6 @@
 import React from "react";
 
 const summary = props => {
-  let friend = (
-    <div className="app-submitRound-players-score">
-      <div>
-        <p>Player1</p>
-        <p>64</p>
-      </div>
-    </div>
-  );
-
-  let friend2 = (
-    <div className="app-submitRound-players-score">
-      <div>
-        <p>Player2</p>
-        <p>64</p>
-      </div>
-    </div>
-  );
-
-  let friends = [friend2, friend, friend2];
-
   const displayScores = () => {
     let playerScores = [];
     for (let i = 0; i < props.data.players.length; i++) {
@@ -46,7 +26,10 @@ const summary = props => {
       </p>
       <div>
         {displayScores().map(score => (
-          <div className="app-submitRound-players-score">
+          <div
+            className="app-submitRound-players-score"
+            key={displayScores().indexOf(score)}
+          >
             <div>
               <p>{score.player}</p>
               <p>{score.score}</p>
@@ -55,7 +38,7 @@ const summary = props => {
         ))}
       </div>
       <button id="submitRound-submitButton" onClick={props.handler}>
-        SUBMIT
+        SUBMIT ROUND
       </button>
     </div>
   );
