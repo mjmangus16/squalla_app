@@ -28,7 +28,7 @@ const summary = props => {
         {displayScores().map(score => (
           <div
             className="app-submitRound-players-score"
-            key={displayScores().indexOf(score)}
+            key={`${score.player}${score.score}`}
           >
             <div>
               <p>{score.player}</p>
@@ -40,6 +40,7 @@ const summary = props => {
       <button id="submitRound-submitButton" onClick={props.handler}>
         SUBMIT ROUND
       </button>
+      <p id="round-submitted-success">Your round was successfully submitted</p>
     </div>
   );
 };

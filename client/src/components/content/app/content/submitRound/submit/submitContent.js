@@ -36,6 +36,8 @@ class SubmitContent extends Component {
     scores: []
   };
 
+  submitted = "";
+
   componentDidMount() {
     this.props.getProfile();
   }
@@ -96,11 +98,13 @@ class SubmitContent extends Component {
   submitRoundHandler = () => {
     this.roundData.players = this.roundData.players.join(",");
     this.roundData.scores = this.roundData.scores.join(",");
-    console.log(this.roundData);
+
     axios
       .post("/api/rounds/add", this.roundData)
-      .then(res => console.log(res.data))
       .catch(err => console.log(err));
+
+    document.getElementById("round-submitted-success").style.display = "block";
+    document.getElementById("submitRound-submitButton").style.display = "none";
   };
 
   displayContent = <Date handler={this.getDateHandler} />;
@@ -137,7 +141,11 @@ class SubmitContent extends Component {
     } else if (this.state.scores == true) {
       this.getScoresHandler();
       this.displayContent = (
-        <Summary data={this.roundData} handler={this.submitRoundHandler} />
+        <Summary
+          data={this.roundData}
+          handler={this.submitRoundHandler}
+          submitted={this.submitted}
+        />
       );
       document.querySelector(".submit-topNav-scores").id = "";
       document.querySelector(".submit-topNav-summary").id = "nav-link-style";
