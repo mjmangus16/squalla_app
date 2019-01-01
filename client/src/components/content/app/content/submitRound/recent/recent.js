@@ -52,6 +52,10 @@ class Recent extends Component {
           ))
         );
       } else {
+        recentRoundsContent = (
+          <p className="orange-text">You have not submitted any rounds yet</p>
+        );
+        console.log(profile.rounds.length);
       }
     }
 

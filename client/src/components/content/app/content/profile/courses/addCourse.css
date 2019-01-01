@@ -1,3 +1,12 @@
+.app-home-courses-content-addCourse {
+  width: 75%;
+  height: 80%;
+  margin: auto;
+  display: grid;
+  grid-template-rows: 50px 50px auto;
+  grid-template-columns: 1fr;
+}
+
 .add-course-button {
   color: var(--green);
   grid-column: 2;

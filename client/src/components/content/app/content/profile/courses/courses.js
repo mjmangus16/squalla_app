@@ -53,47 +53,57 @@ class Courses extends Component {
     if (Object.keys(profile).length > 0) {
       let coursesData = getCoursesData(profile);
 
-      coursesContent.push(
-        coursesData.map(course => (
-          <div className="app-courses-course" key={coursesData.indexOf(course)}>
-            <h3>{course.name}</h3>
-
+      if (coursesData.length > 0) {
+        coursesContent.push(
+          coursesData.map(course => (
             <div
-              className="app-courses-course-data"
-              style={{
-                gridTemplateColumns: `repeat(${course.tees.length + 1}, 40px)`,
-                gridTemplateRows: "20px 20px"
-              }}
+              className="app-courses-course"
+              key={coursesData.indexOf(course)}
             >
-              <h4 id="extra-padding-h4-2">Tees:</h4>
-              {course.tees.map(tee => (
-                <h4 key={course.tees.indexOf(tee)}>{tee.tee}</h4>
-              ))}
+              <h3>{course.name}</h3>
 
-              <h4 id="extra-padding-h4">Par:</h4>
-              {course.tees.map(tee => (
-                <p key={course.tees.indexOf(tee)}>{tee.par}</p>
-              ))}
-              {/* <div className="app-courses-course-data-heading">
-              <h4>Best</h4>
-              
-            </div> */}
+              <div
+                className="app-courses-course-data"
+                style={{
+                  gridTemplateColumns: `repeat(${course.tees.length +
+                    1}, 40px)`,
+                  gridTemplateRows: "20px 20px"
+                }}
+              >
+                <h4 id="extra-padding-h4-2">Tees:</h4>
+                {course.tees.map(tee => (
+                  <h4 key={course.tees.indexOf(tee)}>{tee.tee}</h4>
+                ))}
+
+                <h4 id="extra-padding-h4">Par:</h4>
+                {course.tees.map(tee => (
+                  <p key={course.tees.indexOf(tee)}>{tee.par}</p>
+                ))}
+                {/* <div className="app-courses-course-data-heading">
+                <h4>Best</h4>
+                
+              </div> */}
+              </div>
+              <input
+                type="image"
+                src={selectArrow}
+                className="app-courses-course-selectArrow"
+                alt="expand course item icon"
+                onClick={() =>
+                  this.setState({
+                    courseSelected: !this.state.courseSelected,
+                    courseData: course
+                  })
+                }
+              />
             </div>
-            <input
-              type="image"
-              src={selectArrow}
-              className="app-courses-course-selectArrow"
-              alt="expand course item icon"
-              onClick={() =>
-                this.setState({
-                  courseSelected: !this.state.courseSelected,
-                  courseData: course
-                })
-              }
-            />
-          </div>
-        ))
-      );
+          ))
+        );
+      } else {
+        coursesContent = (
+          <p className="orange-text">You have not added any courses yet</p>
+        );
+      }
 
       if (this.state.courseSelected === false) {
         displayContent = (

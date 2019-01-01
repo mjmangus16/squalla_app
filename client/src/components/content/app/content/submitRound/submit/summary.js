@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from "react-moment";
 
 const summary = props => {
   const displayScores = () => {
@@ -18,7 +19,7 @@ const summary = props => {
         {props.data.course}
       </p>
       <p className="app-submitRound-submit-content-summary-p">
-        <span>Date:</span> {props.data.date}
+        <span>Date:</span> <Moment format="MM/DD/YY">{props.data.date}</Moment>
       </p>
 
       <p className="app-submitRound-submit-content-summary-p">

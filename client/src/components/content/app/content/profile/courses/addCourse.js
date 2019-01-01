@@ -8,16 +8,26 @@ import "./addCourse.css";
 
 class AddCourse extends Component {
   state = {
-    courses: []
+    courses: [],
+    courseAdded: ""
   };
 
   addCourseHandler = e => {
     let course = {};
     course.name = e.target.parentElement.firstChild.textContent;
-    console.log(course);
     axios
       .post("/api/profiles/courses/add", course)
-      .then(res => console.log(res.data))
+      .then(res => {
+        if (res.data.course) {
+          this.setState({
+            courseAdded: `${course.name} has already been added to your profile`
+          });
+        } else {
+          this.setState({
+            courseAdded: `${course.name} has been added to your profile`
+          });
+        }
+      })
       .catch(err => console.log(err));
   };
 
@@ -63,13 +73,15 @@ class AddCourse extends Component {
       <div className="squalla-app-container">
         <AppMenu link={"courses"} />
         <div className="squalla-app-content-container">
-          <div className="app-home-courses-content">
+          <div className="app-home-courses-content-addCourse">
+            <p className="orange-text">{this.state.courseAdded}</p>
             <input
               id="course-search"
               type="text"
               placeholder="Search..."
               onChange={this.searchByNameHandler}
             />
+
             <div className="app-home-courses-data-container">
               {this.state.courses}
             </div>

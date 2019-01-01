@@ -96,21 +96,37 @@ class SubmitContent extends Component {
   };
 
   submitRoundHandler = () => {
-    this.roundData.players = this.roundData.players.join(",");
-    this.roundData.scores = this.roundData.scores.join(",");
+    if (
+      this.roundData.date !== "" &&
+      this.roundData.course !== "" &&
+      this.roundData.tees !== "" &&
+      this.roundData.players.length !== 0 &&
+      this.roundData.players.length === this.roundData.scores.length
+    ) {
+      console.log(this.roundData);
+      this.roundData.players = this.roundData.players.join(",");
+      this.roundData.scores = this.roundData.scores.join(",");
 
-    axios
-      .post("/api/rounds/add", this.roundData)
-      .catch(err => console.log(err));
+      axios
+        .post("/api/rounds/add", this.roundData)
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err));
 
-    document.getElementById("round-submitted-success").style.display = "block";
-    document.getElementById("submitRound-submitButton").style.display = "none";
+      document.getElementById("round-submitted-success").style.display =
+        "block";
+      document.getElementById("submitRound-submitButton").style.display =
+        "none";
+      document.getElementById("submitRound-backButton").className =
+        "button-hide";
+    } else {
+      console.log(this.roundData);
+    }
   };
 
   displayContent = <Date handler={this.getDateHandler} />;
 
   nextButtonHandler = () => {
-    if (this.state.date === true) {
+    if (this.state.date === true && this.roundData.date !== "") {
       this.displayContent = (
         <Course
           data={this.props.profile.profile.courses}
@@ -121,7 +137,11 @@ class SubmitContent extends Component {
       document.querySelector(".submit-topNav-date").id = "";
       document.querySelector(".submit-topNav-course").id = "nav-link-style";
       this.setState({ date: false, course: true });
-    } else if (this.state.course === true) {
+    } else if (
+      this.state.course === true &&
+      this.roundData.course !== "" &&
+      this.roundData.tees !== ""
+    ) {
       this.displayContent = (
         <Players
           data={this.props.profile.profile.friends}
@@ -133,25 +153,38 @@ class SubmitContent extends Component {
       document.querySelector(".submit-topNav-course").id = "";
       document.querySelector(".submit-topNav-players").id = "nav-link-style";
       this.setState({ course: false, players: true });
-    } else if (this.state.players === true) {
+    } else if (
+      this.state.players === true &&
+      this.roundData.players.length !== 0
+    ) {
       this.displayContent = <Scores data={this.roundData.players} />;
       document.querySelector(".submit-topNav-players").id = "";
       document.querySelector(".submit-topNav-scores").id = "nav-link-style";
+
       this.setState({ players: false, scores: true });
     } else if (this.state.scores == true) {
-      this.getScoresHandler();
-      this.displayContent = (
-        <Summary
-          data={this.roundData}
-          handler={this.submitRoundHandler}
-          submitted={this.submitted}
-        />
-      );
-      document.querySelector(".submit-topNav-scores").id = "";
-      document.querySelector(".submit-topNav-summary").id = "nav-link-style";
-      document.getElementById("submitRound-nextButton").className =
-        "button-hide";
-      this.setState({ players: false, summary: true });
+      let scores = true;
+      let scoresInput = document.querySelectorAll(".submitRound-score");
+      for (let i = 0; i < scoresInput.length; i++) {
+        if (scoresInput[i].value === "") {
+          scores = false;
+        }
+      }
+      if (scores === true) {
+        this.getScoresHandler();
+        this.displayContent = (
+          <Summary
+            data={this.roundData}
+            handler={this.submitRoundHandler}
+            submitted={this.submitted}
+          />
+        );
+        document.querySelector(".submit-topNav-scores").id = "";
+        document.querySelector(".submit-topNav-summary").id = "nav-link-style";
+        document.getElementById("submitRound-nextButton").className =
+          "button-hide";
+        this.setState({ players: false, summary: true });
+      }
     }
   };
 

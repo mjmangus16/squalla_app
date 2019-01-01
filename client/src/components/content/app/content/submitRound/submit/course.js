@@ -21,26 +21,35 @@ class Course extends Component {
 
   render() {
     let coursesContent = [];
-    coursesContent.push(
-      this.props.data.map(course => (
-        <div
-          className="app-submitRound-submit-content-course-course"
-          key={this.props.data.indexOf(course)}
-        >
-          <h4>{course.name}</h4>
-          <div>
-            {course.tees.map(tee => (
-              <button
-                onClick={this.props.handler}
-                key={course.tees.indexOf(tee)}
-              >
-                {tee.tee}
-              </button>
-            ))}
+    if (this.props.data.length > 0) {
+      coursesContent.push(
+        this.props.data.map(course => (
+          <div
+            className="app-submitRound-submit-content-course-course"
+            key={this.props.data.indexOf(course)}
+          >
+            <h4>{course.name}</h4>
+            <div>
+              {course.tees.map(tee => (
+                <button
+                  onClick={this.props.handler}
+                  key={course.tees.indexOf(tee)}
+                >
+                  {tee.tee}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      ))
-    );
+        ))
+      );
+    } else {
+      coursesContent = (
+        <p className="orange-text">
+          You must add a course to your profile before you can submit a round
+        </p>
+      );
+    }
+
     return (
       <div className="app-submitRound-submit-content-course">
         <div>

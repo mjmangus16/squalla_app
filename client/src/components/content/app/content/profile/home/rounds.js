@@ -35,41 +35,47 @@ class Rounds extends Component {
     let roundsContent = [];
     if (Object.keys(profile).length > 0) {
       let rounds = getRoundsData(profile);
-      roundsContent.push(
-        rounds.map(round => (
-          <div className="app-home-rounds-round" key={rounds.indexOf(round)}>
-            <p>{round.date}</p>
-            <p className="app-home-rounds-round-course-p">{round.course}</p>
-            <p>{round.tees}</p>
-            <p>{round.myScore}</p>
-            <p>{round.players}</p>
-            <input
-              type="image"
-              src={expandArrow}
-              className="rounds-expand-arrow"
-              alt="expand menu item icon"
-              onClick={this.expandRoundHandler}
-            />
-            <div className="app-home-rounds-round-more" id="item-hide">
-              <div className="app-home-rounds-round-more-heading">
-                <h4>Username</h4>
-                <h4>Score</h4>
-              </div>
-              <div>
-                {round.roundScores.map(playerScore => (
-                  <div
-                    className="app-home-rounds-round-more-data"
-                    key={round.roundScores.indexOf(playerScore)}
-                  >
-                    <p>{playerScore.player}</p>
-                    <p>{playerScore.score}</p>
-                  </div>
-                ))}
+      if (rounds.length > 0) {
+        roundsContent.push(
+          rounds.map(round => (
+            <div className="app-home-rounds-round" key={rounds.indexOf(round)}>
+              <p>{round.date}</p>
+              <p className="app-home-rounds-round-course-p">{round.course}</p>
+              <p>{round.tees}</p>
+              <p>{round.myScore}</p>
+              <p>{round.players}</p>
+              <input
+                type="image"
+                src={expandArrow}
+                className="rounds-expand-arrow"
+                alt="expand menu item icon"
+                onClick={this.expandRoundHandler}
+              />
+              <div className="app-home-rounds-round-more" id="item-hide">
+                <div className="app-home-rounds-round-more-heading">
+                  <h4>Username</h4>
+                  <h4>Score</h4>
+                </div>
+                <div>
+                  {round.roundScores.map(playerScore => (
+                    <div
+                      className="app-home-rounds-round-more-data"
+                      key={round.roundScores.indexOf(playerScore)}
+                    >
+                      <p>{playerScore.player}</p>
+                      <p>{playerScore.score}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        ))
-      );
+          ))
+        );
+      } else {
+        roundsContent = (
+          <p className="orange-text">You have not submitted any rounds yet</p>
+        );
+      }
     }
     return (
       <div className="squalla-app-container">

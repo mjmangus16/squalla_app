@@ -1,3 +1,8 @@
+.orange-text {
+  color: var(--orange);
+  font-weight: 300;
+}
+
 .app-submitRound-recent {
   height: 100%;
   width: 100%;
@@ -307,11 +312,13 @@
   display: grid;
   grid-template-columns: 1fr;
   border-top: solid 1px var(--darkGrey);
+  width: 75%;
+  margin: auto;
 }
 
 .app-submitRound-players-score div {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr 75px;
   width: 50%;
   margin: auto;
 }

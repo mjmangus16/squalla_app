@@ -72,7 +72,7 @@ class Friends extends Component {
             </div>
             <div className="app-home-friends-data-container">
               {friendsData.length === 0 ? (
-                <p>You have not added any friends yet.</p>
+                <p>You have not added any friends yet</p>
               ) : (
                 friendsContent
               )}
