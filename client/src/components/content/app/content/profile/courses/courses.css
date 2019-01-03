@@ -33,13 +33,13 @@
   overflow-y: scroll;
   height: auto;
   max-height: 55vh;
-  border: solid 1px var(--darkGrey);
+  border-top: solid 1px var(--darkGrey);
   margin-top: 15px;
   height: auto;
 }
 
 .app-home-courses-data-container::-webkit-scrollbar {
-  width: 5px;
+  width: 0px;
 }
 
 .app-home-courses-data-container::-webkit-scrollbar-track {

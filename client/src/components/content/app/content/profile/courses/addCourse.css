@@ -1,7 +1,7 @@
 .app-home-courses-content-addCourse {
   width: 75%;
-  height: 80%;
-  margin: auto;
+  height: 90%;
+  margin: auto auto 0px;
   display: grid;
   grid-template-rows: 50px 50px auto;
   grid-template-columns: 1fr;

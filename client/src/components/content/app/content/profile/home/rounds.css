@@ -49,6 +49,13 @@
   color: var(--orange);
 }
 
+.app-home-rounds-round time {
+  margin: auto;
+  font-weight: 300;
+  font-size: 0.8em;
+  padding: 10px 0;
+}
+
 .app-home-rounds-round p {
   margin: auto;
   font-weight: 300;

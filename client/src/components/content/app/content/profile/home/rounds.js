@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getProfile } from "../../../../../../actions/profileActions";
+import Moment from "react-moment";
 
 import getRoundsData from "../../../functions/rounds";
 
@@ -39,7 +40,7 @@ class Rounds extends Component {
         roundsContent.push(
           rounds.map(round => (
             <div className="app-home-rounds-round" key={rounds.indexOf(round)}>
-              <p>{round.date}</p>
+              <Moment format="MM/DD/YY">{round.date}</Moment>
               <p className="app-home-rounds-round-course-p">{round.course}</p>
               <p>{round.tees}</p>
               <p>{round.myScore}</p>

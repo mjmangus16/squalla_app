@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getProfile } from "../../../../../../actions/profileActions";
+import Moment from "react-moment";
 
 import getRoundsData from "../../../functions/rounds";
 
@@ -41,7 +42,7 @@ class Recent extends Component {
                   <h4>League</h4>
                 </div>
                 <div className="app-submitRound-recent-round-data-content">
-                  <p>{round.date}</p>
+                  <Moment format="MM/DD/YY">{round.date}</Moment>
                   <p>{round.tees}</p>
                   <p>{round.players}</p>
                   <p>{round.owner}</p>
@@ -63,8 +64,10 @@ class Recent extends Component {
       <div className="squalla-app-container">
         <AppMenu link={"submitRound"} />
         <div className="app-submitRound-recent">
-          <div className="app-submitRound-recent-content">
-            {recentRoundsContent}
+          <div className="app-submitRound-recent-content-container">
+            <div className="app-submitRound-recent-content">
+              {recentRoundsContent}
+            </div>
           </div>
           <div className="app-home-courses-nav">
             <Link to="/squallaApp/submitRound/recent" exact="true">

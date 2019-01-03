@@ -55,7 +55,7 @@ class SubmitContent extends Component {
     console.log(this.state.roundData);
   };
 
-  getPlayersHandler = e => {
+  togglePlayersHandler = e => {
     let selected = false;
     for (let i = 0; i < this.roundData.players.length; i++) {
       if (
@@ -69,17 +69,16 @@ class SubmitContent extends Component {
       this.roundData.players.push(
         e.target.parentElement.firstChild.textContent
       );
-      this.setState({ roundData: this.roundData });
-    }
-  };
-
-  removePlayersHandler = e => {
-    for (let i = 0; i < this.roundData.players.length; i++) {
-      if (
-        e.target.parentElement.firstChild.textContent ===
-        this.roundData.players[i]
-      ) {
-        this.roundData.players.splice(i, 1);
+      e.target.id = "player-selected";
+    } else if (selected === true) {
+      e.target.id = "";
+      for (let i = 0; i < this.roundData.players.length; i++) {
+        if (
+          e.target.parentElement.firstChild.textContent ===
+          this.roundData.players[i]
+        ) {
+          this.roundData.players.splice(i, 1);
+        }
       }
     }
     this.setState({ roundData: this.roundData });
@@ -90,7 +89,7 @@ class SubmitContent extends Component {
     const div = document.getElementById("submitRound-scores-container")
       .children;
     for (let i = 0; i < div.length; i++) {
-      scores.push(div[i].firstChild.lastChild.value);
+      scores.push(div[i].lastChild.value);
     }
     this.roundData.scores = scores;
   };
@@ -145,9 +144,9 @@ class SubmitContent extends Component {
       this.displayContent = (
         <Players
           data={this.props.profile.profile.friends}
-          getHandler={this.getPlayersHandler}
-          removeHandler={this.removePlayersHandler}
+          handler={this.togglePlayersHandler}
           user={this.props.profile.profile.username}
+          selected={this.roundData.players}
         />
       );
       document.querySelector(".submit-topNav-course").id = "";
@@ -199,9 +198,9 @@ class SubmitContent extends Component {
       this.displayContent = (
         <Players
           data={this.props.profile.profile.friends}
-          getHandler={this.getPlayersHandler}
-          removeHandler={this.removePlayersHandler}
+          handler={this.togglePlayersHandler}
           user={this.props.profile.profile.username}
+          selected={this.roundData.players}
         />
       );
       document.querySelector(".submit-topNav-players").id = "nav-link-style";
@@ -241,20 +240,27 @@ class SubmitContent extends Component {
               >
                 BACK
               </button>
-              <div className="app-submitRound-submit-summary-content">
-                {this.roundData.date != "" ? (
-                  <Moment format="MM/DD/YY">{this.roundData.date}</Moment>
-                ) : null}
+              {this.state.summary === true ? null : (
+                <div className="app-submitRound-submit-summary-content">
+                  {this.roundData.date != "" ? (
+                    <Moment format="MM/DD/YY">{this.roundData.date}</Moment>
+                  ) : (
+                    <p className="no-details-selected">
+                      Details will appear here when selected
+                    </p>
+                  )}
 
-                <p>{this.roundData.course}</p>
-                {this.roundData.tees != "" ? (
-                  <p>Tees: {this.roundData.tees}</p>
-                ) : null}
+                  <p>{this.roundData.course}</p>
+                  {this.roundData.tees != "" ? (
+                    <p>Tees: {this.roundData.tees}</p>
+                  ) : null}
 
-                {this.roundData.players.length > 0 ? (
-                  <p>{this.roundData.players.length} Players</p>
-                ) : null}
-              </div>
+                  {this.roundData.players.length > 0 ? (
+                    <p>{this.roundData.players.length} Players</p>
+                  ) : null}
+                </div>
+              )}
+
               <button
                 onClick={this.nextButtonHandler}
                 id="submitRound-nextButton"

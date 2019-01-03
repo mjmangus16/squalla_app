@@ -25,19 +25,22 @@ const summary = props => {
       <p className="app-submitRound-submit-content-summary-p">
         <span>Tees:</span> {props.data.tees}
       </p>
-      <div>
+      <div className="app-submitRound-submit-content-summary-scores">
         {displayScores().map(score => (
           <div
-            className="app-submitRound-players-score"
+            className="app-submitRound-players-scores"
             key={`${score.player}${score.score}`}
           >
-            <div>
-              <p>{score.player}</p>
+            <div className="app-submitRound-players-scores-content">
+              <p id="app-submitRound-players-scores-content-player">
+                {score.player}
+              </p>
               <p>{score.score}</p>
             </div>
           </div>
         ))}
       </div>
+
       <button id="submitRound-submitButton" onClick={props.handler}>
         SUBMIT ROUND
       </button>

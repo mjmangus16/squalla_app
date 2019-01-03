@@ -19,6 +19,22 @@ class Course extends Component {
     }
   };
 
+  displayTees = e => {
+    let tees = document.querySelectorAll(".course-tee-buttons");
+
+    for (let i = 0; i < tees.length; i++) {
+      tees[i].style.display = "none";
+      tees[i].parentElement.style.height = "50px";
+      tees[i].parentElement.id = "";
+      tees[i].parentElement.children[0].style.color = "var(--lightGrey)";
+    }
+
+    e.target.parentElement.style.height = "100px";
+    e.target.parentElement.id = "black-background";
+    e.target.parentElement.children[1].style.display = "block";
+    e.target.parentElement.children[0].style.color = "var(--orange)";
+  };
+
   render() {
     let coursesContent = [];
     if (this.props.data.length > 0) {
@@ -28,12 +44,15 @@ class Course extends Component {
             className="app-submitRound-submit-content-course-course"
             key={this.props.data.indexOf(course)}
           >
-            <h4>{course.name}</h4>
-            <div>
+            <button onClick={this.displayTees} className="course-name-button">
+              {course.name}
+            </button>
+            <div className="course-tee-buttons">
               {course.tees.map(tee => (
                 <button
                   onClick={this.props.handler}
                   key={course.tees.indexOf(tee)}
+                  className="tee-name-button"
                 >
                   {tee.tee}
                 </button>
@@ -54,7 +73,7 @@ class Course extends Component {
       <div className="app-submitRound-submit-content-course">
         <div>
           <h3 className="app-submitRound-submit-content-course-h3">
-            Select the tees for the course you played.
+            Select the course and tees you played
           </h3>
           <input
             id="submitRound-course-search"

@@ -48,7 +48,7 @@
 .app-home-friends-data-container {
   overflow-y: scroll;
   height: auto;
-  border: solid 1px var(--darkGrey);
+  border-top: solid 1px var(--darkGrey);
   margin-top: 15px;
   height: auto;
 }
@@ -61,7 +61,7 @@
 }
 
 .app-home-friends-data-container::-webkit-scrollbar {
-  width: 5px;
+  width: 0px;
 }
 
 .app-home-friends-data-container::-webkit-scrollbar-track {

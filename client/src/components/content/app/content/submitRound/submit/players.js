@@ -15,6 +15,7 @@ class Players extends Component {
       }
     }
   };
+
   render() {
     let friendsContent = [];
 
@@ -24,12 +25,16 @@ class Players extends Component {
           className="app-submitRound-players-player"
           key={this.props.data.indexOf(player)}
         >
-          <p>{player}</p>
-          <button onClick={this.props.getHandler}>Select</button>
-          <button onClick={this.props.removeHandler}>Remove</button>
+          <button
+            className="select-players-button"
+            onClick={this.props.handler}
+          >
+            {player}
+          </button>
         </div>
       ))
     );
+
     return (
       <div className="app-submitRound-submit-content-course">
         <div>
@@ -46,9 +51,12 @@ class Players extends Component {
         <div className="app-submitRound-submit-content-courses-container">
           <div className="app-submitRound-submit-content-courses">
             <div className="app-submitRound-players-player">
-              <p>{this.props.user}</p>
-              <button onClick={this.props.getHandler}>Select</button>
-              <button onClick={this.props.removeHandler}>Remove</button>
+              <button
+                className="select-players-button"
+                onClick={this.props.handler}
+              >
+                {this.props.user}
+              </button>
             </div>
             {friendsContent}
           </div>
