@@ -7,12 +7,14 @@ import axios from "axios";
 import Moment from "react-moment";
 
 import AppMenu from "../../../appMenu";
+import Modal from "../../../../../UI/Modal/Modal";
 
 import Date from "./date";
 import Course from "./course";
 import Players from "./players";
 import Scores from "./scores";
 import Summary from "./summary";
+import UserSummary from "./userSummary";
 
 import backButton2 from "../../../../../../img/backButton2.png";
 
@@ -25,7 +27,9 @@ class SubmitContent extends Component {
     players: false,
     scores: false,
     summary: false,
-    roundData: {}
+    roundData: {},
+    userSummaryData: {},
+    showModal: false
   };
 
   roundData = {
@@ -41,6 +45,10 @@ class SubmitContent extends Component {
   componentDidMount() {
     this.props.getProfile();
   }
+
+  removeModal = () => {
+    this.setState({ userSummaryData: {}, showModal: false });
+  };
 
   getDateHandler = () => {
     this.roundData.date = document.getElementById("submitRound-date").value;
@@ -108,7 +116,11 @@ class SubmitContent extends Component {
 
       axios
         .post("/api/rounds/add", this.roundData)
-        .then(res => console.log(res.data))
+        .then(res => {
+          if (res.data) {
+            this.setState({ userSummaryData: res.data, showModal: true });
+          }
+        })
         .catch(err => console.log(err));
 
       document.getElementById("round-submitted-success").style.display =
@@ -232,6 +244,14 @@ class SubmitContent extends Component {
         <AppMenu link={"submitRound"} />
         <div className="app-submitRound-submit">
           <div className="app-submitRound-submit-container">
+            {this.state.showModal === false ? null : (
+              <Modal show={this.state.showModal}>
+                <UserSummary
+                  data={this.state.userSummaryData}
+                  removeModal={this.removeModal}
+                />
+              </Modal>
+            )}
             <div className="app-submitRound-submit-summary-container">
               <button
                 className="button-hide"

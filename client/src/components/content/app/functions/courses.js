@@ -6,7 +6,7 @@ const getCoursesData = profile => {
       }
     }
   }
-  return profile.courses;
+  return profile.courses.sort((a, b) => b.history.length - a.history.length);
 };
 
 module.exports = getCoursesData;

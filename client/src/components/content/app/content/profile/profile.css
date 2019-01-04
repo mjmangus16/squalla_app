@@ -65,150 +65,6 @@
 @media only screen and (max-width: 500px) {
   .app-home-dashboard-content {
     width: 100%;
-    max-height: 65%;
-  }
-
-  .app-home-rounds-content {
-    width: 100%;
-    height: 90%;
-    margin: auto auto 0px;
-    font-size: 0.8em;
-  }
-
-  .app-home-rounds-round-more {
-    width: 65%;
-  }
-
-  .app-home-dashboard-recentRound {
-    border-bottom: none;
-  }
-
-  .app-home-courses-content {
-    width: 100%;
-    height: 90%;
-    margin: auto auto 0px;
-  }
-
-  .app-courses-course {
-    grid-template-columns: 4fr 1fr;
-    grid-template-rows: 1fr;
-    height: 50px;
-  }
-
-  .app-courses-course h3 {
-    grid-column: 1;
-    padding: 0px;
-    font-size: 0.8em;
-  }
-
-  .app-courses-course-data {
-    display: none;
-  }
-
-  .app-courses-course-selectArrow {
-    grid-column: 2;
-    margin: auto;
-  }
-
-  .app-courses-course-backArrow {
-    width: 30px;
-  }
-
-  .selectedCourse-container {
-    width: 95%;
-    margin: auto auto 0px;
-  }
-
-  .selectedCourse-data {
-    width: auto;
-    height: 100%;
-    margin-top: 0px;
-  }
-
-  .selectedCourse-data h2 {
-    font-size: 1.2em;
-  }
-
-  .selectedCourse-data-info1 {
-    grid-column: 1/4;
-    width: 100%;
-    margin: 25px auto auto;
-    font-size: 0.75em;
-  }
-
-  .selectedCourse-data-info2 {
-    grid-column: 1/4;
-    width: 100%;
-    height: auto;
-    margin: 30px auto 0px;
-    font-size: 0.9em;
-  }
-
-  .selectedCourse-rounds-container {
-    height: 45vh;
-    margin: auto auto 0px;
-  }
-
-  .app-home-courses-content-addCourse {
-    width: 100%;
-  }
-
-  .app-courses-course-data-add {
-    width: 100%;
-    grid-column: 1;
-  }
-
-  .app-courses-course-database {
-    grid-template-columns: 6fr 1fr;
-  }
-
-  .app-courses-course-database h3 {
-    grid-column: 1;
-  }
-
-  .add-course-button {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  .app-home-friends-content {
-    width: 100%;
-    height: 90%;
-    margin-bottom: 0px;
-  }
-
-  .app-friends-friend {
-    grid-template-columns: 3fr 1fr;
-  }
-
-  .app-friends-friend p {
-    grid-column: 1;
-  }
-
-  .add-friend-button {
-    grid-column: 2;
-    padding: 0px 10px;
-  }
-
-  .app-home-dashboard-content-friend-container {
-    width: 100%;
-    max-height: 65%;
-  }
-
-  .app-home-courses-data-container {
-    margin-top: 15px;
-    max-height: 69vh;
-    border-top: solid 1px (--lightGrey);
-  }
-
-  .app-home-rounds-data-container {
-    border-top: solid 1px (--lightGrey);
-  }
-}
-
-@media only screen and (max-width: 325px) and (max-height: 575px) {
-  .app-home-dashboard-content {
-    width: 100%;
     height: 100%;
     max-height: 90%;
     margin: auto auto 0px;
@@ -244,6 +100,15 @@
     margin: auto auto 0px;
   }
 
+  .app-home-courses-data-heading {
+    font-size: 0.8em;
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  #tees-par {
+    display: none;
+  }
+
   .app-courses-course-backArrow {
     width: 30px;
     margin: auto;
@@ -258,35 +123,54 @@
     width: auto;
     height: 100%;
     margin-top: 20px;
+    grid-template-rows: 25px 25px 130px auto;
   }
 
   .selectedCourse-data h2 {
     font-size: 1em;
   }
 
+  .selectedCourse-data h3 {
+    font-size: 1em;
+  }
+
   .selectedCourse-data-info1 {
     grid-column: 1/4;
-    width: 90%;
+    width: auto;
     margin: 10px auto;
     font-size: 0.75em;
+  }
+
+  .selectedCourse-data-info1 h4 {
+    width: 60px;
+  }
+
+  .selectedCourse-data-info1 p {
+    width: 60px;
   }
 
   .selectedCourse-data-info2 {
     grid-column: 1/4;
     width: 100%;
-    margin: 10px auto;
+    margin: 25px auto;
     font-size: 0.75em;
   }
 
   .app-courses-course {
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 1fr;
     height: 50px;
   }
 
-  .app-courses-course h3 {
+  .app-courses-course-name {
     grid-column: 1;
-    padding: 0px;
+    text-align: left;
+  }
+
+  .app-courses-course-holes {
+    grid-column: 2;
+    width: auto;
+    margin: auto;
   }
 
   .app-courses-course-data {
@@ -295,7 +179,7 @@
 
   .app-courses-course-selectArrow {
     grid-row: 1;
-    grid-column: 2;
+    grid-column: 3;
     margin: auto;
   }
 
@@ -347,7 +231,6 @@
   }
 
   .app-home-courses-data-container {
-    margin-top: 15px;
     max-height: 60vh;
   }
 }
@@ -361,5 +244,11 @@
   }
   .app-home-nav-middle {
     border-bottom: none;
+  }
+}
+
+@media only screen and (max-width: 500px) and (min-height: 700px) {
+  .selectedCourse-rounds-container {
+    height: 45vh;
   }
 }

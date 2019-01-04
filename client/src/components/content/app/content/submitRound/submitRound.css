@@ -133,6 +133,7 @@
 }
 
 .app-submitRound-submit-container {
+  position: relative;
   height: 90%;
   width: 75%;
   margin: auto auto 0px;
@@ -366,15 +367,15 @@
 
 .app-submitRound-submit-content-scores {
   display: grid;
-  grid-template-rows: 50px auto;
+  grid-template-rows: 75px auto;
   height: 100%;
 }
 
 .app-submitRound-players-score {
   display: grid;
-  grid-template-columns: auto 75px;
+  grid-template-columns: 200px 75px;
   border-top: solid 1px var(--darkGrey);
-  width: 100%;
+  width: 275px;
   margin: auto;
 }
 
@@ -401,6 +402,10 @@
   margin: auto;
 }
 
+.app-submitRound-players-scores:last-child {
+  border-bottom: solid 1px var(--darkGrey);
+}
+
 .app-submitRound-players-scores-content {
   display: grid;
   grid-template-columns: 75% 25%;
@@ -423,7 +428,7 @@
 .app-submitRound-submit-content-summary {
   height: 100%;
   display: grid;
-  grid-template-rows: 30px 30px 30px 30vh 70px;
+  grid-template-rows: auto auto auto 35vh 70px;
   margin: auto;
 }
 
@@ -454,6 +459,7 @@
   font-weight: 300;
   margin: auto;
   font-size: 1.25em;
+  padding: 10px auto;
 }
 
 .app-submitRound-submit-content-summary-p {

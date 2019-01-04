@@ -28,7 +28,6 @@ class selectedCourse extends Component {
       .get(`/api/profiles/courses/name/${this.props.data.name}`)
       .then(res => {
         if (res.data) {
-          console.log(res.data);
           this.setState({
             rounds: res.data.map(round => (
               <div
@@ -104,7 +103,10 @@ class selectedCourse extends Component {
             alt="expand course item icon"
             onClick={this.props.handler}
           />
-          <h2 style={this.styleh3}>{this.props.data.name}</h2>
+          <h2 className="selectedCourse-data-name">{this.props.data.name}</h2>
+          <h3 className="selectedCourse-data-holes">
+            Holes: {this.props.data.holes}
+          </h3>
           <div
             className="selectedCourse-data-info1"
             style={{

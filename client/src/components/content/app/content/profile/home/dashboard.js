@@ -41,6 +41,7 @@ class Dashboard extends Component {
     let dashboardContent;
     if (Object.keys(profile).length > 0) {
       let dashboardData = getDashboardData(profile);
+      console.log(dashboardData);
       let expBarStyle = getExperiencePercent(profile.exp, profile.level);
       dashboardContent = (
         <div className="app-home-dashboard-content">
@@ -77,9 +78,14 @@ class Dashboard extends Component {
               <h5>Course</h5>
               <h5>Tees</h5>
               <h5>Score</h5>
-              <Moment format="MM/DD/YY">
-                {dashboardData.recentRound.date}
-              </Moment>
+              {dashboardData.recentRound.date === "N/A" ? (
+                <p>N/A</p>
+              ) : (
+                <Moment format="MM/DD/YY">
+                  {dashboardData.recentRound.date}
+                </Moment>
+              )}
+
               <p className="app-home-dashboard-recentRound-data-course-name">
                 {dashboardData.recentRound.course}
               </p>

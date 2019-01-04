@@ -73,7 +73,7 @@ class MobileMenu extends Component {
           id="mobile-menu-sa"
           onClick={this.props.auth ? this.expandMenuHandler : null}
         >
-          Squalla App
+          App
           <input
             type="image"
             src={expandArrow}
@@ -116,7 +116,7 @@ class MobileMenu extends Component {
               <li>About</li>
               <li>Blog</li>
               <a href="/discSearch">
-                <li id="mobile-menu-dst">Disc Search Tool</li>
+                <li id="mobile-menu-dst">Disc Search</li>
               </a>
               {squallaApp}
               <li id={squallaAppSubMenu}>
@@ -145,7 +145,7 @@ class MobileMenu extends Component {
                   <li id={profileSubMenu}>
                     <ul id="profile-subMenu">
                       <li className="border-bottom">
-                        <a href="/squallaApp/profile/dashboard">Home</a>
+                        <a href="/squallaApp/profile/dashboard">Dashboard</a>
                       </li>
                       <li className="border-bottom">
                         <a href="/squallaApp/profile/courses">Courses</a>

@@ -84,25 +84,6 @@ router.post(
       });
     }
 
-    const getDate = () => {
-      let today = new Date();
-      let d, m, y;
-
-      d = today.getDate();
-      m = today.getMonth() + 1;
-      y = today.getFullYear();
-
-      if (d < 10) {
-        d = "0" + d;
-      }
-
-      if (m < 10) {
-        m = "0" + m;
-      }
-
-      return `${m}/${d}`;
-    };
-
     const newRound = new Round({
       owner: req.user.username,
       league: league,
@@ -165,9 +146,29 @@ router.post(
                       userScore
                     );
 
+                    profile.rounds.splice(
+                      0,
+                      1,
+                      addExpToRound(userExp, profile)
+                    );
+
+                    let oldLevel = profile.level;
                     profile.exp = profile.exp + userExp;
                     profile.level = levels(profile.exp);
-                    profile.save();
+                    profile.save().then(profile => {
+                      if (profile.username === req.user.username) {
+                        const returnData = {
+                          username: profile.username,
+                          level: oldLevel,
+                          originalExp: profile.exp - userExp,
+                          gainedExp: userExp,
+                          score: userScore,
+                          average: courseStats.average,
+                          best: courseStats.best
+                        };
+                        return res.json(returnData);
+                      }
+                    });
                   }
                 });
               })
@@ -314,7 +315,7 @@ const getCourseStats = (
     }
     average = scoresTotal / count;
     stats.average = Math.ceil(average);
-    stats.best = best;
+    stats.best = parseInt(best);
   }
   stats.distance = parseInt(distance);
   stats.par = parseInt(par);
@@ -330,4 +331,16 @@ const getUserScore = (scores, username) => {
       return parseInt(scores[i].score);
     }
   }
+};
+
+const addExpToRound = (exp, profile) => {
+  let round = profile.rounds[0];
+  for (let i = 0; i < round.scores.length; i++) {
+    if (profile.username === round.scores[i].player) {
+      round.scores[i].expEarned = exp;
+    } else {
+      delete round.scores[i].expEarned;
+    }
+  }
+  return round;
 };

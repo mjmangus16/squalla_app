@@ -9,13 +9,17 @@
   width: 100%;
   display: grid;
   grid-template-columns: 50px auto 50px;
-  grid-template-rows: 50px auto auto;
+  grid-template-rows: 40px 40px 150px auto;
 }
 
 .selectedCourse-data-info1 {
   display: grid;
-  margin-top: 50px;
+  margin: 20px auto auto;
   grid-column: 2;
+}
+
+.selectedCourse-data-info1 h4 {
+  text-transform: capitalize;
 }
 
 .selectedCourse-data-info1 div {
@@ -28,7 +32,7 @@
   color: var(--lightGrey);
   margin: 2px auto;
   padding-bottom: 5px;
-  width: 100%;
+  width: 100px;
   border-bottom: 1px solid var(--darkGrey);
 }
 
@@ -38,7 +42,7 @@
   margin: 2px auto;
   padding-bottom: 5px;
   border-bottom: 1px solid var(--darkGrey);
-  width: 100%;
+  width: 100px;
 }
 
 .selectedCourse-data h2 {
@@ -55,6 +59,20 @@
 .selectedCourse-data-info2 h3 {
   margin: auto;
   font-size: 1em;
+  font-weight: 300;
+}
+
+.selectedCourse-data-name {
+  grid-column: 2;
+  margin: 5px auto;
+  color: var(--orange);
+  font-weight: 300;
+}
+
+.selectedCourse-data-holes {
+  grid-column: 2;
+  margin: 5px auto;
+  color: var(--lightGrey);
   font-weight: 300;
 }
 

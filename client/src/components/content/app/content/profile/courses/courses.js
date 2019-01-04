@@ -52,7 +52,7 @@ class Courses extends Component {
     let displayContent;
     if (Object.keys(profile).length > 0) {
       let coursesData = getCoursesData(profile);
-
+      console.log(coursesData);
       if (coursesData.length > 0) {
         coursesContent.push(
           coursesData.map(course => (
@@ -60,7 +60,8 @@ class Courses extends Component {
               className="app-courses-course"
               key={coursesData.indexOf(course)}
             >
-              <h3>{course.name}</h3>
+              <h3 className="app-courses-course-name">{course.name}</h3>
+              <h3 className="app-courses-course-holes">{course.holes}</h3>
 
               <div
                 className="app-courses-course-data"
@@ -120,6 +121,11 @@ class Courses extends Component {
                 placeholder="Search..."
                 onChange={this.searchByNameHandler}
               />
+            </div>
+            <div className="app-home-courses-data-heading">
+              <p>Course</p>
+              <p>Holes</p>
+              <p id="tees-par">Tees / Par</p>
             </div>
             <div className="app-home-courses-data-container">
               <div className="app-home-courses-data">{coursesContent}</div>
