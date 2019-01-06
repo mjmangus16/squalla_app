@@ -280,7 +280,7 @@ router.post(
             for (let i = 0; i < profile.friends.length; i++) {
               if (req.body.username === profile.friends[i]) {
                 errors.friend =
-                  "That user has already been added to you friends";
+                  "That user has already been added to your profile";
                 return res.json(errors);
               }
             }
@@ -288,10 +288,25 @@ router.post(
               profile.friends.push(username.username);
               profile
                 .save()
-                .then(profile => res.json(profile))
+                .then(profile => {
+                  Profile.findOne({ username: req.body.username }).then(
+                    friend => {
+                      friend.friends.push(profile.username);
+                      friend.save().then(friend => {
+                        data = {
+                          friend: `${
+                            friend.username
+                          } has been added to your friends list`
+                        };
+                        return res.json(data);
+                      });
+                    }
+                  );
+                  res.j;
+                })
                 .catch(err => res.json(err));
             } else {
-              errors.self = "You do not need to add yourself to your profile";
+              errors.friend = "You do not need to add yourself to your profile";
               res.json(errors);
             }
           })

@@ -5,7 +5,7 @@
   max-height: 450px;
   margin: auto;
   display: grid;
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: 75px 75px 75px 150px;
   grid-template-columns: 1fr 1fr;
 }
 
@@ -17,7 +17,7 @@
 
 .app-home-dashboard-content p {
   color: var(--orange);
-  font-size: 1.5em;
+  font-size: 1.25em;
   font-weight: 300;
   text-align: center;
 }
@@ -55,12 +55,13 @@
 }
 
 .app-home-dashboard-roundsPlayed h4,
-.app-home-dashboard-roundsPlayed p {
-  margin: 10px auto;
-}
-
+.app-home-dashboard-roundsPlayed p,
 .app-home-dashboard-coursesPlayed h4,
-.app-home-dashboard-coursesPlayed p {
+.app-home-dashboard-coursesPlayed p,
+.app-home-dashboard-recentAchieve p,
+.app-home-dashboard-recentAchieve h4,
+.app-home-dashboard-achievePoints p,
+.app-home-dashboard-achievePoints h4 {
   margin: 10px auto;
 }
 
@@ -75,11 +76,6 @@
   grid-row: 3;
   grid-column: 1;
   border-right: solid 1px var(--darkGrey);
-}
-
-.app-home-dashboard-recentAchieve p {
-  font-size: 1em;
-  margin: 5px auto;
 }
 
 .app-home-dashboard-achievePoints {

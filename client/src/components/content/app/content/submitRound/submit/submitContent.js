@@ -48,6 +48,7 @@ class SubmitContent extends Component {
 
   removeModal = () => {
     this.setState({ userSummaryData: {}, showModal: false });
+    this.props.history.push("/squallaApp/submitRound/recent");
   };
 
   getDateHandler = () => {

@@ -1,7 +1,6 @@
 .app-home-home-nav {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  height: auto;
   font-size: 1em;
 }
 
@@ -68,26 +67,6 @@
     height: 100%;
     max-height: 90%;
     margin: auto auto 0px;
-  }
-
-  .app-home-rounds-content {
-    width: 100%;
-    height: 90%;
-    margin: auto auto 0px;
-    font-size: 0.8em;
-    grid-template-rows: 50px auto;
-  }
-
-  .app-home-rounds-heading {
-    font-size: 0.8em;
-  }
-
-  .app-home-rounds-heading h3 {
-    margin: 25px auto 5px;
-  }
-
-  .app-home-rounds-round-more {
-    width: 65%;
   }
 
   .app-home-dashboard-recentRound {
@@ -230,8 +209,8 @@
     left: 0;
   }
 
-  .app-home-courses-data-container {
-    max-height: 60vh;
+  .app-home-friends-content-add {
+    width: 100%;
   }
 }
 

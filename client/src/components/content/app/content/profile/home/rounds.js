@@ -94,7 +94,7 @@ class Rounds extends Component {
               <div className="app-home-rounds-data">{roundsContent}</div>
             </div>
           </div>
-          <div className="app-home-home-nav">
+          <div className="app-home-home-nav app-nav">
             <Link to="/squallaApp/profile/dashboard" exact="true">
               <button className="app-home-nav-button">Dashboard</button>
             </Link>

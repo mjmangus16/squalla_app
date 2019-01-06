@@ -18,7 +18,9 @@ router.post(
   (req, res) => {
     Course.findOne({ name: req.body.name }).then(course => {
       if (course) {
-        return res.status(400).json({ email: "Course is already in database" });
+        return res
+          .status(400)
+          .json({ course: "Course is already in database" });
       } else {
         const pars = {};
 

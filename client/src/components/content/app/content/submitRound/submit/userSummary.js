@@ -5,6 +5,10 @@ import getExperiencePercent from "../../profile/home/functions/getExperiencePerc
 import Aux from "../../../../../UI/Aux";
 
 class UserSummary extends Component {
+  componentDidMount() {
+    this.progressBar();
+  }
+
   averageScore = (score, avg) => {
     if (avg < score) {
       return <p>You did not beat your average score in that round.</p>;
@@ -29,23 +33,51 @@ class UserSummary extends Component {
     }
   };
 
-  render() {
-    let expBarStyle = getExperiencePercent(
+  progressBar = () => {
+    let elem = document.getElementById("app-home-dashboard-expBar-filler");
+
+    let width = getExperiencePercent(
       this.props.data.originalExp,
       this.props.data.level
     );
+    elem.style.width = width;
+    let newWidth = getExperiencePercent(
+      this.props.data.originalExp + this.props.data.gainedExp,
+      this.props.data.level
+    );
+    console.log(width, newWidth);
+    var id = setInterval(frame, 250);
+    function frame() {
+      if (width >= newWidth || width >= 100) {
+        clearInterval(id);
+      } else {
+        width++;
+        console.log(width + "%");
+        elem.style.width = width + "%";
+      }
+    }
+  };
+
+  render() {
+    // let expBarStyle = getExperiencePercent(
+    //   this.props.data.originalExp,
+    //   this.props.data.level
+    // );
     return (
       <Aux>
         <h4>Level {this.props.data.level}</h4>
         <div className="app-home-dashboard-expBar-container">
           <div
             className="app-home-dashboard-expBar-filler"
-            style={{ width: expBarStyle }}
+            id="app-home-dashboard-expBar-filler"
+            // style={{ width: expBarStyle }}
           />
         </div>
         {this.averageScore(this.props.data.score, this.props.data.average)}
         {this.bestScore(this.props.data.score, this.props.data.best)}
-        <p>{`You gained ${this.props.data.gainedExp} from that round.`}</p>
+        <p>{`You earned ${
+          this.props.data.gainedExp
+        } experience points from that round.`}</p>
         <button onClick={this.props.removeModal}>CLOSE</button>
       </Aux>
     );

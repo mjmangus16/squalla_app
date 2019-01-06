@@ -52,7 +52,7 @@ class Friends extends Component {
             <input
               type="image"
               src={selectArrow}
-              className="app-courses-course-selectArrow"
+              className="app-friends-selectArrow"
               alt="expand course item icon"
               onClick={this.selectFriendHandler}
             />
@@ -94,7 +94,7 @@ class Friends extends Component {
         <AppMenu link={"friends"} />
         <div className="squalla-app-content-container">
           {displayContent}
-          <div className="app-home-courses-nav">
+          <div className="app-home-courses-nav app-nav">
             <Link to="/squallaApp/profile/friends" exact="true">
               <button
                 className="app-home-nav-button"

@@ -13,7 +13,7 @@ const achievements = () => {
         <div className="app-home-dashboard-content">
           <h2>Achievements are not yet available</h2>
         </div>
-        <div className="app-home-home-nav">
+        <div className="app-home-home-nav app-nav">
           <Link to="/squallaApp/profile/dashboard" exact="true">
             <button className="app-home-nav-button">Dashboard</button>
           </Link>

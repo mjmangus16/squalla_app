@@ -57,7 +57,6 @@
   display: grid;
   grid-template-columns: 2fr 1fr 2fr 1fr;
   color: var(--lightGrey);
-  border-bottom: solid 1px var(--darkGrey);
   height: 30px;
   margin-top: 30px;
   margin-bottom: 0px;
@@ -73,6 +72,10 @@
   grid-template-rows: 1fr;
   grid-template-columns: 2fr 1fr 2fr 1fr;
   border-bottom: solid 1px var(--darkGrey);
+}
+
+.app-courses-course:first-child {
+  border-top: solid 1px var(--darkGrey);
 }
 
 .app-courses-course-holes {
@@ -157,4 +160,10 @@
 .app-courses-course-backArrow {
   width: 40px;
   margin: auto;
+}
+
+@media only screen and (max-width: 500px) {
+  .app-home-courses-heading-total {
+    font-size: 0.75em;
+  }
 }

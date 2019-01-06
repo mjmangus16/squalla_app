@@ -540,10 +540,11 @@
   }
 
   .app-submitRound-submit-summary-container button {
-    width: 50px;
+    width: 90%;
     height: 30px;
     font-size: 0.75em;
     margin: auto auto 10px;
+    text-align: center;
   }
 
   .app-submitRound-submit-summary-content {

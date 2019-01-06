@@ -18,6 +18,7 @@ class AddCourse extends Component {
     axios
       .post("/api/profiles/courses/add", course)
       .then(res => {
+        console.log(res.data);
         if (res.data.course) {
           this.setState({
             courseAdded: `${course.name} has already been added to your profile`
@@ -74,7 +75,6 @@ class AddCourse extends Component {
         <AppMenu link={"courses"} />
         <div className="squalla-app-content-container">
           <div className="app-home-courses-content-addCourse">
-            <p className="orange-text">{this.state.courseAdded}</p>
             <input
               id="course-search"
               type="text"
@@ -86,7 +86,7 @@ class AddCourse extends Component {
               {this.state.courses}
             </div>
           </div>
-          <div className="app-home-courses-nav">
+          <div className="app-home-courses-nav app-nav">
             <Link to="/squallaApp/profile/courses" exact="true">
               <button className="app-home-nav-button">Courses</button>
             </Link>

@@ -3,7 +3,7 @@
   height: 90%;
   margin: auto auto 0px;
   display: grid;
-  grid-template-rows: 50px 50px auto;
+  grid-template-rows: 50px auto;
   grid-template-columns: 1fr;
 }
 
@@ -25,12 +25,20 @@
   font-weight: 400;
 }
 
+.app-home-courses-data-container {
+  margin-top: 10px;
+}
+
 .app-courses-course-add {
   height: 50px;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 3fr 1fr;
   border-bottom: solid 1px var(--darkGrey);
+}
+
+.app-courses-course-add:first-child {
+  border-top: solid 1px var(--darkGrey);
 }
 
 .app-courses-course-add h3 {
@@ -56,4 +64,14 @@
   font-weight: 300;
   grid-column: 2;
   margin: 10px auto;
+}
+
+@media only screen and (max-width: 500px) {
+  .app-home-courses-content-addCourse {
+    width: 100%;
+  }
+
+  .app-home-courses-data-container {
+    max-height: 70vh;
+  }
 }

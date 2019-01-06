@@ -2,14 +2,23 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import Modal from "../../../../../UI/Modal/Modal";
+
 import AppMenu from "../../../appMenu";
 
 import "./friends.css";
 
 class AddFriend extends Component {
   state = {
-    friend: []
+    friend: [],
+    friendAdded: "",
+    showModal: false
   };
+
+  removeModal = () => {
+    this.setState({ showModal: false });
+  };
+
   getFriend = () => {
     const username = document.getElementById("add-friend-search").value;
 
@@ -40,7 +49,11 @@ class AddFriend extends Component {
     console.log(friend);
     axios
       .post("/api/profiles/friends/add", friend)
-      .then(res => console.log(res.data))
+      .then(res => {
+        if (res.data.friend) {
+          this.setState({ friendAdded: res.data.friend, showModal: true });
+        }
+      })
       .catch(err => console.log(err));
   };
 
@@ -49,7 +62,13 @@ class AddFriend extends Component {
       <div className="squalla-app-container">
         <AppMenu link={"friends"} />
         <div className="squalla-app-content-container">
-          <div className="app-home-friends-content">
+          <Modal show={this.state.showModal}>
+            <div className="add-friend-modal-alert">
+              {this.state.friendAdded}
+              <button onClick={this.removeModal}>close</button>
+            </div>
+          </Modal>
+          <div className="app-home-friends-content-add">
             <div className="add-friend-search-container">
               <input
                 id="add-friend-search"
@@ -57,13 +76,13 @@ class AddFriend extends Component {
                 placeholder="Username..."
               />
               <button id="add-friend-submit" onClick={this.getFriend}>
-                Search
+                FIND
               </button>
             </div>
 
             <div className="app-home-addFriend-container">
               {this.state.friend.length === 0 ? (
-                <p>
+                <p className="addFriend-faq">
                   Use the search box to find and add a friend to you profile.
                   Anyone you want to include in rounds you want to submit, must
                   be added to your friends list first.
@@ -73,7 +92,7 @@ class AddFriend extends Component {
               )}
             </div>
           </div>
-          <div className="app-home-courses-nav">
+          <div className="app-home-courses-nav app-nav">
             <Link to="/squallaApp/profile/friends" exact="true">
               <button className="app-home-nav-button">Friends</button>
             </Link>

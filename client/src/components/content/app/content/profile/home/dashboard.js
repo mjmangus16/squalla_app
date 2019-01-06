@@ -147,7 +147,7 @@ class Dashboard extends Component {
         <AppMenu link={"home"} />
         <div className="squalla-app-content-container">
           {dashboardContent}
-          <div className="app-home-home-nav">
+          <div className="app-home-home-nav app-nav">
             <Link to="/squallaApp/profile/dashboard" exact="true">
               <button
                 className="app-home-nav-button"

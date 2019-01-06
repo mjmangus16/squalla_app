@@ -7,21 +7,44 @@
   grid-template-columns: 1fr;
 }
 
+.app-home-friends-content-add {
+  width: 50%;
+  height: 80%;
+  margin: auto;
+  display: grid;
+  grid-template-rows: 100px auto;
+  grid-template-columns: 1fr;
+}
+
 .add-friend-search-container {
   display: grid;
   grid-template-columns: 70% 30%;
+  width: 75%;
+  margin: auto;
 }
 
 #add-friend-search {
-  width: 90%;
-  height: 25px;
   margin: auto;
+  width: 150px;
+  height: 25px;
 }
 
 #add-friend-submit {
-  width: 100%;
-  height: 31px;
   margin: auto;
+  width: 75px;
+  height: 25px;
+}
+
+.add-friend-modal-alert {
+  display: grid;
+  grid-template-rows: 25px 25px;
+}
+
+.add-friend-modal-alert button {
+  width: 50px;
+  margin: auto;
+  background-color: var(--darkGrey);
+  color: var(--lightGrey);
 }
 
 .app-home-addFriend-container p {
@@ -33,16 +56,26 @@
 .app-home-addfriend-friend {
   display: grid;
   grid-template-columns: 70% 30%;
+  width: 75%;
+  margin: auto;
+  border-top: 1px solid var(--darkGrey);
+  border-bottom: 1px solid var(--darkGrey);
 }
 
 .app-home-addfriend-friend h3 {
   color: var(--orange);
   font-weight: 300;
+  font-size: 1em;
 }
 
 .app-home-addfriend-friend button {
   margin: auto;
-  height: 30px;
+  height: 100%;
+  width: 100%;
+  background: none;
+  color: var(--green);
+  border: none;
+  font-size: 0.75em;
 }
 
 .app-home-friends-data-container {
@@ -181,4 +214,33 @@
   color: var(--orange);
   font-weight: 300;
   text-align: center;
+}
+
+.app-friends-selectArrow {
+  width: 30px;
+  margin: auto;
+}
+
+.addFriend-faq {
+  width: 75%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 500px) {
+  #add-friend-search {
+    width: 150px;
+    height: 25px;
+    margin: auto;
+  }
+
+  #add-friend-submit {
+    width: 75px;
+    height: 31px;
+    margin: auto;
+    background-color: var(--lightGrey);
+  }
+
+  .addFriend-faq {
+    font-size: 0.75em;
+  }
 }

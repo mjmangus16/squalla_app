@@ -147,7 +147,7 @@ class Courses extends Component {
         <AppMenu link={"courses"} />
         <div className="squalla-app-content-container">
           {displayContent}
-          <div className="app-home-courses-nav">
+          <div className="app-home-courses-nav app-nav">
             <Link to="/squallaApp/profile/courses" exact="true">
               <button
                 className="app-home-nav-button"
