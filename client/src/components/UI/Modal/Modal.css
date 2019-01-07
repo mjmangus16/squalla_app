@@ -6,15 +6,31 @@
   border: 1px solid #ccc;
   box-shadow: 1px 1px 1px black;
   padding: 16px;
-  left: 5%;
+  /* left: 5%; */
   top: 15%;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
 }
 
+.Modal progress {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 75%;
+  height: 15px;
+}
+
+.Modal progress::-webkit-progress-bar {
+  border: var(--orange) solid 1px;
+  background-color: var(--lightGrey);
+  width: 100%;
+}
+.Modal progress::-webkit-progress-value {
+  background-color: var(--darkGrey);
+}
+
 @media (min-width: 600px) {
   .Modal {
-    width: 500px;
-    left: calc(50% - 250px);
+    width: 400px;
+    /* left: calc(50% - 250px); */
   }
 }

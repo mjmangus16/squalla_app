@@ -303,7 +303,7 @@ class SubmitContent extends Component {
               {this.displayContent}
             </div>
           </div>
-          <div className="app-home-courses-nav">
+          <div className="app-home-courses-nav app-nav">
             <Link to="/squallaApp/submitRound/recent" exact="true">
               <button className="app-home-nav-button">Recent Rounds</button>
             </Link>

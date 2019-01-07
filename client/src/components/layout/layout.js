@@ -73,12 +73,11 @@ class Layout extends Component {
           />
 
           <div className="layout-sidebar-nav">
-            <a id="squalla-app-button" href={isAuthenticated ? auth : guest}>
-              <button>DISC GOLF APP</button>
-            </a>
-
             <a id="squalla-search-button" href="/discSearch">
               <button>DISC SEARCH</button>
+            </a>
+            <a id="squalla-app-button" href={isAuthenticated ? auth : guest}>
+              <button>DISC GOLF APP</button>
             </a>
           </div>
           <Content />

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import Modal from "../../../../../UI/Modal/Modal";
+
 import AppMenu from "../../../appMenu";
 
 import "./addCourse.css";
@@ -9,7 +11,12 @@ import "./addCourse.css";
 class AddCourse extends Component {
   state = {
     courses: [],
-    courseAdded: ""
+    courseAdded: "",
+    showModal: false
+  };
+
+  removeModal = () => {
+    this.setState({ showModal: false });
   };
 
   addCourseHandler = e => {
@@ -18,14 +25,10 @@ class AddCourse extends Component {
     axios
       .post("/api/profiles/courses/add", course)
       .then(res => {
-        console.log(res.data);
         if (res.data.course) {
           this.setState({
-            courseAdded: `${course.name} has already been added to your profile`
-          });
-        } else {
-          this.setState({
-            courseAdded: `${course.name} has been added to your profile`
+            courseAdded: res.data.course,
+            showModal: true
           });
         }
       })
@@ -74,6 +77,12 @@ class AddCourse extends Component {
       <div className="squalla-app-container">
         <AppMenu link={"courses"} />
         <div className="squalla-app-content-container">
+          <Modal show={this.state.showModal}>
+            <div className="add-friend-modal-alert">
+              {this.state.courseAdded}
+              <button onClick={this.removeModal}>close</button>
+            </div>
+          </Modal>
           <div className="app-home-courses-content-addCourse">
             <input
               id="course-search"

@@ -56,7 +56,6 @@ class Recent extends Component {
         recentRoundsContent = (
           <p className="orange-text">You have not submitted any rounds yet</p>
         );
-        console.log(profile.rounds.length);
       }
     }
 
@@ -69,7 +68,7 @@ class Recent extends Component {
               {recentRoundsContent}
             </div>
           </div>
-          <div className="app-home-courses-nav">
+          <div className="app-home-courses-nav app-nav">
             <Link to="/squallaApp/submitRound/recent" exact="true">
               <button
                 className="app-home-nav-button"

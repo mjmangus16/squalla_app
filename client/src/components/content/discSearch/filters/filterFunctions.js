@@ -414,7 +414,7 @@ const filterFunctions = {
       }
     }
     if (object._12 === true) {
-      for (let i = 0; i <= array.length; i++) {
+      for (let i = 0; i < array.length; i++) {
         if (array[i].Speed > 11.6 && array[i].Speed <= 12.5) {
           newArray.push(array[i]);
         }

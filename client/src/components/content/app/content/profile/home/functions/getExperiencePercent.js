@@ -1,10 +1,14 @@
 const getExperiencePercent = (exp, lvl) => {
   const getPercent = (min, max) => {
-    let total = max - min;
-    let total2 = exp - min;
+    if (exp > max) {
+      return getExperiencePercent(exp, parseInt(lvl + 1));
+    } else {
+      let total = max - min;
+      let total2 = exp - min;
 
-    let sum = (total2 * 100) / total;
-    return Math.floor(sum);
+      let sum = (total2 * 100) / total;
+      return Math.floor(sum);
+    }
   };
 
   switch (lvl) {

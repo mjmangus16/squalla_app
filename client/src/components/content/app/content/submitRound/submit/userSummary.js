@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 
 import getExperiencePercent from "../../profile/home/functions/getExperiencePercent";
+import getLevel from "../../profile/home/functions/levels";
 
 import Aux from "../../../../../UI/Aux";
 
 class UserSummary extends Component {
+  state = {
+    userLevel: this.props.data.level
+  };
   componentDidMount() {
     this.progressBar();
   }
@@ -34,26 +38,43 @@ class UserSummary extends Component {
   };
 
   progressBar = () => {
-    let elem = document.getElementById("app-home-dashboard-expBar-filler");
+    let currentExp = this.props.data.originalExp;
+    let currentLevel = this.props.data.level;
+    let currentExpBar = getExperiencePercent(currentExp, currentLevel);
+    document.querySelector(".leveling-progress-bar").value = currentExpBar;
 
-    let width = getExperiencePercent(
-      this.props.data.originalExp,
-      this.props.data.level
-    );
-    elem.style.width = width;
-    let newWidth = getExperiencePercent(
-      this.props.data.originalExp + this.props.data.gainedExp,
-      this.props.data.level
-    );
-    console.log(width, newWidth);
-    var id = setInterval(frame, 250);
+    let newExp = this.props.data.originalExp + this.props.data.gainedExp;
+    let newLevel = getLevel(newExp);
+    let newExpBar = getExperiencePercent(newExp, newLevel);
+
+    console.log(currentExpBar, newExpBar);
+
+    let increaseUserLevel = newLevel => {
+      this.setState({ userLevel: newLevel });
+    };
+
+    var id = setInterval(frame, 75);
     function frame() {
-      if (width >= newWidth || width >= 100) {
-        clearInterval(id);
-      } else {
-        width++;
-        console.log(width + "%");
-        elem.style.width = width + "%";
+      if (newLevel === currentLevel) {
+        if (currentExpBar >= newExpBar) {
+          clearInterval(id);
+        } else {
+          currentExpBar++;
+          document.querySelector(
+            ".leveling-progress-bar"
+          ).value = currentExpBar;
+        }
+      } else if (newLevel > currentLevel) {
+        if (currentExpBar >= 100) {
+          currentLevel = currentLevel + 1;
+          increaseUserLevel(currentLevel);
+          currentExpBar = 0;
+        } else {
+          currentExpBar++;
+          document.querySelector(
+            ".leveling-progress-bar"
+          ).value = currentExpBar;
+        }
       }
     }
   };
@@ -65,14 +86,8 @@ class UserSummary extends Component {
     // );
     return (
       <Aux>
-        <h4>Level {this.props.data.level}</h4>
-        <div className="app-home-dashboard-expBar-container">
-          <div
-            className="app-home-dashboard-expBar-filler"
-            id="app-home-dashboard-expBar-filler"
-            // style={{ width: expBarStyle }}
-          />
-        </div>
+        <h4>Level {this.state.userLevel}</h4>
+        <progress max="100" value="0" className="leveling-progress-bar" />
         {this.averageScore(this.props.data.score, this.props.data.average)}
         {this.bestScore(this.props.data.score, this.props.data.best)}
         <p>{`You earned ${

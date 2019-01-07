@@ -27,17 +27,24 @@ class AddFriend extends Component {
         .get(`/api/profiles/friends/name/${username}`)
         .then(res => {
           console.log(res.data);
-          let user = res.data;
-          this.setState({
-            friend: (
-              <div className="app-home-addfriend-friend">
-                <h3>{user.username}</h3>
-                <button onClick={() => this.addFriend(user.username)}>
-                  Add Friend
-                </button>
-              </div>
-            )
-          });
+          if (res.data.friendFail) {
+            this.setState({
+              friendAdded: res.data.friendFail,
+              showModal: true
+            });
+          } else {
+            let user = res.data;
+            this.setState({
+              friend: (
+                <div className="app-home-addfriend-friend">
+                  <h3>{user.username}</h3>
+                  <button onClick={() => this.addFriend(user.username)}>
+                    Add Friend
+                  </button>
+                </div>
+              )
+            });
+          }
         })
         .catch(err => console.log(err));
     }

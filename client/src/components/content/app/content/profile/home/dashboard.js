@@ -42,7 +42,7 @@ class Dashboard extends Component {
     if (Object.keys(profile).length > 0) {
       let dashboardData = getDashboardData(profile);
       console.log(dashboardData);
-      let expBarStyle = getExperiencePercent(profile.exp, profile.level);
+      let expBarStyle = `${getExperiencePercent(profile.exp, profile.level)}%`;
       dashboardContent = (
         <div className="app-home-dashboard-content">
           <div className="app-home-dashboard-exp">

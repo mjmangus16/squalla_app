@@ -160,14 +160,15 @@ router.post(
     Course.findOne({ name: req.body.name })
       .then(course => {
         if (!course) {
-          errors.course = "That course does not exist in our database";
+          errors.course = `${req.body.course} does not exist in our database`;
           res.status(404).json(errors);
         } else {
           Profile.findOne({ username: req.user.username }).then(profile => {
             for (let i = 0; i < profile.courses.length; i++) {
               if (req.body.name === profile.courses[i].name) {
-                errors.course =
-                  "You have already added that course to your profile";
+                errors.course = `You have already added ${
+                  req.body.name
+                } to your profile`;
                 return res.json(errors);
               }
             }
@@ -191,7 +192,12 @@ router.post(
             profile.courses.unshift(myCourse);
             profile
               .save()
-              .then(profile => res.json(profile))
+              .then(profile => {
+                data = {
+                  course: `${myCourse.name} has been added to your profile`
+                };
+                return res.json(data);
+              })
               .catch(err => console.log(err));
           });
         }
@@ -272,15 +278,16 @@ router.post(
 
     Profile.findOne({ username: req.body.username }).then(username => {
       if (!username) {
-        errors.user = "That user does not exist";
+        errors.user = `${req.body.username} does not exist in our database`;
         res.status(404).json(errors);
       } else {
         Profile.findOne({ username: req.user.username })
           .then(profile => {
             for (let i = 0; i < profile.friends.length; i++) {
               if (req.body.username === profile.friends[i]) {
-                errors.friend =
-                  "That user has already been added to your profile";
+                errors.friend = `${
+                  req.body.username
+                } has already been added to your profile`;
                 return res.json(errors);
               }
             }
@@ -336,63 +343,70 @@ router.get(
   "/friends/name/:name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    const errors = {};
+
     Profile.findOne({ username: req.params.name }).then(profile => {
-      const myScore = () => {
-        for (let i = 0; i < profile.rounds[0].scores.length; i++) {
-          if (profile.rounds[0].scores[i].player === profile.username) {
-            return profile.rounds[0].scores[i].score;
+      if (!profile) {
+        errors.friendFail = `${req.params.name} does not exist in our database`;
+        return res.json(errors);
+      } else {
+        const myScore = () => {
+          for (let i = 0; i < profile.rounds[0].scores.length; i++) {
+            if (profile.rounds[0].scores[i].player === profile.username) {
+              return profile.rounds[0].scores[i].score;
+            }
+          }
+        };
+
+        for (let j = 0; j < profile.rounds.length; j++) {
+          for (let k = 0; k < profile.courses.length; k++) {
+            if (profile.rounds[j].course.name === profile.courses[k].name) {
+              profile.courses[k].history.unshift(profile.rounds[j]);
+            }
           }
         }
-      };
 
-      for (let j = 0; j < profile.rounds.length; j++) {
-        for (let k = 0; k < profile.courses.length; k++) {
-          if (profile.rounds[j].course.name === profile.courses[k].name) {
-            profile.courses[k].history.unshift(profile.rounds[j]);
+        let coursesPlayed = 0;
+
+        for (let y = 0; y < profile.courses.length; y++) {
+          if (profile.courses[y].history.length > 0) {
+            coursesPlayed++;
           }
         }
-      }
 
-      let coursesPlayed = 0;
+        let dashboard = {
+          level: profile.level,
+          exp: profile.exp,
+          username: profile.username,
+          roundsPlayed: profile.rounds.length,
+          coursesPlayed: coursesPlayed,
+          achievePoints: profile.achievePoints
+        };
 
-      for (let y = 0; y < profile.courses.length; y++) {
-        if (profile.courses[y].history.length > 0) {
-          coursesPlayed++;
+        if (profile.rounds[0]) {
+          dashboard.recentRound = {
+            date: profile.rounds[0].date,
+            course: profile.rounds[0].course.name,
+            tees: profile.rounds[0].course.tees,
+            score: myScore()
+          };
+        } else {
+          dashboard.recentRound = {
+            date: "N/A",
+            course: "N/A",
+            tees: "N/A",
+            score: "N/A"
+          };
         }
+
+        if (profile.achievements[0]) {
+          dashboard.recentAchieve = profile.achievements[0];
+        } else {
+          dashboard.recentAchieve = "N/A";
+        }
+
+        return res.json(dashboard);
       }
-
-      let dashboard = {
-        level: profile.level,
-        exp: profile.exp,
-        username: profile.username,
-        roundsPlayed: profile.rounds.length,
-        coursesPlayed: coursesPlayed,
-        achievePoints: profile.achievePoints
-      };
-
-      if (profile.rounds[0]) {
-        dashboard.recentRound = {
-          date: profile.rounds[0].date,
-          course: profile.rounds[0].course.name,
-          tees: profile.rounds[0].course.tees,
-          score: myScore()
-        };
-      } else {
-        dashboard.recentRound = {
-          date: "N/A",
-          course: "N/A",
-          tees: "N/A",
-          score: "N/A"
-        };
-      }
-
-      if (profile.achievements[0]) {
-        dashboard.recentAchieve = profile.achievements[0];
-      } else {
-        dashboard.recentAchieve = "N/A";
-      }
-
-      res.json(dashboard);
     });
   }
 );
