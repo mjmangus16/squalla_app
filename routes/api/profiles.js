@@ -426,4 +426,10 @@ router.get(
   }
 );
 
+//                      **************** ACHIEVEMENTS ***************
+
+// @route   GET api/profiles/achievements/all
+// @desc    Get all user leagues
+// @access  Private
+
 module.exports = router;

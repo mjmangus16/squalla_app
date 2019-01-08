@@ -65,7 +65,7 @@ class Dashboard extends Component {
           <div className="app-home-dashboard-recentAchieve">
             <h4>Recent Achievement</h4>
 
-            <p>{dashboardData.recentAchieve}</p>
+            <p>N/A</p>
           </div>
           <div className="app-home-dashboard-achievePoints">
             <h4>Achievement Points</h4>
