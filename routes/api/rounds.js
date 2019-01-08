@@ -144,14 +144,18 @@ router.post(
                       //   round,
                       //   allAchieves
                       // );
-                      // console.log(achievesEarned);
 
                       // const achieveData = updateAchievements(achievesEarned);
                       // profile.achievePoints =
                       //   profile.achievePoints + achieveData.points;
-                      // profile.achievements = profile.achievements.concat(
-                      //   achieveData.achieves
+
+                      // const myUpdatedAchieves = compareAchieves(
+                      //   profile.achievements,
+                      //   achievesEarned
                       // );
+
+                      // profile.achievements = [];
+                      // profile.achievements = myUpdatedAchieves;
 
                       let userInfo = {
                         level: profile.level,
@@ -370,7 +374,6 @@ const updateAchievements = earned => {
     achieves: []
   };
   if (earned.length > 0) {
-    console.log(earned.length);
     for (let i = 0; i < earned.length; i++) {
       data.points = data.points + earned[i].points;
       data.achieves.push(earned[i]);
@@ -378,4 +381,22 @@ const updateAchievements = earned => {
   }
 
   return data;
+};
+
+const compareAchieves = (mine, earned) => {
+  if (earned.length > 0) {
+    for (let i = 0; i < earned.length; i++) {
+      let exists = false;
+      for (let j = 0; j < mine.length; j++) {
+        if (earned[i].code === mine[j].code) {
+          exists = true;
+          mine[j] = earned[i];
+        }
+      }
+      if (!exists) {
+        mine.push(earned[i]);
+      }
+    }
+  }
+  return mine;
 };
