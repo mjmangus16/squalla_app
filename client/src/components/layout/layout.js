@@ -15,14 +15,15 @@ import "../content/app/app.css";
 
 class Layout extends Component {
   state = {
-    showMenu: "item-hide"
+    showMenu: "item-hide",
+    showBackdrop: false
   };
 
   showMenuHandler = () => {
     if (this.state.showMenu === "item-hide") {
-      this.setState({ showMenu: "" });
+      this.setState({ showMenu: "", showBackdrop: true });
     } else {
-      this.setState({ showMenu: "item-hide" });
+      this.setState({ showMenu: "item-hide", showBackdrop: false });
     }
   };
 
@@ -36,8 +37,6 @@ class Layout extends Component {
     let displayLogin;
 
     const { isAuthenticated } = this.props.auth;
-
-    // const isAuthenticated = true;
 
     const auth = "/squallaApp/profile/dashboard";
     const guest = "/login";
@@ -66,6 +65,7 @@ class Layout extends Component {
           />
           <MobileMenu
             showMenu={this.state.showMenu}
+            showBackdrop={this.state.showBackdrop}
             showMenuHandler={this.showMenuHandler}
             displayLogin={displayLogin}
             logout={this.onLogoutClick.bind(this)}

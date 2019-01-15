@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 import Modal from "../../../../../UI/Modal/Modal";
 
 import AppMenu from "../../../appMenu";
+import NavButtons from "../../../navButtons";
 
 import "./addCourse.css";
 
@@ -73,11 +73,17 @@ class AddCourse extends Component {
   };
 
   render() {
+    let navButtonLinks = [
+      "/squallaApp/profile/courses",
+      "/squallaApp/profile/courses/add"
+    ];
+    let navButtonNames = ["Courses", "Add Course"];
     return (
       <div className="squalla-app-container">
         <AppMenu link={"courses"} />
+
         <div className="squalla-app-content-container">
-          <Modal show={this.state.showModal}>
+          <Modal show={this.state.showModal} remove={this.removeModal}>
             <div className="add-friend-modal-alert">
               {this.state.courseAdded}
               <button onClick={this.removeModal}>close</button>
@@ -95,17 +101,12 @@ class AddCourse extends Component {
               {this.state.courses}
             </div>
           </div>
-          <div className="app-home-courses-nav app-nav">
-            <Link to="/squallaApp/profile/courses" exact="true">
-              <button className="app-home-nav-button">Courses</button>
-            </Link>
-
-            <Link to="/squallaApp/profile/courses/add" exact="true">
-              <button className="app-home-nav-right" id="app-home-nav-selected">
-                Add Course
-              </button>
-            </Link>
-          </div>
+          <NavButtons
+            buttons={2}
+            selected={2}
+            links={navButtonLinks}
+            names={navButtonNames}
+          />
         </div>
       </div>
     );

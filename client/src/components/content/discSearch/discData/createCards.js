@@ -31,7 +31,7 @@ const createCards = discsArray => {
           </div>
         </div>
         <p className="search-card-stability-heading">{disc.Stability}</p>
-        <a href={disc.Link} target="_blank">
+        <a href={disc.Link} target="_blank" rel="noopener noreferrer">
           <p className="search-card-more-info">MORE INFO</p>
         </a>
       </div>

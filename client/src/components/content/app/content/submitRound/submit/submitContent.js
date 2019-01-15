@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getProfile } from "../../../../../../actions/profileActions";
@@ -7,6 +6,7 @@ import axios from "axios";
 import Moment from "react-moment";
 
 import AppMenu from "../../../appMenu";
+import NavButtons from "../../../navButtons";
 import Modal from "../../../../../UI/Modal/Modal";
 
 import Date from "./date";
@@ -15,8 +15,6 @@ import Players from "./players";
 import Scores from "./scores";
 import Summary from "./summary";
 import UserSummary from "./userSummary";
-
-import backButton2 from "../../../../../../img/backButton2.png";
 
 import "../submitRound.css";
 
@@ -61,7 +59,6 @@ class SubmitContent extends Component {
       e.target.parentElement.parentElement.firstChild.textContent;
     this.roundData.tees = e.target.textContent;
     this.setState({ roundData: this.roundData });
-    console.log(this.state.roundData);
   };
 
   togglePlayersHandler = e => {
@@ -111,7 +108,6 @@ class SubmitContent extends Component {
       this.roundData.players.length !== 0 &&
       this.roundData.players.length === this.roundData.scores.length
     ) {
-      console.log(this.roundData);
       this.roundData.players = this.roundData.players.join(",");
       this.roundData.scores = this.roundData.scores.join(",");
 
@@ -119,6 +115,7 @@ class SubmitContent extends Component {
         .post("/api/rounds/add", this.roundData)
         .then(res => {
           if (res.data) {
+            console.log(res.data);
             this.setState({ userSummaryData: res.data, showModal: true });
           }
         })
@@ -174,7 +171,7 @@ class SubmitContent extends Component {
       document.querySelector(".submit-topNav-scores").id = "nav-link-style";
 
       this.setState({ players: false, scores: true });
-    } else if (this.state.scores == true) {
+    } else if (this.state.scores === true) {
       let scores = true;
       let scoresInput = document.querySelectorAll(".submitRound-score");
       for (let i = 0; i < scoresInput.length; i++) {
@@ -240,19 +237,26 @@ class SubmitContent extends Component {
   };
 
   render() {
+    let navButtonLinks = [
+      "/squallaApp/submitRound/recent",
+      "/squallaApp/submitRound/submit"
+    ];
+    let navButtonNames = ["Recent Rounds", "Submit Round"];
+
     return (
       <div className="squalla-app-container">
         <AppMenu link={"submitRound"} />
+
         <div className="app-submitRound-submit">
+          {this.state.showModal === false ? null : (
+            <Modal show={this.state.showModal} remove={this.removeModal}>
+              <UserSummary
+                data={this.state.userSummaryData}
+                removeModal={this.removeModal}
+              />
+            </Modal>
+          )}
           <div className="app-submitRound-submit-container">
-            {this.state.showModal === false ? null : (
-              <Modal show={this.state.showModal}>
-                <UserSummary
-                  data={this.state.userSummaryData}
-                  removeModal={this.removeModal}
-                />
-              </Modal>
-            )}
             <div className="app-submitRound-submit-summary-container">
               <button
                 className="button-hide"
@@ -263,7 +267,7 @@ class SubmitContent extends Component {
               </button>
               {this.state.summary === true ? null : (
                 <div className="app-submitRound-submit-summary-content">
-                  {this.roundData.date != "" ? (
+                  {this.roundData.date !== "" ? (
                     <Moment format="MM/DD/YY">{this.roundData.date}</Moment>
                   ) : (
                     <p className="no-details-selected">
@@ -272,7 +276,7 @@ class SubmitContent extends Component {
                   )}
 
                   <p>{this.roundData.course}</p>
-                  {this.roundData.tees != "" ? (
+                  {this.roundData.tees !== "" ? (
                     <p>Tees: {this.roundData.tees}</p>
                   ) : null}
 
@@ -303,17 +307,12 @@ class SubmitContent extends Component {
               {this.displayContent}
             </div>
           </div>
-          <div className="app-home-courses-nav app-nav">
-            <Link to="/squallaApp/submitRound/recent" exact="true">
-              <button className="app-home-nav-button">Recent Rounds</button>
-            </Link>
-
-            <Link to="/squallaApp/submitRound/submit" exact="true">
-              <button className="app-home-nav-right" id="app-home-nav-selected">
-                Submit Round
-              </button>
-            </Link>
-          </div>
+          <NavButtons
+            buttons={2}
+            selected={2}
+            links={navButtonLinks}
+            names={navButtonNames}
+          />
         </div>
       </div>
     );

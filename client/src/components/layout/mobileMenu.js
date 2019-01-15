@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+import Backdrop from "../UI/Backdrop/Backdrop";
+import Aux from "../UI/Aux";
+
 import expandArrow from "../../img/expandArrow.png";
 import collapseArrow from "../../img/collapseArrow.png";
 
@@ -97,77 +100,83 @@ class MobileMenu extends Component {
       squallaAppExpand = "item-hide";
       squallaApp = (
         <a href="/login">
-          <li id="mobile-menu-sa">Squalla App</li>
+          <li id="mobile-menu-sa">App</li>
         </a>
       );
     }
 
     return (
-      <div className="mobile-menu-container" id={this.props.showMenu}>
-        <div className="mobile-menu-container2">
-          <nav>
-            <ul>
-              <li>
-                <a className="mobile-menu-link" href="/home">
-                  Home
+      <Aux>
+        <Backdrop
+          show={this.props.showBackdrop}
+          clicked={this.props.showMenuHandler}
+        />
+        <div className="mobile-menu-container" id={this.props.showMenu}>
+          <div className="mobile-menu-container2">
+            <nav>
+              <ul>
+                <li>
+                  <a className="mobile-menu-link" href="/home">
+                    Home
+                  </a>
+                </li>
+
+                <li>About</li>
+                <li>Blog</li>
+                <a href="/discSearch">
+                  <li id="mobile-menu-dst">Disc Search</li>
                 </a>
-              </li>
+                {squallaApp}
+                <li id={squallaAppSubMenu}>
+                  <ul id="logged-in-subMenu">
+                    <li
+                      id={showLogout}
+                      onClick={this.expandMenuHandler2}
+                      className="border-bottom"
+                    >
+                      Profile
+                      <input
+                        type="image"
+                        src={expandArrow}
+                        className="mobile-menu-expand-arrow"
+                        id={profileExpand}
+                        alt="expand menu item icon"
+                      />
+                      <input
+                        type="image"
+                        src={collapseArrow}
+                        className="mobile-menu-collapse-arrow"
+                        id={profileCollapse}
+                        alt="collapse menu item icon"
+                      />
+                    </li>
+                    <li id={profileSubMenu}>
+                      <ul id="profile-subMenu">
+                        <li className="border-bottom">
+                          <a href="/squallaApp/profile/dashboard">Home</a>
+                        </li>
+                        <li className="border-bottom">
+                          <a href="/squallaApp/profile/courses">Courses</a>
+                        </li>
+                        <li className="border-bottom">
+                          <a href="/squallaApp/profile/friends">Friends</a>
+                        </li>
+                        <li>Leagues</li>
+                      </ul>
+                    </li>
 
-              <li>About</li>
-              <li>Blog</li>
-              <a href="/discSearch">
-                <li id="mobile-menu-dst">Disc Search</li>
-              </a>
-              {squallaApp}
-              <li id={squallaAppSubMenu}>
-                <ul id="logged-in-subMenu">
-                  <li
-                    id={showLogout}
-                    onClick={this.expandMenuHandler2}
-                    className="border-bottom"
-                  >
-                    Profile
-                    <input
-                      type="image"
-                      src={expandArrow}
-                      className="mobile-menu-expand-arrow"
-                      id={profileExpand}
-                      alt="expand menu item icon"
-                    />
-                    <input
-                      type="image"
-                      src={collapseArrow}
-                      className="mobile-menu-collapse-arrow"
-                      id={profileCollapse}
-                      alt="collapse menu item icon"
-                    />
-                  </li>
-                  <li id={profileSubMenu}>
-                    <ul id="profile-subMenu">
-                      <li className="border-bottom">
-                        <a href="/squallaApp/profile/dashboard">Home</a>
-                      </li>
-                      <li className="border-bottom">
-                        <a href="/squallaApp/profile/courses">Courses</a>
-                      </li>
-                      <li className="border-bottom">
-                        <a href="/squallaApp/profile/friends">Friends</a>
-                      </li>
-                      <li>Leagues</li>
-                    </ul>
-                  </li>
-
-                  <li id={showLogout} className="border-bottom">
-                    <a href="/squallaApp/submitRound/recent">Submit Round</a>
-                  </li>
-                  <li id={showLogout}>Settings</li>
-                </ul>
-              </li>
-              {loggedIn}
-            </ul>
-          </nav>
+                    <li id={showLogout} className="border-bottom">
+                      <a href="/squallaApp/submitRound/recent">Submit Round</a>
+                    </li>
+                    <li id={showLogout}>Settings</li>
+                  </ul>
+                </li>
+                {loggedIn}
+              </ul>
+            </nav>
+          </div>
         </div>
-      </div>
+      </Aux>
     );
   }
 }

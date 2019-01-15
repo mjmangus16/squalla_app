@@ -1,5 +1,4 @@
 import { GET_PROFILE } from "../actions/types";
-import isEmpty from "../validation/is-empty";
 
 const initialState = {
   profile: {}

@@ -1,36 +1,92 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getProfile } from "../../../../../../actions/profileActions";
+import axios from "axios";
+import _ from "lodash";
 
 import AppMenu from "../../../appMenu";
+import NavButtons from "../../../navButtons";
+import Achieve from "./achieveComponent/Achieve";
 
 import "./achievements.css";
 
-const achievements = () => {
-  return (
-    <div className="squalla-app-container">
-      <AppMenu link={"home"} />
-      <div className="squalla-app-content-container">
-        <div className="app-home-dashboard-content">
-          <h2>Achievements are not yet available</h2>
-        </div>
-        <div className="app-home-home-nav app-nav">
-          <Link to="/squallaApp/profile/dashboard" exact="true">
-            <button className="app-home-nav-button">Dashboard</button>
-          </Link>
+class Achievements extends Component {
+  state = {
+    achieves: [],
+    updatedAchieves: []
+  };
 
-          <Link to="/squallaApp/profile/achievements" exact="true">
-            <button className="app-home-nav-middle" id="app-home-nav-selected">
-              Achievements
-            </button>
-          </Link>
+  componentDidMount() {
+    this.props.getProfile();
+    axios.get("/api/achievements/all").then(achieves => {
+      this.setState({ achieves: achieves.data });
+    });
+  }
 
-          <Link to="/squallaApp/profile/rounds" exact="true">
-            <button className="app-home-nav-button">Rounds</button>
-          </Link>
+  combineAchieves = (achieves, myAchieves) => {
+    let updatedAchieves = _.uniqBy([...myAchieves, ...achieves], "code");
+    let updatedAchievesArray = updatedAchieves.map(UA => (
+      <Achieve data={UA} key={updatedAchieves.indexOf(UA)} />
+    ));
+    return updatedAchievesArray;
+  };
+
+  navButtonLinks = [
+    "/squallaApp/profile/dashboard",
+    "/squallaApp/profile/achievements",
+    "/squallaApp/profile/rounds"
+  ];
+  navButtonNames = ["Dashboard", "Achievements", "Rounds"];
+  render() {
+    const { profile } = this.props.profile;
+    let achievesContent;
+    if (Object.keys(profile).length > 0) {
+      achievesContent = this.combineAchieves(
+        this.state.achieves,
+        profile.achievements
+      );
+    }
+
+    return (
+      <div className="squalla-app-container">
+        <AppMenu link={"home"} />
+        <div className="squalla-app-content-container">
+          <div className="app-home-achievements-container">
+            <div className="app-home-achievements-heading">
+              <h4 className="app-home-achievements-heading-1">
+                Achievement Name
+              </h4>
+              <h4>Points</h4>
+              <h4>Earned</h4>
+            </div>
+            <div className="app-home-achievements-container-content">
+              {achievesContent}
+            </div>
+          </div>
+          <NavButtons
+            buttons={3}
+            selected={2}
+            links={this.navButtonLinks}
+            names={this.navButtonNames}
+          />
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+}
+
+Achievements.propTypes = {
+  auth: PropTypes.object.isRequired,
+  getProfile: PropTypes.func.isRequired
 };
 
-export default achievements;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile
+});
+
+export default connect(
+  mapStateToProps,
+  { getProfile }
+)(Achievements);

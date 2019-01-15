@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getProfile } from "../../../../../../actions/profileActions";
@@ -9,6 +8,7 @@ import getDashboardData from "../../../functions/dashboard";
 import getExperiencePercent from "./functions/getExperiencePercent";
 
 import AppMenu from "../../../appMenu";
+import NavButtons from "../../../navButtons";
 
 import "./dashboard.css";
 
@@ -142,29 +142,25 @@ class Dashboard extends Component {
         </div>
       );
     }
+
+    let navButtonLinks = [
+      "/squallaApp/profile/dashboard",
+      "/squallaApp/profile/achievements",
+      "/squallaApp/profile/rounds"
+    ];
+    let navButtonNames = ["Dashboard", "Achievements", "Rounds"];
+
     return (
       <div className="squalla-app-container">
         <AppMenu link={"home"} />
         <div className="squalla-app-content-container">
           {dashboardContent}
-          <div className="app-home-home-nav app-nav">
-            <Link to="/squallaApp/profile/dashboard" exact="true">
-              <button
-                className="app-home-nav-button"
-                id="app-home-nav-selected"
-              >
-                Dashboard
-              </button>
-            </Link>
-
-            <Link to="/squallaApp/profile/achievements" exact="true">
-              <button className="app-home-nav-middle">Achievements</button>
-            </Link>
-
-            <Link to="/squallaApp/profile/rounds" exact="true">
-              <button className="app-home-nav-button">Rounds</button>
-            </Link>
-          </div>
+          <NavButtons
+            buttons={3}
+            selected={1}
+            links={navButtonLinks}
+            names={navButtonNames}
+          />
         </div>
       </div>
     );

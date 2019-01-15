@@ -6,6 +6,8 @@
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.11",
+    "lodash.uniqby": "^4.7.0",
     "moment": "^2.23.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",

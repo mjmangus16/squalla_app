@@ -52,6 +52,8 @@ const getExperiencePercent = (exp, lvl) => {
       return getPercent(12825, 14250);
     case 20:
       return getPercent(14250, 15750);
+    default:
+      return 0;
   }
 };
 

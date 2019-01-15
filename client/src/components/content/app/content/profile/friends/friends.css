@@ -37,12 +37,15 @@
 
 .add-friend-modal-alert {
   display: grid;
-  grid-template-rows: 25px 25px;
+  grid-template-rows: auto auto;
+  grid-gap: 1em;
 }
 
 .add-friend-modal-alert button {
-  width: 50px;
+  width: 75px;
+  height: 25px;
   margin: auto;
+  font-size: 1em;
   background-color: var(--darkGrey);
   color: var(--lightGrey);
 }

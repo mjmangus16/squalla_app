@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getProfile } from "../../../../../../actions/profileActions";
@@ -8,6 +7,7 @@ import Moment from "react-moment";
 import getRoundsData from "../../../functions/rounds";
 
 import AppMenu from "../../../appMenu";
+import NavButtons from "../../../navButtons";
 
 import "../submitRound.css";
 
@@ -59,6 +59,12 @@ class Recent extends Component {
       }
     }
 
+    let navButtonLinks = [
+      "/squallaApp/submitRound/recent",
+      "/squallaApp/submitRound/submit"
+    ];
+    let navButtonNames = ["Recent Rounds", "Submit Round"];
+
     return (
       <div className="squalla-app-container">
         <AppMenu link={"submitRound"} />
@@ -68,20 +74,12 @@ class Recent extends Component {
               {recentRoundsContent}
             </div>
           </div>
-          <div className="app-home-courses-nav app-nav">
-            <Link to="/squallaApp/submitRound/recent" exact="true">
-              <button
-                className="app-home-nav-button"
-                id="app-home-nav-selected"
-              >
-                Recent Rounds
-              </button>
-            </Link>
-
-            <Link to="/squallaApp/submitRound/submit" exact="true">
-              <button className="app-home-nav-right">Submit Round</button>
-            </Link>
-          </div>
+          <NavButtons
+            buttons={2}
+            selected={1}
+            links={navButtonLinks}
+            names={navButtonNames}
+          />
         </div>
       </div>
     );

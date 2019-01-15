@@ -102,7 +102,12 @@ router.post(
             Profile.findOne({ username: round.scores[i].player })
               .then(profile => {
                 Achievements.find().then(allAchieves => {
+                  round.course.holes = course.holes;
+
                   profile.rounds.unshift(round);
+                  profile.rounds.sort((a, b) => {
+                    return new Date(b.date) - new Date(a.date);
+                  });
                   profile.save().then(profile => {
                     if (profile.courses) {
                       let courseExists = doesCourseExist(
@@ -139,23 +144,37 @@ router.post(
                         profile.username
                       );
 
-                      // const achievesEarned = getAchievements(
-                      //   profile,
-                      //   round,
-                      //   allAchieves
-                      // );
+                      courseStats.score = userScore;
 
-                      // const achieveData = updateAchievements(achievesEarned);
-                      // profile.achievePoints =
-                      //   profile.achievePoints + achieveData.points;
+                      const courseData = {
+                        courseInfo: coursePlayed,
+                        userStats: courseStats
+                      };
 
-                      // const myUpdatedAchieves = compareAchieves(
-                      //   profile.achievements,
-                      //   achievesEarned
-                      // );
+                      // courseInfo: course name, holes, tees/par/distance, history, terrain, landscape
 
-                      // profile.achievements = [];
-                      // profile.achievements = myUpdatedAchieves;
+                      // userStats: specific to the course/tees that were played. Score, average, best, distance, par, terrain, landscape, holes.
+
+                      // console.log(courseData);
+
+                      const achievesEarned = getAchievements(
+                        profile,
+                        round,
+                        allAchieves,
+                        courseData
+                      );
+
+                      const achieveData = updateAchievements(achievesEarned);
+                      profile.achievePoints =
+                        profile.achievePoints + achieveData.points;
+
+                      const myUpdatedAchieves = compareAchieves(
+                        profile.achievements,
+                        achievesEarned
+                      );
+
+                      profile.achievements = [];
+                      profile.achievements = myUpdatedAchieves;
 
                       let userInfo = {
                         level: profile.level,
@@ -187,7 +206,9 @@ router.post(
                             gainedExp: userExp,
                             score: userScore,
                             average: courseStats.average,
-                            best: courseStats.best
+                            best: courseStats.best,
+                            achievements: achievesEarned.length,
+                            achievePoints: achieveData.points
                           };
                           return res.json(returnData);
                         }

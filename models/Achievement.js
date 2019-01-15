@@ -27,6 +27,11 @@ const AchievementSchema = new Schema({
     required: true,
     default: 0
   },
+  hidden: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
   data: {
     type: Array,
     required: false

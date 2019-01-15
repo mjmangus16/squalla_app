@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -10,6 +9,7 @@ import selectArrow from "../../../../../../img/selectArrow.png";
 import SelectedFriend from "./selectedFriend";
 
 import AppMenu from "../../../appMenu";
+import NavButtons from "../../../navButtons";
 
 import "./friends.css";
 
@@ -89,25 +89,23 @@ class Friends extends Component {
       }
     }
 
+    let navButtonLinks = [
+      "/squallaApp/profile/friends",
+      "/squallaApp/profile/friends/add"
+    ];
+    let navButtonNames = ["Friends", "Add Friend"];
+
     return (
       <div className="squalla-app-container">
         <AppMenu link={"friends"} />
         <div className="squalla-app-content-container">
           {displayContent}
-          <div className="app-home-courses-nav app-nav">
-            <Link to="/squallaApp/profile/friends" exact="true">
-              <button
-                className="app-home-nav-button"
-                id="app-home-nav-selected"
-              >
-                Friends
-              </button>
-            </Link>
-
-            <Link to="/squallaApp/profile/friends/add" exact="true">
-              <button className="app-home-nav-right">Add Friend</button>
-            </Link>
-          </div>
+          <NavButtons
+            buttons={2}
+            selected={1}
+            links={navButtonLinks}
+            names={navButtonNames}
+          />
         </div>
       </div>
     );

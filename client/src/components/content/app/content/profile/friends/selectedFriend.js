@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 import selectArrowBack from "../../../../../../img/selectArrowBack.png";
-import getExperiencePercent from "../home/functions/getExperiencePercent";
 
 import "./friends.css";
 

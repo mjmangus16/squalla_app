@@ -1,8 +1,19 @@
 import React, { Component } from "react";
 
+import Backdrop from "../Backdrop/Backdrop";
+import Aux from "../Aux";
+
 import "./Modal.css";
+import "../Backdrop/Backdrop.css";
 
 class Modal extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      nextProps.show !== this.props.show ||
+      nextProps.children !== this.props.children
+    );
+  }
+
   componentDidMount() {
     this.getModalPosition();
     window.addEventListener("resize", this.getModalPosition);
@@ -21,16 +32,19 @@ class Modal extends Component {
   };
   render() {
     return (
-      <div
-        className="Modal"
-        onClick={this.getModalPosition}
-        style={{
-          transform: this.props.show ? "translateY(0)" : "translateY(-100vh)",
-          opacity: this.props.show ? "1" : "0"
-        }}
-      >
-        {this.props.children}
-      </div>
+      <Aux>
+        <Backdrop show={this.props.show} clicked={this.props.remove} />
+        <div
+          className="Modal"
+          onClick={this.getModalPosition}
+          style={{
+            transform: this.props.show ? "translateY(0)" : "translateY(-100vh)",
+            opacity: this.props.show ? "1" : "0"
+          }}
+        >
+          {this.props.children}
+        </div>
+      </Aux>
     );
   }
 }

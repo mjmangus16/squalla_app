@@ -65,8 +65,8 @@ class Login extends Component {
               value={this.state.email}
               onChange={this.onChange}
             />
-            {errors.email && (
-              <div className="invalid-feedback">{errors.email}</div>
+            {errors.login && (
+              <div className="invalid-feedback">{errors.login}</div>
             )}
             <input
               className={classnames("register-form-input", {

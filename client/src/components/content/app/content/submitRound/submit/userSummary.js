@@ -4,6 +4,7 @@ import getExperiencePercent from "../../profile/home/functions/getExperiencePerc
 import getLevel from "../../profile/home/functions/levels";
 
 import Aux from "../../../../../UI/Aux";
+import "./userSummary.css";
 
 class UserSummary extends Component {
   state = {
@@ -13,27 +14,30 @@ class UserSummary extends Component {
     this.progressBar();
   }
 
+  achievements = (points, num) => {
+    if (num > 0) {
+      return (
+        <div className="userSummary-modal-achieves">
+          <p>Achievements Earned: {num}</p>
+          <p>Achieve Points Gained: {points}</p>
+        </div>
+      );
+    }
+  };
+
   averageScore = (score, avg) => {
-    if (avg < score) {
-      return <p>You did not beat your average score in that round.</p>;
-    } else if (avg === score) {
-      return <p>You tied your average score!</p>;
+    if (avg === score) {
+      return <p>Tied average score of {avg}</p>;
     } else if (avg > score) {
-      return <p>{`You beat your average score of ${avg}!`}</p>;
-    } else if (avg === "N/A") {
-      return <p>Congrats on completing your first round at this course!</p>;
+      return <p>Beat average score of {avg}</p>;
     }
   };
 
   bestScore = (score, best) => {
-    if (best < score) {
-      return <p>You did not beat your best score in that round.</p>;
-    } else if (best === score) {
-      return <p>You tied your best score!</p>;
+    if (best === score) {
+      return <p>Tied best score of {best}</p>;
     } else if (best > score) {
-      return <p>{`You beat your best score of ${best}!`}</p>;
-    } else if (best === "N/A") {
-      return null;
+      return <p>Beat best score of {best}</p>;
     }
   };
 
@@ -46,8 +50,6 @@ class UserSummary extends Component {
     let newExp = this.props.data.originalExp + this.props.data.gainedExp;
     let newLevel = getLevel(newExp);
     let newExpBar = getExperiencePercent(newExp, newLevel);
-
-    console.log(currentExpBar, newExpBar);
 
     let increaseUserLevel = newLevel => {
       this.setState({ userLevel: newLevel });
@@ -67,8 +69,8 @@ class UserSummary extends Component {
       } else if (newLevel > currentLevel) {
         if (currentExpBar >= 100) {
           currentLevel = currentLevel + 1;
-          increaseUserLevel(currentLevel);
           currentExpBar = 0;
+          increaseUserLevel(currentLevel);
         } else {
           currentExpBar++;
           document.querySelector(
@@ -80,21 +82,19 @@ class UserSummary extends Component {
   };
 
   render() {
-    // let expBarStyle = getExperiencePercent(
-    //   this.props.data.originalExp,
-    //   this.props.data.level
-    // );
     return (
-      <Aux>
+      <div className="userSummary-modal">
         <h4>Level {this.state.userLevel}</h4>
         <progress max="100" value="0" className="leveling-progress-bar" />
         {this.averageScore(this.props.data.score, this.props.data.average)}
         {this.bestScore(this.props.data.score, this.props.data.best)}
-        <p>{`You earned ${
-          this.props.data.gainedExp
-        } experience points from that round.`}</p>
+        {this.achievements(
+          this.props.data.achievePoints,
+          this.props.data.achievements
+        )}
+        <p>{`Exp Earned: ${this.props.data.gainedExp}`}</p>
         <button onClick={this.props.removeModal}>CLOSE</button>
-      </Aux>
+      </div>
     );
   }
 }

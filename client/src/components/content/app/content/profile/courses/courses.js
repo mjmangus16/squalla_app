@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getProfile } from "../../../../../../actions/profileActions";
@@ -10,6 +8,7 @@ import getCoursesData from "../../../functions/courses";
 import selectArrow from "../../../../../../img/selectArrow.png";
 
 import AppMenu from "../../../appMenu";
+import NavButtons from "../../../navButtons";
 import SelectedCourse from "./selectedCourse";
 
 import "./courses.css";
@@ -52,7 +51,6 @@ class Courses extends Component {
     let displayContent;
     if (Object.keys(profile).length > 0) {
       let coursesData = getCoursesData(profile);
-      console.log(coursesData);
       if (coursesData.length > 0) {
         coursesContent.push(
           coursesData.map(course => (
@@ -142,25 +140,23 @@ class Courses extends Component {
       }
     }
 
+    let navButtonLinks = [
+      "/squallaApp/profile/courses",
+      "/squallaApp/profile/courses/add"
+    ];
+    let navButtonNames = ["Courses", "Add Course"];
+
     return (
       <div className="squalla-app-container">
         <AppMenu link={"courses"} />
         <div className="squalla-app-content-container">
           {displayContent}
-          <div className="app-home-courses-nav app-nav">
-            <Link to="/squallaApp/profile/courses" exact="true">
-              <button
-                className="app-home-nav-button"
-                id="app-home-nav-selected"
-              >
-                Courses
-              </button>
-            </Link>
-
-            <Link to="/squallaApp/profile/courses/add" exact="true">
-              <button className="app-home-nav-right">Add Course</button>
-            </Link>
-          </div>
+          <NavButtons
+            buttons={2}
+            selected={1}
+            links={navButtonLinks}
+            names={navButtonNames}
+          />
         </div>
       </div>
     );

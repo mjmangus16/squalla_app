@@ -1,6 +1,24 @@
 module.exports = [
   {
     Manufacturer: "DiscMania",
+    Name: "DD3",
+    Distance: "Distance Driver",
+    Stability: "Overstable",
+    Speed: "12",
+    Glide: "5",
+    Turn: "-1",
+    Fade: "3",
+    Difficulty: "2",
+    Manufacture_Ratings: {
+      Speed: 10,
+      Glide: 5,
+      Turn: -1,
+      Fade: 2
+    },
+    Link: "#"
+  },
+  {
+    Manufacturer: "DiscMania",
     Name: "CD Craze",
     Distance: "Distance Driver",
     Stability: "Stable",
