@@ -36,6 +36,14 @@ class Dashboard extends Component {
     this.props.getProfile();
   }
 
+  getAchievements = achieves => {
+    let count = 0;
+    for (let i = 0; i < achieves.length; i++) {
+      count = count + achieves[i].count;
+    }
+    return count;
+  };
+
   render() {
     const { profile } = this.props.profile;
     let dashboardContent;
@@ -63,9 +71,9 @@ class Dashboard extends Component {
             <p>{dashboardData.coursesPlayed}</p>
           </div>
           <div className="app-home-dashboard-recentAchieve">
-            <h4>Recent Achievement</h4>
+            <h4>Achievements Earned</h4>
 
-            <p>N/A</p>
+            <p>{this.getAchievements(profile.achievements)}</p>
           </div>
           <div className="app-home-dashboard-achievePoints">
             <h4>Achievement Points</h4>
