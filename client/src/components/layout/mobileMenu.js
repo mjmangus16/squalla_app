@@ -161,7 +161,9 @@ class MobileMenu extends Component {
                         <li className="border-bottom">
                           <a href="/squallaApp/profile/friends">Friends</a>
                         </li>
-                        <li>Leagues</li>
+                        <li>
+                          <a href="/squallaApp/profile/leagues">Leagues</a>
+                        </li>
                       </ul>
                     </li>
 
