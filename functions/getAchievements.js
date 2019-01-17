@@ -290,14 +290,14 @@ const two_threeCoursesSameDay = (available, myRounds, round) => {
 
   let uniq;
 
-  if (sameDayRounds.length >= 2) {
+  if (sameDayRounds.length >= 2 && sameDayRounds.length <= 3) {
     if (sameDayRounds.length === 2) {
       for (let i = 0; i < available.length; i++) {
         if (available[i].code === 7) {
           data.info = available[i];
         }
       }
-    } else if (sameDayRounds.length >= 3) {
+    } else if (sameDayRounds.length === 3) {
       for (let i = 0; i < available.length; i++) {
         if (available[i].code === 6) {
           data.info = available[i];

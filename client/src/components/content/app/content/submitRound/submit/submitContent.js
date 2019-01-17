@@ -11,6 +11,7 @@ import Modal from "../../../../../UI/Modal/Modal";
 
 import Date from "./date";
 import Course from "./course";
+import League from "./league";
 import Players from "./players";
 import Scores from "./scores";
 import Summary from "./summary";
@@ -22,6 +23,7 @@ class SubmitContent extends Component {
   state = {
     date: true,
     course: false,
+    league: false,
     players: false,
     scores: false,
     summary: false,
@@ -35,7 +37,8 @@ class SubmitContent extends Component {
     course: "",
     tees: "",
     players: [],
-    scores: []
+    scores: [],
+    league: ""
   };
 
   submitted = "";
@@ -58,6 +61,17 @@ class SubmitContent extends Component {
     this.roundData.course =
       e.target.parentElement.parentElement.firstChild.textContent;
     this.roundData.tees = e.target.textContent;
+    this.setState({ roundData: this.roundData });
+  };
+
+  toggleLeagueHandler = e => {
+    if (this.roundData.league === e.target.textContent) {
+      this.roundData.league = "";
+      e.target.id = "";
+    } else {
+      this.roundData.league = e.target.textContent;
+      e.target.id = "player-selected";
+    }
     this.setState({ roundData: this.roundData });
   };
 
@@ -152,6 +166,16 @@ class SubmitContent extends Component {
       this.roundData.tees !== ""
     ) {
       this.displayContent = (
+        <League
+          data={this.props.profile.profile.leagues}
+          handler={this.toggleLeagueHandler}
+        />
+      );
+      document.querySelector(".submit-topNav-course").id = "";
+      document.querySelector(".submit-topNav-league").id = "nav-link-style";
+      this.setState({ course: false, league: true });
+    } else if (this.state.league === true) {
+      this.displayContent = (
         <Players
           data={this.props.profile.profile.friends}
           handler={this.togglePlayersHandler}
@@ -159,9 +183,9 @@ class SubmitContent extends Component {
           selected={this.roundData.players}
         />
       );
-      document.querySelector(".submit-topNav-course").id = "";
+      document.querySelector(".submit-topNav-league").id = "";
       document.querySelector(".submit-topNav-players").id = "nav-link-style";
-      this.setState({ course: false, players: true });
+      this.setState({ league: false, players: true });
     } else if (
       this.state.players === true &&
       this.roundData.players.length !== 0
@@ -218,14 +242,24 @@ class SubmitContent extends Component {
       this.setState({ players: true, scores: false });
     } else if (this.state.players === true) {
       this.displayContent = (
+        <League
+          data={this.props.profile.profile.leagues}
+          handler={this.getLeagueHandler}
+        />
+      );
+      document.querySelector(".submit-topNav-players").id = "";
+      document.querySelector(".submit-topNav-league").id = "nav-link-style";
+      this.setState({ league: true, players: false });
+    } else if (this.state.league === true) {
+      this.displayContent = (
         <Course
           data={this.props.profile.profile.courses}
-          handler={this.getCourseHandler}
+          handler={this.toggleCourseHandler}
         />
       );
       document.querySelector(".submit-topNav-course").id = "nav-link-style";
-      document.querySelector(".submit-topNav-players").id = "";
-      this.setState({ course: true, players: false });
+      document.querySelector(".submit-topNav-league").id = "";
+      this.setState({ course: true, league: false });
     } else if (this.state.course === true) {
       this.displayContent = <Date handler={this.getDateHandler} />;
       document.getElementById("submitRound-backButton").className =
@@ -275,11 +309,14 @@ class SubmitContent extends Component {
                     </p>
                   )}
 
-                  <p>{this.roundData.course}</p>
+                  <p className="app-submitRound-submit-summary-content-course1">
+                    {this.roundData.course}
+                  </p>
                   {this.roundData.tees !== "" ? (
                     <p>Tees: {this.roundData.tees}</p>
                   ) : null}
 
+                  <p>{this.roundData.league}</p>
                   {this.roundData.players.length > 0 ? (
                     <p>{this.roundData.players.length} Players</p>
                   ) : null}
@@ -298,6 +335,7 @@ class SubmitContent extends Component {
                 Date
               </p>
               <p className="submit-topNav-course">Course</p>
+              <p className="submit-topNav-league">League</p>
               <p className="submit-topNav-players">Players</p>
               <p className="submit-topNav-scores">Scores</p>
               <p className="submit-topNav-summary">Summary</p>

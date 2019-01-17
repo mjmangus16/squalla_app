@@ -24,6 +24,7 @@ import AddCourse from "../content/app/content/profile/courses/addCourse";
 import Friends from "../content/app/content/profile/friends/friends";
 import AddFriend from "../content/app/content/profile/friends/addFriend";
 import Leagues from "../content/app/content/profile/leagues/leagues";
+import SearchLeagues from "../content/app/content/profile/leagues/searchLeagues";
 import submitRoundRecent from "../content/app/content/submitRound/recent/recent";
 import submitContent from "../content/app/content/submitRound/submit/submitContent";
 
@@ -74,6 +75,11 @@ class Content extends Component {
             component={AddFriend}
           />
           <Route exact path="/squallaApp/profile/leagues" component={Leagues} />
+          <Route
+            exact
+            path="/squallaApp/profile/leagues/search"
+            component={SearchLeagues}
+          />
           <Route
             exact
             path="/squallaApp/submitRound/recent"

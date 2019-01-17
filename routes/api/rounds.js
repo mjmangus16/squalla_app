@@ -6,11 +6,13 @@ const Round = require("../../models/Round");
 const Profile = require("../../models/Profile");
 const Course = require("../../models/Course");
 const Achievements = require("../../models/Achievement");
+const League = require("../../models/League");
 
 const getCourseRating = require("../../functions/getCourseRating");
 const getExp = require("../../functions/leveling/expGained");
 const levels = require("../../functions/leveling/levels");
 const getAchievements = require("../../functions/getAchievements");
+const getLeagueData = require("../../functions/getLeagueData");
 
 // Load Input Validation
 const validateRoundsInput = require("../../validation/rounds");
@@ -43,7 +45,7 @@ router.post(
   (req, res) => {
     let league;
 
-    if (req.body.league) {
+    if (req.body.league !== "") {
       league = req.body.league;
     } else {
       league = "N/A";
@@ -98,6 +100,16 @@ router.post(
       Course.findOne({ name: req.body.course }).then(course => {
         course.history.push(round);
         course.save().then(course => {
+          if (round.league !== "N/A") {
+            League.findOne({ name: round.league }).then(league => {
+              if (league) {
+                league = getLeagueData(league, round);
+                console.log(league);
+                league.save();
+              }
+            });
+          }
+
           for (let i = 0; i < round.scores.length; i++) {
             Profile.findOne({ username: round.scores[i].player })
               .then(profile => {
@@ -115,7 +127,7 @@ router.post(
                         round.course.name
                       );
                       if (!courseExists) {
-                        addCourseToProfile(req, res, errors, profile.username);
+                        profile = addCourseToProfile(course, profile);
                       }
 
                       let coursePlayed = getCoursePlayed(course);
@@ -251,44 +263,19 @@ const getCoursePlayed = course => {
   return myCourse;
 };
 
-const addCourseToProfile = (req, res, errors, username) => {
-  Course.findOne({ name: req.body.course })
-    .then(course => {
-      if (!course) {
-        errors.course = "That course does not exist in our database";
-        res.status(404).json(errors);
-      } else {
-        Profile.findOne({ username: username }).then(profile => {
-          for (let i = 0; i < profile.courses.length; i++) {
-            if (req.body.course === profile.courses[i].name) {
-              errors.course =
-                "You have already added that course to your profile";
-              return res.json(errors);
-            }
-          }
-
-          for (let j = 0; j < course.tees.length; j++) {
-            course.tees[j].avg = "N/A";
-            course.tees[j].best = "N/A";
-          }
-
-          const myCourse = {
-            id: course._id,
-            name: course.name,
-            holes: course.holes,
-            tees: course.tees,
-            history: [],
-            terrain: course.terrain,
-            landscape: course.landscape,
-            latLong: course.latLong
-          };
-
-          profile.courses.unshift(myCourse);
-          profile.save().catch(err => console.log(err));
-        });
-      }
-    })
-    .catch(err => console.log(err));
+const addCourseToProfile = (course, profile) => {
+  const myCourse = {
+    id: course._id,
+    name: course.name,
+    holes: course.holes,
+    tees: course.tees,
+    history: [],
+    terrain: course.terrain,
+    landscape: course.landscape,
+    latLong: course.latLong
+  };
+  profile.courses.push(myCourse);
+  return profile;
 };
 
 const collectCourseHistory = (course, roundHistory, username) => {

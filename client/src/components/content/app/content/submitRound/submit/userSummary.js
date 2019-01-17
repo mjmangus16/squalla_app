@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import getExperiencePercent from "../../profile/home/functions/getExperiencePercent";
 import getLevel from "../../profile/home/functions/levels";
 
-import Aux from "../../../../../UI/Aux";
 import "./userSummary.css";
 
 class UserSummary extends Component {

@@ -6,20 +6,23 @@ const LeagueSchema = new Schema({
     type: String,
     required: true
   },
-  category: {
+  type: {
     type: String,
     required: true
   },
-  leagueType: {
+  availability: {
+    type: String,
+    required: true
+  },
+  roster: {
     type: Array,
-    required: true
+    required: true,
+    default: []
   },
-  manager: {
-    type: String,
-    required: true
-  },
-  length: {
-    type: Number
+  rosterData: {
+    type: Array,
+    required: true,
+    default: []
   }
 });
 
