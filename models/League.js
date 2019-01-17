@@ -23,6 +23,11 @@ const LeagueSchema = new Schema({
     type: Array,
     required: true,
     default: []
+  },
+  rounds: {
+    type: Number,
+    required: true,
+    default: 0
   }
 });
 

@@ -100,7 +100,8 @@ const leagueType = (type, username, members) => {
   if (type === "Tag") {
     data = {
       username: username,
-      tag: members + 1
+      tag: members + 1,
+      rounds: 0
     };
 
     return data;

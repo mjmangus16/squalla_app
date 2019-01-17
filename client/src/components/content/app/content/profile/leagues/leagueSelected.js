@@ -5,12 +5,16 @@ import selectArrowBack from "../../../../../../img/selectArrowBack.png";
 
 class LeagueSelected extends Component {
   state = {
-    leagueData: []
+    leagueData: [],
+    members: 0,
+    rounds: 0
   };
   componentDidMount() {
     axios.get(`/api/leagues/name/${this.props.data.name}`).then(res => {
       if (res) {
         this.setState({
+          members: res.data.rosterData.length,
+          rounds: res.data.rounds,
           leagueData: (
             <div className="league-selected-player-data-container">
               <div className="league-selected-player-data-container-heading">
@@ -52,13 +56,23 @@ class LeagueSelected extends Component {
           <h2 className="selected-league-container-name">
             {this.props.data.name}
           </h2>
-          <p className="selected-league-container-type">
-            Type: {this.props.data.type}
-          </p>
-          <p className="selected-league-container-avail">
-            {this.props.data.availability}
-          </p>
-
+          <div className="selected-league-content-typeAvail-container">
+            <p className="selected-league-container-type">
+              Type: <span id="orange-q">{this.props.data.type}</span>
+            </p>
+            <p className="selected-league-container-avail">
+              Availability:{" "}
+              <span id="orange-q">{this.props.data.availability}</span>
+            </p>
+          </div>
+          <div className="selected-league-content-typeAvail-container">
+            <p className="selected-league-container-type">
+              Members <span id="orange-q">{this.state.members}</span>
+            </p>
+            <p className="selected-league-container-avail">
+              Rounds: <span id="orange-q">{this.state.rounds}</span>
+            </p>
+          </div>
           {this.state.leagueData}
         </div>
       </div>

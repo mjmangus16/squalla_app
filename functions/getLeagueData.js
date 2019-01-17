@@ -2,11 +2,16 @@ const _ = require("lodash");
 
 const getLeagueData = (league, round) => {
   if (league.type === "Tag") {
+    let count = league.rounds;
+
     let tagData = tagLeague(league, round);
     let updatedRosterData = _.uniqBy([...tagData, ...league.rosterData], "tag");
     updatedRosterData = updatedRosterData.sort((a, b) => {
       return a.tag - b.tag;
     });
+    count++;
+    league.rounds = count;
+    console.log(league.rounds);
     league.rosterData = updatedRosterData;
   }
   return league;
@@ -58,7 +63,11 @@ const tagLeague = (league, round) => {
   }
 
   for (let i = 0; i < tagData.length; i++) {
-    updatedTagData.push({ players: tagData[i].username, tag: tagData[i].tag });
+    updatedTagData.push({
+      username: tagData[i].username,
+      tag: tagData[i].tag,
+      rounds: tagData[i].rounds + 1
+    });
   }
 
   return updatedTagData;

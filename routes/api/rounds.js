@@ -104,7 +104,6 @@ router.post(
             League.findOne({ name: round.league }).then(league => {
               if (league) {
                 league = getLeagueData(league, round);
-                console.log(league);
                 league.save();
               }
             });

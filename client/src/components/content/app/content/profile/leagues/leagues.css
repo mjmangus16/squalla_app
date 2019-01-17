@@ -57,11 +57,22 @@
 .selected-league-container-name {
   color: var(--orange);
   font-weight: 300;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.selected-league-content-typeAvail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 75%;
+  margin: auto;
 }
 
 .selected-league-container-type,
 .selected-league-container-avail {
   color: var(--lightGrey);
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .league-selected-player-data-container {
@@ -151,6 +162,10 @@
   }
 
   .league-selected-player-data-container-content-player {
+    width: 100%;
+  }
+
+  .selected-league-content-typeAvail-container {
     width: 100%;
   }
 }
