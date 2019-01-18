@@ -10,7 +10,7 @@ class SelectedFriend extends Component {
       level: 1,
       exp: 0,
       achievePoints: "",
-      recentAchieve: "N/A",
+      achievementsEarned: 0,
       username: "",
       roundsPlayed: "",
       coursesPlayed: "",
@@ -53,9 +53,9 @@ class SelectedFriend extends Component {
             <p>{this.state.dashboard.coursesPlayed}</p>
           </div>
           <div className="app-home-dashboard-recentAchieve">
-            <h4>Recent Achievement</h4>
+            <h4>Achievements Earned</h4>
 
-            <p>{this.state.dashboard.recentAchieve}</p>
+            <p>{this.state.dashboard.achievementsEarned}</p>
           </div>
           <div className="app-home-dashboard-achievePoints">
             <h4>Achievement Points</h4>

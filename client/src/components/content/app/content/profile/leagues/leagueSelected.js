@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import Tags from "./type/Tags";
+
 import selectArrowBack from "../../../../../../img/selectArrowBack.png";
 
 class LeagueSelected extends Component {
@@ -14,31 +16,11 @@ class LeagueSelected extends Component {
       if (res) {
         this.setState({
           members: res.data.rosterData.length,
-          rounds: res.data.rounds,
-          leagueData: (
-            <div className="league-selected-player-data-container">
-              <div className="league-selected-player-data-container-heading">
-                <h4 className="league-selected-player-data-container-heading-username">
-                  Username
-                </h4>
-                <h4>Tag</h4>
-              </div>
-              <div className="league-selected-player-data-container-content">
-                {res.data.rosterData.map(player => (
-                  <div
-                    className="league-selected-player-data-container-content-player"
-                    key={res.data.rosterData.indexOf(player)}
-                  >
-                    <p className="league-selected-player-data-container-heading-username">
-                      {player.username}
-                    </p>
-                    <p>{player.tag}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )
+          rounds: res.data.rounds
         });
+        if (res.data.type === "Tag") {
+          this.setState({ leagueData: <Tags data={res.data} /> });
+        }
       }
     });
   }

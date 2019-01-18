@@ -400,9 +400,7 @@ router.get(
         }
 
         if (profile.achievements[0]) {
-          dashboard.recentAchieve = profile.achievements[0];
-        } else {
-          dashboard.recentAchieve = "N/A";
+          dashboard.achievementsEarned = profile.achievements.length;
         }
 
         return res.json(dashboard);
