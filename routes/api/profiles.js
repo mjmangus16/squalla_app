@@ -399,7 +399,7 @@ router.get(
           };
         }
 
-        if (profile.achievements[0]) {
+        if (profile.achievements) {
           dashboard.achievementsEarned = profile.achievements.length;
         }
 
