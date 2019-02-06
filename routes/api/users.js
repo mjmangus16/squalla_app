@@ -154,4 +154,30 @@ router.get("/all", (req, res) => {
   });
 });
 
+// @route   POST api/users/changepassword
+// @desc    Change a users password
+// @access  Private
+router.post(
+  "/changepassword",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ email: req.body.email }).then(user => {
+      const password = req.body.password;
+
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, (err, hash) => {
+          if (err) throw err;
+          user.password = hash;
+          user
+            .save()
+            .then(user => {
+              res.json(user);
+            })
+            .catch(err => console.log(err));
+        });
+      });
+    });
+  }
+);
+
 module.exports = router;
