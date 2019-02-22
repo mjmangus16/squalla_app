@@ -28,74 +28,6 @@ router.get(
 
 //                        ************* HOME **************
 
-// // @route   GET api/profiles/home/dashboard
-// // @desc    Get dashboard data
-// // @access  Private
-// router.get(
-//   "/home/dashboard",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     Profile.findOne({ username: req.user.username }).then(profile => {
-//       const myScore = () => {
-//         for (let i = 0; i < profile.rounds[0].scores.length; i++) {
-//           if (profile.rounds[0].scores[i].player === profile.username) {
-//             return profile.rounds[0].scores[i].score;
-//           }
-//         }
-//       };
-
-//       for (let j = 0; j < profile.rounds.length; j++) {
-//         for (let k = 0; k < profile.courses.length; k++) {
-//           if (profile.rounds[j].course.name === profile.courses[k].name) {
-//             profile.courses[k].history.unshift(profile.rounds[j]);
-//           }
-//         }
-//       }
-
-//       let coursesPlayed = 0;
-
-//       for (let y = 0; y < profile.courses.length; y++) {
-//         if (profile.courses[y].history.length > 0) {
-//           coursesPlayed++;
-//         }
-//       }
-
-//       let dashboard = {
-//         level: profile.level,
-//         exp: profile.exp,
-//         username: profile.username,
-//         roundsPlayed: profile.rounds.length,
-//         coursesPlayed: coursesPlayed,
-//         achievePoints: profile.achievePoints
-//       };
-
-//       if (profile.rounds[0]) {
-//         dashboard.recentRound = {
-//           date: profile.rounds[0].date,
-//           course: profile.rounds[0].course.name,
-//           tees: profile.rounds[0].course.tees,
-//           score: myScore()
-//         };
-//       } else {
-//         dashboard.recentRound = {
-//           date: "N/A",
-//           course: "N/A",
-//           tees: "N/A",
-//           score: "N/A"
-//         };
-//       }
-
-//       if (profile.achievements[0]) {
-//         dashboard.recentAchieve = profile.achievements[0];
-//       } else {
-//         dashboard.recentAchieve = "N/A";
-//       }
-
-//       profile.save().then(profile => res.json(dashboard));
-//     });
-//   }
-// );
-
 // @route   GET api/profiles/home/achievements/all
 // @desc    Get all achievements earned
 // @access  Private
@@ -108,39 +40,6 @@ router.get(
     });
   }
 );
-
-// // @route   GET api/profiles/home/rounds/all
-// // @desc    Get all rounds
-// // @access  Private
-// router.get(
-//   "/home/rounds/all",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     Profile.findOne({ username: req.user.username }).then(profile => {
-//       let myScore = i => {
-//         for (let j = 0; j < profile.rounds[i].scores.length; j++) {
-//           if (profile.rounds[i].scores[j].player === profile.username) {
-//             return profile.rounds[i].scores[j].score;
-//           }
-//         }
-//       };
-//       let roundsData = [];
-//       for (let i = 0; i < profile.rounds.length; i++) {
-//         roundsData.push({
-//           date: profile.rounds[i].date,
-//           course: profile.rounds[i].course.name,
-//           tees: profile.rounds[i].course.tees,
-//           myScore: myScore(i),
-//           players: profile.rounds[i].scores.length,
-//           roundScores: profile.rounds[i].scores,
-//           owner: profile.rounds[i].owner,
-//           league: profile.rounds[i].league
-//         });
-//       }
-//       res.json(roundsData);
-//     });
-//   }
-// );
 
 //                        ************* COURSES **************
 
@@ -173,17 +72,11 @@ router.post(
               }
             }
 
-            for (let j = 0; j < course.tees.length; j++) {
-              course.tees[j].avg = "N/A";
-              course.tees[j].best = "N/A";
-            }
-
             const myCourse = {
               id: course._id,
               name: course.name,
               holes: course.holes,
               tees: course.tees,
-              history: [],
               terrain: course.terrain,
               landscape: course.landscape,
               latLong: course.latLong
@@ -192,7 +85,7 @@ router.post(
             profile.courses.unshift(myCourse);
             profile
               .save()
-              .then(profile => {
+              .then(() => {
                 data = {
                   course: `${myCourse.name} has been added to your profile`
                 };
@@ -205,26 +98,6 @@ router.post(
       .catch(err => console.log(err));
   }
 );
-
-// // @route   GET api/profiles/courses/all
-// // @desc    Get all user courses
-// // @access  Private
-// router.get(
-//   "/courses/all",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     Profile.findOne({ username: req.user.username }).then(profile => {
-//       for (let i = 0; i < profile.courses.length; i++) {
-//         for (let j = 0; j < profile.rounds.length; j++) {
-//           if (profile.courses[i].name === profile.rounds[j].course.name) {
-//             profile.courses[i].history.unshift(profile.rounds[j]);
-//           }
-//         }
-//       }
-//       res.json(profile.courses);
-//     });
-//   }
-// );
 
 // @route   GET api/profiles/courses/name/:name
 // @desc    Get a specific course by name
@@ -322,19 +195,6 @@ router.post(
     });
   }
 );
-
-// // @route   GET api/profiles/friends/all
-// // @desc    Get all friends
-// // @access  Private
-// router.get(
-//   "/friends/all",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     Profile.findOne({ username: req.user.username }).then(user =>
-//       res.json(user.friends)
-//     );
-//   }
-// );
 
 // @route   GET api/profiles/friends/name/:name
 // @desc    Get a specific friend

@@ -58,7 +58,7 @@ router.post(
 // @access  Private
 router.get(
   "/all",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Course.find().then(courses => {
       res.json(courses);

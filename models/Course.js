@@ -30,9 +30,6 @@ const CourseSchema = new Schema({
   },
   latLong: {
     type: String
-  },
-  history: {
-    type: Array
   }
 });
 

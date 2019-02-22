@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 const ProfileSchema = new Schema({
   username: {
+    type: String,
+    required: true
+  },
+  nickname: {
     type: String
   },
   level: {
@@ -20,22 +24,20 @@ const ProfileSchema = new Schema({
     required: true,
     default: 0
   },
-  dashboard: {
-    nickname: {
-      type: String
-    },
-    roundsPlayed: {
-      type: Number
-    },
-    coursesPlayed: {
-      type: Number
-    },
-    achievement: {
-      type: Object
-    },
-    recentRound: {
-      type: Object
-    }
+  performancePoints: {
+    type: Number,
+    default: 0,
+    required: true
+  },
+  roundsPlayed: {
+    type: Number,
+    default: 0,
+    required: true
+  },
+  coursesPlayed: {
+    type: Number,
+    default: 0,
+    required: true
   },
   courses: {
     type: Array
