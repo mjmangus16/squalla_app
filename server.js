@@ -6,11 +6,14 @@ const passport = require("passport");
 const path = require("path");
 
 const users = require("./routes/api/users");
+const dashboard = require("./routes/api/dashboard");
+const performance = require("./routes/api/performance");
 const profile = require("./routes/api/profiles");
 const submitRound = require("./routes/api/rounds");
 const leagues = require("./routes/api/leagues");
 const courses = require("./routes/api/courses");
 const achievements = require("./routes/api/achievements");
+const addRound = require("./routes/api/addRound");
 
 const app = express();
 
@@ -35,11 +38,15 @@ require("./config/passport")(passport);
 
 // Use Routes
 app.use("/api/users", users);
-app.use("/api/profiles", profile);
+
+app.use("/api/dashboard", dashboard);
+app.use("/api/performance", performance);
 app.use("/api/rounds", submitRound);
+app.use("/api/profiles", profile);
 app.use("/api/leagues", leagues);
 app.use("/api/courses", courses);
 app.use("/api/achievements", achievements);
+app.use("/api/addRound", addRound);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {

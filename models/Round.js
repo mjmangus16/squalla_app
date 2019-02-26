@@ -21,6 +21,10 @@ const RoundSchema = new Schema({
   scores: {
     type: Array,
     required: true
+  },
+  holes: {
+    type: Number,
+    required: true
   }
 });
 

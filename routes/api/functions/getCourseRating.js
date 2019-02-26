@@ -1,9 +1,5 @@
-const getCourseRating = stats => {
+const getCourseRating = (distance, terrain, landscape, holes) => {
   let rating;
-  let landscape = stats.landscape;
-  let terrain = stats.terrain;
-  let distance = stats.distance;
-  let holes = stats.holes;
 
   let terrainRating, landscapeRating, distancePerHole;
 

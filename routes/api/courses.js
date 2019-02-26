@@ -3,11 +3,13 @@ const router = express.Router();
 const passport = require("passport");
 
 const Course = require("../../models/Course");
+const Pofile = require("../../models/Profile");
 
-// @route   GET api/courses/test
-// @desc    Tests courses route
-// @access  Public
-router.get("/test", (req, res) => res.json({ msg: "Courses Works" }));
+// Functions
+const getCourseRating = require("./functions/getCourseRating");
+
+// Load Input Validation
+const validateProfileInput = require("../../validation/profile");
 
 // @route   POST api/courses/add
 // @desc    Post course to database
@@ -16,73 +18,71 @@ router.post(
   "/add",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Course.findOne({ name: req.body.name }).then(course => {
-      if (course) {
-        return res
-          .status(400)
-          .json({ course: "Course is already in database" });
-      } else {
-        const pars = {};
+    const { errors, isValid } = validateProfileInput.course(req.body);
+    // Check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
 
-        if (req.body.gold) {
-          pars.gold = req.body.gold;
-        }
-        if (req.body.blue) {
-          pars.blue = req.body.blue;
-        }
-        if (req.body.white) {
-          pars.white = req.body.white;
-        }
-        if (req.body.red) {
-          pars.red = req.body.red;
-        }
-
-        const newCourse = new Course({
-          name: req.body.name,
-          holes: req.body.holes,
-          par: pars,
-          history: []
-        });
-
-        newCourse
-          .save()
-          .then(course => res.json(course))
-          .catch(err => console.log(err));
-      }
-    });
-  }
-);
-
-// @route   GET api/courses/courses
-// @desc    Get all courses from database
-// @access  Private
-router.get(
-  "/all",
-  // passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Course.find().then(courses => {
-      res.json(courses);
-    });
-  }
-);
-
-// @route   GET api/courses/name/:name
-// @desc    Get course by name from database
-// @access  Private
-router.get(
-  "/name/:name",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Course.findOne({ name: req.params.name })
+    Course.findOne({ name: req.body.name })
       .then(course => {
         if (!course) {
-          res
-            .status(404)
-            .json({ course: "That course is not in our database" });
+          errors.course = `${req.body.course} does not exist in our database`;
+          res.status(404).json(errors);
+        } else {
+          Profile.findOne({ username: req.user.username }).then(profile => {
+            for (let i = 0; i < profile.courses.length; i++) {
+              if (req.body.name === profile.courses[i].name) {
+                errors.course = `You have already added ${
+                  req.body.name
+                } to your profile`;
+                return res.json(errors);
+              }
+            }
+
+            const myCourse = {
+              id: course._id,
+              name: course.name,
+              holes: course.holes,
+              tees: [],
+              terrain: course.terrain,
+              landscape: course.landscape,
+              latLong: course.latLong
+            };
+
+            for (let i = 0; i < course.tees.length; i++) {
+              const teeData = {
+                pin: course.tees[i].tee,
+                par: course.tees[i].par,
+                distance: course.tees[i].distance,
+                average: "",
+                best: "",
+                rating: Math.round(
+                  getCourseRating(
+                    course.tees[i].distance,
+                    course.terrain,
+                    course.landscape,
+                    course.holes
+                  )
+                )
+              };
+              myCourse.tees.push(teeData);
+            }
+
+            profile.courses.unshift(myCourse);
+            profile
+              .save()
+              .then(() => {
+                data = {
+                  course: `${myCourse.name} has been added to your profile`
+                };
+                return res.json(data);
+              })
+              .catch(err => console.log(err));
+          });
         }
-        res.json(course);
       })
-      .catch(err => res.status(404).json(err));
+      .catch(err => console.log(err));
   }
 );
 

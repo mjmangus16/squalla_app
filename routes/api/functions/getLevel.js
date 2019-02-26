@@ -1,4 +1,4 @@
-const levels = userExp => {
+const getLevel = userExp => {
   if (userExp < 50) {
     return 1;
   } else if (userExp >= 50 && userExp < 225) {
@@ -42,4 +42,4 @@ const levels = userExp => {
   }
 };
 
-module.exports = levels;
+module.exports = getLevel;

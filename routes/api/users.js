@@ -51,21 +51,7 @@ router.post("/register", (req, res) => {
                 .save()
                 .then(user => {
                   const newProfile = new Profile({
-                    username: user.username,
-                    dashboard: {
-                      nickname: "",
-                      roundsPlayed: 0,
-                      coursesPlayed: 0,
-                      achievement: {},
-                      recentRound: {}
-                    },
-                    courses: [],
-                    friends: [],
-                    rounds: [],
-                    leagues: [],
-                    achievements: [],
-                    level: 1,
-                    exp: 0
+                    username: user.username
                   });
 
                   newProfile.save().then(profile => res.json(profile));

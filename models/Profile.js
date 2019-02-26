@@ -6,20 +6,17 @@ const ProfileSchema = new Schema({
     type: String,
     required: true
   },
-  nickname: {
-    type: String
-  },
   level: {
     type: Number,
     required: true,
     default: 1
   },
-  exp: {
+  experience: {
     type: Number,
     required: true,
     default: 0
   },
-  achievePoints: {
+  achievementPoints: {
     type: Number,
     required: true,
     default: 0
@@ -29,30 +26,41 @@ const ProfileSchema = new Schema({
     default: 0,
     required: true
   },
-  roundsPlayed: {
-    type: Number,
-    default: 0,
-    required: true
-  },
-  coursesPlayed: {
-    type: Number,
-    default: 0,
-    required: true
-  },
   courses: {
-    type: Array
+    type: Array,
+    required: true,
+    default: []
   },
   friends: {
-    type: Array
+    type: Array,
+    required: true,
+    default: []
   },
   rounds: {
-    type: Array
+    type: Array,
+    required: true,
+    default: []
   },
   leagues: {
-    type: Array
+    type: Array,
+    required: true,
+    default: []
   },
   achievements: {
-    type: Array
+    type: Array,
+    required: true,
+    default: []
+  },
+  snapshot: {
+    type: Object,
+    required: true,
+    default: {
+      level: 1,
+      experience: 0,
+      achievementPoints: 0,
+      performancePoints: 0,
+      rounds: []
+    }
   }
 });
 

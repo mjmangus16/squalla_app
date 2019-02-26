@@ -1,22 +1,3 @@
-const _ = require("lodash");
-
-const getLeagueData = (league, round) => {
-  if (league.type === "Tag") {
-    let count = league.rounds;
-
-    let tagData = tagLeague(league, round);
-    let updatedRosterData = _.uniqBy([...tagData, ...league.rosterData], "tag");
-    updatedRosterData = updatedRosterData.sort((a, b) => {
-      return a.tag - b.tag;
-    });
-    count++;
-    league.rounds = count;
-    console.log(league.rounds);
-    league.rosterData = updatedRosterData;
-  }
-  return league;
-};
-
 const tagLeague = (league, round) => {
   let tagScores = [];
   let tagData = [];
@@ -25,21 +6,24 @@ const tagLeague = (league, round) => {
   let tags = [];
 
   for (let i = 0; i < round.scores.length; i++) {
-    if (leagueRoster.includes(round.scores[i].player)) {
-      tagScores.push(round.scores[i]);
+    if (leagueRoster.includes(round.scores[i].username)) {
+      tagScores.push({
+        username: round.scores[i].username,
+        score: round.scores[i].score
+      });
     }
   }
 
   for (let j = 0; j < tagScores.length; j++) {
     for (let y = 0; y < league.rosterData.length; y++) {
-      if (tagScores[j].player === league.rosterData[y].username) {
+      if (tagScores[j].username === league.rosterData[y].username) {
         tagData.push(league.rosterData[y]);
       }
     }
   }
 
   for (let i = 0; i < tagScores.length; i++) {
-    if (tagScores[i].player === tagData[i].username) {
+    if (tagScores[i].username === tagData[i].username) {
       tagData[i].score = tagScores[i].score;
     }
   }
@@ -73,4 +57,4 @@ const tagLeague = (league, round) => {
   return updatedTagData;
 };
 
-module.exports = getLeagueData;
+module.exports = tagLeague;
