@@ -4,6 +4,13 @@ const passport = require("passport");
 
 const Profile = require("../../models/Profile");
 
+// Functions
+const getRecentRounds = require("./functions/dashboard/getRecentRounds");
+const getCoursesPlayed = require("./functions/dashboard/getCoursesPlayed");
+const getRoundsPerCourse = require("./functions/dashboard/getRoundsPerCourse");
+const getAchievementPointsPerRound = require("./functions/dashboard/getAchievementPointsPerRound");
+const getRoundsPerFriend = require("./functions/dashboard/getRoundsPerFriend");
+
 // @route   GET api/dashboard/
 // @desc    Get user dashboard data
 // @access  Private
@@ -11,23 +18,21 @@ router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.find({ username: req.user.usernam }).then(profile => {
+    Profile.findOne({ username: req.user.username }).then(profile => {
       let data = {
         level: profile.level,
         experience: profile.experience,
         roundsPlayed: profile.rounds.length,
-        recentRounds: getRecentRounds(),
-        coursesPlayed: getCoursesPlayed(),
-        roundsPerCourse: getRoundsPerCourse(),
+        recentRounds: getRecentRounds(profile.rounds, profile.username),
+        coursesPlayed: getCoursesPlayed(profile.courses),
+        roundsPerCourse: getRoundsPerCourse(profile),
         achievementPoints: profile.achievementPoints,
-        achievementPointsPerRound: getAchievementPointsPerRound()
+        achievementPointsPerRound: getAchievementPointsPerRound(profile),
+        totalFriends: profile.friends.length,
+        roundsPerFriend: getRoundsPerFriend(profile)
       };
-      // Level & Experience
-      // Performance of last 10 rounds
-      // last 3 rounds & Total rounds played
-      // Rounds played per top 7 courses & total courses played
-      // Total achievement points & points earned per last 10 rounds
-      // Rounds played with top 7 friends & total friends
+
+      return res.json(data);
     });
   }
 );

@@ -22,7 +22,7 @@ const Friends = ({ classes }) => {
       <CardHeader title="Friends" subheader="7 Friends" />
       <CardContent className={classes.chartWrapper}>
         <div className={classes.chart}>
-          <FriendsChart height={250} />
+          <FriendsChart height={225} />
         </div>
       </CardContent>
     </Card>

@@ -7,20 +7,23 @@ const Course = require("../../models/Course");
 const Achievement = require("../../models/Achievement");
 const League = require("../../models/League");
 
+// Load Input Validation
+const validateAddRoundInput = require("../../validation/addRound");
+
 // Functions
-const getLevel = require("./functions/getLevel");
-const updateStats = require("./functions/updateStats");
-const getExperience = require("./functions/getExperience");
-const getTeeData = require("./functions/getTeeData");
-const getPerformance = require("./functions/getPerformance");
-const getAverage = require("./functions/getAverage");
-const addCourseToProfile = require("./functions/addCourseToProfile");
-const doesCourseExist = require("./functions/doesCourseExist");
-const getAchievements = require("./functions/achievements/getAchievements");
-const collectCourseHistory = require("./functions/collectCourseHistory");
-const updateAchievements = require("./functions/achievements/updateAchievements");
-const compareAchievements = require("./functions/achievements/compareAchiements");
-const getLeagueData = require("./functions/leagues/getLeagueData");
+const getLevel = require("./functions/addRound/getLevel");
+const updateStats = require("./functions/addRound/updateStats");
+const getExperience = require("./functions/addRound/getExperience");
+const getTeeData = require("./functions/addRound/getTeeData");
+const getPerformance = require("./functions/addRound/getPerformance");
+const getAverage = require("./functions/addRound/getAverage");
+const addCourseToProfile = require("./functions/addRound/addCourseToProfile");
+const doesCourseExist = require("./functions/addRound/doesCourseExist");
+const getAchievements = require("./functions/addRound/achievements/getAchievements");
+const collectCourseHistory = require("./functions/addRound/collectCourseHistory");
+const updateAchievements = require("./functions/addRound/achievements/updateAchievements");
+const compareAchievements = require("./functions/addRound/achievements/compareAchiements");
+const getLeagueData = require("./functions/addRound/leagues/getLeagueData");
 
 // @route   POST api/addRound
 // @desc    Post a round
@@ -29,15 +32,11 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // Get Round Data
-    // Date
-    // Course
-    // Tees
-    // Owner
-    // League
-    // Scores
-    // Player
-    // Score
+    const { errors, isValid } = validateAddRoundInput(req.body);
+    // Check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
 
     let league = null;
 
@@ -73,12 +72,19 @@ router.post(
       }
     }
 
+    if (players.length !== scores.length) {
+      errors.scores =
+        "The number of players selected and the number of scores submitted must match";
+      return res.json(errors);
+    }
+
     for (let i = 0; i < players.length; i++) {
       let score = {
         username: players[i],
         score: scores[i],
         experience: 0,
-        performance: 0
+        performance: 0,
+        achievementPoints: 0
       };
       round.scores.push(score);
     }
@@ -162,6 +168,8 @@ router.post(
             profile.achievementPoints =
               profile.achievementPoints + achieveInfo.points;
 
+            round.scores[i].achievementPoints = achieveInfo.points;
+
             const myUpdatedAchieves = compareAchievements(
               profile.achievements,
               achievesEarned
@@ -187,26 +195,12 @@ router.post(
                 course.holes
               );
             profile.level = getLevel(profile.experience);
-            // profile.save();
-            // return res.json(profile);
-            // profile.save().then(profile => res.json(profile));
+            profile.save();
           });
         });
       });
     }
-
-    1; // If League, handle league
-    // Loop through all players
-    // Add course to players profile if it has not already been added
-    // Get course data
-    // Average
-    // Best
-    // Get player score
-    // Get player exp
-    // Get player performance points
-    // Add exp and PP to Round Data
-    // save round
-    // add round to
+    return res.json(round);
   }
 );
 

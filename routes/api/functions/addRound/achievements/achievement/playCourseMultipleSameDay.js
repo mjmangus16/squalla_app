@@ -14,7 +14,7 @@ const playCourseMultipleSameDay = (available, myRounds, round) => {
   let count = 0;
 
   for (let i = 0; i < myRounds.length; i++) {
-    if (myRounds[i].course.name === round.course) {
+    if (myRounds[i].course === round.course) {
       if (myRounds[i].date === date) {
         count++;
       }

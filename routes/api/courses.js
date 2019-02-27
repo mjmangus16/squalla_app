@@ -6,7 +6,7 @@ const Course = require("../../models/Course");
 const Pofile = require("../../models/Profile");
 
 // Functions
-const getCourseRating = require("./functions/getCourseRating");
+const getCourseRating = require("./functions/courses/getCourseRating");
 
 // Load Input Validation
 const validateProfileInput = require("../../validation/profile");

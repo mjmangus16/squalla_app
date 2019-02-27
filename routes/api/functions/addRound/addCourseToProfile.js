@@ -1,4 +1,4 @@
-const getCourseRating = require("./getCourseRating");
+const getCourseRating = require("../courses/getCourseRating");
 
 const addCourseToProfile = (course, profile) => {
   const myCourse = {

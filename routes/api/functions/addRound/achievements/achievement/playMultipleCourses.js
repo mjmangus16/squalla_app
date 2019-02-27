@@ -12,7 +12,7 @@ const playMultipleCourses = (available, courses, rounds) => {
 
   let coursesContainer = [];
   for (let i = 0; i < rounds.length; i++) {
-    coursesContainer.push(rounds[i].course.name);
+    coursesContainer.push(rounds[i].course);
   }
 
   data.info.data = [];

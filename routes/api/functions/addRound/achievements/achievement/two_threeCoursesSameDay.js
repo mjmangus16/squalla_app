@@ -9,7 +9,7 @@ const two_threeCoursesSameDay = (available, myRounds, round) => {
   if (round.course.holes >= 18) {
     for (let i = 0; i < myRounds.length; i++) {
       if (myRounds[i].date === round.date && myRounds[i].course.holes >= 18) {
-        sameDayRounds.push(myRounds[i].course.name);
+        sameDayRounds.push(myRounds[i].course);
       }
     }
   }
