@@ -20,12 +20,23 @@ const styles = theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     flexBasis: "33.33%",
-    flexShrink: 0
+    flexShrink: 0,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".8em"
+    }
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
-    paddingLeft: 25
+    paddingLeft: 25,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".7em"
+    }
+  },
+  content: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".7em"
+    }
   },
   earned: {
     color: "orange",
@@ -71,10 +82,12 @@ class Achieves extends Component {
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>Description: {achievement.description}</Typography>
+          <Typography className={classes.content}>
+            Description: {achievement.description}
+          </Typography>
         </ExpansionPanelDetails>
         <ExpansionPanelDetails>
-          <Typography>
+          <Typography className={classes.content}>
             Earned: {achievement.count} times for{" "}
             {achievement.count * achievement.points} total points
           </Typography>

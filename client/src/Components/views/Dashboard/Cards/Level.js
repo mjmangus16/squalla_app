@@ -77,6 +77,12 @@ const styles = theme => ({
     height: 20,
     width: "75%",
     margin: "auto"
+  },
+  level: {
+    fontSize: "1.5em",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.15em"
+    }
   }
 });
 
@@ -93,11 +99,13 @@ class Level extends Component {
         <CardContent>
           <Typography
             gutterBottom
-            variant="h6"
-            component="h2"
+            variant="display1"
             style={{ textAlign: "center" }}
+            classes={{
+              display1: classes.level
+            }}
           >
-            {`Level: ${level}`}
+            Level: {level}
           </Typography>
           <LinearProgress
             variant="determinate"
