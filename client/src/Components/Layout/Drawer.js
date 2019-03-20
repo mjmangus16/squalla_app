@@ -84,15 +84,11 @@ const DrawerComponent = ({
     }
   }
 
-  const testfunc = () => {
-    console.log("test func working");
-  };
-
   if (auth) {
     drawerContent = (
       <div className={classes.root}>
         <List component="nav">
-          <ListItem button onClick={testfunc}>
+          <ListItem button>
             <ListItemIcon className={classes.listItem}>
               <PersonIcon />
             </ListItemIcon>

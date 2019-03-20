@@ -10,7 +10,7 @@ import {
 const styles = theme => ({
   formControl: {
     minWidth: 75,
-    margin: "auto"
+    margin: "auto auto 5px auto"
   }
 });
 

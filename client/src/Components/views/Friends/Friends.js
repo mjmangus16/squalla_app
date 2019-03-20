@@ -36,6 +36,7 @@ const styles = theme => ({
     margin: "auto"
   },
   toolbarHeading: {
+    textDecoration: "underline",
     [theme.breakpoints.down("xs")]: {
       fontSize: "1.25em"
     }

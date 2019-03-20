@@ -14,6 +14,16 @@ const styles = theme => ({
   chart: {
     position: "relative",
     width: "100%"
+  },
+  headerTitle: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.15em"
+    }
+  },
+  subheader: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".75em"
+    }
   }
 });
 
@@ -23,6 +33,10 @@ const Courses = ({ classes, coursesPlayed, roundsPerCourse }) => {
       <CardHeader
         title="Courses"
         subheader={`${coursesPlayed} Courses Played`}
+        classes={{
+          title: classes.headerTitle,
+          subheader: classes.subheader
+        }}
       />
       <CardContent className={classes.chartWrapper}>
         <div className={classes.chart}>

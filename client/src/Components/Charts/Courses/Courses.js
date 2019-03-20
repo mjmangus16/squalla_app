@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { HorizontalBar } from "react-chartjs-2";
 import chartColors from "../chartColors";
+import withWidth from "@material-ui/core/withWidth";
 
 const getLabels = data => {
   let array = [];
@@ -38,7 +39,7 @@ class Courses extends Component {
           title: {
             display: true,
             text: "Rounds Per Course",
-            fontSize: 20
+            fontSize: this.props.width === "xs" ? 12 : 18
           },
 
           legend: {
@@ -74,4 +75,4 @@ class Courses extends Component {
   }
 }
 
-export default Courses;
+export default withWidth()(Courses);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
 import chartColors from "../chartColors";
+import withWidth from "@material-ui/core/withWidth";
 
 class Rounds extends Component {
   state = {
@@ -38,7 +39,7 @@ class Rounds extends Component {
           title: {
             display: true,
             text: "Best Score By Course",
-            fontSize: 20
+            fontSize: this.props.width === "xs" ? 12 : 18
           },
           legend: { display: false },
           scales: {
@@ -56,4 +57,4 @@ class Rounds extends Component {
   }
 }
 
-export default Rounds;
+export default withWidth()(Rounds);

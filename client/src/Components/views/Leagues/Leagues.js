@@ -18,6 +18,7 @@ const styles = theme => ({
     margin: "auto"
   },
   toolbarHeading: {
+    textDecoration: "underline",
     [theme.breakpoints.down("xs")]: {
       fontSize: "1.25em"
     }
@@ -49,10 +50,9 @@ class Leagues extends Component {
               <Card className={classes.card}>
                 <CardContent>
                   <Typography
-                    gutterBottom
-                    variant="h6"
-                    component="h2"
-                    style={{ textAlign: "center" }}
+                    align="center"
+                    variant="display1"
+                    style={{ fontSize: "1.15em" }}
                   >
                     Leagues are not yet available.
                   </Typography>

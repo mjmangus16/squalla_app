@@ -14,13 +14,30 @@ const styles = theme => ({
   chart: {
     position: "relative",
     width: "100%"
+  },
+  headerTitle: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.15em"
+    }
+  },
+  subheader: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".75em"
+    }
   }
 });
 
 const Friends = ({ classes, friends, roundsPerFriend }) => {
   return (
     <Card className={classes.card}>
-      <CardHeader title="Friends" subheader={`${friends} Friends`} />
+      <CardHeader
+        title="Friends"
+        subheader={`${friends} Friends`}
+        classes={{
+          title: classes.headerTitle,
+          subheader: classes.subheader
+        }}
+      />
       <CardContent className={classes.chartWrapper}>
         <div className={classes.chart}>
           <FriendsChart height={225} data={roundsPerFriend} />

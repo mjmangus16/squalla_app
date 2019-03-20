@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Bar } from "react-chartjs-2";
 import chartColors from "../chartColors";
+import withWidth from "@material-ui/core/withWidth";
 
 class Year extends Component {
   state = {
@@ -41,7 +42,7 @@ class Year extends Component {
           title: {
             display: true,
             text: "Rounds Played Per Month",
-            fontSize: 20
+            fontSize: this.props.width === "xs" ? 12 : 18
           },
           legend: { display: false },
           scales: {
@@ -59,4 +60,4 @@ class Year extends Component {
   }
 }
 
-export default Year;
+export default withWidth()(Year);

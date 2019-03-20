@@ -21,6 +21,16 @@ const styles = theme => ({
     width: "100%",
     height: 500
   },
+  headerTitle: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.15em"
+    }
+  },
+  subheader: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".75em"
+    }
+  },
   cardContent: {
     overflow: "auto",
     paddingTop: 0
@@ -118,6 +128,10 @@ class History extends Component {
         <CardHeader
           title="History"
           subheader={`${data.length} Rounds Played`}
+          classes={{
+            title: classes.headerTitle,
+            subheader: classes.subheader
+          }}
         />
         <CardContent className={classes.cardContent}>
           <div className={classes.tableContainer}>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Bar } from "react-chartjs-2";
 import chartColors from "../chartColors";
+import withWidth from "@material-ui/core/withWidth";
 
 const colors = chartColors();
 
@@ -28,7 +29,7 @@ class Courses extends Component {
           title: {
             display: true,
             text: "Performance Rating Per Course",
-            fontSize: 20
+            fontSize: this.props.width === "xs" ? 12 : 18
           },
           legend: { display: false },
           scales: {
@@ -52,5 +53,4 @@ class Courses extends Component {
     );
   }
 }
-
-export default Courses;
+export default withWidth()(Courses);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
 import chartColors from "../chartColors";
+import withWidth from "@material-ui/core/withWidth";
 
 const colors = chartColors();
 
@@ -29,7 +30,7 @@ class Achievements extends Component {
           title: {
             display: true,
             text: "Points Trend By Round",
-            fontSize: 20
+            fontSize: this.props.width === "xs" ? 12 : 18
           },
           legend: { display: false },
           scales: {
@@ -47,4 +48,4 @@ class Achievements extends Component {
   }
 }
 
-export default Achievements;
+export default withWidth()(Achievements);

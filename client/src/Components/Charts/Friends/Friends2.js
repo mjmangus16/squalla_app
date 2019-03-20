@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Bar } from "react-chartjs-2";
 import chartColors from "../chartColors";
+import withWidth from "@material-ui/core/withWidth";
 
 const colors = chartColors();
 
@@ -33,7 +34,7 @@ class Friends extends Component {
           title: {
             display: true,
             text: "Rounds / Wins Per Friend",
-            fontSize: 20
+            fontSize: this.props.width === "xs" ? 12 : 18
           },
           legend: {
             display: true,
@@ -61,4 +62,4 @@ class Friends extends Component {
   }
 }
 
-export default Friends;
+export default withWidth()(Friends);

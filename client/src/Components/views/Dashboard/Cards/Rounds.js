@@ -23,13 +23,30 @@ const styles = theme => ({
   table: {
     position: "relative",
     width: "100%"
+  },
+  headerTitle: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.15em"
+    }
+  },
+  subheader: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".75em"
+    }
   }
 });
 
 const Rounds = ({ classes, roundsPlayed, recentRounds }) => {
   return (
     <Card className={classes.card}>
-      <CardHeader title="Rounds" subheader={`${roundsPlayed} Rounds Played`} />
+      <CardHeader
+        title="Rounds"
+        subheader={`${roundsPlayed} Rounds Played`}
+        classes={{
+          title: classes.headerTitle,
+          subheader: classes.subheader
+        }}
+      />
       <CardContent className={classes.tableWrapper}>
         <Table className={classes.table}>
           <TableHead>
