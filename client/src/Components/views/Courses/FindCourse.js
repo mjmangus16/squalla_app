@@ -31,6 +31,9 @@ const styles = theme => ({
   },
   navButtonColor: {
     backgroundColor: teal[300]
+  },
+  limit: {
+    display: "none"
   }
 });
 
@@ -224,7 +227,12 @@ class FindCourse extends Component {
           </Grid>
         </Toolbar>
         <Grid container style={{ maxWidth: 400, margin: "auto" }}>
-          <Grid item sm={3} style={{ margin: "auto" }}>
+          <Grid
+            item
+            sm={3}
+            style={{ margin: "auto" }}
+            className={byName ? classes.limit : null}
+          >
             <Limit handler={this.handleChange("limit")} value={limit} />
           </Grid>
           <Grid

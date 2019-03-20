@@ -27,6 +27,7 @@ router.get(
         foliage: course.foliage,
         elevation: course.elevation,
         totalRounds: getTotalRounds(course.tees),
+        course_node_nid: course.node_id,
         tees: course.tees.map(tee => ({
           tee: tee.tee,
           par: tee.par,
@@ -70,6 +71,7 @@ router.post(
           distance: req.body.distance,
           foliage: req.body.foliage,
           elevation: req.body.elevation,
+          node_id: req.body.course_node_nid,
           tees: [
             {
               tee: "Red",

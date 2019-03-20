@@ -193,6 +193,7 @@ class Courses extends Component {
       distance: distance,
       foliage: course.course_foliage,
       elevation: course.course_elevation,
+      course_node_nid: course.course_node_nid,
       par1,
       par2,
       par3,

@@ -40,6 +40,11 @@ const styles = theme => ({
   },
   row: {
     width: "auto"
+  },
+  courseLink: {
+    color: "lightgrey",
+    fontSize: ".75em",
+    cursor: "pointer"
   }
 });
 
@@ -147,6 +152,15 @@ const AddCourse = ({ classes, data, addCourseHandler }) => {
               </TableRow>
             </TableBody>
           </Table>
+        </CardContent>
+        <CardContent>
+          <a
+            href={`https://www.pdga.com/node/${data.course_node_nid}`}
+            target="_blank"
+            className={classes.courseLink}
+          >
+            PDGA Course Link
+          </a>
         </CardContent>
       </Card>
     </Grid>
