@@ -13,6 +13,12 @@ const styles = theme => ({
   card: {
     width: "100%",
     height: "auto"
+  },
+  headerTitle: {
+    fontSize: "1.25em",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.15em"
+    }
   }
 });
 
@@ -22,6 +28,9 @@ const MyFriend = ({ classes, data, getUserHandler, openDialogHandler }) => {
       <Card className={classes.card}>
         <CardHeader
           title={data}
+          classes={{
+            title: classes.headerTitle
+          }}
           action={
             <IconButton
               onClick={() => {

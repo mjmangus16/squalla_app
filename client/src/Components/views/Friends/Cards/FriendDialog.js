@@ -9,10 +9,24 @@ import {
   TableCell,
   Table,
   TableBody,
-  DialogTitle
+  DialogTitle,
+  withStyles
 } from "@material-ui/core";
 
-const FriendDialog = ({ open, close, data }) => {
+const styles = theme => ({
+  content: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".75em"
+    }
+  },
+  tableCell: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".75em"
+    }
+  }
+});
+
+const FriendDialog = ({ classes, open, close, data }) => {
   let friend;
 
   if (!data) {
@@ -37,19 +51,19 @@ const FriendDialog = ({ open, close, data }) => {
             <Typography align="center">LEVEL: {friend.level}</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography align="center">
+            <Typography align="center" className={classes.content}>
               Achievement Points: {friend.achievementPoints}
             </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography align="center">
+            <Typography align="center" className={classes.content}>
               Performance Rating: {friend.performancePoints}
             </Typography>
           </Grid>
         </Grid>
       </DialogContent>
       <DialogContent>
-        <Table>
+        <Table padding="dense">
           <TableHead>
             <TableRow>
               <TableCell align="center">Date</TableCell>
@@ -60,17 +74,17 @@ const FriendDialog = ({ open, close, data }) => {
           <TableBody>
             <TableRow>
               <TableCell>
-                <Typography align="center">
+                <Typography align="center" className={classes.tableCell}>
                   {friend.recentRound.date}
                 </Typography>
               </TableCell>
               <TableCell>
-                <Typography align="center">
+                <Typography align="center" className={classes.tableCell}>
                   {friend.recentRound.course}
                 </Typography>
               </TableCell>
               <TableCell>
-                <Typography align="center">
+                <Typography align="center" className={classes.tableCell}>
                   {friend.recentRound.score}
                 </Typography>
               </TableCell>
@@ -82,4 +96,4 @@ const FriendDialog = ({ open, close, data }) => {
   );
 };
 
-export default FriendDialog;
+export default withStyles(styles)(FriendDialog);
