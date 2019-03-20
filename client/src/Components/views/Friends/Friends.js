@@ -1,23 +1,31 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import {
+  getFriendsData,
+  getUserByName,
+  addFriend
+} from "../../../redux/actions/profileActions";
 import {
   Grid,
   Toolbar,
   Typography,
   IconButton,
   Button,
-  InputBase,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogContentText,
   withStyles
 } from "@material-ui/core";
 import InfoButton from "@material-ui/icons/Info";
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import SearchIcon from "@material-ui/icons/Search";
 
 import MyFriend from "./Cards/MyFriend";
+import RoundsPlayed from "./Cards/roundsPlayed";
+import FriendDialog from "./Cards/FriendDialog";
+import FindFriends from "./FindFriends";
+import AddFriendDialog from "./Cards/AddFriendDialog";
 
 const styles = theme => ({
   root: {
@@ -27,16 +35,18 @@ const styles = theme => ({
     height: "calc(100% - 64px)",
     margin: "auto"
   },
-  addCourseButton: {
-    width: "50%"
+  toolbarHeading: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.25em"
+    }
   },
   gridWrapper: {
     marginTop: 12,
     position: "relative"
   },
   grid: {
-    maxHeight: "76vh",
-    overflowX: "auto"
+    minHeight: 200,
+    maxHeight: "76vh"
   },
   "@global": {
     "*::-webkit-scrollbar": {
@@ -96,81 +106,212 @@ const styles = theme => ({
 class Friends extends Component {
   state = {
     myFriends: true,
-    addFriends: false
+    findFriends: false,
+    friendOpen: false,
+    addFriendOpen: false,
+    dialog: false
+  };
+
+  componentDidMount() {
+    this.props.getFriendsData();
+  }
+
+  handleDialogOpen = () => {
+    this.setState({ dialog: true });
+  };
+
+  handleDialogClose = () => {
+    this.setState({ dialog: false });
   };
 
   myFriendsClicked = () => {
     this.setState({
       myFriends: true,
-      addFriends: false
+      findFriends: false
+    });
+    this.props.getFriendsData();
+  };
+
+  findFriendsClicked = () => {
+    this.setState({
+      myFriends: false,
+      findFriends: true
     });
   };
 
-  addFriendsClicked = () => {
-    this.setState({
-      myFriends: false,
-      addFriends: true
-    });
+  getUser = user => {
+    const data = {
+      name: user
+    };
+    this.props.getUserByName(data);
+  };
+
+  openFriendDialog = () => {
+    this.setState({ friendOpen: true, addFriendOpen: false });
+  };
+
+  closeFriendDialog = () => {
+    this.setState({ friendOpen: false });
+  };
+
+  openAddFriendDialog = () => {
+    this.setState({ friendOpen: false, addFriendOpen: true });
+  };
+
+  closeAddFriendDialog = () => {
+    this.setState({ addFriendOpen: false });
+  };
+
+  addFriendHandler = username => {
+    const data = {
+      username
+    };
+    this.props.addFriend(data);
   };
 
   render() {
     const { classes } = this.props;
-    const { myFriends, addFriends } = this.state;
+    const {
+      myFriends,
+      findFriends,
+      friendOpen,
+      addFriendOpen,
+      dialog
+    } = this.state;
+    const { friends, foundUser, addFriend } = this.props.profile;
+    const { isAuthenticated } = this.props.auth;
 
-    let content = [];
+    let friendsWrapper;
+    let friendsContent;
+    let friendsChart;
 
-    for (let i = 0; i < 10; i++) {
-      content.push(<MyFriend />);
+    if (!friends) {
+      friendsContent = null;
+      friendsChart = null;
+    } else {
+      if (Object.keys(friends).length > 0) {
+        if (myFriends) {
+          friendsChart = (
+            <Grid container style={{ marginBottom: 12, width: "100%" }}>
+              <RoundsPlayed roundsPerFriend={friends.roundsPerFriend} />
+            </Grid>
+          );
+
+          friendsContent = friends.roundsPerFriend.map(friend => {
+            return (
+              <MyFriend
+                key={friend.friend}
+                data={friend.friend}
+                getUserHandler={this.getUser}
+                openDialogHandler={this.openFriendDialog}
+              />
+            );
+          });
+        } else if (findFriends) {
+          friendsContent = (
+            <FindFriends
+              handler={this.getUser}
+              data={foundUser}
+              addFriend={this.addFriendHandler}
+              openDialog={this.openAddFriendDialog}
+            />
+          );
+        }
+      }
     }
 
-    return (
-      <div className={classes.root}>
-        <Toolbar style={{ marginBottom: 12 }}>
-          <Typography variant="h5">Friends</Typography>
-          <IconButton>
-            <InfoButton />
-          </IconButton>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              onChange={this.mySearch}
-              placeholder="Search…"
-              id="search"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-            />
-          </div>
-        </Toolbar>
-        <Button
-          variant={myFriends ? "raised" : "outlined"}
-          size="small"
-          className={classes.addCourseButton}
-          onClick={this.myFriendsClicked}
-        >
-          My Friends
-        </Button>
-        <Button
-          variant={addFriends ? "raised" : "outlined"}
-          size="small"
-          className={classes.addCourseButton}
-          onClick={this.addFriendsClicked}
-        >
-          Find Friends
-        </Button>
-        <div className={classes.gridWrapper}>
-          <div className={classes.grid}>
-            <Grid container justify="center" spacing={24}>
-              {content}
+    if (!isAuthenticated) {
+      friendsWrapper = null;
+    } else {
+      friendsWrapper = (
+        <div className={classes.root}>
+          <FriendDialog
+            open={friendOpen}
+            close={this.closeFriendDialog}
+            data={foundUser}
+          />
+          <AddFriendDialog
+            open={addFriendOpen}
+            handler={this.closeAddFriendDialog}
+            data={addFriend}
+          />
+          <Toolbar style={{ marginBottom: 12 }}>
+            <Typography variant="h5" className={classes.toolbarHeading}>
+              Friends
+            </Typography>
+            <IconButton onClick={this.handleDialogOpen}>
+              <InfoButton />
+            </IconButton>
+          </Toolbar>
+          <Dialog open={dialog} onClose={this.handleDialogClose}>
+            <DialogTitle>Friends</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Friends has two sections. "My Friends" shows all the friends you
+                have added to your profile. "Find Friends" is where you can look
+                up a friends username so that you can add them.
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+          <Grid container>
+            <Grid item xs={6}>
+              <Button
+                variant={myFriends ? "contained" : "outlined"}
+                size="small"
+                fullWidth
+                onClick={this.myFriendsClicked}
+              >
+                My Friends
+              </Button>
             </Grid>
+            <Grid item xs={6}>
+              <Button
+                variant={findFriends ? "contained" : "outlined"}
+                size="small"
+                fullWidth
+                onClick={this.findFriendsClicked}
+              >
+                Find Friends
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid container style={{ marginTop: 12 }}>
+            <Grid item xs={12}>
+              {friendsChart}
+            </Grid>
+          </Grid>
+
+          <div className={classes.gridWrapper}>
+            <div className={classes.grid}>
+              <Grid container justify="center" spacing={8}>
+                {friendsContent}
+              </Grid>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
+
+    return friendsWrapper;
   }
 }
 
-export default withStyles(styles)(Friends);
+Friends.propTypes = {
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  getFriendsData: PropTypes.func.isRequired,
+  getUserByName: PropTypes.func.isRequired,
+  addFriend: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { getFriendsData, getUserByName, addFriend }
+)(withStyles(styles)(Friends));

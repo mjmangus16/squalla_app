@@ -24,10 +24,6 @@ const playCourseMultipleSameDay = (available, myRounds, round) => {
   if (count > 1) {
     data.pass = true;
     data.info.count++;
-    data.info.points = 0;
-    for (let j = 1; j < count; j++) {
-      data.info.points = data.info.points + 2;
-    }
 
     data.info.data.push({ course: round.course, date: date, count: count });
   }

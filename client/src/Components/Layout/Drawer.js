@@ -7,10 +7,12 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
+  Badge,
   SvgIcon,
   withStyles
 } from "@material-ui/core";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 import ListIcon from "@material-ui/icons/List";
 import FlagIcon from "@material-ui/icons/Flag";
 import PeopleIcon from "@material-ui/icons/People";
@@ -18,6 +20,7 @@ import PlaceIcon from "@material-ui/icons/Place";
 import PersonIcon from "@material-ui/icons/Person";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import ShowChartIcon from "@material-ui/icons/ShowChart";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
 
 const styles = theme => ({
   root: {
@@ -27,6 +30,12 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       width: 55
     },
+    marginTop: 64,
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper
+  },
+  root2: {
+    width: 200,
     marginTop: 64,
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper
@@ -55,17 +64,60 @@ function AwardIcon(props) {
   );
 }
 
-export default withStyles(styles)(({ classes, status }) => {
-  return (
-    <Drawer anchor="left" variant="persistent" open={status} id="drawer">
+const DrawerComponent = ({
+  classes,
+  status,
+  auth,
+  registerHandler,
+  loginHandler,
+  logout,
+  username,
+  notifications
+}) => {
+  let drawerContent;
+
+  let notificationCount = 0;
+
+  if (notifications) {
+    if (Object.keys(notifications).length > 0) {
+      notificationCount = getNotificationsCount(notifications);
+    }
+  }
+
+  const testfunc = () => {
+    console.log("test func working");
+  };
+
+  if (auth) {
+    drawerContent = (
       <div className={classes.root}>
         <List component="nav">
-          <ListItem button>
+          <ListItem button onClick={testfunc}>
             <ListItemIcon className={classes.listItem}>
               <PersonIcon />
             </ListItemIcon>
-            <ListItemText primary="MJMANGUS16" className={classes.menuText} />
+            <ListItemText
+              primary={username.toUpperCase()}
+              className={classes.menuText}
+            />
           </ListItem>
+          <Link to="/notifications" className={classes.navLink}>
+            <ListItem button>
+              <ListItemIcon className={classes.listItem}>
+                <Badge
+                  className={classes.margin}
+                  badgeContent={notificationCount}
+                  color="secondary"
+                >
+                  <NotificationsIcon />
+                </Badge>
+              </ListItemIcon>
+              <ListItemText
+                primary="NOTIFICATIONS"
+                className={classes.menuText}
+              />
+            </ListItem>
+          </Link>
         </List>
         <Divider />
         <List component="nav">
@@ -143,7 +195,71 @@ export default withStyles(styles)(({ classes, status }) => {
             </ListItem>
           </Link>
         </List>
+        <Divider />
+        <List component="nav">
+          <Link to="/" className={classes.navLink}>
+            <ListItem
+              button
+              onClick={() => {
+                logout();
+                loginHandler();
+              }}
+            >
+              <ListItemIcon className={classes.listItem}>
+                <LockOpenIcon />
+              </ListItemIcon>
+              <ListItemText primary="LOGOUT" className={classes.menuText} />
+            </ListItem>
+          </Link>
+        </List>
       </div>
+    );
+  } else {
+    drawerContent = (
+      <div className={classes.root2}>
+        <List component="nav">
+          <ListItem button onClick={registerHandler}>
+            <ListItemIcon className={classes.listItem}>
+              <PersonIcon />
+            </ListItemIcon>
+            <ListItemText primary="SIGN UP" />
+          </ListItem>
+        </List>
+        <Divider />
+        <List component="nav">
+          <Link to="#" className={classes.navLink}>
+            <ListItem button onClick={loginHandler}>
+              <ListItemIcon className={classes.listItem}>
+                <LockOpenIcon />
+              </ListItemIcon>
+              <ListItemText primary="LOGIN" />
+            </ListItem>
+          </Link>
+        </List>
+      </div>
+    );
+  }
+
+  return (
+    <Drawer
+      anchor="left"
+      variant="persistent"
+      open={!auth ? true : status}
+      id="drawer"
+    >
+      {drawerContent}
     </Drawer>
   );
-});
+};
+
+export default withStyles(styles)(DrawerComponent);
+
+const getNotificationsCount = notifications => {
+  let sum = 0;
+  sum =
+    notifications.rounds.length +
+    notifications.checkins.length +
+    notifications.other.length;
+
+  return sum;
+};

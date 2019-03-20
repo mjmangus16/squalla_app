@@ -5,6 +5,7 @@ const passport = require("passport");
 const Profile = require("../../models/Profile");
 
 // Functions
+const getPerformancePointsPerRound = require("./functions/dashboard/getPerformancePointsPerRound");
 const getRecentRounds = require("./functions/dashboard/getRecentRounds");
 const getCoursesPlayed = require("./functions/dashboard/getCoursesPlayed");
 const getRoundsPerCourse = require("./functions/dashboard/getRoundsPerCourse");
@@ -22,6 +23,8 @@ router.get(
       let data = {
         level: profile.level,
         experience: profile.experience,
+        performanceRating: profile.performancePoints,
+        performancePointsPerRound: getPerformancePointsPerRound(profile),
         roundsPlayed: profile.rounds.length,
         recentRounds: getRecentRounds(profile.rounds, profile.username),
         coursesPlayed: getCoursesPlayed(profile.courses),

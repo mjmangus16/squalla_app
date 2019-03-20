@@ -1,34 +1,46 @@
-const getCourseRating = require("../courses/getCourseRating");
+const getCourseRating = require("../addRound/getCourseRating");
 
 const addCourseToProfile = (course, profile) => {
-  const myCourse = {
-    id: course._id,
+  let myCourse = {
     name: course.name,
+    city: course.city,
+    state: course.state,
     holes: course.holes,
-    tees: [],
-    terrain: course.terrain,
-    landscape: course.landscape,
-    latLong: course.latLong
+    distance: course.distance,
+    foliage: course.foliage,
+    elevation: course.elevation,
+    tees: [
+      {
+        tee: "Red",
+        par: "N/A",
+        best: "",
+        average: "",
+        rounds: 0
+      },
+      {
+        tee: "White",
+        par: "N/A",
+        best: "",
+        average: "",
+        rounds: 0
+      },
+      {
+        tee: "Blue",
+        par: "N/A",
+        best: "",
+        average: "",
+        rounds: 0
+      },
+      {
+        tee: "Gold",
+        par: "N/A",
+        best: "",
+        average: "",
+        rounds: 0
+      }
+    ]
   };
 
-  for (let i = 0; i < course.tees.length; i++) {
-    const teeData = {
-      pin: course.tees[i].tee,
-      par: course.tees[i].par,
-      distance: course.tees[i].distance,
-      average: "",
-      best: "",
-      rating: Math.round(
-        getCourseRating(
-          course.tees[i].distance,
-          course.terrain,
-          course.landscape,
-          course.holes
-        )
-      )
-    };
-    myCourse.tees.push(teeData);
-  }
   profile.courses.push(myCourse);
   return profile;
 };

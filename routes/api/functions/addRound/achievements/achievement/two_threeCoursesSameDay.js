@@ -6,11 +6,9 @@ const two_threeCoursesSameDay = (available, myRounds, round) => {
 
   let sameDayRounds = [];
 
-  if (round.course.holes >= 18) {
-    for (let i = 0; i < myRounds.length; i++) {
-      if (myRounds[i].date === round.date && myRounds[i].course.holes >= 18) {
-        sameDayRounds.push(myRounds[i].course);
-      }
+  for (let i = 0; i < myRounds.length; i++) {
+    if (myRounds[i].date === round.date) {
+      sameDayRounds.push(myRounds[i].course);
     }
   }
 
@@ -35,7 +33,7 @@ const two_threeCoursesSameDay = (available, myRounds, round) => {
     data.info.data.push({ date: round.date, courses: uniq });
     data.info.count++;
   }
-
+  console.log(data);
   return data;
 };
 

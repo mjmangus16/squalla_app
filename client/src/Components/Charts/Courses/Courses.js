@@ -1,40 +1,28 @@
 import React, { Component } from "react";
-import { Bar } from "react-chartjs-2";
-import {
-  red,
-  pink,
-  purple,
-  deepPurple,
-  indigo,
-  blue,
-  lightBlue
-} from "@material-ui/core/colors";
+import { HorizontalBar } from "react-chartjs-2";
+import chartColors from "../chartColors";
+
+const getLabels = data => {
+  let array = [];
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].course.length > 15) {
+      array.push(data[i].course.substring(0, 15) + "..");
+    } else {
+      array.push(data[i].course.substring(0, 15));
+    }
+  }
+  return array;
+};
 
 class Courses extends Component {
   state = {
     chartData: {
-      labels: [
-        "Course1",
-        "Course2",
-        "Course3",
-        "Course4",
-        "Course5",
-        "Course6",
-        "Course7"
-      ],
+      labels: getLabels(this.props.data),
       datasets: [
         {
           label: "Rounds Played",
-          data: [3, 5, 6, 7, 10, 3, 5],
-          backgroundColor: [
-            red[300],
-            pink[300],
-            purple[300],
-            deepPurple[300],
-            indigo[300],
-            blue[300],
-            lightBlue[300]
-          ]
+          data: this.props.data.map(course => course.rounds),
+          backgroundColor: chartColors()
         }
       ]
     }
@@ -42,7 +30,7 @@ class Courses extends Component {
   render() {
     const { height } = this.props;
     return (
-      <Bar
+      <HorizontalBar
         data={this.state.chartData}
         height={height}
         options={{
@@ -52,14 +40,30 @@ class Courses extends Component {
             text: "Rounds Per Course",
             fontSize: 20
           },
+
           legend: {
             display: false
           },
+          tooltips: {
+            callbacks: {
+              label: function(tooltipItem) {
+                return tooltipItem.yLabel;
+              }
+            }
+          },
+
           scales: {
-            yAxes: [
+            xAxes: [
               {
                 ticks: {
                   beginAtZero: true
+                }
+              }
+            ],
+            yAxes: [
+              {
+                ticks: {
+                  display: false
                 }
               }
             ]

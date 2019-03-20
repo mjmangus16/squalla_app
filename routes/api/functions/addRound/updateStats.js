@@ -3,10 +3,10 @@ const updateStats = (profile, round, score) => {
   for (let i = 0; i < profile.courses.length; i++) {
     if (profile.courses[i].name === round.course) {
       for (let y = 0; y < profile.courses[i].tees.length; y++) {
-        if (profile.courses[i].tees[y].pin === round.tees) {
+        if (profile.courses[i].tees[y].tee === round.tees) {
           average = profile.courses[i].tees[y].average;
           best = profile.courses[i].tees[y].best;
-
+          profile.courses[i].tees[y].rounds++;
           if (best > score || best === "") {
             profile.courses[i].tees[y].best = parseInt(score);
           }

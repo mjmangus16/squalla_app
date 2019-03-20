@@ -10,71 +10,198 @@ import {
   TableHead,
   TableRow,
   IconButton,
+  Typography,
   withStyles
 } from "@material-ui/core";
-import InfoIcon from "@material-ui/icons/Info";
-import { blue } from "@material-ui/core/colors";
+import EditIcon from "@material-ui/icons/Edit";
+import { blue, orange } from "@material-ui/core/colors";
 
 const styles = theme => ({
   card: {
     width: "100%",
-    height: "auto"
+    height: "100%"
   },
   cellHeading: {
-    fontWeight: 900
+    fontWeight: 900,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".75em"
+    }
   },
   historyButton: {
     width: "100%"
+  },
+  header: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".75em"
+    }
+  },
+  details: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+    gridTemplateRows: "1fr 1fr",
+    margin: "auto"
+  },
+  detailsHeading: {
+    textDecoration: "underline",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".6em"
+    }
+  },
+  detailsContent: {
+    paddingTop: 5,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".6em"
+    }
+  },
+  orangeText: {
+    color: orange[500]
   }
 });
 
-const MyCourse = ({ classes }) => {
+const MyCourse = ({ classes, data, editCourseHandler }) => {
   return (
     <Grid item xs={12} sm={6} className="myCourseCard">
       <Card className={classes.card}>
         <CardHeader
-          title="Joseph Davis State Park"
-          subheader="27 holes"
+          title={data.name}
+          subheader={`${data.city}, ${data.state}`}
           action={
-            <IconButton>
-              <InfoIcon style={{ color: blue[400] }} />
+            <IconButton onClick={() => editCourseHandler(data)}>
+              <EditIcon style={{ color: blue[300] }} />
             </IconButton>
           }
         />
-        <CardContent style={{ paddingTop: 0 }}>
+        <CardContent>
+          <div className={classes.details}>
+            <Typography
+              align="center"
+              variant="subheading"
+              className={classes.detailsHeading}
+            >
+              Length
+            </Typography>
+            <Typography
+              align="center"
+              variant="subheading"
+              className={classes.detailsHeading}
+            >
+              Holes
+            </Typography>
+            <Typography
+              align="center"
+              variant="subheading"
+              className={classes.detailsHeading}
+            >
+              Foliage
+            </Typography>
+            <Typography
+              align="center"
+              variant="subheading"
+              className={classes.detailsHeading}
+            >
+              Elevation
+            </Typography>
+            <Typography
+              align="center"
+              variant="subheading"
+              className={classes.detailsHeading}
+            >
+              Rounds
+            </Typography>
+            <Typography align="center" className={classes.detailsContent}>
+              {data.distance}
+            </Typography>
+            <Typography align="center" className={classes.detailsContent}>
+              {data.holes}
+            </Typography>
+            <Typography align="center" className={classes.detailsContent}>
+              {data.foliage}
+            </Typography>
+            <Typography align="center" className={classes.detailsContent}>
+              {data.elevation}
+            </Typography>
+            <Typography align="center" className={classes.detailsContent}>
+              {data.totalRounds}
+            </Typography>
+          </div>
+        </CardContent>
+        <CardContent style={{ paddingTop: 0, overflow: "auto" }}>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell />
-                <TableCell align="center">Red</TableCell>
-                <TableCell align="center">White</TableCell>
-                <TableCell align="center">Blue</TableCell>
+                <TableCell padding="dense" />
+                {data.tees.map(tee => (
+                  <TableCell
+                    padding="dense"
+                    align="center"
+                    style={{ textTransform: "capitalize" }}
+                    key={`pin${data.tees.indexOf(tee)}`}
+                  >
+                    {tee.tee}
+                  </TableCell>
+                ))}
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell className={classes.cellHeading}>Par</TableCell>
-                <TableCell align="center">54</TableCell>
-                <TableCell align="center">70</TableCell>
-                <TableCell align="center">70</TableCell>
+                <TableCell padding="dense" className={classes.cellHeading}>
+                  Par
+                </TableCell>
+                {data.tees.map(tee => (
+                  <TableCell
+                    padding="dense"
+                    align="center"
+                    key={`par${data.tees.indexOf(tee)}`}
+                    className={tee.par !== "N/A" ? classes.orangeText : null}
+                  >
+                    {tee.par}
+                  </TableCell>
+                ))}
               </TableRow>
               <TableRow>
-                <TableCell className={classes.cellHeading}>Best</TableCell>
-                <TableCell align="center">N/A</TableCell>
-                <TableCell align="center">61</TableCell>
-                <TableCell align="center">N/A</TableCell>
+                <TableCell padding="dense" className={classes.cellHeading}>
+                  Best
+                </TableCell>
+                {data.tees.map(tee => (
+                  <TableCell
+                    padding="dense"
+                    align="center"
+                    key={`best${data.tees.indexOf(tee)}`}
+                    className={tee.best !== "" ? classes.orangeText : null}
+                  >
+                    {tee.best === "" ? "N/A" : tee.best}
+                  </TableCell>
+                ))}
               </TableRow>
               <TableRow>
-                <TableCell className={classes.cellHeading}>Average</TableCell>
-                <TableCell align="center">N/A</TableCell>
-                <TableCell align="center">61</TableCell>
-                <TableCell align="center">N/A</TableCell>
+                <TableCell padding="dense" className={classes.cellHeading}>
+                  Average
+                </TableCell>
+                {data.tees.map(tee => (
+                  <TableCell
+                    padding="dense"
+                    align="center"
+                    key={`average${data.tees.indexOf(tee)}`}
+                    className={tee.average !== "" ? classes.orangeText : null}
+                  >
+                    {tee.average === "" ? "N/A" : tee.average}
+                  </TableCell>
+                ))}
               </TableRow>
               <TableRow>
-                <TableCell className={classes.cellHeading}>Rounds</TableCell>
-                <TableCell align="center">0</TableCell>
-                <TableCell align="center">1</TableCell>
-                <TableCell align="center">0</TableCell>
+                <TableCell padding="dense" className={classes.cellHeading}>
+                  Rounds
+                </TableCell>
+                {data.tees.map(tee => (
+                  <TableCell
+                    padding="dense"
+                    align="center"
+                    key={`rounds${data.tees.indexOf(tee)}`}
+                    className={tee.rounds !== 0 ? classes.orangeText : null}
+                  >
+                    {tee.rounds}
+                  </TableCell>
+                ))}
               </TableRow>
             </TableBody>
           </Table>

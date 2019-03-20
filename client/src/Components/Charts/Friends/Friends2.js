@@ -1,28 +1,23 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Bar } from "react-chartjs-2";
-import { purple } from "@material-ui/core/colors";
+import chartColors from "../chartColors";
+
+const colors = chartColors();
 
 class Friends extends Component {
   state = {
     chartData: {
-      labels: [
-        "Friend1",
-        "Friend2",
-        "Friend3",
-        "Friend4",
-        "Friend5",
-        "Friend6",
-        "Friend7",
-        "Friend8",
-        "Friend9",
-        "Friend10"
-      ],
+      labels: this.props.data.map(friend => friend.friend),
       datasets: [
         {
+          label: "Rounds",
+          data: this.props.data.map(friend => friend.rounds),
+          backgroundColor: colors[3]
+        },
+        {
           label: "Wins",
-          data: [3, 5, 6, 7, 10, 3, 5, 6, 7, 10],
-          borderColor: purple[300],
-          borderWidth: 1
+          data: this.props.data.map(friend => friend.wins),
+          backgroundColor: colors[15]
         }
       ]
     }
@@ -37,15 +32,25 @@ class Friends extends Component {
           maintainAspectRatio: false,
           title: {
             display: true,
-            text: "Wins vs Friends",
+            text: "Rounds / Wins Per Friend",
             fontSize: 20
           },
-          legend: { display: false },
+          legend: {
+            display: true,
+            position: "top"
+          },
           scales: {
             yAxes: [
               {
                 ticks: {
                   beginAtZero: true
+                }
+              }
+            ],
+            xAxes: [
+              {
+                ticks: {
+                  display: false
                 }
               }
             ]

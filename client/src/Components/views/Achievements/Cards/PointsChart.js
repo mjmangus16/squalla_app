@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, withStyles } from "@material-ui/core";
-import PointsBar from "../../../Charts/Achievements/ByMonth";
-import PointsLine from "../../../Charts/Achievements/ByRound";
+import PointsMonth from "../../../Charts/Achievements/ByMonth";
+import PointsRounds from "../../../Charts/Achievements/ByRound";
 
 const styles = theme => ({
   card: {
@@ -13,17 +13,18 @@ const styles = theme => ({
     paddingTop: 0
   },
   chart: {
-    minWidth: 400
+    position: "relative",
+    width: "100%"
   }
 });
 
-const PointsChart = ({ classes, chart }) => {
+const PointsChart = ({ classes, chart, data }) => {
   let content;
 
-  if (chart === "bar") {
-    content = <PointsBar />;
-  } else if (chart === "line") {
-    content = <PointsLine height={275} heading={true} />;
+  if (chart === "month") {
+    content = <PointsMonth data={data} />;
+  } else if (chart === "rounds") {
+    content = <PointsRounds height={275} data={data} />;
   }
 
   return (

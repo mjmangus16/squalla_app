@@ -1,34 +1,37 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Bar } from "react-chartjs-2";
-import { teal, pink, lightBlue } from "@material-ui/core/colors";
+import chartColors from "../chartColors";
 
 class Year extends Component {
   state = {
     chartData: {
-      labels: [
-        "Jan",
-        "Feb",
-        "March",
-        "Apr",
-        "May",
-        "June",
-        "July",
-        "Aug",
-        "Sept",
-        "Nov",
-        "Dec"
-      ],
+      labels:
+        Object.values(this.props.data).length >= 6
+          ? [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec"
+            ]
+          : ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
       datasets: [
         {
           label: "Rounds Played",
-          data: [3, 5, 6, 7, 10, 3, 5, 6, 7, 10, 22, 15],
-          backgroundColor: teal[500]
+          data: Object.values(this.props.data),
+          backgroundColor: chartColors()
         }
       ]
     }
   };
   render() {
-    const { height } = this.props;
     return (
       <Bar
         data={this.state.chartData}

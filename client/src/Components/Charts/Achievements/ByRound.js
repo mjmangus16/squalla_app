@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
-import { deepPurple } from "@material-ui/core/colors";
+import chartColors from "../chartColors";
+
+const colors = chartColors();
 
 class Achievements extends Component {
   state = {
@@ -9,8 +11,8 @@ class Achievements extends Component {
 
       datasets: [
         {
-          data: [0, 3, 5, 9, 12, 12, 16, 16, 22, 27],
-          borderColor: deepPurple[200]
+          data: this.props.data,
+          borderColor: colors[0]
         }
       ]
     }
@@ -26,7 +28,7 @@ class Achievements extends Component {
           responsive: true,
           title: {
             display: true,
-            text: "Points Earned Per Round",
+            text: "Points Trend By Round",
             fontSize: 20
           },
           legend: { display: false },

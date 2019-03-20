@@ -5,24 +5,25 @@ import FriendsChart from "../../../Charts/Friends/Friends";
 const styles = theme => ({
   card: {
     width: "100%",
-    height: 325
+    height: "100%"
   },
   chartWrapper: {
     overflowX: "auto",
     paddingTop: 0
   },
   chart: {
-    minWidth: 450
+    position: "relative",
+    width: "100%"
   }
 });
 
-const Friends = ({ classes }) => {
+const Friends = ({ classes, friends, roundsPerFriend }) => {
   return (
     <Card className={classes.card}>
-      <CardHeader title="Friends" subheader="7 Friends" />
+      <CardHeader title="Friends" subheader={`${friends} Friends`} />
       <CardContent className={classes.chartWrapper}>
         <div className={classes.chart}>
-          <FriendsChart height={225} />
+          <FriendsChart height={225} data={roundsPerFriend} />
         </div>
       </CardContent>
     </Card>

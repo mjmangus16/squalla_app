@@ -1,40 +1,16 @@
 import React, { Component } from "react";
-import { Bar } from "react-chartjs-2";
-import {
-  red,
-  pink,
-  purple,
-  deepPurple,
-  indigo,
-  blue,
-  lightBlue
-} from "@material-ui/core/colors";
+import { HorizontalBar } from "react-chartjs-2";
+import chartColors from "../chartColors";
 
 class Friends extends Component {
   state = {
     chartData: {
-      labels: [
-        "Friend1",
-        "Friend2",
-        "Friend3",
-        "Friend4",
-        "Friend5",
-        "Friend6",
-        "Friend7"
-      ],
+      labels: this.props.data.map(friend => friend.friend),
       datasets: [
         {
           label: "Rounds Played Together",
-          data: [3, 5, 6, 7, 10, 3, 5],
-          backgroundColor: [
-            red[300],
-            pink[300],
-            purple[300],
-            deepPurple[300],
-            indigo[300],
-            blue[300],
-            lightBlue[300]
-          ]
+          data: this.props.data.map(friend => friend.rounds),
+          backgroundColor: chartColors()
         }
       ]
     }
@@ -42,7 +18,7 @@ class Friends extends Component {
   render() {
     const { height } = this.props;
     return (
-      <Bar
+      <HorizontalBar
         data={this.state.chartData}
         height={height}
         options={{
@@ -56,10 +32,17 @@ class Friends extends Component {
             display: false
           },
           scales: {
-            yAxes: [
+            xAxes: [
               {
                 ticks: {
                   beginAtZero: true
+                }
+              }
+            ],
+            yAxes: [
+              {
+                ticks: {
+                  display: false
                 }
               }
             ]

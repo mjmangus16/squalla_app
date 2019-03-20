@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getPerformanceData } from "../../../redux/actions/profileActions";
 import {
   Grid,
   Typography,
@@ -13,7 +16,7 @@ import {
 
 import InfoButton from "@material-ui/icons/Info";
 
-import Performance from "./Cards/Performance";
+import PerformanceCard from "./Cards/Performance";
 
 const styles = theme => ({
   root: {
@@ -21,13 +24,22 @@ const styles = theme => ({
     width: "95%",
     maxWidth: 1000,
     margin: "auto"
+  },
+  toolbarHeading: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.25em"
+    }
   }
 });
 
-class Friends extends Component {
+class Performance extends Component {
   state = {
     dialog: false
   };
+
+  componentDidMount() {
+    this.props.getPerformanceData();
+  }
 
   handleDialogOpen = () => {
     this.setState({ dialog: true });
@@ -40,45 +52,71 @@ class Friends extends Component {
   render() {
     const { classes } = this.props;
     const { dialog } = this.state;
-    return (
-      <div className={classes.root}>
-        <Toolbar style={{ marginBottom: 12 }}>
-          <Typography variant="h5">Performance</Typography>
-          <IconButton onClick={this.handleDialogOpen}>
-            <InfoButton />
-          </IconButton>
-        </Toolbar>
-        <Dialog open={dialog} onClose={this.handleDialogClose}>
-          <DialogTitle>Performance Info</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Performance is based on how well you play in comparison to your
-              skill level. For each round you play, you are given a performance
-              score of either +1, 0 or -1. If you beat your personal average for
-              that course, your performance score is a +1. Tieing your average
-              results in a 0 and playing worse than you average gives you a -1.
-            </DialogContentText>
-          </DialogContent>
-        </Dialog>
-        <Grid
-          container
-          className={classes.gridRoot}
-          justify="center"
-          spacing={24}
-        >
-          <Grid item xs={12}>
-            <Performance chart="rounds" />
+    const { isAuthenticated } = this.props.auth;
+
+    let performanceWrapper;
+
+    if (!isAuthenticated) {
+      performanceWrapper = null;
+    } else {
+      performanceWrapper = (
+        <div className={classes.root}>
+          <Toolbar style={{ marginBottom: 12 }}>
+            <Typography variant="h5" className={classes.toolbarHeading}>
+              Performance
+            </Typography>
+            <IconButton onClick={this.handleDialogOpen}>
+              <InfoButton />
+            </IconButton>
+          </Toolbar>
+          <Dialog open={dialog} onClose={this.handleDialogClose}>
+            <DialogTitle>Performance Info</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Performance gives you a visual on the rate at which you are
+                improving your game. Performance is based on your own personal
+                skill level.
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+          <Grid
+            container
+            className={classes.gridRoot}
+            justify="center"
+            spacing={8}
+          >
+            <Grid item xs={12}>
+              <PerformanceCard chart="rounds" />
+            </Grid>
+            <Grid item xs={12}>
+              <PerformanceCard chart="courses" />
+            </Grid>
+            <Grid item xs={12}>
+              <PerformanceCard chart="year" />
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <Performance chart="courses" />
-          </Grid>
-          <Grid item xs={12}>
-            <Performance chart="year" />
-          </Grid>
-        </Grid>
-      </div>
-    );
+        </div>
+      );
+    }
+
+    return performanceWrapper;
   }
 }
 
-export default withStyles(styles)(Friends);
+Performance.propTypes = {
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  getPerformanceData: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { getPerformanceData }
+)(withStyles(styles)(Performance));

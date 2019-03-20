@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+// const cors = require("cors");
 
 const path = require("path");
 
@@ -14,8 +15,12 @@ const leagues = require("./routes/api/leagues");
 const courses = require("./routes/api/courses");
 const achievements = require("./routes/api/achievements");
 const addRound = require("./routes/api/addRound");
+const friends = require("./routes/api/friends");
+const pdgaAPI = require("./routes/api/pdgaAPI");
+const notifications = require("./routes/api/notifications");
 
 const app = express();
+// app.use(cors());
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,7 +43,6 @@ require("./config/passport")(passport);
 
 // Use Routes
 app.use("/api/users", users);
-
 app.use("/api/dashboard", dashboard);
 app.use("/api/performance", performance);
 app.use("/api/rounds", submitRound);
@@ -47,6 +51,9 @@ app.use("/api/leagues", leagues);
 app.use("/api/courses", courses);
 app.use("/api/achievements", achievements);
 app.use("/api/addRound", addRound);
+app.use("/api/friends", friends);
+app.use("/api/pdgaAPI", pdgaAPI);
+app.use("/api/notifications", notifications);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {

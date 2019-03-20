@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
+import chartColors from "../chartColors";
+import withWidth from "@material-ui/core/withWidth";
+
+const colors = chartColors();
 
 class Rounds extends Component {
   state = {
@@ -8,14 +12,16 @@ class Rounds extends Component {
 
       datasets: [
         {
-          data: [1, 2, 1, 2, 3, 4, 5, 4, 5, 6],
-          borderColor: "green"
+          data: this.props.data,
+          borderColor: colors[0]
         }
       ]
     }
   };
+
   render() {
-    const { height } = this.props;
+    const { height, data, width } = this.props;
+
     return (
       <Line
         data={this.state.chartData}
@@ -25,15 +31,15 @@ class Rounds extends Component {
           responsive: true,
           title: {
             display: true,
-            text: "Performance Trend By Rounds",
-            fontSize: 20
+            text: "Performance Rating Trend By Rounds",
+            fontSize: width === "xs" ? 12 : 18
           },
           legend: { display: false },
           scales: {
             xAxes: [
               {
                 ticks: {
-                  max: 10
+                  suggestedMax: 2 + Math.max(...data)
                 }
               }
             ]
@@ -44,4 +50,4 @@ class Rounds extends Component {
   }
 }
 
-export default Rounds;
+export default withWidth()(Rounds);

@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getDashboardData } from "../../../redux/actions/profileActions";
 import {
   Grid,
   Typography,
@@ -25,6 +28,11 @@ const styles = theme => ({
     width: "95%",
     maxWidth: 1000,
     margin: "auto"
+  },
+  toolbarHeading: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.25em"
+    }
   }
 });
 
@@ -32,6 +40,10 @@ class Dashboard extends Component {
   state = {
     dialog: false
   };
+
+  componentDidMount() {
+    this.props.getDashboardData();
+  }
 
   handleDialogOpen = () => {
     this.setState({ dialog: true });
@@ -44,48 +56,103 @@ class Dashboard extends Component {
   render() {
     const { classes } = this.props;
     const { dialog } = this.state;
+    const { dashboard } = this.props.profile;
+    const { isAuthenticated } = this.props.auth;
 
-    return (
-      <div className={classes.root}>
-        <Toolbar style={{ marginBottom: 12 }}>
-          <Typography variant="h5">Dashboard</Typography>
-          <IconButton onClick={this.handleDialogOpen}>
-            <InfoButton />
-          </IconButton>
-        </Toolbar>
-        <Dialog open={dialog} onClose={this.handleDialogClose}>
-          <DialogTitle>Dashboard Info</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              The Dashboard provides a quick snapshot of some of the stats being
-              tracked. To learn more about the available data, navigate to that
-              page.
-            </DialogContentText>
-          </DialogContent>
-        </Dialog>
-        <Grid container justify="center" spacing={24}>
-          <Grid item xs={12}>
-            <Level />
-          </Grid>
-          <Grid item xs={12}>
-            <Performance />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Rounds />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Courses />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Achievements />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Friends />
-          </Grid>
-        </Grid>
-      </div>
-    );
+    let dashboardWrapper;
+    let dashboardContent;
+
+    if (!dashboard) {
+      dashboardContent = null;
+    } else {
+      if (Object.keys(dashboard).length > 0) {
+        dashboardContent = (
+          <div className={classes.root}>
+            <Toolbar style={{ marginBottom: 12 }}>
+              <Typography variant="h5" className={classes.toolbarHeading}>
+                Dashboard
+              </Typography>
+              <IconButton onClick={this.handleDialogOpen}>
+                <InfoButton />
+              </IconButton>
+            </Toolbar>
+            <Dialog open={dialog} onClose={this.handleDialogClose}>
+              <DialogTitle>Dashboard</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  The Dashboard provides a quick snapshot of your profile. To
+                  learn more about the stats being tracked on the dashboard,
+                  visit that page.
+                </DialogContentText>
+              </DialogContent>
+            </Dialog>
+            <Grid container justify="center" spacing={8}>
+              <Grid item xs={12}>
+                <Level
+                  level={dashboard.level}
+                  experience={dashboard.experience}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Performance
+                  performance={dashboard.performancePointsPerRound}
+                  rating={dashboard.performanceRating}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Rounds
+                  roundsPlayed={dashboard.roundsPlayed}
+                  recentRounds={dashboard.recentRounds}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Courses
+                  coursesPlayed={dashboard.coursesPlayed}
+                  roundsPerCourse={dashboard.roundsPerCourse}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Achievements
+                  points={dashboard.achievementPoints}
+                  pointsPerRound={dashboard.achievementPointsPerRound}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Friends
+                  friends={dashboard.totalFriends}
+                  roundsPerFriend={dashboard.roundsPerFriend}
+                />
+              </Grid>
+            </Grid>
+          </div>
+        );
+      }
+    }
+
+    if (!isAuthenticated) {
+      dashboardWrapper = null;
+    } else {
+      dashboardWrapper = dashboardContent;
+    }
+
+    return dashboardWrapper;
   }
 }
 
-export default withStyles(styles)(Dashboard);
+Dashboard.propTypes = {
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  getDashboardData: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { getDashboardData }
+)(withStyles(styles)(Dashboard));

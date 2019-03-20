@@ -10,29 +10,29 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 const styles = theme => ({
   flex: {
-    flex: 1,
-    paddingLeft: 15,
     [theme.breakpoints.down("xs")]: {
-      fontSize: "1em"
+      fontSize: "1.15em"
     }
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    flexWrap: "flex"
+    flexWrap: "flex",
+    padding: 0
   },
-  menuButton: {
-    marginRight: 20
+  menuIcon: {
+    marginLeft: 4
   }
 });
 
 const Header = ({ classes, drawerToggle }) => {
   return (
-    <AppBar className={classes.appBar}>
-      <Toolbar>
+    <AppBar className={classes.appBar} style={{ maxWidth: "100%" }}>
+      <Toolbar className={classes.toolbar} disableGutters>
         <IconButton
           color="inherit"
           aria-label="Open drawer"
           onClick={drawerToggle}
+          className={classes.menuIcon}
         >
           <MenuIcon />
         </IconButton>

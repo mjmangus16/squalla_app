@@ -1,33 +1,39 @@
 import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
+import chartColors from "../chartColors";
+
+const colors = chartColors();
 
 class Year extends Component {
   state = {
     chartData: {
-      labels: [
-        "Jan",
-        "Feb",
-        "March",
-        "Apr",
-        "May",
-        "June",
-        "July",
-        "Aug",
-        "Sept",
-        "Nov",
-        "Dec"
-      ],
-
+      labels:
+        this.props.data.length >= 6
+          ? [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec"
+            ]
+          : ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
       datasets: [
         {
-          data: [3, 12, 9, 11, 15, 14, 17, 15, 22, 25, 20],
-          borderColor: "lightBlue"
+          data: this.props.data,
+          borderColor: colors[0]
         }
       ]
     }
   };
   render() {
-    const { height } = this.props;
+    const { height, data } = this.props;
     return (
       <Line
         data={this.state.chartData}
@@ -37,15 +43,16 @@ class Year extends Component {
           responsive: true,
           title: {
             display: true,
-            text: "Performance Trend Over Year",
+            text: "Performance Rating Trend By Month",
             fontSize: 20
           },
           legend: { display: false },
           scales: {
-            xAxes: [
+            yAxes: [
               {
                 ticks: {
-                  max: 10
+                  suggestedMax: 2 + Math.max(...data),
+                  beginAtZero: true
                 }
               }
             ]

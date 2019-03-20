@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Card, CardContent, CardHeader, withStyles } from "@material-ui/core";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Card, CardContent, withStyles } from "@material-ui/core";
 
 import RoundsChart from "../../../Charts/Performance/Rounds";
 import CoursesChart from "../../../Charts/Performance/Courses";
@@ -15,22 +17,45 @@ const styles = theme => ({
     paddingTop: 0
   },
   chart: {
-    minWidth: 400
+    position: "relative",
+    width: "100%"
   }
 });
 
-class Performance extends Component {
+class PerformanceCard extends Component {
   render() {
     const { classes, chart } = this.props;
+    const { performance } = this.props.profile;
 
     let chartContent;
 
-    if (chart === "rounds") {
-      chartContent = <RoundsChart height={300} />;
-    } else if (chart === "courses") {
-      chartContent = <CoursesChart height={300} />;
-    } else if (chart === "year") {
-      chartContent = <YearChart height={300} />;
+    if (!performance) {
+      chartContent = null;
+    } else {
+      if (Object.keys(performance).length > 0) {
+        if (chart === "rounds") {
+          chartContent = (
+            <RoundsChart
+              height={300}
+              data={performance.performancePointsPerRound}
+            />
+          );
+        } else if (chart === "courses") {
+          chartContent = (
+            <CoursesChart
+              height={300}
+              data={performance.performancePointsPerCourse}
+            />
+          );
+        } else if (chart === "year") {
+          chartContent = (
+            <YearChart
+              height={300}
+              data={performance.performanceTrendByMonth}
+            />
+          );
+        }
+      }
     }
 
     return (
@@ -43,4 +68,16 @@ class Performance extends Component {
   }
 }
 
-export default withStyles(styles)(Performance);
+PerformanceCard.propTypes = {
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile,
+  errors: state.errors
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(PerformanceCard));

@@ -5,24 +5,28 @@ import AchievementsChart from "../../../Charts/Achievements/ByRound";
 const styles = theme => ({
   card: {
     width: "100%",
-    height: 325
+    height: "100%"
   },
   chartWrapper: {
     overflowX: "auto",
     paddingTop: 0
   },
   chart: {
-    minWidth: 400
+    position: "relative",
+    width: "100%"
   }
 });
 
-const Achievements = ({ classes }) => {
+const Achievements = ({ classes, points, pointsPerRound }) => {
   return (
     <Card className={classes.card}>
-      <CardHeader title="Achievements" subheader="27 Achievement Points" />
+      <CardHeader
+        title="Achievements"
+        subheader={`${points} Achievement Points`}
+      />
       <CardContent className={classes.chartWrapper}>
         <div className={classes.chart}>
-          <AchievementsChart height={225} />
+          <AchievementsChart height={225} data={pointsPerRound} />
         </div>
       </CardContent>
     </Card>

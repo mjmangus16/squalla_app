@@ -51,15 +51,13 @@ const ProfileSchema = new Schema({
     required: true,
     default: []
   },
-  snapshot: {
+  notifications: {
     type: Object,
     required: true,
     default: {
-      level: 1,
-      experience: 0,
-      achievementPoints: 0,
-      performancePoints: 0,
-      rounds: []
+      rounds: [],
+      checkins: [],
+      other: []
     }
   }
 });

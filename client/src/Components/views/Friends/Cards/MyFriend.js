@@ -16,14 +16,19 @@ const styles = theme => ({
   }
 });
 
-const MyFriend = ({ classes }) => {
+const MyFriend = ({ classes, data, getUserHandler, openDialogHandler }) => {
   return (
     <Grid item xs={12} sm={4} className="myCourseCard">
       <Card className={classes.card}>
         <CardHeader
-          title="Player5"
+          title={data}
           action={
-            <IconButton>
+            <IconButton
+              onClick={() => {
+                getUserHandler(data);
+                openDialogHandler();
+              }}
+            >
               <InfoIcon style={{ color: blue[400] }} />
             </IconButton>
           }

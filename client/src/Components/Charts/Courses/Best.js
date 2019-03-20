@@ -1,5 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
+import chartColors from "../chartColors";
 
 class Rounds extends Component {
   state = {
@@ -20,7 +21,7 @@ class Rounds extends Component {
       datasets: [
         {
           data: [2, -5, -17, -3, 4, -5, -11, 7, 0, 1],
-          borderColor: "pink"
+          borderColor: chartColors()
         }
       ]
     }

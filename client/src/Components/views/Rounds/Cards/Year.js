@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardHeader, CardContent, withStyles } from "@material-ui/core";
+import { Card, CardContent, withStyles } from "@material-ui/core";
 import Year from "../../../Charts/Rounds/Year";
 
 const styles = theme => ({
@@ -12,16 +12,17 @@ const styles = theme => ({
     paddingTop: 0
   },
   chart: {
-    minWidth: 400
+    position: "relative",
+    width: "100%"
   }
 });
 
-const Stats = ({ classes }) => {
+const Stats = ({ classes, data }) => {
   return (
     <Card className={classes.card}>
       <CardContent className={classes.chartWrapper}>
         <div className={classes.chart}>
-          <Year />
+          <Year data={data} />
         </div>
       </CardContent>
     </Card>
