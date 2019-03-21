@@ -96,11 +96,11 @@ class CourseInput extends Component {
         <CardContent>
           <Grid
             container
-            spacing={16}
+            spacing={8}
             className={classes.gridContainer}
             justify="center"
           >
-            <Grid item xs={6} sm={3}>
+            <Grid item xs={3} sm={3}>
               <Button
                 variant={redTee ? "contained" : "outlined"}
                 onClick={() => {
@@ -113,7 +113,7 @@ class CourseInput extends Component {
                 Red
               </Button>
             </Grid>
-            <Grid item xs={6} sm={3}>
+            <Grid item xs={3} sm={3}>
               <Button
                 variant={whiteTee ? "contained" : "outlined"}
                 onClick={() => {
@@ -126,7 +126,7 @@ class CourseInput extends Component {
                 White
               </Button>
             </Grid>
-            <Grid item xs={6} sm={3}>
+            <Grid item xs={3} sm={3}>
               <Button
                 variant={blueTee ? "contained" : "outlined"}
                 onClick={() => {
@@ -139,7 +139,7 @@ class CourseInput extends Component {
                 Blue
               </Button>
             </Grid>
-            <Grid item xs={6} sm={3}>
+            <Grid item xs={3}>
               <Button
                 variant={goldTee ? "contained" : "outlined"}
                 onClick={() => {
@@ -162,7 +162,7 @@ class CourseInput extends Component {
             justify="center"
           >
             {courses.map(course => (
-              <Grid item xs={12} sm={6} key={courses.indexOf(course)}>
+              <Grid item xs={12} sm={8} key={courses.indexOf(course)}>
                 <Button
                   fullWidth
                   onClick={() => {

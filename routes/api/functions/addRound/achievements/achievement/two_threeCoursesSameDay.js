@@ -33,7 +33,6 @@ const two_threeCoursesSameDay = (available, myRounds, round) => {
     data.info.data.push({ date: round.date, courses: uniq });
     data.info.count++;
   }
-  console.log(data);
   return data;
 };
 

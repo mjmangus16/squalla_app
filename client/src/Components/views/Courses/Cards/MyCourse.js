@@ -39,7 +39,8 @@ const styles = theme => ({
     display: "grid",
     gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
     gridTemplateRows: "1fr 1fr",
-    margin: "auto"
+    margin: "auto",
+    maxWidth: 300
   },
   detailsHeading: {
     textDecoration: "underline",
@@ -65,7 +66,7 @@ const styles = theme => ({
 
 const MyCourse = ({ classes, data, editCourseHandler }) => {
   return (
-    <Grid item xs={12} sm={6} className="myCourseCard">
+    <Grid item xs={12} md={6} className="myCourseCard">
       <Card className={classes.card}>
         <CardHeader
           title={data.name}
@@ -130,7 +131,14 @@ const MyCourse = ({ classes, data, editCourseHandler }) => {
             </Typography>
           </div>
         </CardContent>
-        <CardContent style={{ paddingTop: 0, overflow: "auto" }}>
+        <CardContent
+          style={{
+            paddingTop: 0,
+            overflow: "auto",
+            maxWidth: 500,
+            margin: "auto"
+          }}
+        >
           <Table>
             <TableHead>
               <TableRow>

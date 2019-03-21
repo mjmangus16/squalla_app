@@ -20,6 +20,7 @@ const styles = theme => ({
   content: {
     width: "50%",
     margin: "auto",
+    maxWidth: 400,
     [theme.breakpoints.down("sm")]: {
       width: "100%"
     }

@@ -20,7 +20,8 @@ const styles = theme => ({
     gridTemplateColumns: "3fr 1fr",
     borderBottom: "solid Grey 1px",
     margin: "auto",
-    paddingBottom: 5
+    paddingBottom: 5,
+    maxWidth: 250
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -28,7 +29,8 @@ const styles = theme => ({
     width: 75
   },
   typography: {
-    margin: "auto auto 8px 5px"
+    margin: "auto auto 8px 5px",
+    fontSize: "1.25em"
   }
 });
 
@@ -50,8 +52,10 @@ const ScoresInput = ({ classes, players, scoresHandler, scores }) => {
                   noValidate
                   autoComplete="off"
                 >
-                  <Typography variant="headline" className={classes.typography}>
-                    {player}
+                  <Typography variant="display1" className={classes.typography}>
+                    {player.length > 10
+                      ? player.substring(0, 10) + ".."
+                      : player}
                   </Typography>
                   <TextField
                     id="standard-score"

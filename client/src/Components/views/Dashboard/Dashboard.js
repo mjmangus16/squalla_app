@@ -100,25 +100,25 @@ class Dashboard extends Component {
                   rating={dashboard.performanceRating}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} md={6}>
                 <Rounds
                   roundsPlayed={dashboard.roundsPlayed}
                   recentRounds={dashboard.recentRounds}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} md={6}>
                 <Courses
                   coursesPlayed={dashboard.coursesPlayed}
                   roundsPerCourse={dashboard.roundsPerCourse}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} md={6}>
                 <Achievements
                   points={dashboard.achievementPoints}
                   pointsPerRound={dashboard.achievementPointsPerRound}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} md={6}>
                 <Friends
                   friends={dashboard.totalFriends}
                   roundsPerFriend={dashboard.roundsPerFriend}

@@ -91,6 +91,7 @@ const styles = theme => ({
     width: "50%",
     margin: "auto",
     overflow: "auto",
+    maxWidth: 450,
     [theme.breakpoints.down("sm")]: {
       width: "auto"
     }

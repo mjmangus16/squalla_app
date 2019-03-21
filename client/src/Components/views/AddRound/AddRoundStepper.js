@@ -27,7 +27,7 @@ const styles = theme => ({
 
   button: {
     marginRight: theme.spacing.unit,
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       display: "none"
     }
   },
@@ -39,13 +39,15 @@ const styles = theme => ({
     marginTop: 25
   },
   stepper: {
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       display: "none"
     }
   },
   stepperMobile: {
     flexGrow: 1,
-    [theme.breakpoints.up("sm")]: {
+    maxWidth: 400,
+    margin: "auto",
+    [theme.breakpoints.up("md")]: {
       display: "none"
     }
   }

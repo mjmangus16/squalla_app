@@ -36,11 +36,11 @@ const PlayersInput = ({ classes, playersHandler, friends, players, user }) => {
       <CardContent>
         <Grid
           container
-          spacing={16}
+          spacing={8}
           className={classes.gridContainer}
           justify="center"
         >
-          <Grid item xs={12} sm={4} key={user}>
+          <Grid item xs={12} sm={6} md={4} key={user}>
             <Button
               fullWidth
               variant={isPlayerSelected(user) ? "contained" : "outlined"}
@@ -53,7 +53,8 @@ const PlayersInput = ({ classes, playersHandler, friends, players, user }) => {
             <Grid
               item
               xs={12}
-              sm={4}
+              sm={6}
+              md={4}
               key={friends.roundsPerFriend.indexOf(friend)}
             >
               <Button
