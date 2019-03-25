@@ -70,10 +70,14 @@
 // };
 
 // getCourseRating("Medium", 6, 6, 27);
-let j = 50;
-let sum = 0;
-for (let i = 0; i < 20; i++) {
-  j = j + 100;
-  sum = sum + j;
-  console.log(sum);
-}
+// let j = 50;
+// let sum = 0;
+// for (let i = 0; i < 20; i++) {
+//   j = j + 100;
+//   sum = sum + j;
+//   console.log(sum);
+// }
+
+let newSet = new Set([1, 2, 3, 3]);
+
+console.log(newSet);

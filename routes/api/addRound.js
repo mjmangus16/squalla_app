@@ -64,6 +64,7 @@ router.post(
       date: req.body.date,
       course: req.body.course,
       tees: req.body.tees,
+      holes: req.body.holes,
       owner: req.user.username,
       league: league,
       scores: []

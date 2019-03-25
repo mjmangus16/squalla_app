@@ -5,7 +5,8 @@ import {
   getUserCourses,
   getFriendsData,
   submitRound,
-  getDashboardData
+  getDashboardData,
+  clearSubmitRound
 } from "../../../redux/actions/profileActions";
 import {
   Toolbar,
@@ -52,6 +53,7 @@ class AddRound extends Component {
     this.props.getUserCourses();
     this.props.getFriendsData();
     this.props.getDashboardData();
+    this.props.clearSubmitRound();
   }
 
   handleDialogOpen = () => {
@@ -103,6 +105,8 @@ class AddRound extends Component {
             submitRound={this.props.submitRound}
             user={username}
             success={submitRound}
+            getDashboard={this.props.getDashboardData}
+            clearSubmitRound={this.props.clearSubmitRound}
           />
         </div>
       );
@@ -133,6 +137,7 @@ export default connect(
     getUserCourses,
     getFriendsData,
     submitRound,
-    getDashboardData
+    getDashboardData,
+    clearSubmitRound
   }
 )(withStyles(styles)(AddRound));

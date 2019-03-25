@@ -330,6 +330,8 @@ class AddRoundStepper extends Component {
       players: [],
       scores: []
     });
+
+    this.props.clearSubmitRound();
   };
 
   isStepSkipped(step) {

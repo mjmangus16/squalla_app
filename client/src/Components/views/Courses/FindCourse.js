@@ -44,8 +44,7 @@ class FindCourse extends Component {
     byZip: false,
     byName: false,
     queryData: "",
-    limit: "10",
-    tees: ["red", "white", "blue"]
+    limit: "10"
   };
 
   handleChange = name => event => {

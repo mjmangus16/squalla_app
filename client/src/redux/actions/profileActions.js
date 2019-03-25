@@ -16,6 +16,7 @@ import {
   EDIT_COURSE,
   CLEAR_ADD_COURSE,
   SUBMIT_ROUND,
+  CLEAR_SUBMIT_ROUND,
   CLEAR_CURRENT_PROFILE,
   PROFILE_LOADING
 } from "./types";
@@ -265,6 +266,12 @@ export const submitRound = data => dispatch => {
         payload: {}
       })
     );
+};
+
+export const clearSubmitRound = () => {
+  return {
+    type: CLEAR_SUBMIT_ROUND
+  };
 };
 
 export const clearAddCourse = () => {

@@ -15,6 +15,7 @@ import {
   EDIT_COURSE,
   CLEAR_ADD_COURSE,
   SUBMIT_ROUND,
+  CLEAR_SUBMIT_ROUND,
   CLEAR_CURRENT_PROFILE,
   PROFILE_LOADING
 } from "../actions/types";
@@ -138,6 +139,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         submitRound: action.payload,
+        loading: false
+      };
+    case CLEAR_SUBMIT_ROUND:
+      return {
+        ...state,
+        submitRound: null,
         loading: false
       };
     case CLEAR_CURRENT_PROFILE:

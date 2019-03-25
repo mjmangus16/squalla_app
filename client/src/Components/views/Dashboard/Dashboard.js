@@ -42,7 +42,7 @@ class Dashboard extends Component {
     dialog: false
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.getDashboardData();
   }
 
@@ -92,6 +92,7 @@ class Dashboard extends Component {
                 <Level
                   level={dashboard.level}
                   experience={dashboard.experience}
+                  getDashboardData={this.props.getDashboardData}
                 />
               </Grid>
               <Grid item xs={12}>
