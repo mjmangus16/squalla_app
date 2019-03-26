@@ -2,6 +2,7 @@ import {
   GET_NOTIFICATIONS,
   CLEAR_ALL_NOTIFICATIONS,
   GET_DASHBOARD,
+  CLEAR_DASHBOARD,
   GET_PERFORMANCE,
   GET_ROUNDS,
   GET_ACHIEVEMENTS,
@@ -61,6 +62,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         dashboard: action.payload,
+        loading: false
+      };
+    case CLEAR_DASHBOARD:
+      return {
+        ...state,
+        dashboard: null,
         loading: false
       };
     case GET_PERFORMANCE:

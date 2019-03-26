@@ -4,6 +4,7 @@ import {
   GET_NOTIFICATIONS,
   CLEAR_ALL_NOTIFICATIONS,
   GET_DASHBOARD,
+  CLEAR_DASHBOARD,
   GET_PERFORMANCE,
   GET_ROUNDS,
   GET_ACHIEVEMENTS,
@@ -72,6 +73,12 @@ export const getDashboardData = () => dispatch => {
         payload: {}
       })
     );
+};
+
+export const clearDashboardData = () => {
+  return {
+    type: CLEAR_DASHBOARD
+  };
 };
 
 export const getPerformanceData = () => dispatch => {

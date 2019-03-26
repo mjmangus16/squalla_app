@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getDashboardData } from "../../../redux/actions/profileActions";
+import {
+  getDashboardData,
+  clearDashboardData
+} from "../../../redux/actions/profileActions";
 import {
   Grid,
   Typography,
@@ -42,7 +45,7 @@ class Dashboard extends Component {
     dialog: false
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getDashboardData();
   }
 
@@ -92,7 +95,6 @@ class Dashboard extends Component {
                 <Level
                   level={dashboard.level}
                   experience={dashboard.experience}
-                  getDashboardData={this.props.getDashboardData}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -145,7 +147,8 @@ Dashboard.propTypes = {
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  getDashboardData: PropTypes.func.isRequired
+  getDashboardData: PropTypes.func.isRequired,
+  clearDashboardData: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -156,5 +159,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getDashboardData }
+  { getDashboardData, clearDashboardData }
 )(withStyles(styles)(Dashboard));

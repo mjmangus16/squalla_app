@@ -6,7 +6,8 @@ import {
   getFriendsData,
   submitRound,
   getDashboardData,
-  clearSubmitRound
+  clearSubmitRound,
+  clearDashboardData
 } from "../../../redux/actions/profileActions";
 import {
   Toolbar,
@@ -54,6 +55,10 @@ class AddRound extends Component {
     this.props.getFriendsData();
     this.props.getDashboardData();
     this.props.clearSubmitRound();
+  }
+
+  componentWillUnmount() {
+    this.props.clearDashboardData();
   }
 
   handleDialogOpen = () => {
@@ -122,7 +127,8 @@ AddRound.propTypes = {
   errors: PropTypes.object.isRequired,
   getUserCourses: PropTypes.func.isRequired,
   getFriendsData: PropTypes.func.isRequired,
-  submitRound: PropTypes.func.isRequired
+  submitRound: PropTypes.func.isRequired,
+  clearDashboardData: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -138,6 +144,7 @@ export default connect(
     getFriendsData,
     submitRound,
     getDashboardData,
-    clearSubmitRound
+    clearSubmitRound,
+    clearDashboardData
   }
 )(withStyles(styles)(AddRound));
