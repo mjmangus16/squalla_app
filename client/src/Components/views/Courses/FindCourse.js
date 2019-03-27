@@ -3,14 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCourses } from "../../../redux/actions/profileActions";
 import Spinner from "../../Spinner/Spinner";
-import {
-  Grid,
-  Toolbar,
-  Button,
-  Typography,
-  withStyles
-} from "@material-ui/core";
-import { teal } from "@material-ui/core/colors";
+import { Grid, Tabs, Tab, Typography, withStyles } from "@material-ui/core";
+import { grey } from "@material-ui/core/colors";
 
 import ByName from "./queries/ByName";
 import ByZip from "./queries/ByZip";
@@ -29,26 +23,40 @@ const styles = theme => ({
       marginBottom: 15
     }
   },
-  navButtonColor: {
-    backgroundColor: teal[300]
-  },
   limit: {
     display: "none"
+  },
+  tabs: {
+    margin: "25px auto 25px",
+    width: "75%",
+    [theme.breakpoints.down("xs")]: {
+      width: "100%"
+    }
+  },
+  selected: {
+    borderTop: "1px solid grey",
+    borderLeft: "1px solid grey"
+  },
+  tab: {
+    borderTop: "1px solid grey",
+    borderLeft: "1px solid grey",
+    borderBottom: "1px solid grey"
   }
 });
 
 class FindCourse extends Component {
   state = {
-    nearMe: true,
-    byState: false,
-    byZip: false,
-    byName: false,
     queryData: "",
-    limit: "10"
+    limit: "10",
+    tabValue: 0
   };
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
+  };
+
+  handleTabChange = (event, value) => {
+    this.setState({ tabValue: value });
   };
 
   nearMeHandler = () => {
@@ -98,13 +106,13 @@ class FindCourse extends Component {
       data: this.state.queryData,
       limit: this.state.limit
     };
-    if (this.state.byName) {
+    if (this.state.tabValue === 1) {
       data.query = "name";
-    } else if (this.state.nearMe) {
+    } else if (this.state.tabValue === 0) {
       data.query = "nearMe";
-    } else if (this.state.byState) {
+    } else if (this.state.tabValue === 2) {
       data.query = "state";
-    } else if (this.state.byZip) {
+    } else if (this.state.tabValue === 3) {
       data.query = "zip";
     }
     this.props.getCourses(data);
@@ -112,27 +120,27 @@ class FindCourse extends Component {
 
   render() {
     const { dialogHandler, classes, addCourse } = this.props;
-    const { nearMe, byState, byZip, byName, limit } = this.state;
+    const { limit, tabValue } = this.state;
     const { courses, loading } = this.props.profile;
 
     let courseContent;
     let queryContent;
 
-    if (byName) {
+    if (tabValue === 1) {
       queryContent = (
         <ByName
           handler={this.handleChange("queryData")}
           submit={this.submitSearch}
         />
       );
-    } else if (byZip) {
+    } else if (tabValue === 3) {
       queryContent = (
         <ByZip
           handler={this.handleChange("queryData")}
           submit={this.submitSearch}
         />
       );
-    } else if (byState) {
+    } else if (tabValue === 2) {
       queryContent = (
         <ByState
           handler={this.handleChange("queryData")}
@@ -140,7 +148,7 @@ class FindCourse extends Component {
           queryData={this.state.queryData}
         />
       );
-    } else if (nearMe) {
+    } else if (tabValue === 0) {
       queryContent = (
         <NearMe handler={this.handleNearMe} submit={this.submitSearch} />
       );
@@ -177,60 +185,38 @@ class FindCourse extends Component {
 
     return (
       <Fragment>
-        <Toolbar style={{ marginTop: 25 }}>
-          <Grid container className={classes.gridContainer}>
-            <Grid item xs={6} sm={3}>
-              <Button
-                fullWidth
-                className={nearMe ? classes.navButtonColor : null}
-                variant={nearMe ? "contained" : "outlined"}
-                onClick={this.nearMeHandler}
-                size="small"
-              >
-                Near Me
-              </Button>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <Button
-                fullWidth
-                className={byName ? classes.navButtonColor : null}
-                variant={byName ? "contained" : "outlined"}
-                onClick={this.byNameHandler}
-                size="small"
-              >
-                Name
-              </Button>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <Button
-                fullWidth
-                className={byState ? classes.navButtonColor : null}
-                variant={byState ? "contained" : "outlined"}
-                onClick={this.byStateHandler}
-                size="small"
-              >
-                State
-              </Button>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <Button
-                fullWidth
-                className={byZip ? classes.navButtonColor : null}
-                variant={byZip ? "contained" : "outlined"}
-                onClick={this.byZipHandler}
-                size="small"
-              >
-                Zip
-              </Button>
-            </Grid>
-          </Grid>
-        </Toolbar>
+        <Tabs
+          className={classes.tabs}
+          value={tabValue}
+          onChange={this.handleTabChange}
+          variant="fullWidth"
+          indicatorColor="secondary"
+          textColor="secondary"
+        >
+          <Tab
+            label="NEAR ME"
+            className={tabValue === 0 ? classes.selected : classes.tab}
+          />
+          <Tab
+            label="NAME"
+            className={tabValue === 1 ? classes.selected : classes.tab}
+          />
+          <Tab
+            label="STATE"
+            className={tabValue === 2 ? classes.selected : classes.tab}
+          />
+          <Tab
+            label="ZIP"
+            className={tabValue === 3 ? classes.selected : classes.tab}
+            style={{ borderRight: "1px solid grey" }}
+          />
+        </Tabs>
         <Grid container style={{ maxWidth: 400, margin: "auto" }}>
           <Grid
             item
             sm={3}
             style={{ margin: "auto" }}
-            className={byName ? classes.limit : null}
+            className={tabValue === 1 ? classes.limit : null}
           >
             <Limit handler={this.handleChange("limit")} value={limit} />
           </Grid>

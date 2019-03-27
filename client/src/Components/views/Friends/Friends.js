@@ -12,6 +12,9 @@ import {
   Typography,
   IconButton,
   Button,
+  Tabs,
+  Tab,
+  Paper,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -20,6 +23,7 @@ import {
 } from "@material-ui/core";
 import InfoButton from "@material-ui/icons/Info";
 import { fade } from "@material-ui/core/styles/colorManipulator";
+import { grey } from "@material-ui/core/colors";
 
 import MyFriend from "./Cards/MyFriend";
 import RoundsPlayed from "./Cards/roundsPlayed";
@@ -101,13 +105,17 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       paddingLeft: theme.spacing.unit
     }
+  },
+  tabs: {
+    flexGrow: 1,
+    backgroundColor: grey[900],
+    marginBottom: 10
   }
 });
 
 class Friends extends Component {
   state = {
-    myFriends: true,
-    findFriends: false,
+    tabValue: 0,
     friendOpen: false,
     addFriendOpen: false,
     dialog: false
@@ -125,19 +133,11 @@ class Friends extends Component {
     this.setState({ dialog: false });
   };
 
-  myFriendsClicked = () => {
-    this.setState({
-      myFriends: true,
-      findFriends: false
-    });
-    this.props.getFriendsData();
-  };
-
-  findFriendsClicked = () => {
-    this.setState({
-      myFriends: false,
-      findFriends: true
-    });
+  handleTabChange = (event, value) => {
+    this.setState({ tabValue: value });
+    if (value === 0) {
+      this.props.getFriendsData();
+    }
   };
 
   getUser = user => {
@@ -172,13 +172,7 @@ class Friends extends Component {
 
   render() {
     const { classes } = this.props;
-    const {
-      myFriends,
-      findFriends,
-      friendOpen,
-      addFriendOpen,
-      dialog
-    } = this.state;
+    const { friendOpen, addFriendOpen, dialog, tabValue } = this.state;
     const { friends, foundUser, addFriend } = this.props.profile;
     const { isAuthenticated } = this.props.auth;
 
@@ -191,7 +185,7 @@ class Friends extends Component {
       friendsChart = null;
     } else {
       if (Object.keys(friends).length > 0) {
-        if (myFriends) {
+        if (tabValue === 0) {
           friendsChart = (
             <Grid container style={{ marginBottom: 12, width: "100%" }}>
               <RoundsPlayed roundsPerFriend={friends.roundsPerFriend} />
@@ -208,7 +202,7 @@ class Friends extends Component {
               />
             );
           });
-        } else if (findFriends) {
+        } else if (tabValue === 1) {
           friendsContent = (
             <FindFriends
               handler={this.getUser}
@@ -254,28 +248,18 @@ class Friends extends Component {
               </DialogContentText>
             </DialogContent>
           </Dialog>
-          <Grid container>
-            <Grid item xs={6}>
-              <Button
-                variant={myFriends ? "contained" : "outlined"}
-                size="small"
-                fullWidth
-                onClick={this.myFriendsClicked}
-              >
-                My Friends
-              </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Button
-                variant={findFriends ? "contained" : "outlined"}
-                size="small"
-                fullWidth
-                onClick={this.findFriendsClicked}
-              >
-                Find Friends
-              </Button>
-            </Grid>
-          </Grid>
+          <Paper className={classes.tabs}>
+            <Tabs
+              value={tabValue}
+              onChange={this.handleTabChange}
+              variant="fullWidth"
+              indicatorColor="primary"
+              textColor="primary"
+            >
+              <Tab label="MY FRIENDS" />
+              <Tab label="FIND FRIENDS" />
+            </Tabs>
+          </Paper>
           <Grid container style={{ marginTop: 12 }}>
             <Grid item xs={12}>
               {friendsChart}

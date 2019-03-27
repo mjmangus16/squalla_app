@@ -18,7 +18,8 @@ const styles = theme => ({
   },
   container: {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr"
+    gridTemplateColumns: "1fr 1fr",
+    marginBottom: 5
   },
   formControl: {
     margin: theme.spacing.unit,

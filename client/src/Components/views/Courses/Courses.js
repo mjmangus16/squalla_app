@@ -12,7 +12,9 @@ import {
   Toolbar,
   Typography,
   IconButton,
-  Button,
+  Tabs,
+  Tab,
+  Paper,
   InputBase,
   Dialog,
   DialogContent,
@@ -23,6 +25,7 @@ import {
 import InfoButton from "@material-ui/icons/Info";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import SearchIcon from "@material-ui/icons/Search";
+import { grey } from "@material-ui/core/colors";
 
 import FindCourses from "./FindCourse";
 import MyCourse from "./Cards/MyCourse";
@@ -99,13 +102,16 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       paddingLeft: theme.spacing.unit
     }
+  },
+  tabs: {
+    flexGrow: 1,
+    backgroundColor: grey[900],
+    marginBottom: 16
   }
 });
 
 class Courses extends Component {
   state = {
-    myCoursesBool: true,
-    addCourses: false,
     addCourseDialog: false,
     editCourseDialog: false,
     courseData: {},
@@ -115,7 +121,12 @@ class Courses extends Component {
     editPar2: "",
     editPar3: "",
     editPar4: "",
-    dialog: false
+    dialog: false,
+    tabValue: 0
+  };
+
+  handleTabChange = (event, value) => {
+    this.setState({ tabValue: value });
   };
 
   handleChange = name => event => {
@@ -268,8 +279,7 @@ class Courses extends Component {
     const { classes } = this.props;
     const addCourseData = this.props.profile.addCourse;
     const {
-      myCoursesBool,
-      addCourses,
+      tabValue,
       addCourseDialog,
       editCourseDialog,
       courseData,
@@ -287,7 +297,7 @@ class Courses extends Component {
     let coursesWrapper;
     let coursesContent;
 
-    if (myCoursesBool) {
+    if (tabValue === 0) {
       if (!myCourses) {
         coursesContent = null;
       } else {
@@ -305,7 +315,7 @@ class Courses extends Component {
           );
         }
       }
-    } else if (addCourses) {
+    } else if (tabValue === 1) {
       coursesContent = (
         <FindCourses
           handler={this.findCourseHandler}
@@ -349,7 +359,7 @@ class Courses extends Component {
               <InfoButton />
             </IconButton>
 
-            {myCoursesBool ? (
+            {tabValue === 0 ? (
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
                   <SearchIcon />
@@ -376,28 +386,18 @@ class Courses extends Component {
               </DialogContentText>
             </DialogContent>
           </Dialog>
-          <Grid container>
-            <Grid item xs={6}>
-              <Button
-                variant={myCoursesBool ? "contained" : "outlined"}
-                size="small"
-                fullWidth
-                onClick={this.myCoursesClicked}
-              >
-                My Courses
-              </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Button
-                variant={addCourses ? "contained" : "outlined"}
-                size="small"
-                fullWidth
-                onClick={this.addCoursesClicked}
-              >
-                Find Courses
-              </Button>
-            </Grid>
-          </Grid>
+          <Paper className={classes.tabs}>
+            <Tabs
+              value={tabValue}
+              onChange={this.handleTabChange}
+              variant="fullWidth"
+              indicatorColor="primary"
+              textColor="primary"
+            >
+              <Tab label="MY COURSES" />
+              <Tab label="FIND COURSES" />
+            </Tabs>
+          </Paper>
           <div className={classes.gridWrapper}>
             <div className={classes.grid}>{coursesContent}</div>
           </div>

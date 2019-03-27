@@ -116,29 +116,28 @@ class FindFriend extends Component {
 
     return (
       <Fragment>
-        <Toolbar disableGutters>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              onChange={this.handleChange("username")}
-              placeholder="Search By Username..."
-              id="search"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-            />
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
           </div>
-          <Button
-            variant="contained"
-            style={{ backgroundColor: lightBlue[700] }}
-            onClick={() => handler(this.state.username)}
-          >
-            SEARCH
-          </Button>
-        </Toolbar>
+          <InputBase
+            onChange={this.handleChange("username")}
+            placeholder="Search By Username..."
+            id="search"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput
+            }}
+          />
+        </div>
+        <Button
+          variant="contained"
+          style={{ backgroundColor: lightBlue[700] }}
+          onClick={() => handler(this.state.username)}
+        >
+          SEARCH
+        </Button>
+
         <Grid container justify="center" style={{ marginTop: 12 }}>
           <Grid item xs={12} sm={4}>
             {userContent}

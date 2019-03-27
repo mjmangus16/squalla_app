@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getAchievementsData } from "../../../redux/actions/profileActions";
 import {
   Grid,
-  Button,
+  Paper,
   Typography,
   IconButton,
   Toolbar,
@@ -12,9 +12,12 @@ import {
   DialogContent,
   DialogTitle,
   DialogContentText,
+  Tabs,
+  Tab,
   withStyles
 } from "@material-ui/core";
 import InfoButton from "@material-ui/icons/Info";
+import { grey } from "@material-ui/core/colors";
 
 import PointsChart from "./Cards/PointsChart";
 import Achieves from "./Cards/Achieves";
@@ -31,26 +34,26 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       fontSize: "1.25em"
     }
+  },
+  tabs: {
+    flexGrow: 1,
+    backgroundColor: grey[900],
+    marginBottom: 10
   }
 });
 
 class Achievements extends Component {
   state = {
     dialog: false,
-    stats: true,
-    achievementsList: false
+    tabValue: 0
   };
 
   componentDidMount() {
     this.props.getAchievementsData();
   }
 
-  statsClicked = () => {
-    this.setState({ stats: true, achievementsList: false });
-  };
-
-  achievementsClicked = () => {
-    this.setState({ stats: false, achievementsList: true });
+  handleChange = (event, value) => {
+    this.setState({ tabValue: value });
   };
 
   handleDialogOpen = () => {
@@ -64,7 +67,7 @@ class Achievements extends Component {
   render() {
     const { classes } = this.props;
     const { achievements } = this.props.profile;
-    const { dialog, stats, achievementsList } = this.state;
+    const { dialog, stats, achievementsList, tabValue } = this.state;
     const { isAuthenticated } = this.props.auth;
 
     let achievementWrapper;
@@ -74,7 +77,7 @@ class Achievements extends Component {
       achievementContent = null;
     } else {
       if (Object.keys(achievements).length > 0) {
-        if (achievementsList) {
+        if (tabValue === 1) {
           achievementContent = (
             <Grid container justify="center" spacing={8}>
               <Grid item xs={12}>
@@ -82,7 +85,7 @@ class Achievements extends Component {
               </Grid>
             </Grid>
           );
-        } else if (stats) {
+        } else if (tabValue === 0) {
           achievementContent = (
             <Grid container justify="center" spacing={8}>
               <Grid item xs={12}>
@@ -128,28 +131,18 @@ class Achievements extends Component {
               </DialogContentText>
             </DialogContent>
           </Dialog>
-          <Grid container style={{ marginBottom: 12 }}>
-            <Grid item xs={6}>
-              <Button
-                variant={stats ? "contained" : "outlined"}
-                size="small"
-                fullWidth
-                onClick={this.statsClicked}
-              >
-                Stats
-              </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Button
-                variant={achievementsList ? "contained" : "outlined"}
-                size="small"
-                fullWidth
-                onClick={this.achievementsClicked}
-              >
-                Achievements
-              </Button>
-            </Grid>
-          </Grid>
+          <Paper className={classes.tabs}>
+            <Tabs
+              value={tabValue}
+              onChange={this.handleChange}
+              variant="fullWidth"
+              indicatorColor="primary"
+              textColor="primary"
+            >
+              <Tab label="STATS" />
+              <Tab label="ACHIEVEMENTS" />
+            </Tabs>
+          </Paper>
           {achievementContent}
         </div>
       );

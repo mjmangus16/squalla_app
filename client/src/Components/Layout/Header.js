@@ -7,6 +7,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import { green } from "@material-ui/core/colors";
 
 const styles = theme => ({
   flex: {
@@ -17,7 +18,8 @@ const styles = theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     flexWrap: "flex",
-    padding: 0
+    padding: 0,
+    backgroundColor: green[900]
   },
   menuIcon: {
     marginLeft: 4
