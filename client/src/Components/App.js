@@ -47,6 +47,7 @@ const styles = theme => ({
 class App extends Component {
   state = {
     drawer: false,
+    drawerExpand: true,
     login: false,
     register: this.props.auth.isAuthenticated ? false : true
   };
@@ -57,6 +58,11 @@ class App extends Component {
 
   drawerToggle = () => {
     this.setState({ drawer: !this.state.drawer });
+  };
+
+  drawerExpandHandler = () => {
+    this.setState({ drawerExpand: !this.state.drawerExpand });
+    console.log("works");
   };
 
   loginToggle = () => {
@@ -74,7 +80,7 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
-    const { drawer, login, register } = this.state;
+    const { drawer, login, register, drawerExpand } = this.state;
     const { isAuthenticated } = this.props.auth;
     const { username } = this.props.auth.user;
     const { notifications } = this.props.profile;
@@ -102,6 +108,8 @@ class App extends Component {
             logout={this.logoutUserHandler}
             username={username}
             notifications={notifications}
+            drawerExpandStatus={drawerExpand}
+            drawerExpandHandler={this.drawerExpandHandler}
           />
           <div
             className={

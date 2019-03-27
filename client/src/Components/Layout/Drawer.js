@@ -11,6 +11,8 @@ import {
   SvgIcon,
   withStyles
 } from "@material-ui/core";
+import ExpandIcon from "@material-ui/icons/ChevronRight";
+import ShrinkIcon from "@material-ui/icons/ChevronLeft";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import ListIcon from "@material-ui/icons/List";
@@ -53,6 +55,11 @@ const styles = theme => ({
   },
   navLink: {
     textDecoration: "none"
+  },
+  drawerExpand: {
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+    }
   }
 });
 
@@ -72,7 +79,9 @@ const DrawerComponent = ({
   loginHandler,
   logout,
   username,
-  notifications
+  notifications,
+  drawerExpandStatus,
+  drawerExpandHandler
 }) => {
   let drawerContent;
 
@@ -86,15 +95,47 @@ const DrawerComponent = ({
 
   if (auth) {
     drawerContent = (
-      <div className={classes.root}>
+      <div
+        className={classes.root}
+        style={drawerExpandStatus ? { width: 200 } : null}
+      >
         <List component="nav">
+          {drawerExpandStatus ? (
+            <ListItem
+              button
+              onClick={drawerExpandHandler}
+              className={classes.drawerExpand}
+            >
+              <ListItemIcon className={classes.listItem}>
+                <ShrinkIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="SHRINK"
+                className={drawerExpandStatus ? null : classes.menuText}
+              />
+            </ListItem>
+          ) : (
+            <ListItem
+              button
+              onClick={drawerExpandHandler}
+              className={classes.drawerExpand}
+            >
+              <ListItemIcon className={classes.listItem}>
+                <ExpandIcon />
+              </ListItemIcon>
+              <ListItemText
+                className={drawerExpandStatus ? null : classes.menuText}
+              />
+            </ListItem>
+          )}
+
           <ListItem button>
             <ListItemIcon className={classes.listItem}>
               <PersonIcon />
             </ListItemIcon>
             <ListItemText
               primary={username.toUpperCase()}
-              className={classes.menuText}
+              className={drawerExpandStatus ? null : classes.menuText}
             />
           </ListItem>
           <Link to="/notifications" className={classes.navLink}>
@@ -110,7 +151,7 @@ const DrawerComponent = ({
               </ListItemIcon>
               <ListItemText
                 primary="NOTIFICATIONS"
-                className={classes.menuText}
+                className={drawerExpandStatus ? null : classes.menuText}
               />
             </ListItem>
           </Link>
@@ -122,7 +163,10 @@ const DrawerComponent = ({
               <ListItemIcon className={classes.listItem}>
                 <DashboardIcon />
               </ListItemIcon>
-              <ListItemText primary="DASHBOARD" className={classes.menuText} />
+              <ListItemText
+                primary="DASHBOARD"
+                className={drawerExpandStatus ? null : classes.menuText}
+              />
             </ListItem>
           </Link>
           <Link to="/performance" className={classes.navLink}>
@@ -132,7 +176,7 @@ const DrawerComponent = ({
               </ListItemIcon>
               <ListItemText
                 primary="PERFORMANCE"
-                className={classes.menuText}
+                className={drawerExpandStatus ? null : classes.menuText}
               />
             </ListItem>
           </Link>
@@ -141,7 +185,10 @@ const DrawerComponent = ({
               <ListItemIcon className={classes.listItem}>
                 <ListIcon />
               </ListItemIcon>
-              <ListItemText primary="ROUNDS" className={classes.menuText} />
+              <ListItemText
+                primary="ROUNDS"
+                className={drawerExpandStatus ? null : classes.menuText}
+              />
             </ListItem>
           </Link>
           <Link to="/achievements" className={classes.navLink}>
@@ -151,7 +198,7 @@ const DrawerComponent = ({
               </ListItemIcon>
               <ListItemText
                 primary="ACHIEVEMENTS"
-                className={classes.menuText}
+                className={drawerExpandStatus ? null : classes.menuText}
               />
             </ListItem>
           </Link>
@@ -160,7 +207,10 @@ const DrawerComponent = ({
               <ListItemIcon className={classes.listItem}>
                 <PlaceIcon />
               </ListItemIcon>
-              <ListItemText primary="COURSES" className={classes.menuText} />
+              <ListItemText
+                primary="COURSES"
+                className={drawerExpandStatus ? null : classes.menuText}
+              />
             </ListItem>
           </Link>
           <Link to="/friends" className={classes.navLink}>
@@ -168,7 +218,10 @@ const DrawerComponent = ({
               <ListItemIcon className={classes.listItem}>
                 <PeopleIcon />
               </ListItemIcon>
-              <ListItemText primary="FRIENDS" className={classes.menuText} />
+              <ListItemText
+                primary="FRIENDS"
+                className={drawerExpandStatus ? null : classes.menuText}
+              />
             </ListItem>
           </Link>
           <Link to="/leagues" className={classes.navLink}>
@@ -176,7 +229,10 @@ const DrawerComponent = ({
               <ListItemIcon className={classes.listItem}>
                 <FlagIcon />
               </ListItemIcon>
-              <ListItemText primary="LEAGUES" className={classes.menuText} />
+              <ListItemText
+                primary="LEAGUES"
+                className={drawerExpandStatus ? null : classes.menuText}
+              />
             </ListItem>
           </Link>
         </List>
@@ -187,7 +243,10 @@ const DrawerComponent = ({
               <ListItemIcon className={classes.listItem}>
                 <LibraryAddIcon />
               </ListItemIcon>
-              <ListItemText primary="ADD ROUND" className={classes.menuText} />
+              <ListItemText
+                primary="ADD ROUND"
+                className={drawerExpandStatus ? null : classes.menuText}
+              />
             </ListItem>
           </Link>
         </List>
@@ -204,7 +263,10 @@ const DrawerComponent = ({
               <ListItemIcon className={classes.listItem}>
                 <LockOpenIcon />
               </ListItemIcon>
-              <ListItemText primary="LOGOUT" className={classes.menuText} />
+              <ListItemText
+                primary="LOGOUT"
+                className={drawerExpandStatus ? null : classes.menuText}
+              />
             </ListItem>
           </Link>
         </List>
