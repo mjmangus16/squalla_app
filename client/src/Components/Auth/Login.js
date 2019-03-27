@@ -24,7 +24,7 @@ class Login extends Component {
 
   onSubmit = () => {
     const user = {
-      username: this.state.username,
+      username: this.state.username.toLowerCase(),
       password: this.state.password
     };
 
