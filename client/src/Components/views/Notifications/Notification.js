@@ -17,6 +17,7 @@ import ClearIcon from "@material-ui/icons/ClearAll";
 import InfoButton from "@material-ui/icons/Info";
 
 import Round from "./Cards/Round";
+import Other from "./Cards/Other";
 
 const styles = theme => ({
   root: {
@@ -73,7 +74,7 @@ class Notifications extends Component {
     let notificationsContent = [];
     let roundsContent;
     // let checkinsContent;
-    // let otherContent;
+    let otherContent;
 
     if (notifications) {
       if (Object.keys(notifications).length > 0) {
@@ -110,10 +111,25 @@ class Notifications extends Component {
               </Grid>
             ));
           }
+          if (notifications.other.length > 0) {
+            otherContent = notifications.other.map(other => (
+              <Grid
+                item
+                xs={12}
+                md={6}
+                key={`rounds_${notifications.other.indexOf(other)}`}
+              >
+                <Other success={other} />
+              </Grid>
+            ));
+          }
         }
       }
     }
-    notificationsContent = notificationsContent.concat(roundsContent);
+    notificationsContent = notificationsContent.concat(
+      roundsContent,
+      otherContent
+    );
 
     if (!isAuthenticated) {
       notificationsWrapper = null;

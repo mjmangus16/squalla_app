@@ -81,7 +81,6 @@ router.post(
               }
             }
             if (req.body.username !== req.user.username) {
-              username.friends.push(profile.username);
               profile.friends.push(username.username);
               profile
                 .save()
@@ -89,6 +88,11 @@ router.post(
                   Profile.findOne({ username: req.body.username }).then(
                     friend => {
                       friend.friends.push(profile.username);
+                      friend.notifications.other.push({
+                        type: "addFriend",
+                        data: profile.username
+                      });
+                      friend.markModified("notifications");
                       friend.save().then(friend => {
                         data = {
                           friend: `${
