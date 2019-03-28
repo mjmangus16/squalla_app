@@ -81,6 +81,7 @@ router.post(
               }
             }
             if (req.body.username !== req.user.username) {
+              username.friends.push(profile.username);
               profile.friends.push(username.username);
               profile
                 .save()
