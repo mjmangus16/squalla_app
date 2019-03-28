@@ -14,8 +14,6 @@ const two_threeCoursesSameDay = (available, myRounds, round) => {
 
   sameDayRounds = [...new Set(sameDayRounds)];
 
-  console.log(sameDayRounds);
-
   if (sameDayRounds.length >= 2 && sameDayRounds.length <= 3) {
     if (sameDayRounds.length === 2) {
       for (let i = 0; i < available.length; i++) {

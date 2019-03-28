@@ -233,8 +233,24 @@ router.post(
 
             profile.save().then(profile => {
               if (profile.username === req.user.username) {
-                return res.json(returnData);
+                for (let i = 0; i < achievesEarned.length; i++) {
+                  profile.notifications.other.push({
+                    type: "achievementEarned",
+                    data: {
+                      name: achievesEarned[i].name,
+                      description: achievesEarned[i].description,
+                      points: achievesEarned[i].points,
+                      date: req.body.date
+                    }
+                  });
+                }
+                profile.markModified("notifications");
               }
+              profile.save().then(profile => {
+                if (profile.username === req.user.username) {
+                  return res.json(returnData);
+                }
+              });
             });
           });
         });

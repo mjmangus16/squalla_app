@@ -10,6 +10,7 @@ import {
   withStyles,
   CardHeader
 } from "@material-ui/core";
+import { cyan } from "@material-ui/core/colors";
 
 const styles = theme => ({
   root: {
@@ -54,16 +55,32 @@ class Round extends Component {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell align="center" className={classes.cell}>
+                <TableCell
+                  align="center"
+                  className={classes.cell}
+                  style={{ color: cyan[200] }}
+                >
                   {success.date}
                 </TableCell>
-                <TableCell align="center" className={classes.cell}>
+                <TableCell
+                  align="center"
+                  className={classes.cell}
+                  style={{ color: cyan[200] }}
+                >
                   {success.owner}
                 </TableCell>
-                <TableCell align="center" className={classes.cell}>
+                <TableCell
+                  align="center"
+                  className={classes.cell}
+                  style={{ color: cyan[200] }}
+                >
                   {success.league ? success.league : "Non-League"}
                 </TableCell>
-                <TableCell align="center" className={classes.cell}>
+                <TableCell
+                  align="center"
+                  className={classes.cell}
+                  style={{ color: cyan[200] }}
+                >
                   {success.score}
                 </TableCell>
               </TableRow>

@@ -127,6 +127,7 @@ class Courses extends Component {
 
   handleTabChange = (event, value) => {
     this.setState({ tabValue: value });
+    this.props.getUserCourses();
   };
 
   handleChange = name => event => {

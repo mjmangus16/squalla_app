@@ -117,7 +117,7 @@ class Notifications extends Component {
                 item
                 xs={12}
                 md={6}
-                key={`rounds_${notifications.other.indexOf(other)}`}
+                key={`other_${notifications.other.indexOf(other)}`}
               >
                 <Other success={other} />
               </Grid>

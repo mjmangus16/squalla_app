@@ -42,6 +42,10 @@ const addCourseToProfile = (course, profile) => {
   };
 
   profile.courses.push(myCourse);
+  profile.notifications.other.push({
+    type: "addCourse",
+    data: course.name
+  });
   return profile;
 };
 
