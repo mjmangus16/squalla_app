@@ -33,7 +33,6 @@ class Register extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.errors);
     if (nextProps.errors) {
       if (nextProps.errors.email) {
         this.setState({ open: true, error: nextProps.errors.email });
