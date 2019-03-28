@@ -97,7 +97,7 @@ const DrawerComponent = ({
     drawerContent = (
       <div
         className={classes.root}
-        style={drawerExpandStatus ? { width: 200 } : null}
+        style={drawerExpandStatus ? { width: 225 } : null}
       >
         <List component="nav">
           {drawerExpandStatus ? (
