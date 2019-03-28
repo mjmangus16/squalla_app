@@ -9,14 +9,38 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle
+  DialogTitle,
+  Snackbar,
+  withStyles
 } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
+
+const styles = theme => ({
+  close: {
+    padding: theme.spacing.unit / 2
+  }
+});
 
 class Login extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    open: false,
+    error: ""
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      if (nextProps.errors.username) {
+        this.setState({ open: true, error: nextProps.errors.username });
+      } else if (nextProps.errors.login) {
+        this.setState({ open: true, error: nextProps.errors.login });
+      } else if (nextProps.errors.password) {
+        this.setState({ open: true, error: nextProps.errors.password });
+      }
+    }
+  }
 
   onChange = name => e => {
     this.setState({ [name]: e.target.value });
@@ -31,8 +55,16 @@ class Login extends Component {
     this.props.loginUser(user, this.props.close);
   };
 
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    this.setState({ open: false });
+  };
+
   render() {
-    const { open, close, register } = this.props;
+    const { open, close, register, classes } = this.props;
     return (
       <Dialog open={open} onClose={close}>
         <DialogTitle>LOGIN</DialogTitle>
@@ -77,6 +109,30 @@ class Login extends Component {
             Login
           </Button>
         </DialogActions>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left"
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+          ContentProps={{
+            "aria-describedby": "message-id"
+          }}
+          message={<span id="message-id">{this.state.error}</span>}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              className={classes.close}
+              onClick={this.handleClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          ]}
+        />
       </Dialog>
     );
   }
@@ -96,4 +152,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { loginUser }
-)(Login);
+)(withStyles(styles)(Login));

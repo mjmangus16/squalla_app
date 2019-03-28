@@ -9,8 +9,18 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle
+  DialogTitle,
+  Snackbar,
+  withStyles
 } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
+
+const styles = theme => ({
+  close: {
+    padding: theme.spacing.unit / 2
+  }
+});
 
 class Register extends Component {
   state = {
@@ -18,8 +28,24 @@ class Register extends Component {
     username: "",
     password: "",
     password2: "",
-    errors: {}
+    open: false,
+    error: ""
   };
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.errors);
+    if (nextProps.errors) {
+      if (nextProps.errors.email) {
+        this.setState({ open: true, error: nextProps.errors.email });
+      } else if (nextProps.errors.username) {
+        this.setState({ open: true, error: nextProps.errors.username });
+      } else if (nextProps.errors.password) {
+        this.setState({ open: true, error: nextProps.errors.password });
+      } else if (nextProps.errors.password2) {
+        this.setState({ open: true, error: nextProps.errors.password2 });
+      }
+    }
+  }
 
   onChange = name => e => {
     this.setState({ [name]: e.target.value });
@@ -36,8 +62,16 @@ class Register extends Component {
     this.props.registerUser(newUser, this.props.login);
   };
 
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    this.setState({ open: false });
+  };
+
   render() {
-    const { open, close, login } = this.props;
+    const { open, close, login, classes } = this.props;
     return (
       <Dialog open={open} onClose={close}>
         <DialogTitle>SIGN UP</DialogTitle>
@@ -100,6 +134,30 @@ class Register extends Component {
             Submit
           </Button>
         </DialogActions>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left"
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+          ContentProps={{
+            "aria-describedby": "message-id"
+          }}
+          message={<span id="message-id">{this.state.error}</span>}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              className={classes.close}
+              onClick={this.handleClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          ]}
+        />
       </Dialog>
     );
   }
@@ -119,4 +177,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { registerUser }
-)(Register);
+)(withStyles(styles)(Register));
