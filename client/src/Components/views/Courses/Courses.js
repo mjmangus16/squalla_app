@@ -247,12 +247,7 @@ class Courses extends Component {
   };
 
   mySearch = () => {
-    let courses;
-    if (this.state.myCoursesBool) {
-      courses = document.querySelectorAll(".myCourseCard");
-    } else if (this.state.addCourses) {
-      courses = document.querySelectorAll(".addCourseCard");
-    }
+    let courses = document.querySelectorAll(".myCourseCard");
 
     const value = document.getElementById("search").value.toUpperCase();
 
