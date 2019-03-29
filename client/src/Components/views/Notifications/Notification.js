@@ -54,10 +54,6 @@ class Notifications extends Component {
     dialog: false
   };
 
-  // componentDidMount() {
-  //   this.props.getNotifications();
-  // }
-
   handleDialogOpen = () => {
     this.setState({ dialog: true });
   };

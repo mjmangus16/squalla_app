@@ -81,7 +81,7 @@ class Login extends Component {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="username"
             label="Username"
             type="text"
             fullWidth
@@ -90,7 +90,7 @@ class Login extends Component {
           />
           <TextField
             margin="dense"
-            id="name"
+            id="password"
             label="Password"
             type="password"
             fullWidth
