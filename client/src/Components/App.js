@@ -62,7 +62,6 @@ class App extends Component {
 
   drawerExpandHandler = () => {
     this.setState({ drawerExpand: !this.state.drawerExpand });
-    console.log("works");
   };
 
   loginToggle = () => {
