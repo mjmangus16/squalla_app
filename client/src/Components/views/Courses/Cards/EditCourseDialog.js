@@ -18,7 +18,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 100
+    width: 90
   },
   dense: {
     marginTop: 19
@@ -53,7 +53,7 @@ class EditCourseDialog extends Component {
           <form className={classes.container}>
             <TextField
               id="standard-par1"
-              label="Red Tee Par"
+              label="Red Tee"
               className={classes.textField}
               value={par1}
               onChange={handleChange("editPar1")}
@@ -61,7 +61,7 @@ class EditCourseDialog extends Component {
             />
             <TextField
               id="standard-par2"
-              label="White Tee Par"
+              label="White Tee"
               className={classes.textField}
               value={par2}
               onChange={handleChange("editPar2")}
@@ -69,7 +69,7 @@ class EditCourseDialog extends Component {
             />
             <TextField
               id="standard-par3"
-              label="Blue Tee Par"
+              label="Blue Tee"
               className={classes.textField}
               value={par3}
               onChange={handleChange("editPar3")}
@@ -77,7 +77,7 @@ class EditCourseDialog extends Component {
             />
             <TextField
               id="standard-par4"
-              label="Gold Tee Par"
+              label="Gold Tee"
               className={classes.textField}
               value={par4}
               onChange={handleChange("editPar4")}
