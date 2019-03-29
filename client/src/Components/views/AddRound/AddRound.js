@@ -7,7 +7,8 @@ import {
   submitRound,
   getDashboardData,
   clearSubmitRound,
-  clearDashboardData
+  clearDashboardData,
+  getNotifications
 } from "../../../redux/actions/profileActions";
 import {
   Toolbar,
@@ -128,7 +129,8 @@ AddRound.propTypes = {
   getUserCourses: PropTypes.func.isRequired,
   getFriendsData: PropTypes.func.isRequired,
   submitRound: PropTypes.func.isRequired,
-  clearDashboardData: PropTypes.func.isRequired
+  clearDashboardData: PropTypes.func.isRequired,
+  getNotifications: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -145,6 +147,7 @@ export default connect(
     submitRound,
     getDashboardData,
     clearSubmitRound,
-    clearDashboardData
+    clearDashboardData,
+    getNotifications
   }
 )(withStyles(styles)(AddRound));

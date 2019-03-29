@@ -126,6 +126,7 @@ class App extends Component {
                 <Notifications
                   notifications={notifications}
                   clearAllNotifications={this.props.clearAllNotifications}
+                  getNotifications={this.props.getNotifications}
                   isAuthenticated={isAuthenticated}
                 />
               )}
