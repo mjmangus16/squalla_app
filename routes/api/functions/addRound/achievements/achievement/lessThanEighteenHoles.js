@@ -4,7 +4,7 @@ const lessThanEighteenHoles = (available, round) => {
     info: {}
   };
 
-  if (round.course.holes < 18) {
+  if (round.holes < 18) {
     for (let i = 0; i < available.length; i++) {
       if (available[i].code === 8) {
         data.info = available[i];

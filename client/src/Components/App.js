@@ -55,7 +55,6 @@ class App extends Component {
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.getNotifications();
-      console.log("app");
     }
   }
 
