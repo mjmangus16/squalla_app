@@ -40,7 +40,7 @@ const styles = theme => ({
     gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
     gridTemplateRows: "1fr 1fr",
     margin: "auto",
-    maxWidth: 300
+    width: "90%"
   },
   detailsHeading: {
     textDecoration: "underline",
