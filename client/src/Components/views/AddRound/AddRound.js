@@ -7,8 +7,7 @@ import {
   submitRound,
   getDashboardData,
   clearSubmitRound,
-  clearDashboardData,
-  getNotifications
+  clearDashboardData
 } from "../../../redux/actions/profileActions";
 import {
   Toolbar,
@@ -147,7 +146,6 @@ export default connect(
     submitRound,
     getDashboardData,
     clearSubmitRound,
-    clearDashboardData,
-    getNotifications
+    clearDashboardData
   }
 )(withStyles(styles)(AddRound));

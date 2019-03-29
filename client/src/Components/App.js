@@ -53,7 +53,9 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.props.getNotifications();
+    if (this.props.auth.isAuthenticated) {
+      this.props.getNotifications();
+    }
   }
 
   drawerToggle = () => {
