@@ -28,7 +28,7 @@ class Courses extends Component {
           maintainAspectRatio: false,
           title: {
             display: true,
-            text: "Performance Rating Per Course",
+            text: "Performance By Course",
             fontSize: this.props.width === "xs" ? 12 : 18
           },
           legend: { display: false },

@@ -31,7 +31,7 @@ class Rounds extends Component {
           responsive: true,
           title: {
             display: true,
-            text: "Performance Rating Trend By Rounds",
+            text: "Performance Trend By Round",
             fontSize: width === "xs" ? 12 : 18
           },
           legend: { display: false },
