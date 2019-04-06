@@ -14,7 +14,10 @@ const getRoundsPerFriend = profile => {
       for (let j = 0; j < rounds[y].scores.length; j++) {
         if (rounds[y].scores[j].username === profile.username) {
           myScore = rounds[y].scores[j].score;
+          console.log(myScore);
         }
+      }
+      for (let j = 0; j < rounds[y].scores.length; j++) {
         if (myFriends[i].friend === rounds[y].scores[j].username) {
           myFriends[i].rounds++;
           let friendScore = rounds[y].scores[j].score;
@@ -25,6 +28,7 @@ const getRoundsPerFriend = profile => {
       }
     }
   }
+  console.log(myFriends);
   return myFriends;
 };
 
