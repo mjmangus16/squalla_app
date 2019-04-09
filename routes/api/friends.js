@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 
 const Profile = require("../../models/Profile");
+const Achievement = require("../../models/Achievement");
 
 const getRoundsPerFriend = require("./functions/friends/getRoundsPerFriend");
 const getRecentRound = require("./functions/friends/getRecentRound");
@@ -14,13 +15,82 @@ router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ username: req.user.username }).then(profile => {
-      const data = {
-        roundsPerFriend: getRoundsPerFriend(profile)
-      };
+    Achievement.findOne({ code: 11 })
+      .then(achievement => {
+        Profile.findOne({ username: req.user.username })
+          .then(profile => {
+            let achieveData = {};
+            const data = {
+              roundsPerFriend: getRoundsPerFriend(profile)
+            };
 
-      return res.json(data);
-    });
+            const popularityContestEarned = determinePopularityContestEarned(
+              profile.achievements
+            );
+
+            let date = new Date();
+
+            let year = date.getFullYear();
+
+            let fullDate = `${date.getMonth()}/${date.getDate()}/${year
+              .toString()
+              .substr(-2)}`;
+
+            if (!popularityContestEarned) {
+              achieveData = popularityContestRequirementsMet(
+                profile.friends,
+                0
+              );
+              if (achieveData.points > 0) {
+                achievement.count = achieveData.count;
+                profile.achievements.push(achievement);
+                profile.achievementPoints =
+                  profile.achievementPoints + achieveData.points;
+                profile.notifications.other.push({
+                  type: "achievementEarned",
+                  data: {
+                    name: achievement.name,
+                    description: achievement.description,
+                    points: achieveData.points,
+                    date: fullDate
+                  }
+                });
+              }
+            } else {
+              let count;
+              for (let i = 0; i < profile.achievements.length; i++) {
+                if (profile.achievements[i].code === 11) {
+                  count = profile.achievements[i].count;
+
+                  achieveData = popularityContestRequirementsMet(
+                    profile.friends,
+                    count
+                  );
+                  if (achieveData.count > count) {
+                    profile.achievements[i].count = achieveData.count;
+                    profile.achievementPoints =
+                      profile.achievementPoints + achieveData.points;
+                    profile.notifications.other.push({
+                      type: "achievementEarned",
+                      data: {
+                        name: achievement.name,
+                        description: achievement.description,
+                        points: achieveData.points,
+                        date: fullDate
+                      }
+                    });
+                  }
+                }
+              }
+            }
+            profile.markModified("achievements");
+            profile.markModified("notifications");
+            profile.save();
+            return res.json(data);
+          })
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   }
 );
 
@@ -118,3 +188,51 @@ router.post(
 );
 
 module.exports = router;
+
+const determinePopularityContestEarned = achieves => {
+  let earned = false;
+
+  for (let i = 0; i < achieves.length; i++) {
+    if (achieves[i].code === 11) {
+      earned = true;
+    }
+  }
+  return earned;
+};
+
+const popularityContestRequirementsMet = (friends, count) => {
+  let points = 0;
+  if (count === 0) {
+    if (friends.length >= 5) {
+      count++;
+      points = points + 5;
+    }
+    if (friends.length >= 10) {
+      count++;
+      points = points + 5;
+    }
+    if (friends.length >= 25) {
+      count++;
+      points = points + 5;
+    }
+  } else if (count === 1) {
+    if (friends.length >= 10) {
+      count++;
+      points = points + 5;
+    }
+    if (friends.length >= 25) {
+      count++;
+      points = points + 5;
+    }
+  } else if (count === 2) {
+    if (friends.length >= 25) {
+      count++;
+      points = points + 5;
+    }
+  }
+
+  return {
+    count,
+    points
+  };
+};

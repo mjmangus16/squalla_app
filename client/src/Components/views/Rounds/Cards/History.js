@@ -19,8 +19,7 @@ import HistoryInfo from "./HistoryInfo";
 const styles = theme => ({
   card: {
     width: "100%",
-    height: 500,
-    marginBottom: 25
+    height: 500
   },
   headerTitle: {
     [theme.breakpoints.down("xs")]: {
