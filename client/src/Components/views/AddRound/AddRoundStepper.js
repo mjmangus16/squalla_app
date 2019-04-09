@@ -348,8 +348,6 @@ class AddRoundStepper extends Component {
     const steps = getSteps();
     const { activeStep, players, scores, summary, errorMsg } = this.state;
 
-    console.log(success);
-
     let mobileStepNext;
 
     if (activeStep === steps.length - 1) {

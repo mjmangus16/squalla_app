@@ -220,11 +220,14 @@ class Friends extends Component {
     } else {
       friendsWrapper = (
         <div className={classes.root}>
-          <FriendDialog
-            open={friendOpen}
-            close={this.closeFriendDialog}
-            data={foundUser}
-          />
+          {typeof foundUser === "object" ? (
+            <FriendDialog
+              open={friendOpen}
+              close={this.closeFriendDialog}
+              data={foundUser}
+            />
+          ) : null}
+
           <AddFriendDialog
             open={addFriendOpen}
             handler={this.closeAddFriendDialog}
