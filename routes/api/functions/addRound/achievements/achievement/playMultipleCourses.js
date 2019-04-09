@@ -10,8 +10,6 @@ const playMultipleCourses = (available, courses, rounds) => {
     }
   }
 
-  console.log(data.info);
-
   let coursesContainer = [];
   for (let i = 0; i < rounds.length; i++) {
     coursesContainer.push(rounds[i].course);
