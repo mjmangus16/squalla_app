@@ -87,6 +87,9 @@ class Performance extends Component {
             spacing={8}
           >
             <Grid item xs={12}>
+              <PerformanceCard chart="overall" />
+            </Grid>
+            <Grid item xs={12}>
               <PerformanceCard chart="rounds" />
             </Grid>
             <Grid item xs={12}>

@@ -165,6 +165,7 @@ class AddRoundStepper extends Component {
       foliage: this.state.course.foliage,
       elevation: this.state.course.elevation
     };
+    console.log(data);
     this.props.submitRound(data);
     this.setState({
       date: "",
@@ -328,7 +329,8 @@ class AddRoundStepper extends Component {
       tee: "",
       course: {},
       players: [],
-      scores: []
+      scores: [],
+      summary: {}
     });
 
     this.props.clearSubmitRound();
@@ -342,6 +344,8 @@ class AddRoundStepper extends Component {
     const { classes, courses, friends, user, success, theme } = this.props;
     const steps = getSteps();
     const { activeStep, players, scores, summary, errorMsg } = this.state;
+
+    console.log(success);
 
     let mobileStepNext;
 

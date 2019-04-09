@@ -8,6 +8,7 @@ const Profile = require("../../models/Profile");
 const getPerformancePointsPerRound = require("./functions/dashboard/getPerformancePointsPerRound");
 const getPerformancePointsPerCourse = require("./functions/performance/getPerformancePointsPerCourse");
 const getPerformanceTrendByMonth = require("./functions/performance/getPerformanceTrendByMonth");
+const getPerformanceOverall = require("./functions/performance/getPerformanceOverall");
 
 // @route   GET api/performance/
 // @desc    Get user performance data
@@ -20,12 +21,13 @@ router.get(
       let data = {
         performancePointsPerRound: getPerformancePointsPerRound(profile),
         performancePointsPerCourse: getPerformancePointsPerCourse(profile),
-        performanceTrendByMonth: getPerformanceTrendByMonth(profile)
+        performanceTrendByMonth: getPerformanceTrendByMonth(profile),
+        performanceOverall: getPerformanceOverall(
+          profile.rounds,
+          profile.username
+        )
       };
       return res.json(data);
-      // Performance of last 10 rounds
-      // Performance points per course
-      // Performance point total per month over year
     });
   }
 );

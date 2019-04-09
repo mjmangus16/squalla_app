@@ -116,143 +116,159 @@ router.post(
     }
 
     for (let i = 0; i < players.length; i++) {
-      Profile.findOne({ username: round.scores[i].username }).then(profile => {
-        Achievement.find().then(allAchieves => {
-          let courseExists = doesCourseExist(profile.courses, round.course);
+      Profile.findOne({ username: round.scores[i].username })
+        .then(profile => {
+          Achievement.find()
+            .then(allAchieves => {
+              let courseExists = doesCourseExist(profile.courses, round.course);
 
-          if (!courseExists) {
-            profile = addCourseToProfile(course, profile);
-          }
-          let average = getAverage(round, profile);
-          let performance = getPerformance(average, round.scores[i].score);
-
-          profile.performancePoints = profile.performancePoints + performance;
-
-          round.scores[i].performance = performance;
-
-          const teeData = getTeeData(profile, round);
-
-          teeData.rating = course.rating;
-
-          profile.rounds.unshift(round);
-
-          profile = updateStats(profile, round, round.scores[i].score);
-          profile.markModified("courses");
-
-          let courseInfo = {
-            name: round.course,
-            holes: course.holes,
-            tees: course.tees,
-            terrain: course.terrain,
-            landscape: course.landscape
-          };
-
-          courseInfo.history = collectCourseHistory(
-            courseInfo,
-            profile.rounds,
-            profile.username
-          );
-
-          let userStats = {
-            average: teeData.average,
-            best: teeData.best,
-            score: round.scores[i].score,
-            rating: teeData.rating
-          };
-
-          const achieveData = {
-            courseInfo,
-            userStats
-          };
-
-          const achievesEarned = getAchievements(
-            profile,
-            round,
-            allAchieves,
-            achieveData
-          );
-
-          const achieveInfo = updateAchievements(achievesEarned);
-          profile.achievementPoints =
-            profile.achievementPoints + achieveInfo.points;
-
-          round.scores[i].achievementPoints = achieveInfo.points;
-
-          const myUpdatedAchieves = compareAchievements(
-            profile.achievements,
-            achievesEarned
-          );
-
-          profile.achievements = [];
-          profile.achievements = myUpdatedAchieves;
-
-          round.scores[i].experience = getExperience(
-            teeData,
-            profile.level,
-            profile.achievementPoints,
-            round.scores[i].score,
-            course.holes
-          );
-
-          const userExp = getExperience(
-            teeData,
-            profile.level,
-            profile.achievementPoints,
-            round.scores[i].score,
-            course.holes
-          );
-
-          profile.experience = profile.experience + userExp;
-
-          let oldLevel = profile.level;
-          profile.level = getLevel(profile.experience);
-          profile.save().then(profile => {
-            const returnData = {
-              date: round.date,
-              course: round.course,
-              tees: round.tees,
-              owner: round.owner,
-              league: round.league,
-              username: profile.username,
-              oldLevel: oldLevel,
-              newLevel: profile.level,
-              originalExp: profile.experience - userExp,
-              gainedExp: userExp,
-              score: parseInt(userStats.score),
-              average: userStats.average,
-              best: userStats.best,
-              achievements: achievesEarned.length,
-              achievePoints: achieveInfo.points,
-              performance: performance
-            };
-
-            if (profile.username !== req.user.username) {
-              profile.notifications.rounds.push(returnData);
-              profile.markModified("notifications");
-            }
-
-            profile.save().then(profile => {
-              for (let i = 0; i < achievesEarned.length; i++) {
-                profile.notifications.other.push({
-                  type: "achievementEarned",
-                  data: {
-                    name: achievesEarned[i].name,
-                    description: achievesEarned[i].description,
-                    points: achievesEarned[i].points,
-                    date: req.body.date
-                  }
-                });
+              if (!courseExists) {
+                profile = addCourseToProfile(course, profile);
               }
-              profile.markModified("notifications");
-              profile.save().then(profile => {
-                if (profile.username === req.user.username) {
-                  return res.json(returnData);
-                }
-              });
-            });
-          });
-        });
-      });
+              let average = getAverage(round, profile);
+              let performance = getPerformance(average, round.scores[i].score);
+
+              profile.performancePoints =
+                profile.performancePoints + performance;
+
+              round.scores[i].performance = performance;
+
+              const teeData = getTeeData(profile, round);
+
+              teeData.rating = course.rating;
+
+              profile.rounds.unshift(round);
+
+              profile = updateStats(profile, round, round.scores[i].score);
+              profile.markModified("courses");
+
+              let courseInfo = {
+                name: round.course,
+                holes: course.holes,
+                tees: course.tees,
+                terrain: course.terrain,
+                landscape: course.landscape
+              };
+
+              courseInfo.history = collectCourseHistory(
+                courseInfo,
+                profile.rounds,
+                profile.username
+              );
+
+              let userStats = {
+                average: teeData.average,
+                best: teeData.best,
+                score: round.scores[i].score,
+                rating: teeData.rating
+              };
+
+              const achieveData = {
+                courseInfo,
+                userStats
+              };
+
+              const achievesEarned = getAchievements(
+                profile,
+                round,
+                allAchieves,
+                achieveData
+              );
+
+              const achieveInfo = updateAchievements(achievesEarned);
+              profile.achievementPoints =
+                profile.achievementPoints + achieveInfo.points;
+
+              round.scores[i].achievementPoints = achieveInfo.points;
+
+              const myUpdatedAchieves = compareAchievements(
+                profile.achievements,
+                achievesEarned
+              );
+
+              profile.achievements = [];
+              profile.achievements = myUpdatedAchieves;
+
+              round.scores[i].experience = getExperience(
+                teeData,
+                profile.level,
+                profile.achievementPoints,
+                round.scores[i].score,
+                course.holes
+              );
+
+              const userExp = getExperience(
+                teeData,
+                profile.level,
+                profile.achievementPoints,
+                round.scores[i].score,
+                course.holes
+              );
+
+              profile.experience = profile.experience + userExp;
+
+              let oldLevel = profile.level;
+              profile.level = getLevel(profile.experience);
+              profile
+                .save()
+                .then(profile => {
+                  const returnData = {
+                    date: round.date,
+                    course: round.course,
+                    tees: round.tees,
+                    owner: round.owner,
+                    league: round.league,
+                    username: profile.username,
+                    oldLevel: oldLevel,
+                    newLevel: profile.level,
+                    originalExp: profile.experience - userExp,
+                    gainedExp: userExp,
+                    score: parseInt(userStats.score),
+                    average: userStats.average,
+                    best: userStats.best,
+                    achievements: achievesEarned.length,
+                    achievePoints: achieveInfo.points,
+                    performance: performance
+                  };
+
+                  if (profile.username !== req.user.username) {
+                    profile.notifications.rounds.push(returnData);
+                    profile.markModified("notifications");
+                  }
+
+                  profile
+                    .save()
+                    .then(profile => {
+                      for (let i = 0; i < achievesEarned.length; i++) {
+                        profile.notifications.other.push({
+                          type: "achievementEarned",
+                          data: {
+                            name: achievesEarned[i].name,
+                            description: achievesEarned[i].description,
+                            points: achievesEarned[i].points,
+                            date: req.body.date
+                          }
+                        });
+                      }
+                      profile.markModified("notifications");
+                      profile
+                        .save()
+                        .then(profile => {
+                          if (profile.username === req.user.username) {
+                            return res.json(returnData);
+                          } else {
+                            return res.json({});
+                          }
+                        })
+                        .catch(err => console.log(err));
+                    })
+                    .catch(err => console.log(err));
+                })
+                .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
     }
   }
 );

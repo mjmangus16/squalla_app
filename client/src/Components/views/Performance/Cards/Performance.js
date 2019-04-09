@@ -6,6 +6,7 @@ import { Card, CardContent, withStyles } from "@material-ui/core";
 import RoundsChart from "../../../Charts/Performance/Rounds";
 import CoursesChart from "../../../Charts/Performance/Courses";
 import YearChart from "../../../Charts/Performance/Year";
+import OverallChart from "../../../Charts/Performance/Overall";
 
 const styles = theme => ({
   card: {
@@ -53,6 +54,10 @@ class PerformanceCard extends Component {
               height={300}
               data={performance.performanceTrendByMonth}
             />
+          );
+        } else if (chart === "overall") {
+          chartContent = (
+            <OverallChart height={300} data={performance.performanceOverall} />
           );
         }
       }

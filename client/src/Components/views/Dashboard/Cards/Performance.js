@@ -34,7 +34,7 @@ const Performance = ({ classes, performance, rating }) => {
       <CardHeader
         title="Performance"
         style={{ paddingBottom: 0 }}
-        subheader={`Current Rating: ${rating >= 0 ? "+" : "-"}${rating}`}
+        subheader={`Current Rating: ${rating >= 0 ? "+" : null}${rating}`}
         classes={{
           title: classes.headerTitle,
           subheader: classes.subheader

@@ -128,8 +128,7 @@ AddRound.propTypes = {
   getUserCourses: PropTypes.func.isRequired,
   getFriendsData: PropTypes.func.isRequired,
   submitRound: PropTypes.func.isRequired,
-  clearDashboardData: PropTypes.func.isRequired,
-  getNotifications: PropTypes.func.isRequired
+  clearDashboardData: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

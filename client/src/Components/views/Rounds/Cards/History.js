@@ -36,7 +36,7 @@ const styles = theme => ({
     paddingTop: 0
   },
   tableContainer: {
-    minWidth: 400,
+    minWidth: 550,
     position: "relative",
     width: "100%"
   },
@@ -47,7 +47,8 @@ const styles = theme => ({
   },
   cellPadding: {
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
+    minWidth: 75
   }
 });
 
@@ -79,39 +80,22 @@ class History extends Component {
 
     const historyContent = data.map(myRound => (
       <TableRow key={data.indexOf(myRound)}>
-        <TableCell
-          padding="dense"
-          align="center"
-          className={classes.cellPadding}
-        >
+        <TableCell align="center" className={classes.cellPadding}>
           {myRound.date}
         </TableCell>
-        <TableCell
-          padding="dense"
-          align="center"
-          className={classes.cellPadding}
-        >
+        <TableCell align="center" className={classes.cellPadding}>
           {myRound.course}
         </TableCell>
-        <TableCell
-          padding="dense"
-          align="center"
-          className={classes.cellPadding}
-        >
+        <TableCell align="center" className={classes.cellPadding}>
           {getScore(myRound, username)}
         </TableCell>
-        <TableCell
-          padding="dense"
-          align="center"
-          className={classes.cellPadding}
-        >
+        <TableCell align="center" className={classes.cellPadding}>
+          {getPerformance(myRound, username)}
+        </TableCell>
+        <TableCell align="center" className={classes.cellPadding}>
           {getExperience(myRound, username)}
         </TableCell>
-        <TableCell
-          padding="dense"
-          align="center"
-          className={classes.cellPadding}
-        >
+        <TableCell align="center" className={classes.cellPadding}>
           <IconButton onClick={() => this.handleDialogOpen(myRound)}>
             <InfoIcon style={{ color: blue[400] }} />
           </IconButton>
@@ -138,39 +122,22 @@ class History extends Component {
             <Table className={classes.table} style={{ tableLayout: "fixed" }}>
               <TableHead>
                 <TableRow>
-                  <TableCell
-                    padding="dense"
-                    align="center"
-                    className={classes.cellPadding}
-                  >
+                  <TableCell align="center" className={classes.cellPadding}>
                     Date
                   </TableCell>
-                  <TableCell
-                    padding="dense"
-                    align="center"
-                    className={classes.cellPadding}
-                  >
+                  <TableCell align="center" className={classes.cellPadding}>
                     Course
                   </TableCell>
-                  <TableCell
-                    padding="dense"
-                    align="center"
-                    className={classes.cellPadding}
-                  >
+                  <TableCell align="center" className={classes.cellPadding}>
                     Score
                   </TableCell>
-                  <TableCell
-                    padding="dense"
-                    align="center"
-                    className={classes.cellPadding}
-                  >
+                  <TableCell align="center" className={classes.cellPadding}>
+                    Performance
+                  </TableCell>
+                  <TableCell align="center" className={classes.cellPadding}>
                     Experience
                   </TableCell>
-                  <TableCell
-                    padding="dense"
-                    align="center"
-                    className={classes.cellPadding}
-                  >
+                  <TableCell align="center" className={classes.cellPadding}>
                     More Info
                   </TableCell>
                 </TableRow>
@@ -211,5 +178,17 @@ const getExperience = (round, username) => {
       data = round.scores[i].experience;
     }
   }
+  return data;
+};
+
+const getPerformance = (round, username) => {
+  let data;
+
+  for (let i = 0; i < round.scores.length; i++) {
+    if (round.scores[i].username === username) {
+      data = round.scores[i].performance;
+    }
+  }
+
   return data;
 };
