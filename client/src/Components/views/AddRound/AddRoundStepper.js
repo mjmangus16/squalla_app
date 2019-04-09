@@ -333,6 +333,9 @@ class AddRoundStepper extends Component {
       summary: {}
     });
 
+    this.players = [];
+    this.scores = [];
+
     this.props.clearSubmitRound();
   };
 

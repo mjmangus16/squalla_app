@@ -256,8 +256,6 @@ router.post(
                         .then(profile => {
                           if (profile.username === req.user.username) {
                             return res.json(returnData);
-                          } else {
-                            return res.json({});
                           }
                         })
                         .catch(err => console.log(err));

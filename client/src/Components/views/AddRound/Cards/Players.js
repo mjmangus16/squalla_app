@@ -28,7 +28,28 @@ const PlayersInput = ({ classes, playersHandler, friends, players, user }) => {
         break;
       }
     }
-    return exists;
+
+    if (exists) {
+      return (
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={() => playersHandler(player)}
+        >
+          {player}
+        </Button>
+      );
+    } else if (!exists) {
+      return (
+        <Button
+          fullWidth
+          variant="outlined"
+          onClick={() => playersHandler(player)}
+        >
+          {player}
+        </Button>
+      );
+    }
   };
 
   return (
@@ -41,13 +62,7 @@ const PlayersInput = ({ classes, playersHandler, friends, players, user }) => {
           justify="center"
         >
           <Grid item xs={12} sm={6} md={4} key={user}>
-            <Button
-              fullWidth
-              variant={isPlayerSelected(user) ? "contained" : "outlined"}
-              onClick={() => playersHandler(user)}
-            >
-              {user}
-            </Button>
+            {isPlayerSelected(user)}
           </Grid>
           {friends.roundsPerFriend.map(friend => (
             <Grid
@@ -57,15 +72,7 @@ const PlayersInput = ({ classes, playersHandler, friends, players, user }) => {
               md={4}
               key={friends.roundsPerFriend.indexOf(friend)}
             >
-              <Button
-                fullWidth
-                variant={
-                  isPlayerSelected(friend.friend) ? "contained" : "outlined"
-                }
-                onClick={() => playersHandler(friend.friend)}
-              >
-                {friend.friend}
-              </Button>
+              {isPlayerSelected(friend.friend)}
             </Grid>
           ))}
         </Grid>

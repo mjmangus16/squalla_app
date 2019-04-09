@@ -19,7 +19,8 @@ import HistoryInfo from "./HistoryInfo";
 const styles = theme => ({
   card: {
     width: "100%",
-    height: 500
+    height: 500,
+    marginBottom: 25
   },
   headerTitle: {
     [theme.breakpoints.down("xs")]: {
@@ -47,8 +48,7 @@ const styles = theme => ({
   },
   cellPadding: {
     paddingLeft: 10,
-    paddingRight: 10,
-    minWidth: 75
+    paddingRight: 10
   }
 });
 
@@ -188,6 +188,10 @@ const getPerformance = (round, username) => {
     if (round.scores[i].username === username) {
       data = round.scores[i].performance;
     }
+  }
+
+  if (data === 1) {
+    data = "+" + data;
   }
 
   return data;

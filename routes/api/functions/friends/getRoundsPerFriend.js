@@ -27,7 +27,6 @@ const getRoundsPerFriend = profile => {
       }
     }
   }
-  console.log(myFriends);
   return myFriends;
 };
 

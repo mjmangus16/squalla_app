@@ -173,7 +173,11 @@ class FindCourse extends Component {
           } else {
             courseContent = (
               <div style={{ marginTop: 50 }}>
-                <Typography variant="title">
+                <Typography
+                  variant="title"
+                  align="center"
+                  style={{ width: "75%", margin: "auto" }}
+                >
                   Could not find any courses based on that criteria.
                 </Typography>
               </div>
