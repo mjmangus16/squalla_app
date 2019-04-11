@@ -4,7 +4,7 @@ const frontNineWarmup = (available, round) => {
     info: {}
   };
 
-  if (round.course.holes >= 27) {
+  if (round.holes >= 27) {
     for (let i = 0; i < available.length; i++) {
       if (available[i].code === 9) {
         data.info = available[i];

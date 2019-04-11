@@ -8,6 +8,7 @@ const playCourseMultipleTimes = require("./achievement/playCourseMultipleTimes")
 const playMultipleCourses = require("./achievement/playMultipleCourses");
 const two_threeCoursesSameDay = require("./achievement/two_threeCoursesSameDay");
 const playWithSomeoneFirstTime = require("./achievement/playWithSomeoneFirstTime");
+const playMultipleRounds = require("./achievement/playMultipleRounds");
 
 const determineAchievements = (profile, available, round, courseData) => {
   let earned = [];
@@ -83,6 +84,11 @@ const determineAchievements = (profile, available, round, courseData) => {
   );
   if (playWithSomeoneFirstTime_.pass === true) {
     earned.push(playWithSomeoneFirstTime_.info);
+  }
+
+  let playMultipleRounds_ = playMultipleRounds(available, profile.rounds);
+  if (playMultipleRounds_.pass === true) {
+    earned.push(playMultipleRounds_.info);
   }
 
   return earned;

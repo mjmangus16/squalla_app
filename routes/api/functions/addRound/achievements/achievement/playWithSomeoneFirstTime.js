@@ -25,7 +25,6 @@ const playWithSomeoneFirstTime = (available, round, username) => {
       data.info.data.push(playersInRound[i]);
     }
   }
-  console.log(data);
   return data;
 };
 

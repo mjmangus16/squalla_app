@@ -165,7 +165,7 @@ class AddRoundStepper extends Component {
       foliage: this.state.course.foliage,
       elevation: this.state.course.elevation
     };
-    console.log(data);
+
     this.props.submitRound(data);
     this.setState({
       date: "",
