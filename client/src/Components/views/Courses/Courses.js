@@ -203,14 +203,24 @@ class Courses extends Component {
       state: course.state_province,
       holes: course.holes,
       distance: distance,
-      foliage: course.course_foliage,
-      elevation: course.course_elevation,
       course_node_nid: course.course_node_nid,
       par1,
       par2,
       par3,
       par4
     };
+
+    if (course.course_foliage === "") {
+      data.foliage = "N/A";
+    } else {
+      data.foliage = course.course_foliage;
+    }
+
+    if (course.course_elevation === "") {
+      data.elevation = "N/A";
+    } else {
+      data.elevation = course.course_elevation;
+    }
 
     this.props.addCourse(data);
   };

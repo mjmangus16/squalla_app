@@ -115,6 +115,7 @@ class FindCourse extends Component {
     } else if (this.state.tabValue === 3) {
       data.query = "zip";
     }
+
     this.props.getCourses(data);
   };
 

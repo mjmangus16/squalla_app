@@ -1,10 +1,16 @@
 const getCourseRating = (distance, foliage, elevation) => {
   let rating;
   let distanceRating;
-  foliage = parseInt(foliage);
-  elevation = parseInt(elevation);
+  if (foliage !== "N/A") {
+    foliage = parseInt(foliage);
+  }
+  if (elevation !== "N/A") {
+    elevation = parseInt(elevation);
+  }
 
-  if (distance === "Very Short") {
+  if (distance === "N/A") {
+    distanceRating = 10;
+  } else if (distance === "Very Short") {
     distanceRating = 20;
   } else if (distance === "Short") {
     distanceRating = 30;
@@ -18,7 +24,7 @@ const getCourseRating = (distance, foliage, elevation) => {
 
   let foliageRating, elevationRating;
 
-  if (foliage === 0) {
+  if (foliage === 0 || foliage === "N/A") {
     foliageRating = 1.0;
   } else if (foliage === 1) {
     foliageRating = 1.1;
@@ -42,7 +48,7 @@ const getCourseRating = (distance, foliage, elevation) => {
     foliageRating = 2;
   }
 
-  if (elevation === 0) {
+  if (elevation === 0 || elevation === "N/A") {
     elevationRating = 1.0;
   } else if (elevation === 1) {
     elevationRating = 1.05;

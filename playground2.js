@@ -78,6 +78,19 @@
 //   console.log(sum);
 // }
 
-let newSet = new Set([1, 2, 3, 3]);
+// let newSet = new Set([1, 2, 3, 3]);
 
-console.log(newSet);
+// console.log(newSet);
+
+let date = new Date();
+let priorDate = new Date();
+
+console.log(date);
+priorDate.setDate(priorDate.getDate() - 5);
+console.log(priorDate);
+
+if (date < priorDate) {
+  console.log(true);
+} else {
+  console.log(false);
+}
