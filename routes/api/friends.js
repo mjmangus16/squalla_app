@@ -45,7 +45,7 @@ router.get(
                 profile.achievements.push(achievement);
                 profile.achievementPoints =
                   profile.achievementPoints + achieveData.points;
-                profile.notifications.other.push({
+                profile.notifications.other.unshift({
                   type: "achievementEarned",
                   data: {
                     name: achievement.name,
@@ -69,7 +69,7 @@ router.get(
                     profile.achievements[i].count = achieveData.count;
                     profile.achievementPoints =
                       profile.achievementPoints + achieveData.points;
-                    profile.notifications.other.push({
+                    profile.notifications.other.unshift({
                       type: "achievementEarned",
                       data: {
                         name: achievement.name,
@@ -157,7 +157,7 @@ router.post(
                   Profile.findOne({ username: req.body.username }).then(
                     friend => {
                       friend.friends.push(profile.username);
-                      friend.notifications.other.push({
+                      friend.notifications.other.unshift({
                         type: "addFriend",
                         data: profile.username
                       });

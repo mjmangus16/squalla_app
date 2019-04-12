@@ -232,7 +232,7 @@ router.post(
                   };
 
                   if (profile.username !== req.user.username) {
-                    profile.notifications.rounds.push(returnData);
+                    profile.notifications.rounds.unshift(returnData);
                     profile.markModified("notifications");
                   }
 
@@ -240,7 +240,7 @@ router.post(
                     .save()
                     .then(profile => {
                       for (let i = 0; i < achievesEarned.length; i++) {
-                        profile.notifications.other.push({
+                        profile.notifications.other.unshift({
                           type: "achievementEarned",
                           data: {
                             name: achievesEarned[i].name,
