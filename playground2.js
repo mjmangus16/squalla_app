@@ -83,14 +83,10 @@
 // console.log(newSet);
 
 let date = new Date();
-let priorDate = new Date();
 
-console.log(date);
-priorDate.setDate(priorDate.getDate() - 5);
-console.log(priorDate);
+let year = date.getFullYear();
 
-if (date < priorDate) {
-  console.log(true);
-} else {
-  console.log(false);
-}
+let fullDate = `${date.getMonth() +
+  1}/${date.getDate()}/${year.toString().substr(-2)}`;
+
+console.log(fullDate);

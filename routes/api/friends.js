@@ -32,9 +32,8 @@ router.get(
 
             let year = date.getFullYear();
 
-            let fullDate = `${date.getMonth()}/${date.getDate()}/${year
-              .toString()
-              .substr(-2)}`;
+            let fullDate = `${date.getMonth() +
+              1}/${date.getDate()}/${year.toString().substr(-2)}`;
 
             if (!popularityContestEarned) {
               achieveData = popularityContestRequirementsMet(
