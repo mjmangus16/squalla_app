@@ -10,28 +10,51 @@ import {
 const styles = theme => ({
   card: {
     width: "100%",
-    height: 215
-  }
+    height: "100%"
+  },
+  fontSize: {}
 });
 
-const Stats = ({ classes }) => {
-  return (
-    <Card className={classes.card}>
-      <CardHeader title="Stats" />
-      <CardContent>
-        <Typography variant="subtitle1">59 - Total Points Earned</Typography>
-        <Typography variant="subtitle1">
-          14 - Total Achievements Earned
-        </Typography>
-        <Typography variant="subtitle1">
-          12 - Most Points Earned In A Round
-        </Typography>
-        <Typography variant="subtitle1">
-          17 - Most Points Earned In A Day
-        </Typography>
-      </CardContent>
-    </Card>
-  );
+const Stats = ({ classes, data, stat }) => {
+  if (stat === "points") {
+    return (
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography
+            variant="title"
+            align="center"
+            style={{ fontSize: "1em", textDecoration: "underline" }}
+          >
+            Points
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Typography variant="subtitle1" align="center">
+            {data}
+          </Typography>
+        </CardContent>
+      </Card>
+    );
+  } else if (stat === "achieves") {
+    return (
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography
+            variant="title"
+            align="center"
+            style={{ fontSize: "1em", textDecoration: "underline" }}
+          >
+            Completed
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Typography variant="subtitle1" align="center">
+            {data}
+          </Typography>
+        </CardContent>
+      </Card>
+    );
+  }
 };
 
 export default withStyles(styles)(Stats);

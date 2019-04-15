@@ -21,6 +21,7 @@ import { grey } from "@material-ui/core/colors";
 
 import PointsChart from "./Cards/PointsChart";
 import Achieves from "./Cards/Achieves";
+import Stats from "./Cards/Stats";
 
 const styles = theme => ({
   root: {
@@ -67,7 +68,7 @@ class Achievements extends Component {
   render() {
     const { classes } = this.props;
     const { achievements } = this.props.profile;
-    const { dialog, stats, achievementsList, tabValue } = this.state;
+    const { dialog, tabValue } = this.state;
     const { isAuthenticated } = this.props.auth;
 
     let achievementWrapper;
@@ -88,6 +89,15 @@ class Achievements extends Component {
         } else if (tabValue === 0) {
           achievementContent = (
             <Grid container justify="center" spacing={8}>
+              <Grid item xs={6}>
+                <Stats stat="points" data={achievements.stats.totalPoints} />
+              </Grid>
+              <Grid item xs={6}>
+                <Stats
+                  stat="achieves"
+                  data={achievements.stats.totalAchievementsEarned}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <PointsChart
                   chart="rounds"
