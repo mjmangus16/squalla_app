@@ -46,7 +46,7 @@ const styles = theme => ({
 
 class App extends Component {
   state = {
-    drawer: false,
+    drawer: true,
     drawerExpand: true,
     login: false,
     register: this.props.auth.isAuthenticated ? false : true

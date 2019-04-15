@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Card, CardContent, withStyles } from "@material-ui/core";
+import { Card, CardContent, Typography, withStyles } from "@material-ui/core";
 
 import RoundsChart from "../../../Charts/Performance/Rounds";
 import CoursesChart from "../../../Charts/Performance/Courses";
@@ -56,9 +56,26 @@ class PerformanceCard extends Component {
             />
           );
         } else if (chart === "overall") {
-          chartContent = (
-            <OverallChart height={300} data={performance.performanceOverall} />
-          );
+          if (
+            performance.performanceOverall.plus === 0 &&
+            performance.performanceOverall.even === 0 &&
+            performance.performanceOverall.minus === 0
+          ) {
+            chartContent = (
+              <CardContent>
+                <Typography style={{ textAlign: "center" }} variant="subtitle1">
+                  Start adding rounds to see performance data
+                </Typography>
+              </CardContent>
+            );
+          } else {
+            chartContent = (
+              <OverallChart
+                height={300}
+                data={performance.performanceOverall}
+              />
+            );
+          }
         }
       }
     }
