@@ -12,6 +12,11 @@ const playMultipleRounds = require("./achievement/playMultipleRounds");
 const earnPositiveRating5 = require("./achievement/earnPositiveRating5");
 const earnPositiveRating10 = require("./achievement/earnPositiveRating10");
 const earnPositiveRating15 = require("./achievement/earnPositiveRating15");
+const crowdedRound = require("./achievement/crowdedRound");
+const partyRound = require("./achievement/partyRound");
+const winMatch3 = require("./achievement/winMatch3");
+const winMatch6 = require("./achievement/winMatch6");
+const winMatch10 = require("./achievement/winMatch10");
 
 const determineAchievements = (profile, available, round, courseData) => {
   let earned = [];
@@ -116,6 +121,31 @@ const determineAchievements = (profile, available, round, courseData) => {
   );
   if (earnPositiveRating15_.pass === true) {
     earned.push(earnPositiveRating15_.info);
+  }
+
+  let crowdedRound_ = crowdedRound(available, round);
+  if (crowdedRound_.pass === true) {
+    earned.push(crowdedRound_.info);
+  }
+
+  let partyRound_ = partyRound(available, round);
+  if (partyRound_.pass === true) {
+    earned.push(partyRound_.info);
+  }
+
+  let winMatch3_ = winMatch3(available, round, profile.username);
+  if (winMatch3_.pass === true) {
+    earned.push(winMatch3_.info);
+  }
+
+  let winMatch6_ = winMatch6(available, round, profile.username);
+  if (winMatch6_.pass === true) {
+    earned.push(winMatch6_.info);
+  }
+
+  let winMatch10_ = winMatch10(available, round, profile.username);
+  if (winMatch10_.pass === true) {
+    earned.push(winMatch10_.info);
   }
 
   return earned;
