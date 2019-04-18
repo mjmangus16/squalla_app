@@ -6,11 +6,15 @@ import withWidth from "@material-ui/core/withWidth";
 class Friends extends Component {
   state = {
     chartData: {
-      labels: this.props.data.map(friend => friend.friend),
+      labels: this.props.newToApp
+        ? ["Friend1", "Friend2", "Friend3"]
+        : this.props.data.map(friend => friend.friend),
       datasets: [
         {
           label: "Rounds Played Together",
-          data: this.props.data.map(friend => friend.rounds),
+          data: this.props.newToApp
+            ? [3, 5, 4]
+            : this.props.data.map(friend => friend.rounds),
           backgroundColor: chartColors()
         }
       ]

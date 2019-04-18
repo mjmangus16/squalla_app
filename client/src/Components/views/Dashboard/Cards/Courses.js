@@ -27,12 +27,14 @@ const styles = theme => ({
   }
 });
 
-const Courses = ({ classes, coursesPlayed, roundsPerCourse }) => {
+const Courses = ({ classes, coursesPlayed, roundsPerCourse, newToApp }) => {
   return (
     <Card className={classes.card}>
       <CardHeader
-        title="Courses"
-        subheader={`${coursesPlayed} Courses Played`}
+        title={newToApp ? "Courses (Mock Data)" : "Courses"}
+        subheader={
+          newToApp ? "4 Courses Played" : `${coursesPlayed} Courses Played`
+        }
         classes={{
           title: classes.headerTitle,
           subheader: classes.subheader
@@ -40,7 +42,11 @@ const Courses = ({ classes, coursesPlayed, roundsPerCourse }) => {
       />
       <CardContent className={classes.chartWrapper}>
         <div className={classes.chart}>
-          <CoursesChart height={225} data={roundsPerCourse} />
+          <CoursesChart
+            height={225}
+            data={roundsPerCourse}
+            newToApp={newToApp}
+          />
         </div>
       </CardContent>
     </Card>

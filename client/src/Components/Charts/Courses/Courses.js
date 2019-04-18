@@ -18,11 +18,20 @@ const getLabels = data => {
 class Courses extends Component {
   state = {
     chartData: {
-      labels: getLabels(this.props.data),
+      labels: this.props.newToApp
+        ? [
+            "Beaver Island State Park",
+            "Joseph Davis State Park",
+            "Porter on the Lake Park",
+            "Pine Woods park"
+          ]
+        : getLabels(this.props.data),
       datasets: [
         {
           label: "Rounds Played",
-          data: this.props.data.map(course => course.rounds),
+          data: this.props.newToApp
+            ? [2, 2, 2, 2]
+            : this.props.data.map(course => course.rounds),
           backgroundColor: chartColors()
         }
       ]

@@ -27,12 +27,14 @@ const styles = theme => ({
   }
 });
 
-const Achievements = ({ classes, points, pointsPerRound }) => {
+const Achievements = ({ classes, points, pointsPerRound, newToApp }) => {
   return (
     <Card className={classes.card}>
       <CardHeader
-        title="Achievements"
-        subheader={`${points} Achievement Points`}
+        title={newToApp ? "Achievements (Mock Data)" : "Achievements"}
+        subheader={
+          newToApp ? `42 Achievement Points` : `${points} Achievement Points`
+        }
         classes={{
           title: classes.headerTitle,
           subheader: classes.subheader
@@ -40,7 +42,11 @@ const Achievements = ({ classes, points, pointsPerRound }) => {
       />
       <CardContent className={classes.chartWrapper}>
         <div className={classes.chart}>
-          <AchievementsChart height={225} data={pointsPerRound} />
+          <AchievementsChart
+            height={225}
+            data={pointsPerRound}
+            newToApp={newToApp}
+          />
         </div>
       </CardContent>
     </Card>

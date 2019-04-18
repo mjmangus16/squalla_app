@@ -22,7 +22,8 @@ const styles = theme => ({
   },
   table: {
     position: "relative",
-    width: "100%"
+    width: "100%",
+    minWidth: 300
   },
   headerTitle: {
     [theme.breakpoints.down("xs")]: {

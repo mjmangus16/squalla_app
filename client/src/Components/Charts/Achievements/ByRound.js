@@ -12,7 +12,9 @@ class Achievements extends Component {
 
       datasets: [
         {
-          data: this.props.data,
+          data: this.props.newToApp
+            ? [7, 12, 12, 14, 22, 25, 35, 40, 40, 42]
+            : this.props.data,
           borderColor: colors[0]
         }
       ]

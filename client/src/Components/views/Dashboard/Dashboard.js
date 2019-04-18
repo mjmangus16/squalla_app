@@ -115,18 +115,21 @@ class Dashboard extends Component {
                 <Courses
                   coursesPlayed={dashboard.coursesPlayed}
                   roundsPerCourse={dashboard.roundsPerCourse}
+                  newToApp={dashboard.roundsPlayed === 0 ? true : false}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <Achievements
                   points={dashboard.achievementPoints}
                   pointsPerRound={dashboard.achievementPointsPerRound}
+                  newToApp={dashboard.roundsPlayed === 0 ? true : false}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <Friends
                   friends={dashboard.totalFriends}
                   roundsPerFriend={dashboard.roundsPerFriend}
+                  newToApp={dashboard.roundsPlayed === 0 ? true : false}
                 />
               </Grid>
             </Grid>

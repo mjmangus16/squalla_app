@@ -27,12 +27,12 @@ const styles = theme => ({
   }
 });
 
-const Friends = ({ classes, friends, roundsPerFriend }) => {
+const Friends = ({ classes, friends, roundsPerFriend, newToApp }) => {
   return (
     <Card className={classes.card}>
       <CardHeader
-        title="Friends"
-        subheader={`${friends} Friends`}
+        title={newToApp ? "Friends (Mock Data)" : "Friends"}
+        subheader={newToApp ? "3 Friends" : `${friends} Friends`}
         classes={{
           title: classes.headerTitle,
           subheader: classes.subheader
@@ -40,7 +40,11 @@ const Friends = ({ classes, friends, roundsPerFriend }) => {
       />
       <CardContent className={classes.chartWrapper}>
         <div className={classes.chart}>
-          <FriendsChart height={225} data={roundsPerFriend} />
+          <FriendsChart
+            height={225}
+            data={roundsPerFriend}
+            newToApp={newToApp}
+          />
         </div>
       </CardContent>
     </Card>
