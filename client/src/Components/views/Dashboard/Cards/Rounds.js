@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Card,
   CardHeader,
@@ -36,12 +36,64 @@ const styles = theme => ({
   }
 });
 
-const Rounds = ({ classes, roundsPlayed, recentRounds }) => {
+const Rounds = ({ classes, roundsPlayed, recentRounds, newToApp }) => {
+  const mockRounds = (
+    <Fragment>
+      <TableRow>
+        <TableCell padding="dense" align="center">
+          4/16/19
+        </TableCell>
+        <TableCell
+          padding="dense"
+          align="center"
+          className={classes.courseName}
+        >
+          Beaver Island State Park
+        </TableCell>
+        <TableCell padding="dense" align="center">
+          70
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell padding="dense" align="center">
+          4/13/19
+        </TableCell>
+        <TableCell
+          padding="dense"
+          align="center"
+          className={classes.courseName}
+        >
+          Joseph Davis State Park
+        </TableCell>
+        <TableCell padding="dense" align="center">
+          75
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell padding="dense" align="center">
+          4/9/19
+        </TableCell>
+        <TableCell
+          padding="dense"
+          align="center"
+          className={classes.courseName}
+        >
+          Beaver Island State Park
+        </TableCell>
+        <TableCell padding="dense" align="center">
+          71
+        </TableCell>
+      </TableRow>
+    </Fragment>
+  );
+
   return (
     <Card className={classes.card}>
       <CardHeader
-        title="Rounds"
-        subheader={`${roundsPlayed} Rounds Played`}
+        title={newToApp ? "Rounds (Mock Data)" : "Rounds"}
+        subheader={
+          newToApp ? "8 Rounds Played" : `${roundsPlayed} Rounds Played`
+        }
         classes={{
           title: classes.headerTitle,
           subheader: classes.subheader
@@ -63,23 +115,25 @@ const Rounds = ({ classes, roundsPlayed, recentRounds }) => {
             </TableRow>
           </TableHead>
           <TableBody style={{ overflow: "Scroll" }}>
-            {recentRounds.map(round => (
-              <TableRow key={recentRounds.indexOf(round)}>
-                <TableCell padding="dense" align="center">
-                  {round.date}
-                </TableCell>
-                <TableCell
-                  padding="dense"
-                  align="center"
-                  className={classes.courseName}
-                >
-                  {round.course}
-                </TableCell>
-                <TableCell padding="dense" align="center">
-                  {round.score}
-                </TableCell>
-              </TableRow>
-            ))}
+            {newToApp
+              ? mockRounds
+              : recentRounds.map(round => (
+                  <TableRow key={recentRounds.indexOf(round)}>
+                    <TableCell padding="dense" align="center">
+                      {round.date}
+                    </TableCell>
+                    <TableCell
+                      padding="dense"
+                      align="center"
+                      className={classes.courseName}
+                    >
+                      {round.course}
+                    </TableCell>
+                    <TableCell padding="dense" align="center">
+                      {round.score}
+                    </TableCell>
+                  </TableRow>
+                ))}
           </TableBody>
         </Table>
       </CardContent>

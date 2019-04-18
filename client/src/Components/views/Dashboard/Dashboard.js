@@ -101,12 +101,14 @@ class Dashboard extends Component {
                 <Performance
                   performance={dashboard.performancePointsPerRound}
                   rating={dashboard.performanceRating}
+                  newToApp={dashboard.roundsPlayed === 0 ? true : false}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <Rounds
                   roundsPlayed={dashboard.roundsPlayed}
                   recentRounds={dashboard.recentRounds}
+                  newToApp={dashboard.roundsPlayed === 0 ? true : false}
                 />
               </Grid>
               <Grid item xs={12} md={6}>

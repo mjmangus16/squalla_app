@@ -1,14 +1,12 @@
-const getAverage = (round, profile) => {
+const getAverage = history => {
   let data;
-  for (let i = 0; i < profile.courses.length; i++) {
-    if (round.course === profile.courses[i].name) {
-      for (let y = 0; y < profile.courses[i].tees.length; y++) {
-        if (round.tees === profile.courses[i].tees[y].tee) {
-          data = profile.courses[i].tees[y].average;
-        }
-      }
-    }
+  let sum = 0;
+  for (let i = 0; i < history.length; i++) {
+    sum = sum + parseInt(history[i].score);
   }
+  data = sum / history.length;
+  console.log(sum, history.length);
+  console.log(data);
   return data;
 };
 

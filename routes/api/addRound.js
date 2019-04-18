@@ -125,22 +125,6 @@ router.post(
               if (!courseExists) {
                 profile = addCourseToProfile(course, profile);
               }
-              let average = getAverage(round, profile);
-              let performance = getPerformance(average, round.scores[i].score);
-
-              profile.performancePoints =
-                profile.performancePoints + performance;
-
-              round.scores[i].performance = performance;
-
-              const teeData = getTeeData(profile, round);
-
-              teeData.rating = course.rating;
-
-              profile.rounds.unshift(round);
-
-              profile = updateStats(profile, round, round.scores[i].score);
-              profile.markModified("courses");
 
               let courseInfo = {
                 name: round.course,
@@ -155,6 +139,28 @@ router.post(
                 profile.rounds,
                 profile.username
               );
+
+              let average = getAverage(courseInfo.history);
+              let performance = getPerformance(average, round.scores[i].score);
+
+              profile.performancePoints =
+                profile.performancePoints + performance;
+
+              round.scores[i].performance = performance;
+
+              const teeData = getTeeData(profile, round);
+
+              teeData.rating = course.rating;
+
+              profile.rounds.unshift(round);
+
+              profile = updateStats(
+                profile,
+                round,
+                round.scores[i].score,
+                average
+              );
+              profile.markModified("courses");
 
               let userStats = {
                 average: teeData.average,

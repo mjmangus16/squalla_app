@@ -28,13 +28,17 @@ const styles = theme => ({
   }
 });
 
-const Performance = ({ classes, performance, rating }) => {
+const Performance = ({ classes, performance, rating, newToApp }) => {
   return (
     <Card className={classes.card}>
       <CardHeader
-        title="Performance"
+        title={newToApp ? "Performance (Mock Data)" : "Performance"}
         style={{ paddingBottom: 0 }}
-        subheader={`Current Rating: ${rating >= 0 ? "+" : null}${rating}`}
+        subheader={
+          newToApp
+            ? `Current Rating: +4`
+            : `Current Rating: ${rating >= 0 ? "+" : null}${rating}`
+        }
         classes={{
           title: classes.headerTitle,
           subheader: classes.subheader
@@ -42,7 +46,7 @@ const Performance = ({ classes, performance, rating }) => {
       />
       <CardContent className={classes.chartWrapper}>
         <div className={classes.chart}>
-          <RoundsChart height={225} data={performance} />
+          <RoundsChart height={225} data={performance} newToApp={newToApp} />
         </div>
       </CardContent>
     </Card>

@@ -12,7 +12,9 @@ class Rounds extends Component {
 
       datasets: [
         {
-          data: this.props.data,
+          data: this.props.newToApp
+            ? [1, 2, 1, 2, 3, 2, 3, 4]
+            : this.props.data,
           borderColor: colors[0]
         }
       ]

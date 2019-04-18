@@ -70,6 +70,7 @@ class Notifications extends Component {
     } = this.props;
     const { dialog } = this.state;
 
+    let notificationsArray = [];
     let notificationsWrapper;
     let notificationsContent = [];
     let roundsContent;
@@ -99,37 +100,54 @@ class Notifications extends Component {
             </Grid>
           );
         } else {
-          if (notifications.rounds.length > 0) {
-            roundsContent = notifications.rounds.map(round => (
-              <Grid
-                item
-                xs={12}
-                md={6}
-                key={`rounds_${notifications.rounds.indexOf(round)}`}
-              >
-                <Round success={round} />
-              </Grid>
-            ));
+          for (let i = 0; i < notifications.rounds.length; i++) {
+            notifications.rounds[i].data = {
+              date: notifications.rounds[i].date
+            };
           }
-          if (notifications.other.length > 0) {
-            otherContent = notifications.other.map(other => (
-              <Grid
-                item
-                xs={12}
-                md={6}
-                key={`other_${notifications.other.indexOf(other)}`}
-              >
-                <Other success={other} />
-              </Grid>
-            ));
+          notificationsArray = notificationsArray.concat(
+            notifications.rounds,
+            notifications.other
+          );
+
+          notificationsArray.sort((a, b) => {
+            return new Date(b.data.date) - new Date(a.data.date);
+          });
+
+          if (notificationsArray.length > 0) {
+            for (let i = 0; i < notificationsArray.length; i++) {
+              if (notificationsArray[i].type) {
+                notificationsContent.push(
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    key={`other_${notificationsArray.indexOf(
+                      notificationsArray[i]
+                    )}`}
+                  >
+                    <Other success={notificationsArray[i]} />
+                  </Grid>
+                );
+              } else {
+                notificationsContent.push(
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    key={`rounds_${notificationsArray.indexOf(
+                      notificationsArray[i]
+                    )}`}
+                  >
+                    <Round success={notificationsArray[i]} />
+                  </Grid>
+                );
+              }
+            }
           }
         }
       }
     }
-    notificationsContent = notificationsContent.concat(
-      roundsContent,
-      otherContent
-    );
 
     if (!isAuthenticated) {
       notificationsWrapper = null;

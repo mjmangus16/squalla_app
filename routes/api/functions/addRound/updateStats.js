@@ -1,4 +1,4 @@
-const updateStats = (profile, round, score) => {
+const updateStats = (profile, round, score, courseAverage) => {
   let average, best;
   for (let i = 0; i < profile.courses.length; i++) {
     if (profile.courses[i].name === round.course) {
@@ -13,9 +13,7 @@ const updateStats = (profile, round, score) => {
           if (average === "") {
             profile.courses[i].tees[y].average = parseInt(score);
           } else {
-            let sum = parseInt(average) + parseInt(score);
-            let newAverage = Math.round(sum / 2);
-            profile.courses[i].tees[y].average = newAverage;
+            profile.courses[i].tees[y].average = courseAverage;
           }
         }
       }

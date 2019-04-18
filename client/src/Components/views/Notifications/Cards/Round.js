@@ -22,7 +22,8 @@ const styles = theme => ({
   },
   content: {
     width: "100%",
-    margin: "auto"
+    margin: "auto",
+    overflow: "auto"
   },
   cell: {
     width: 100
