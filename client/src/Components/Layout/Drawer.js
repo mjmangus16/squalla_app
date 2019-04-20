@@ -18,11 +18,12 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import ListIcon from "@material-ui/icons/List";
 import FlagIcon from "@material-ui/icons/Flag";
 import PeopleIcon from "@material-ui/icons/People";
-import PlaceIcon from "@material-ui/icons/Place";
 import PersonIcon from "@material-ui/icons/Person";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import ShowChartIcon from "@material-ui/icons/ShowChart";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
+
+import Settings from "./Settings";
 
 const styles = theme => ({
   root: {
@@ -81,7 +82,9 @@ const DrawerComponent = ({
   username,
   notifications,
   drawerExpandStatus,
-  drawerExpandHandler
+  drawerExpandHandler,
+  settings,
+  settingsHandler
 }) => {
   let drawerContent;
 
@@ -129,7 +132,7 @@ const DrawerComponent = ({
             </ListItem>
           )}
 
-          <ListItem button>
+          <ListItem button onClick={settingsHandler}>
             <ListItemIcon className={classes.listItem}>
               <PersonIcon />
             </ListItemIcon>
@@ -294,6 +297,7 @@ const DrawerComponent = ({
       open={!auth ? true : status}
       id="drawer"
     >
+      <Settings settings={settings} settingsHandler={settingsHandler} />
       {drawerContent}
     </Drawer>
   );

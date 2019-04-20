@@ -48,7 +48,8 @@ class App extends Component {
     drawer: true,
     drawerExpand: true,
     login: false,
-    register: this.props.auth.isAuthenticated ? false : true
+    register: this.props.auth.isAuthenticated ? false : true,
+    settings: false
   };
 
   componentDidMount() {
@@ -78,9 +79,15 @@ class App extends Component {
     this.props.clearCurrentProfile();
   };
 
+  toggleSettings = () => {
+    this.setState({
+      settings: !this.state.settings
+    });
+  };
+
   render() {
     const { classes } = this.props;
-    const { drawer, login, register, drawerExpand } = this.state;
+    const { drawer, login, register, drawerExpand, settings } = this.state;
     const { isAuthenticated } = this.props.auth;
     const { username } = this.props.auth.user;
     const { notifications } = this.props.profile;
@@ -110,6 +117,8 @@ class App extends Component {
             notifications={notifications}
             drawerExpandStatus={drawerExpand}
             drawerExpandHandler={this.drawerExpandHandler}
+            settings={settings}
+            settingsHandler={this.toggleSettings}
           />
           <div
             className={
