@@ -205,7 +205,7 @@ const DrawerComponent = ({
           <Link to="/courses" className={classes.navLink}>
             <ListItem button>
               <ListItemIcon className={classes.listItem}>
-                <PlaceIcon />
+                <FlagIcon />
               </ListItemIcon>
               <ListItemText
                 primary="COURSES"
@@ -220,17 +220,6 @@ const DrawerComponent = ({
               </ListItemIcon>
               <ListItemText
                 primary="FRIENDS"
-                className={drawerExpandStatus ? null : classes.menuText}
-              />
-            </ListItem>
-          </Link>
-          <Link to="/leagues" className={classes.navLink}>
-            <ListItem button>
-              <ListItemIcon className={classes.listItem}>
-                <FlagIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="LEAGUES"
                 className={drawerExpandStatus ? null : classes.menuText}
               />
             </ListItem>

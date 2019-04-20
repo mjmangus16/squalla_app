@@ -24,7 +24,6 @@ import Achievements from "./views/Achievements/Achievements";
 import AddRound from "./views/AddRound/AddRound";
 import Courses from "./views/Courses/Courses";
 import Friends from "./views/Friends/Friends";
-import Leagues from "./views/Leagues/Leagues";
 
 const styles = theme => ({
   contentContainerOpen: {
@@ -137,11 +136,6 @@ class App extends Component {
             <Route exact path="/achievements" component={Achievements} />
             <Route exact path="/courses" component={Courses} />
             <Route exact path="/friends" component={Friends} />
-            <Route
-              exact
-              path="/leagues"
-              component={() => <Leagues isAuthenticated={isAuthenticated} />}
-            />
             <Route exact path="/addRound" component={AddRound} />
           </div>
         </Fragment>
