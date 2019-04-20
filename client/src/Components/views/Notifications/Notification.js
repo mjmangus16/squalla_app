@@ -86,7 +86,7 @@ class Notifications extends Component {
         ) {
           notificationsContent.push(
             <Grid item xs={12} key="0Notifications">
-              <Card>
+              <Card raised>
                 <CardContent>
                   <Typography
                     align="center"

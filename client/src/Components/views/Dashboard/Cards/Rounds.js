@@ -89,7 +89,7 @@ const Rounds = ({ classes, roundsPlayed, recentRounds, newToApp }) => {
   );
 
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardHeader
         title={newToApp ? "Rounds (Mock Data)" : "Rounds"}
         subheader={
@@ -143,11 +143,3 @@ const Rounds = ({ classes, roundsPlayed, recentRounds, newToApp }) => {
 };
 
 export default withStyles(styles)(Rounds);
-
-// const reduceCourseName = name => {
-//   if (name.length > 15) {
-//     return name.substring(0, 15) + "..";
-//   } else {
-//     return name.substring(0, 15);
-//   }
-// };

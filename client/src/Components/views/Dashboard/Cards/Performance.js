@@ -30,7 +30,7 @@ const styles = theme => ({
 
 const Performance = ({ classes, performance, rating, newToApp }) => {
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardHeader
         title={newToApp ? "Performance (Mock Data)" : "Performance"}
         style={{ paddingBottom: 0 }}

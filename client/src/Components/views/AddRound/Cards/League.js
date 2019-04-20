@@ -10,7 +10,7 @@ const styles = theme => ({
 
 const LeagueInput = ({ classes, handler }) => {
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardContent>
         <Typography variant="title" align="center">
           Leagues are not yet available

@@ -81,7 +81,7 @@ class PerformanceCard extends Component {
     }
 
     return (
-      <Card className={classes.card}>
+      <Card raised className={classes.card}>
         <CardContent className={classes.chartWrapper}>
           <div className={classes.chart}>{chartContent}</div>
         </CardContent>

@@ -29,7 +29,7 @@ const styles = theme => ({
 
 const Friends = ({ classes, friends, roundsPerFriend, newToApp }) => {
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardHeader
         title={newToApp ? "Friends (Mock Data)" : "Friends"}
         subheader={newToApp ? "3 Friends" : `${friends} Friends`}

@@ -36,7 +36,7 @@ const styles = theme => ({
 
 const ScoresInput = ({ classes, players, scoresHandler, scores }) => {
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardContent>
         <Grid
           container

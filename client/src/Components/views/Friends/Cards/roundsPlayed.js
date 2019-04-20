@@ -19,7 +19,7 @@ const styles = theme => ({
 
 const Friends = ({ classes, friends, roundsPerFriend }) => {
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardContent className={classes.chartWrapper}>
         <div className={classes.chart}>
           <FriendsChart height={225} data={roundsPerFriend} />

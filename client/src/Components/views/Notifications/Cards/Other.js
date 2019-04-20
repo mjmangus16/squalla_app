@@ -35,7 +35,7 @@ class Other extends Component {
 
     if (success.type === "addFriend") {
       otherContent = (
-        <Card className={classes.card}>
+        <Card raised className={classes.card}>
           <CardHeader title="Friend Added!" />
           <CardContent>
             <Typography variant="subheading">
@@ -49,7 +49,7 @@ class Other extends Component {
       );
     } else if (success.type === "achievementEarned") {
       otherContent = (
-        <Card className={classes.card}>
+        <Card raised className={classes.card}>
           <CardHeader title="Achievement Earned!" />
           <CardContent>
             <Typography variant="subheading">
@@ -75,7 +75,7 @@ class Other extends Component {
       );
     } else if (success.type === "addCourse") {
       otherContent = (
-        <Card className={classes.card}>
+        <Card raised className={classes.card}>
           <CardHeader title="Course Added!" />
           <CardContent>
             <Typography variant="subheading">

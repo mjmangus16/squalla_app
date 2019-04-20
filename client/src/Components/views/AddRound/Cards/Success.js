@@ -151,7 +151,7 @@ class Success extends Component {
   render() {
     const { classes, success } = this.props;
     return (
-      <Card className={classes.card}>
+      <Card raised className={classes.card}>
         <CardContent className={classes.root}>
           <Typography
             gutterBottom

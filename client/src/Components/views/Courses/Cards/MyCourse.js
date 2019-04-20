@@ -67,7 +67,7 @@ const styles = theme => ({
 const MyCourse = ({ classes, data, editCourseHandler }) => {
   return (
     <Grid item xs={12} md={6} className="myCourseCard">
-      <Card className={classes.card}>
+      <Card raised className={classes.card}>
         <CardHeader
           title={data.name}
           subheader={`${data.city}, ${data.state}`}

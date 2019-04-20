@@ -92,7 +92,7 @@ class CourseInput extends Component {
     const { redTee, whiteTee, blueTee, goldTee, courseSelected } = this.state;
 
     return (
-      <Card className={classes.card}>
+      <Card raised className={classes.card}>
         <CardContent>
           <Grid
             container

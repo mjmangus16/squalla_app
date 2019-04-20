@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import {
+  Card,
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
@@ -95,7 +96,7 @@ class Achieves extends Component {
       </ExpansionPanel>
     ));
 
-    return <Fragment>{achievesContent}</Fragment>;
+    return <Card raised>{achievesContent}</Card>;
   }
 }
 

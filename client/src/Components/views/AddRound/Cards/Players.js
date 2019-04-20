@@ -53,7 +53,7 @@ const PlayersInput = ({ classes, playersHandler, friends, players, user }) => {
   };
 
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardContent>
         <Grid
           container

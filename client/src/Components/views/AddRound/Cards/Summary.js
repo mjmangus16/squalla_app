@@ -115,7 +115,11 @@ const Summary = ({ classes, summary }) => {
     }
   }
 
-  return <Card className={classes.card}>{summaryContent}</Card>;
+  return (
+    <Card raised className={classes.card}>
+      {summaryContent}
+    </Card>
+  );
 };
 
 export default withStyles(styles)(Summary);

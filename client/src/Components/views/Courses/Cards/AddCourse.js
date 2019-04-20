@@ -95,7 +95,7 @@ const AddCourse = ({ classes, data, addCourseHandler }) => {
 
   return (
     <Grid item xs={12} md={6} className="addCourseCard">
-      <Card className={classes.card}>
+      <Card raised className={classes.card}>
         <CardHeader
           title={data.course_name}
           subheader={`${data.city}, ${data.state_province}`}

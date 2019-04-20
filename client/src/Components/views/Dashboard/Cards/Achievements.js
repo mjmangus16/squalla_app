@@ -29,7 +29,7 @@ const styles = theme => ({
 
 const Achievements = ({ classes, points, pointsPerRound, newToApp }) => {
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardHeader
         title={newToApp ? "Achievements (Mock Data)" : "Achievements"}
         subheader={

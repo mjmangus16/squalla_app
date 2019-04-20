@@ -95,7 +95,7 @@ class Level extends Component {
     const { classes, level } = this.props;
 
     return (
-      <Card className={classes.card}>
+      <Card raised className={classes.card}>
         <CardContent>
           <Typography
             gutterBottom

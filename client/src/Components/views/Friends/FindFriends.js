@@ -94,7 +94,7 @@ class FindFriend extends Component {
         );
       } else if (typeof data === "object") {
         userContent = (
-          <Card>
+          <Card raised>
             <CardHeader
               title={data.username}
               subheader={`Level: ${data.level}`}

@@ -21,7 +21,7 @@ const styles = theme => ({
 
 const Recent = ({ classes }) => {
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardHeader title="Recent" />
       <CardContent>
         <Table>

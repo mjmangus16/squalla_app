@@ -25,7 +25,7 @@ const styles = theme => ({
 const MyFriend = ({ classes, data, getUserHandler, openDialogHandler }) => {
   return (
     <Grid item xs={12} sm={6} md={4} className="myCourseCard">
-      <Card className={classes.card}>
+      <Card raised className={classes.card}>
         <CardHeader
           title={data}
           classes={{

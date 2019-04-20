@@ -14,6 +14,8 @@ import {
   IconButton,
   Tabs,
   Tab,
+  Card,
+  CardContent,
   Paper,
   InputBase,
   Dialog,
@@ -304,8 +306,19 @@ class Courses extends Component {
     let coursesContent;
 
     if (tabValue === 0) {
-      if (!myCourses) {
-        coursesContent = null;
+      if (!myCourses || myCourses.length === 0) {
+        coursesContent = (
+          <Grid item xs={12} md={12}>
+            <Card raised>
+              <CardContent>
+                <Typography align="center">
+                  Use the Find Courses tab to start adding courses to your
+                  profile
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        );
       } else {
         if (Object.keys(myCourses).length > 0) {
           coursesContent = (

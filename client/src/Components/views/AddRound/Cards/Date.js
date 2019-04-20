@@ -20,7 +20,7 @@ const styles = theme => ({
 
 const DateInput = ({ classes, handler }) => {
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardContent style={{ width: 200, margin: "auto" }}>
         <form className={classes.container} noValidate>
           <TextField

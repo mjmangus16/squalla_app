@@ -34,7 +34,7 @@ class Round extends Component {
   render() {
     const { classes, success } = this.props;
     return (
-      <Card className={classes.card}>
+      <Card raised className={classes.card}>
         <CardHeader title="Round Added!" subheader={success.course} />
         <CardContent className={classes.content}>
           <Table padding="dense">

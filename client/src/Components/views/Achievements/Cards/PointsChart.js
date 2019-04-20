@@ -28,7 +28,7 @@ const PointsChart = ({ classes, chart, data }) => {
   }
 
   return (
-    <Card className={classes.card}>
+    <Card raised className={classes.card}>
       <CardContent className={classes.chartWrapper}>
         <div className={classes.chart}>{content}</div>
       </CardContent>

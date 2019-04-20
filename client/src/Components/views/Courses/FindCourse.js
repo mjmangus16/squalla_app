@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { getCourses } from "../../../redux/actions/profileActions";
 import Spinner from "../../Spinner/Spinner";
 import { Grid, Tabs, Tab, Typography, withStyles } from "@material-ui/core";
-import { grey } from "@material-ui/core/colors";
 
 import ByName from "./queries/ByName";
 import ByZip from "./queries/ByZip";

@@ -102,7 +102,7 @@ class History extends Component {
       </TableRow>
     ));
     return (
-      <Card className={classes.card}>
+      <Card raised className={classes.card}>
         <HistoryInfo
           dialogOpen={dialog}
           dialogClose={this.handleDialogClose}

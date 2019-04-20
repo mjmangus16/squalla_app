@@ -18,7 +18,7 @@ const styles = theme => ({
 const Stats = ({ classes, data, stat }) => {
   if (stat === "points") {
     return (
-      <Card className={classes.card}>
+      <Card raised className={classes.card}>
         <CardContent>
           <Typography
             variant="title"
@@ -37,7 +37,7 @@ const Stats = ({ classes, data, stat }) => {
     );
   } else if (stat === "achieves") {
     return (
-      <Card className={classes.card}>
+      <Card raised className={classes.card}>
         <CardContent>
           <Typography
             variant="title"
