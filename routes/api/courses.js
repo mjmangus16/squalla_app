@@ -7,9 +7,6 @@ const Profile = require("../../models/Profile");
 // Functions
 const getTotalRounds = require("./functions/courses/getTotalRounds");
 
-// Load Input Validation
-const validateProfileInput = require("../../validation/profile");
-
 // @route   GET api/courses/
 // @desc    Get users courses
 // @access  Private

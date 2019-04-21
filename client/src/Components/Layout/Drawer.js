@@ -131,8 +131,8 @@ const DrawerComponent = ({
               />
             </ListItem>
           )}
-
-          <ListItem button onClick={settingsHandler}>
+          {/* onClick={settingsHandler} */}
+          <ListItem button>
             <ListItemIcon className={classes.listItem}>
               <PersonIcon />
             </ListItemIcon>
