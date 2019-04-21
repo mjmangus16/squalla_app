@@ -1,28 +1,29 @@
 import React, { Component } from "react";
 import { Pie } from "react-chartjs-2";
 import withWidth from "@material-ui/core/withWidth";
-import { red, blue, green } from "@material-ui/core/colors";
+import { red, blue, green, deepPurple } from "@material-ui/core/colors";
 
 class Overall extends Component {
   state = {
     chartData: {
-      labels: ["+1", "0", "-1"],
+      labels: ["+2", "+1", "0", "-1"],
 
       datasets: [
         {
           data: [
-            this.props.data.plus,
+            this.props.data.plus2,
+            this.props.data.plus1,
             this.props.data.even,
             this.props.data.minus
           ],
-          backgroundColor: [green[200], blue[200], red[200]]
+          backgroundColor: [deepPurple[100], green[200], blue[200], red[200]]
         }
       ]
     }
   };
 
   render() {
-    const { height, data, width } = this.props;
+    const { height, width } = this.props;
 
     return (
       <Pie

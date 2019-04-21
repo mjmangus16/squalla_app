@@ -1,4 +1,4 @@
-const getPerformance = (average, score) => {
+const getPerformance = (average, best, score) => {
   let data;
 
   if (average === "") {
@@ -9,6 +9,10 @@ const getPerformance = (average, score) => {
     data = -1;
   } else if (score < average) {
     data = 1;
+  }
+
+  if (score < best) {
+    data = 2;
   }
 
   return data;

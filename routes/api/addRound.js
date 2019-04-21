@@ -140,15 +140,19 @@ router.post(
                 profile.username
               );
 
+              const teeData = getTeeData(profile, round);
+
               let average = getAverage(courseInfo.history);
-              let performance = getPerformance(average, round.scores[i].score);
+              let performance = getPerformance(
+                average,
+                teeData.best,
+                round.scores[i].score
+              );
 
               profile.performancePoints =
                 profile.performancePoints + performance;
 
               round.scores[i].performance = performance;
-
-              const teeData = getTeeData(profile, round);
 
               teeData.rating = course.rating;
 
