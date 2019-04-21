@@ -32,7 +32,7 @@ router.get(
           tee: tee.tee,
           par: tee.par,
           best: tee.best,
-          average: tee.average,
+          average: Math.round(tee.average),
           rounds: tee.rounds
         }))
       }));
