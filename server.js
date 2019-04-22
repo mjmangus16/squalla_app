@@ -65,8 +65,4 @@ if (process.env.NODE_ENV === "production") {
 
 const port = process.env.PORT || 5000;
 
-// const expGained = require("./functions/leveling/expGained");
-
-// expGained(10, 150, 87, 27, 85, 76, 86);
-
 app.listen(port, () => console.log(`Server running on port ${port}`));
