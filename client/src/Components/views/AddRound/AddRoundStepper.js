@@ -14,7 +14,6 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 
 import DateInput from "./Cards/Date";
 import CourseInput from "./Cards/Course";
-import LeagueInput from "./Cards/League";
 import PlayersInput from "./Cards/Players";
 import ScoresInput from "./Cards/Scores";
 import Summary from "./Cards/Summary";
@@ -54,7 +53,7 @@ const styles = theme => ({
 });
 
 function getSteps() {
-  return ["Date", "Course", "League", "Players", "Scores", "Summary"];
+  return ["Date", "Course", "Players", "Scores", "Summary"];
 }
 
 function getStepContent(step) {
@@ -64,12 +63,10 @@ function getStepContent(step) {
     case 1:
       return "Select the course and tees played";
     case 2:
-      return "Select a league if it was a league match";
-    case 3:
       return "Select the players that played";
-    case 4:
+    case 3:
       return "Input the total score for each player";
-    case 5:
+    case 4:
       return "Summary of the round";
     default:
       return "Unknown step";
@@ -102,8 +99,6 @@ function getStepContent2(
         />
       );
     case 2:
-      return <LeagueInput />;
-    case 3:
       return (
         <PlayersInput
           user={user}
@@ -112,7 +107,7 @@ function getStepContent2(
           players={players}
         />
       );
-    case 4:
+    case 3:
       return (
         <ScoresInput
           players={players}
@@ -120,7 +115,7 @@ function getStepContent2(
           scores={scores}
         />
       );
-    case 5:
+    case 4:
       return <Summary summary={summary} />;
     default:
       return "Unknown step";
@@ -255,12 +250,6 @@ class AddRoundStepper extends Component {
         });
       }
     } else if (activeStep === 2) {
-      this.setState({
-        activeStep: activeStep + 1,
-        skipped,
-        errorMsg: ""
-      });
-    } else if (activeStep === 3) {
       if (players.length === 0) {
         this.setState({
           errorMsg: "You must select at least one player"
@@ -272,7 +261,7 @@ class AddRoundStepper extends Component {
           errorMsg: ""
         });
       }
-    } else if (activeStep === 4) {
+    } else if (activeStep === 3) {
       let pass = true;
 
       for (let i = 0; i < scores.length; i++) {
@@ -289,7 +278,7 @@ class AddRoundStepper extends Component {
       } else {
         this.setState({ errorMsg: "A score is required for each player" });
       }
-    } else if (activeStep === 5) {
+    } else if (activeStep === 4) {
       this.setState({
         activeStep: activeStep + 1,
         skipped,
@@ -364,11 +353,11 @@ class AddRoundStepper extends Component {
           {steps.map((label, index) => {
             const props = {};
             const labelProps = {};
-            if (this.isStepOptional(index)) {
-              labelProps.optional = (
-                <Typography variant="caption">Optional</Typography>
-              );
-            }
+            // if (this.isStepOptional(index)) {
+            //   labelProps.optional = (
+            //     <Typography variant="caption">Optional</Typography>
+            //   );
+            // }
             if (this.isStepSkipped(index)) {
               props.completed = false;
             }
@@ -381,7 +370,7 @@ class AddRoundStepper extends Component {
         </Stepper>
         <MobileStepper
           variant="dots"
-          steps={7}
+          steps={6}
           position="static"
           activeStep={this.state.activeStep}
           className={classes.stepperMobile}
@@ -389,7 +378,7 @@ class AddRoundStepper extends Component {
             <Button
               size="small"
               onClick={() => {
-                if (activeStep === 4) {
+                if (activeStep === 3) {
                   this.getSummary();
                   this.handleNext();
                 } else if (activeStep === steps.length - 1) {
@@ -451,7 +440,7 @@ class AddRoundStepper extends Component {
                 >
                   Back
                 </Button>
-                {this.isStepOptional(activeStep) && (
+                {/* {this.isStepOptional(activeStep) && (
                   <Button
                     variant="contained"
                     color="secondary"
@@ -460,12 +449,12 @@ class AddRoundStepper extends Component {
                   >
                     Skip
                   </Button>
-                )}
+                )} */}
                 <Button
                   variant="contained"
                   color="secondary"
                   onClick={() => {
-                    if (activeStep === 4) {
+                    if (activeStep === 3) {
                       this.getSummary();
                       this.handleNext();
                     } else if (activeStep === steps.length - 1) {

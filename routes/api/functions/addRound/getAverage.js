@@ -5,8 +5,7 @@ const getAverage = history => {
     sum = sum + parseInt(history[i].score);
   }
   data = sum / history.length;
-  console.log(sum, history.length);
-  console.log(data);
+
   return data;
 };
 
