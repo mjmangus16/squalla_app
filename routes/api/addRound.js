@@ -143,6 +143,7 @@ router.post(
               const teeData = getTeeData(profile, round);
 
               let average = getAverage(courseInfo.history);
+              console.log(average);
               let performance = getPerformance(
                 average,
                 teeData.best,
