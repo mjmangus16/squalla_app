@@ -16,6 +16,7 @@ import Drawer from "./Layout/Drawer";
 import Register from "./Auth/Register";
 import Login from "./Auth/Login";
 
+import Home from "./views/Home/Home";
 import Dashboard from "./views/Dashboard/Dashboard";
 import Notifications from "./views/Notifications/Notification";
 import Performance from "./views/Performance/Performance";
@@ -127,6 +128,7 @@ class App extends Component {
                 : classes.contentContainerClosed
             }
           >
+            <Route exact path="/" component={Home} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route
               exact

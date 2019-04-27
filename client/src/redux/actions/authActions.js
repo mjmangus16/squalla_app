@@ -32,7 +32,7 @@ export const loginUser = (userData, closeLogin) => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
       closeLogin();
-      window.location.href = "/dashboard";
+      window.location.href = "/";
     })
     .catch(err =>
       dispatch({
