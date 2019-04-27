@@ -37,7 +37,7 @@ const Performance = ({ classes, performance, rating, newToApp }) => {
         subheader={
           newToApp
             ? `Current Rating: +4`
-            : `Current Rating: ${rating >= 0 ? "+" : null}${rating}`
+            : `Current Rating: ${rating > 0 ? `+${rating}` : rating}`
         }
         classes={{
           title: classes.headerTitle,
