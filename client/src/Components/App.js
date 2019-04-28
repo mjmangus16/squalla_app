@@ -46,7 +46,7 @@ const styles = theme => ({
 
 class App extends Component {
   state = {
-    drawer: true,
+    drawer: false,
     drawerExpand: true,
     login: false,
     register: false,
@@ -128,7 +128,17 @@ class App extends Component {
                 : classes.contentContainerClosed
             }
           >
-            <Route exact path="/" component={Home} />
+            <Route
+              exact
+              path="/"
+              component={() => (
+                <Home
+                  auth={isAuthenticated}
+                  registerHandler={this.registerToggle}
+                  loginHandler={this.loginToggle}
+                />
+              )}
+            />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route
               exact

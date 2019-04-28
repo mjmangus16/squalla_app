@@ -4,6 +4,7 @@ import {
   CardContent,
   Typography,
   Grid,
+  Button,
   withStyles
 } from "@material-ui/core";
 
@@ -28,15 +29,37 @@ const styles = theme => ({
   }
 });
 
-const Home = ({ classes }) => {
+const Home = ({ classes, auth, registerHandler, loginHandler }) => {
   return (
     <div className={classes.root}>
       <Card>
         <CardContent>
-          <h1 className={classes.heading}>
+          <Typography variant="h4" className={classes.heading}>
             Welcome to the <br />
             Squalla Disc Golf App!
-          </h1>
+          </Typography>
+        </CardContent>
+        <CardContent style={auth ? { display: "none" } : null}>
+          <Grid container style={{ width: "75%", margin: "auto" }}>
+            <Grid item xs={6} style={{ textAlign: "center" }}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={registerHandler}
+              >
+                SIGN UP
+              </Button>
+            </Grid>
+            <Grid item xs={6} style={{ textAlign: "center" }}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={loginHandler}
+              >
+                LOGIN
+              </Button>
+            </Grid>
+          </Grid>
         </CardContent>
         <CardContent>
           <Grid container spacing={16}>
@@ -75,7 +98,7 @@ const Home = ({ classes }) => {
                 </div>
               </section>
             </Grid>
-            {/* <Grid item xs={12} sm={6} className="contentItem">
+            <Grid item xs={12} sm={6} className="contentItem">
               <section style={{ border: "1px solid black", height: "100%" }}>
                 <div style={{ padding: "10px 10%" }}>
                   <Typography
@@ -92,7 +115,7 @@ const Home = ({ classes }) => {
                   </Typography>
                 </div>
               </section>
-            </Grid> */}
+            </Grid>
             <Grid item xs={12} className="contentItem">
               <section style={{ border: "1px solid black", height: "100%" }}>
                 <div style={{ padding: "10px 10%" }}>
