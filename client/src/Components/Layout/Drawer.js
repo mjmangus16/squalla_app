@@ -132,15 +132,20 @@ const DrawerComponent = ({
             </ListItem>
           )}
           {/* onClick={settingsHandler} */}
-          <ListItem button>
-            <ListItemIcon className={classes.listItem}>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary={username.toUpperCase()}
-              className={drawerExpandStatus ? null : classes.menuText}
-            />
-          </ListItem>
+          <Link to="/" className={classes.navLink}>
+            <ListItem button>
+              <ListItemIcon className={classes.listItem}>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={username.toUpperCase()}
+                className={drawerExpandStatus ? null : classes.menuText}
+              />
+            </ListItem>
+          </Link>
+        </List>
+        <Divider />
+        <List component="nav">
           <Link to="/notifications" className={classes.navLink}>
             <ListItem button>
               <ListItemIcon className={classes.listItem}>
@@ -158,9 +163,6 @@ const DrawerComponent = ({
               />
             </ListItem>
           </Link>
-        </List>
-        <Divider />
-        <List component="nav">
           <Link to="/dashboard" className={classes.navLink}>
             <ListItem button>
               <ListItemIcon className={classes.listItem}>
@@ -262,6 +264,30 @@ const DrawerComponent = ({
             </ListItem>
           </Link>
         </List>
+        <Divider />
+        <List
+          component="nav"
+          className={drawerExpandStatus ? null : classes.menuText}
+        >
+          <a
+            href="https://www.squalladgdiscsearch.com"
+            target="_blank"
+            className={classes.navLink}
+          >
+            <ListItem button>
+              <ListItemText primary="DISC SEARCH" />
+            </ListItem>
+          </a>
+          <a
+            href="https://www.squalladgcoursesearch.com"
+            target="_blank"
+            className={classes.navLink}
+          >
+            <ListItem button>
+              <ListItemText primary="COURSE SEARCH" />
+            </ListItem>
+          </a>
+        </List>
       </div>
     );
   } else {
@@ -286,17 +312,36 @@ const DrawerComponent = ({
             </ListItem>
           </Link>
         </List>
+        <Divider />
+        <List
+          component="nav"
+          className={drawerExpandStatus ? null : classes.menuText}
+        >
+          <a
+            href="https://www.squalladgdiscsearch.com"
+            target="_blank"
+            className={classes.navLink}
+          >
+            <ListItem button>
+              <ListItemText primary="DISC SEARCH" />
+            </ListItem>
+          </a>
+          <a
+            href="https://www.squalladgcoursesearch.com"
+            target="_blank"
+            className={classes.navLink}
+          >
+            <ListItem button>
+              <ListItemText primary="COURSE SEARCH" />
+            </ListItem>
+          </a>
+        </List>
       </div>
     );
   }
 
   return (
-    <Drawer
-      anchor="left"
-      variant="persistent"
-      open={!auth ? true : status}
-      id="drawer"
-    >
+    <Drawer anchor="left" variant="persistent" open={status} id="drawer">
       <Settings settings={settings} settingsHandler={settingsHandler} />
       {drawerContent}
     </Drawer>

@@ -46,10 +46,10 @@ const styles = theme => ({
 
 class App extends Component {
   state = {
-    drawer: true,
+    drawer: false,
     drawerExpand: true,
     login: false,
-    register: this.props.auth.isAuthenticated ? false : true,
+    register: false,
     settings: false
   };
 
