@@ -102,24 +102,21 @@ const Home = ({ classes }) => {
                   >
                     New Users
                   </Typography>
-                  <Typography
-                    variant="body1"
-                    style={{ padding: "10px", lineHeight: "2.5em" }}
-                  >
+                  <Typography variant="body1" style={{ padding: "10px" }}>
                     For those of you that are using the app for the first time,
                     most of the content will remain blank until you start adding
                     rounds to your profile. You can start adding rounds by
-                    finding the <LibraryAddIcon /> in the menu. As you add more
-                    rounds, the app will begin to track and record various data
-                    and metrics.
+                    finding the <LibraryAddIcon fontSize="small" /> in the menu.
+                    As you add more rounds, the app will begin to track and
+                    record various data and metrics.
                   </Typography>
                   <Typography variant="body1" style={{ padding: "10px" }}>
                     Until you add your first round, the{" "}
                     <a href="/dashboard" style={{ color: "#fff" }}>
                       dashboard
                     </a>{" "}
-                    is filled in with fake data so that you can get an idea of
-                    what the app will look like as you start to add rounds.
+                    is filled in with fake data so that you can see what the app
+                    will look like as you start to add rounds.
                   </Typography>
                 </div>
               </section>
