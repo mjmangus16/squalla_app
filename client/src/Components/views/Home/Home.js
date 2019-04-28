@@ -75,7 +75,7 @@ const Home = ({ classes }) => {
                 </div>
               </section>
             </Grid>
-            <Grid item xs={12} sm={6} className="contentItem">
+            {/* <Grid item xs={12} sm={6} className="contentItem">
               <section style={{ border: "1px solid black", height: "100%" }}>
                 <div style={{ padding: "10px 10%" }}>
                   <Typography
@@ -92,7 +92,7 @@ const Home = ({ classes }) => {
                   </Typography>
                 </div>
               </section>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} className="contentItem">
               <section style={{ border: "1px solid black", height: "100%" }}>
                 <div style={{ padding: "10px 10%" }}>
