@@ -3,8 +3,8 @@ const router = express.Router();
 const passport = require("passport");
 const request = require("request");
 
-const pdgaApiUsername = require("./../../config/pdgaApi_dev").pdgaApiUsername;
-const pdgaApiPassword = require("./../../config/pdgaApi_dev").pdgaApiPassword;
+const pdgaApiUsername = require("./../../config/pdgaApi").pdgaApiUsername;
+const pdgaApiPassword = require("./../../config/pdgaApi").pdgaApiPassword;
 
 // @route   POST api/pdgaAPI/byName
 // @desc    GET Courses by name
