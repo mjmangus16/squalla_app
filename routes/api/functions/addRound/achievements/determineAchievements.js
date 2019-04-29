@@ -17,6 +17,7 @@ const partyRound = require("./achievement/partyRound");
 const winMatch3 = require("./achievement/winMatch3");
 const winMatch6 = require("./achievement/winMatch6");
 const winMatch10 = require("./achievement/winMatch10");
+const stopTheBleeding = require("./achievement/stopTheBleeding");
 
 const determineAchievements = (profile, available, round, courseData) => {
   let earned = [];
@@ -146,6 +147,16 @@ const determineAchievements = (profile, available, round, courseData) => {
   let winMatch10_ = winMatch10(available, round, profile.username);
   if (winMatch10_.pass === true) {
     earned.push(winMatch10_.info);
+  }
+
+  let stopTheBleeding_ = stopTheBleeding(
+    available,
+    round,
+    profile.rounds,
+    profile.username
+  );
+  if (stopTheBleeding_.pass === true) {
+    earned.push(stopTheBleeding_.info);
   }
 
   return earned;

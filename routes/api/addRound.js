@@ -143,7 +143,6 @@ router.post(
               const teeData = getTeeData(profile, round);
 
               let average = getAverage(courseInfo.history);
-              console.log(average);
               let performance = getPerformance(
                 average,
                 teeData.best,
@@ -185,6 +184,25 @@ router.post(
                 allAchieves,
                 achieveData
               );
+
+              let extraPerformancePoints = 0;
+
+              for (let i = 0; i < achievesEarned.length; i++) {
+                if (achievesEarned[i].code === 22) {
+                  extraPerformancePoints++;
+                  for (let i = 0; i < profile.rounds[0].scores.length; i++) {
+                    if (
+                      profile.rounds[0].scores[i].username === profile.username
+                    ) {
+                      profile.rounds[0].scores[i].performance++;
+                    }
+                  }
+                }
+              }
+
+              profile.performancePoints =
+                profile.performancePoints + extraPerformancePoints;
+              // console.log(achievesEarned);
 
               const achieveInfo = updateAchievements(achievesEarned);
               profile.achievementPoints =

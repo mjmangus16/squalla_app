@@ -189,7 +189,7 @@ const getPerformance = (round, username) => {
     }
   }
 
-  if (data === 1) {
+  if (data > 0) {
     data = "+" + data;
   }
 
