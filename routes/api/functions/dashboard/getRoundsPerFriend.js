@@ -11,7 +11,11 @@ const getRoundsPerFriend = profile => {
     for (let y = 0; y < rounds.length; y++) {
       for (let j = 0; j < rounds[y].scores.length; j++) {
         if (myFriends[i].friend === rounds[y].scores[j].username) {
-          myFriends[i].rounds++;
+          if (rounds[y].holes >= 18) {
+            myFriends[i].rounds++;
+          } else {
+            myFriends[i].rounds = myFriends[i].rounds + 0.5;
+          }
         }
       }
     }

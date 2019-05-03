@@ -4,13 +4,18 @@ const getRoundsPerCourse = profile => {
 
   let myCourses = courses.map(course => ({
     course: course.name,
+    holes: course.holes,
     rounds: 0
   }));
 
   for (let i = 0; i < myCourses.length; i++) {
     for (let y = 0; y < rounds.length; y++) {
       if (myCourses[i].course === rounds[y].course) {
-        myCourses[i].rounds++;
+        if (myCourses[i].holes >= 18) {
+          myCourses[i].rounds++;
+        } else {
+          myCourses[i].rounds = myCourses[i].rounds + 0.5;
+        }
       }
     }
   }

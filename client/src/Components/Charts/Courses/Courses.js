@@ -54,14 +54,6 @@ class Courses extends Component {
           legend: {
             display: false
           },
-          tooltips: {
-            callbacks: {
-              label: function(tooltipItem) {
-                return tooltipItem.yLabel;
-              }
-            }
-          },
-
           scales: {
             xAxes: [
               {

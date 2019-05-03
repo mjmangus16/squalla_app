@@ -146,7 +146,8 @@ router.post(
               let performance = getPerformance(
                 average,
                 teeData.best,
-                round.scores[i].score
+                round.scores[i].score,
+                round.holes
               );
 
               profile.performancePoints =

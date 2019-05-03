@@ -11,6 +11,7 @@ const getCoursesPlayed = require("./functions/dashboard/getCoursesPlayed");
 const getRoundsPerCourse = require("./functions/dashboard/getRoundsPerCourse");
 const getAchievementPointsPerRound = require("./functions/dashboard/getAchievementPointsPerRound");
 const getRoundsPerFriend = require("./functions/dashboard/getRoundsPerFriend");
+const getRoundsPlayed = require("./functions/dashboard/getRoundsPlayed");
 
 // @route   GET api/dashboard/
 // @desc    Get user dashboard data
@@ -25,7 +26,7 @@ router.get(
         experience: profile.experience,
         performanceRating: profile.performancePoints,
         performancePointsPerRound: getPerformancePointsPerRound(profile),
-        roundsPlayed: profile.rounds.length,
+        roundsPlayed: getRoundsPlayed(profile.rounds),
         recentRounds: getRecentRounds(profile.rounds, profile.username),
         coursesPlayed: getCoursesPlayed(profile.courses),
         roundsPerCourse: getRoundsPerCourse(profile),

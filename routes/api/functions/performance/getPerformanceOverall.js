@@ -13,6 +13,8 @@ const getPerformanceOverall = (rounds, username) => {
           overall.plus2++;
         } else if (rounds[i].scores[y].performance === 1) {
           overall.plus1++;
+        } else if (rounds[i].scores[y].performance === 0.5) {
+          overall.plus1 = overall.plus1 + 0.5;
         } else if (rounds[i].scores[y].performance === 0) {
           overall.even++;
         } else if (rounds[i].scores[y].performance === -1) {
