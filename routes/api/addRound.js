@@ -287,15 +287,30 @@ router.post(
                             return res.json(returnData);
                           }
                         })
-                        .catch(err => console.log(err));
+                        .catch(err => {
+                          console.log(err);
+                          return err;
+                        });
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => {
+                      console.log(err);
+                      return err;
+                    });
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                  console.log(err);
+                  return err;
+                });
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+              console.log(err);
+              return err;
+            });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          return err;
+        });
     }
   }
 );
