@@ -110,7 +110,7 @@ class History extends Component {
         />
         <CardHeader
           title="History"
-          subheader={`${data.length} Rounds Played`}
+          subheader={`${getRoundsPlayed(data)} Rounds Played`}
           classes={{
             title: classes.headerTitle,
             subheader: classes.subheader
@@ -194,6 +194,20 @@ const getPerformance = (round, username) => {
   }
 
   // TEST
+
+  return data;
+};
+
+const getRoundsPlayed = rounds => {
+  let data = 0;
+
+  for (let i = 0; i < rounds.length; i++) {
+    if (rounds[i].holes < 18) {
+      data = data + 0.5;
+    } else {
+      data++;
+    }
+  }
 
   return data;
 };

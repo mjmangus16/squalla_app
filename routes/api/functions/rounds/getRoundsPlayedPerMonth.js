@@ -35,29 +35,77 @@ const getRoundsPlayedPerMonth = profile => {
 
   for (let i = 0; i < rounds.length; i++) {
     if (rounds[i].date.charAt(0) === "1" || rounds[i].date.charAt(0) === "01") {
-      year.jan++;
+      if (rounds[i].holes < 18) {
+        year.jan = year.jan + 0.5;
+      } else {
+        year.jan++;
+      }
     } else if (rounds[i].date.charAt(0) === "2") {
-      year.feb++;
+      if (rounds[i].holes < 18) {
+        year.feb = year.feb + 0.5;
+      } else {
+        year.feb++;
+      }
     } else if (rounds[i].date.charAt(0) === "3") {
-      year.mar++;
+      if (rounds[i].holes < 18) {
+        year.mar = year.mar + 0.5;
+      } else {
+        year.mar++;
+      }
     } else if (rounds[i].date.charAt(0) === "4") {
-      year.apr++;
+      if (rounds[i].holes < 18) {
+        year.apr = year.apr + 0.5;
+      } else {
+        year.apr++;
+      }
     } else if (rounds[i].date.charAt(0) === "5") {
-      year.may++;
+      if (rounds[i].holes < 18) {
+        year.may = year.may + 0.5;
+      } else {
+        year.may++;
+      }
     } else if (rounds[i].date.charAt(0) === "6") {
-      year.jun++;
+      if (rounds[i].holes < 18) {
+        year.jun = year.jun + 0.5;
+      } else {
+        year.jun++;
+      }
     } else if (rounds[i].date.charAt(0) === "7") {
-      year.jul++;
+      if (rounds[i].holes < 18) {
+        year.jul = year.jul + 0.5;
+      } else {
+        year.jul++;
+      }
     } else if (rounds[i].date.charAt(0) === "8") {
-      year.aug++;
+      if (rounds[i].holes < 18) {
+        year.aug = year.aug + 0.5;
+      } else {
+        year.aug++;
+      }
     } else if (rounds[i].date.charAt(0) === "9") {
-      year.sep++;
+      if (rounds[i].holes < 18) {
+        year.sep = year.sep + 0.5;
+      } else {
+        year.sep++;
+      }
     } else if (rounds[i].date.charAt(0) === "10") {
-      year.oct++;
+      if (rounds[i].holes < 18) {
+        year.oct = year.oct + 0.5;
+      } else {
+        year.oct++;
+      }
     } else if (rounds[i].date.charAt(0) === "11") {
-      year.nov++;
+      if (rounds[i].holes < 18) {
+        year.nov = year.nov + 0.5;
+      } else {
+        year.nov++;
+      }
     } else if (rounds[i].date.charAt(0) === "12") {
-      year.dec++;
+      if (rounds[i].holes < 18) {
+        year.dec = year.dec + 0.5;
+      } else {
+        year.dec++;
+      }
     }
   }
   return year;
