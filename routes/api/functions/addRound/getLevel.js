@@ -1,3 +1,7 @@
+// 400 - 150 = 250
+// 250 + var = 350   lvls 1-20 var = 100, 21+ var = 500
+// 400 + 350 = 750
+
 const getLevel = userExp => {
   if (userExp < 50) {
     return 1;
@@ -39,6 +43,26 @@ const getLevel = userExp => {
     return 19;
   } else if (userExp >= 18000 && userExp < 19950) {
     return 20;
+  } else if (userExp >= 19950 && userExp < 22400) {
+    return 21;
+  } else if (userExp >= 22400 && userExp < 25350) {
+    return 22;
+  } else if (userExp >= 25350 && userExp < 28800) {
+    return 23;
+  } else if (userExp >= 28800 && userExp < 32750) {
+    return 24;
+  } else if (userExp >= 32750 && userExp < 37200) {
+    return 25;
+  } else if (userExp >= 37200 && userExp < 42150) {
+    return 26;
+  } else if (userExp >= 42150 && userExp < 47600) {
+    return 27;
+  } else if (userExp >= 47600 && userExp < 53550) {
+    return 28;
+  } else if (userExp >= 53550 && userExp < 60000) {
+    return 29;
+  } else if (userExp >= 60000 && userExp < 66950) {
+    return 30;
   }
 };
 
