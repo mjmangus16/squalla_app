@@ -20,6 +20,7 @@ const styles = theme => ({
     }
   },
   tableCell: {
+    maxWidth: 200,
     [theme.breakpoints.down("xs")]: {
       fontSize: ".75em"
     }

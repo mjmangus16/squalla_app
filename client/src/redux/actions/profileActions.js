@@ -17,6 +17,7 @@ import {
   EDIT_COURSE,
   CLEAR_ADD_COURSE,
   SUBMIT_ROUND,
+  CLEAR_FOUND_USER,
   CLEAR_SUBMIT_ROUND,
   CLEAR_CURRENT_PROFILE,
   PROFILE_LOADING
@@ -275,15 +276,21 @@ export const submitRound = data => dispatch => {
     );
 };
 
-export const clearSubmitRound = () => {
+export const clearFoundUser = () => {
   return {
-    type: CLEAR_SUBMIT_ROUND
+    type: CLEAR_FOUND_USER
   };
 };
 
 export const clearAddCourse = () => {
   return {
     type: CLEAR_ADD_COURSE
+  };
+};
+
+export const clearSubmitRound = () => {
+  return {
+    type: CLEAR_SUBMIT_ROUND
   };
 };
 

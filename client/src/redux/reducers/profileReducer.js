@@ -18,7 +18,8 @@ import {
   SUBMIT_ROUND,
   CLEAR_SUBMIT_ROUND,
   CLEAR_CURRENT_PROFILE,
-  PROFILE_LOADING
+  PROFILE_LOADING,
+  CLEAR_FOUND_USER
 } from "../actions/types";
 
 const initialState = {
@@ -152,6 +153,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         submitRound: null,
+        loading: false
+      };
+    case CLEAR_FOUND_USER:
+      console.log("working");
+      return {
+        ...state,
+        foundUser: null,
         loading: false
       };
     case CLEAR_CURRENT_PROFILE:

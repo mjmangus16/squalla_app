@@ -216,7 +216,7 @@ class Success extends Component {
                   {success.achievePoints}
                 </TableCell>
                 <TableCell align="center" className={classes.cell}>
-                  {success.performance > -1
+                  {success.performance > -0.5
                     ? `+${success.performance}`
                     : success.performance}
                 </TableCell>

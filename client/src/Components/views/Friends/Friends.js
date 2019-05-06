@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
   getFriendsData,
   getUserByName,
+  clearFoundUser,
   addFriend
 } from "../../../redux/actions/profileActions";
 import {
@@ -11,7 +12,6 @@ import {
   Toolbar,
   Typography,
   IconButton,
-  Button,
   Tabs,
   Tab,
   Paper,
@@ -153,6 +153,7 @@ class Friends extends Component {
 
   closeFriendDialog = () => {
     this.setState({ friendOpen: false });
+    this.props.clearFoundUser();
   };
 
   openAddFriendDialog = () => {
@@ -301,5 +302,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getFriendsData, getUserByName, addFriend }
+  { getFriendsData, getUserByName, addFriend, clearFoundUser }
 )(withStyles(styles)(Friends));
