@@ -20,7 +20,9 @@ const HistoryInfo = ({ dialogOpen, dialogClose, data }) => {
     if (Object.keys(data).length > 0) {
       dialogContent = (
         <Dialog open={dialogOpen} onClose={dialogClose}>
-          <DialogTitle>{data.course ? data.course : "N/A"}</DialogTitle>
+          <DialogTitle style={{ maxWidth: 275 }}>
+            {data.course ? data.course : "N/A"}
+          </DialogTitle>
 
           <DialogContent style={{ width: 300 }}>
             <Typography>Date: {data.date}</Typography>
