@@ -23,14 +23,14 @@ router.get(
         distance: course.distance,
         foliage: course.foliage,
         elevation: course.elevation,
-        totalRounds: getTotalRounds(course.tees),
+        totalRounds: getTotalRounds(course),
         course_node_nid: course.node_id,
         tees: course.tees.map(tee => ({
           tee: tee.tee,
           par: tee.par,
           best: tee.best,
-          average: Math.round(tee.average),
-          rounds: tee.rounds
+          average: tee.average === "" ? "" : Math.round(tee.average),
+          rounds: course.holes < 18 ? tee.rounds / 2 : tee.rounds
         }))
       }));
 

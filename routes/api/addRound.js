@@ -137,7 +137,8 @@ router.post(
               courseInfo.history = collectCourseHistory(
                 courseInfo,
                 profile.rounds,
-                profile.username
+                profile.username,
+                round.tees
               );
 
               const teeData = getTeeData(profile, round);

@@ -13,7 +13,7 @@ const updateStats = (profile, round, score, courseAverage) => {
           if (average === "") {
             profile.courses[i].tees[y].average = parseInt(score);
           } else {
-            profile.courses[i].tees[y].average = courseAverage;
+            profile.courses[i].tees[y].average = Math.round(courseAverage);
           }
         }
       }
