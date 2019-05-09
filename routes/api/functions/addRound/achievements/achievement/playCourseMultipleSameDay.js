@@ -16,12 +16,18 @@ const playCourseMultipleSameDay = (available, myRounds, round) => {
   for (let i = 0; i < myRounds.length; i++) {
     if (myRounds[i].course === round.course) {
       if (myRounds[i].date === date) {
-        count++;
+        if (myRounds[i].holes >= 18) {
+          count++;
+        } else {
+          count = count + 0.5;
+        }
       }
     }
   }
 
-  if (count > 1) {
+  console.log(count);
+
+  if (count >= 2) {
     data.pass = true;
     data.info.count++;
 
