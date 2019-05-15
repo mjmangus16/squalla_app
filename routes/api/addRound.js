@@ -16,6 +16,7 @@ const getExperience = require("./functions/addRound/getExperience");
 const getTeeData = require("./functions/addRound/getTeeData");
 const getPerformance = require("./functions/addRound/getPerformance");
 const getAverage = require("./functions/addRound/getAverage");
+const getAverage2 = require("./functions/addRound/getAverage2");
 const addCourseToProfile = require("./functions/addRound/addCourseToProfile");
 const doesCourseExist = require("./functions/addRound/doesCourseExist");
 const getAchievements = require("./functions/addRound/achievements/getAchievements");
@@ -150,6 +151,8 @@ router.post(
                 round.scores[i].score,
                 round.holes
               );
+
+              average = getAverage2(courseInfo.history, round.scores[i].score);
 
               profile.performancePoints =
                 profile.performancePoints + performance;

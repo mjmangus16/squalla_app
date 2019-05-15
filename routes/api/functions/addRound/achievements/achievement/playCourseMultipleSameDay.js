@@ -25,8 +25,6 @@ const playCourseMultipleSameDay = (available, myRounds, round) => {
     }
   }
 
-  console.log(count);
-
   if (count >= 2) {
     data.pass = true;
     data.info.count++;
