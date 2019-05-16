@@ -1,24 +1,25 @@
 const collectCourseHistory = (course, roundHistory, username, tees) => {
   let courseHistory = [];
 
-  for (let j = 0; j < roundHistory.length; j++) {
-    let round = {};
-    if (roundHistory[j].course === course.name) {
-      if (roundHistory[j].tees === tees) {
-        round.date = roundHistory[j].date;
-        round.league = roundHistory[j].league;
-        round.tees = roundHistory[j].tees;
+  courseHistory = roundHistory.map(round => {
+    let data = {};
+    if (round.course === course.name) {
+      if (round.tees === tees) {
+        data.date = round.date;
+        data.league = round.league;
+        data.tees = round.tees;
 
-        for (let i = 0; i < roundHistory[j].scores.length; i++) {
-          if (roundHistory[j].scores[i].username === username) {
-            round.score = roundHistory[j].scores[i].score;
+        round.scores.forEach(player => {
+          if (player.username === username) {
+            data.score = player.score;
           }
-        }
-
-        courseHistory.push(round);
+        });
       }
     }
-  }
+    console.log(data);
+    return data;
+  });
+
   return courseHistory;
 };
 
