@@ -16,7 +16,6 @@ const collectCourseHistory = (course, roundHistory, username, tees) => {
         });
       }
     }
-    console.log(data);
     return data;
   });
 
