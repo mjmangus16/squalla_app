@@ -1,5 +1,6 @@
 const updateStats = (profile, round, score, courseAverage) => {
   let average, best;
+
   for (let i = 0; i < profile.courses.length; i++) {
     if (profile.courses[i].name === round.course) {
       for (let y = 0; y < profile.courses[i].tees.length; y++) {
@@ -7,6 +8,7 @@ const updateStats = (profile, round, score, courseAverage) => {
           average = profile.courses[i].tees[y].average;
           best = profile.courses[i].tees[y].best;
           profile.courses[i].tees[y].rounds++;
+
           if (best > score || best === "") {
             profile.courses[i].tees[y].best = parseInt(score);
           }

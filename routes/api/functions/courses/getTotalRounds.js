@@ -1,13 +1,9 @@
 const getRoundsPerTee = course => {
   let sum = 0;
 
-  for (let i = 0; i < course.tees.length; i++) {
-    if (course.holes < 18) {
-      sum = sum + course.tees[i].rounds / 2;
-    } else {
-      sum = sum + course.tees[i].rounds;
-    }
-  }
+  course.tees.forEach(tee => {
+    course.holes < 18 ? (sum = sum + tee.rounds / 2) : (sum = sum + tee.rounds);
+  });
   return sum;
 };
 
