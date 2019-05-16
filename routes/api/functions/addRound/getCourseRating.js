@@ -98,8 +98,6 @@ const getCourseRating = (distance, foliage, elevation) => {
       elevationRating = 1;
   }
 
-  console.log(distanceRating, foliageRating, elevationRating);
-
   rating = distanceRating * foliageRating * elevationRating;
 
   return rating;
