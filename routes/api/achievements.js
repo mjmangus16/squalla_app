@@ -37,7 +37,10 @@ router.get(
           )
         },
         pointsEarnedPerRound: getAchievementPointsPerRound(profile),
-        pointsEarnedPerMonth: getPointsEarnedPerMonth(profile)
+        pointsEarnedPerMonth: getPointsEarnedPerMonth(
+          profile.rounds,
+          profile.username
+        )
       };
 
       Achievement.find().then(achievements => {
