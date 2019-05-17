@@ -31,7 +31,11 @@ router.get(
         coursesPlayed: getCoursesPlayed(profile.courses),
         roundsPerCourse: getRoundsPerCourse(profile),
         achievementPoints: profile.achievementPoints,
-        achievementPointsPerRound: getAchievementPointsPerRound(profile),
+        achievementPointsPerRound: getAchievementPointsPerRound(
+          profile.rounds,
+          profile.achievementPoints,
+          profile.username
+        ),
         totalFriends: profile.friends.length,
         roundsPerFriend: getRoundsPerFriend(profile)
       };

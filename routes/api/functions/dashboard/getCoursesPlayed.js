@@ -1,14 +1,18 @@
 const getCoursesPlayed = courses => {
   let count = 0;
 
-  for (let i = 0; i < courses.length; i++) {
-    for (let y = 0; y < courses[i].tees.length; y++) {
-      if (courses[i].tees[y].average !== "") {
-        count++;
-        break;
-      }
+  courses.forEach(course => {
+    if (course.tees[0].average !== "") {
+      count++;
+    } else if (course.tees[1].average !== "") {
+      count++;
+    } else if (course.tees[2].average !== "") {
+      count++;
+    } else if (course.tees[3].average !== "") {
+      count++;
     }
-  }
+  });
+
   return count;
 };
 
