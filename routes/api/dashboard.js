@@ -25,7 +25,11 @@ router.get(
         level: profile.level,
         experience: profile.experience,
         performanceRating: profile.performancePoints,
-        performancePointsPerRound: getPerformancePointsPerRound(profile),
+        performancePointsPerRound: getPerformancePointsPerRound(
+          profile.rounds,
+          profile.performancePoints,
+          profile.username
+        ),
         roundsPlayed: getRoundsPlayed(profile.rounds),
         recentRounds: getRecentRounds(profile.rounds, profile.username),
         coursesPlayed: getCoursesPlayed(profile.courses),
