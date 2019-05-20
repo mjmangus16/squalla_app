@@ -1,17 +1,17 @@
 const compareAchievements = (mine, earned) => {
   if (earned.length > 0) {
-    for (let i = 0; i < earned.length; i++) {
+    earned.forEach(e => {
       let exists = false;
-      for (let j = 0; j < mine.length; j++) {
-        if (earned[i].code === mine[j].code) {
+      mine.forEach(m => {
+        if (e.code === m.code) {
           exists = true;
-          mine[j] = earned[i];
+          m = e;
         }
-      }
+      });
       if (!exists) {
-        mine.push(earned[i]);
+        mine.push(e);
       }
-    }
+    });
   }
   return mine;
 };

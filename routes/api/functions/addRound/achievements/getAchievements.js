@@ -33,7 +33,6 @@ const available = (myAchieves, allAchieves) => {
   } else {
     achievesAvailable = allAchieves;
   }
-  console.log(achievesAvailable);
   return achievesAvailable;
 };
 
