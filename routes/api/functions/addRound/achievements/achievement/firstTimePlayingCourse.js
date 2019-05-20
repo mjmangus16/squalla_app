@@ -4,17 +4,11 @@ const firstTimePlayingCourse = (available, round) => {
     info: {}
   };
 
-  for (let i = 0; i < available.length; i++) {
-    if (available[i].code === 2) {
-      data.info = available[i];
-    }
-  }
+  data.info = available.filter(avail => avail.code === 2)[0];
 
-  for (let j = 0; j < data.info.data.length; j++) {
-    if (data.info.data[j] === round.course) {
-      data.pass = false;
-    }
-  }
+  data.info.data.forEach(d => {
+    if (d === round.course) data.pass = false;
+  });
 
   if (data.pass === true) {
     data.info.count++;

@@ -5,11 +5,7 @@ const frontNineWarmup = (available, round) => {
   };
 
   if (round.holes >= 27) {
-    for (let i = 0; i < available.length; i++) {
-      if (available[i].code === 9) {
-        data.info = available[i];
-      }
-    }
+    data.info = available.filter(avail => avail.code === 9)[0];
     if (!data.info.data.includes(round.course)) {
       data.info.data.push(round.course);
       data.info.count++;
