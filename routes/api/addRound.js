@@ -145,6 +145,7 @@ router.post(
               const teeData = getTeeData(profile, round);
 
               let average = getAverage(courseInfo.history);
+
               let performance = getPerformance(
                 average,
                 teeData.best,
@@ -242,7 +243,7 @@ router.post(
               profile.experience = profile.experience + userExp;
 
               let oldLevel = profile.level;
-              profile.level = getLevel(profile.experience);
+              profile.level = getLevel(profile.experience, 0, 50, 1);
               profile
                 .save()
                 .then(profile => {

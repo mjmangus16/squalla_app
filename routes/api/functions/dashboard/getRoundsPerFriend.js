@@ -1,7 +1,4 @@
-const getRoundsPerFriend = profile => {
-  const friends = profile.friends;
-  const rounds = profile.rounds;
-
+const getRoundsPerFriend = (rounds, friends) => {
   let myFriends = friends.map(friend => ({
     friend: friend,
     rounds: 0

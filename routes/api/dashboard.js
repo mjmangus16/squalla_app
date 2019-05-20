@@ -41,7 +41,7 @@ router.get(
           profile.username
         ),
         totalFriends: profile.friends.length,
-        roundsPerFriend: getRoundsPerFriend(profile)
+        roundsPerFriend: getRoundsPerFriend(profile.rounds, profile.friends)
       };
 
       return res.json(data);

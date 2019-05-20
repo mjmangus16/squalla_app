@@ -1,7 +1,7 @@
 const collectCourseHistory = (course, roundHistory, username, tees) => {
   let courseHistory = [];
 
-  courseHistory = roundHistory.map(round => {
+  roundHistory.forEach(round => {
     let data = {};
     if (round.course === course.name) {
       if (round.tees === tees) {
@@ -15,8 +15,8 @@ const collectCourseHistory = (course, roundHistory, username, tees) => {
           }
         });
       }
+      courseHistory.push(data);
     }
-    return data;
   });
 
   return courseHistory;

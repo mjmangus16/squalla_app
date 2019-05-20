@@ -19,7 +19,11 @@ router.get(
   (req, res) => {
     Profile.findOne({ username: req.user.username }).then(profile => {
       let data = {
-        performancePointsPerRound: getPerformancePointsPerRound(profile),
+        performancePointsPerRound: getPerformancePointsPerRound(
+          profile.rounds,
+          profile.performancePoints,
+          profile.username
+        ),
         performancePointsPerCourse: getPerformancePointsPerCourse(profile),
         performanceTrendByMonth: getPerformanceTrendByMonth(profile),
         performanceOverall: getPerformanceOverall(
