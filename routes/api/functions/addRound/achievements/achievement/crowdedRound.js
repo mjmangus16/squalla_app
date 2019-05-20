@@ -4,13 +4,10 @@ const crowdedRound = (available, round) => {
     info: {}
   };
 
-  for (let i = 0; i < available.length; i++) {
-    if (available[i].code === 17) {
-      data.info = available[i];
-    }
-  }
-
   if (round.scores.length >= 5 && round.scores.length < 8) {
+    available.forEach(avail => {
+      if (avail.code === 17) data.info = avail;
+    });
     data.pass = true;
     data.info.count++;
   }

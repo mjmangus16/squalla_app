@@ -6,11 +6,10 @@ const beatYourBest = (available, myStats) => {
 
   if (myStats.best !== "N/A") {
     if (myStats.best > myStats.score) {
-      for (let i = 0; i < available.length; i++) {
-        if (available[i].code === 10) {
-          data.info = available[i];
-        }
-      }
+      available.forEach(avail => {
+        if (avail.code === 10) data.info = avail;
+      });
+
       data.pass = true;
       data.info.count++;
     }
