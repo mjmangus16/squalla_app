@@ -19,24 +19,21 @@ const available = (myAchieves, allAchieves) => {
   if (myAchieves.length > 0) {
     achievesAvailable = allAchieves;
 
-    for (let i = 0; i < myAchieves.length; i++) {
-      if (myAchieves[i].limit === true) {
-        for (let j = 0; j < achievesAvailable.length; j++) {
-          if (myAchieves[i].code === achievesAvailable[j].code) {
-            achievesAvailable.splice(j, 1);
-          }
-        }
+    myAchieves.forEach(myA => {
+      if (myA.limit === true) {
+        achievesAvailable.forEach((aAvail, i) => {
+          if (myA.code === aAvail.code) achievesAvailable.splice(i, 1);
+        });
       } else {
-        for (let j = 0; j < achievesAvailable.length; j++) {
-          if (myAchieves[i].code === achievesAvailable[j].code) {
-            achievesAvailable[j] = myAchieves[i];
-          }
-        }
+        achievesAvailable.forEach(aAvail => {
+          if (myA.code === aAvail.code) aAvail = myA;
+        });
       }
-    }
+    });
   } else {
     achievesAvailable = allAchieves;
   }
+  console.log(achievesAvailable);
   return achievesAvailable;
 };
 
