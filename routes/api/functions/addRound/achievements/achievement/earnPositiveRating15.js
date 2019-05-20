@@ -4,13 +4,9 @@ const earnPositiveRating15 = (available, performancePoints) => {
     info: {}
   };
   if (performancePoints >= 15) {
-    for (let i = 0; i < available.length; i++) {
-      if (available[i].code === 16) {
-        data.pass = true;
-        data.info = available[i];
-        data.info.count++;
-      }
-    }
+    data.info = available.filter(avail => avail.code === 16)[0];
+    data.pass = true;
+    data.info.count++;
   }
 
   return data;

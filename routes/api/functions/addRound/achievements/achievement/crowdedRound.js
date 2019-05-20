@@ -5,9 +5,7 @@ const crowdedRound = (available, round) => {
   };
 
   if (round.scores.length >= 5 && round.scores.length < 8) {
-    available.forEach(avail => {
-      if (avail.code === 17) data.info = avail;
-    });
+    data.info = available.filter(avail => avail.code === 17)[0];
     data.pass = true;
     data.info.count++;
   }

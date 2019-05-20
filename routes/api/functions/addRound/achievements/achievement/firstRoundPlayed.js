@@ -3,13 +3,10 @@ const firstRoundPlayed = available => {
     pass: false,
     info: {}
   };
-  for (let i = 0; i < available.length; i++) {
-    if (available[i].code === 1) {
-      data.pass = true;
-      data.info = available[i];
-      data.info.count++;
-    }
-  }
+  data.info = available.filter(avail => avail.code === 1)[0];
+  data.pass = true;
+  data.info.count++;
+
   return data;
 };
 
