@@ -4,10 +4,10 @@ const updateAchievements = earned => {
     achieves: []
   };
   if (earned.length > 0) {
-    for (let i = 0; i < earned.length; i++) {
-      data.points = data.points + earned[i].points;
-      data.achieves.push(earned[i]);
-    }
+    earned.forEach(e => {
+      data.points = data.points + e.points;
+      data.achieves.push(e);
+    });
   }
 
   return data;
