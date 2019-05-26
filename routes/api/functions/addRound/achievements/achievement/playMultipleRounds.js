@@ -4,75 +4,51 @@ const playMultipleRounds = (available, rounds) => {
     info: {}
   };
 
-  let eligibleRounds = [];
+  let count = 0;
 
-  for (let i = 0; i < available.length; i++) {
-    if (available[i].code === 13) {
-      data.info = available[i];
-    }
-  }
+  data.info = available.filter(avail => avail.code === 13)[0];
 
-  for (let i = 0; i < rounds.length; i++) {
-    if (rounds[i].holes >= 18) {
-      eligibleRounds.push(rounds[i]);
+  rounds.forEach(round => {
+    if (round.holes >= 18) {
+      count++;
+    } else if (round.holes < 18) {
+      count = count + 0.5;
     }
-  }
+  });
 
-  if (data.info.count === 0) {
-    if (eligibleRounds.length >= 200) {
-      data.pass = true;
-      data.info.count = data.info.count + 5;
-    } else if (eligibleRounds.length >= 100) {
-      data.pass = true;
-      data.info.count = data.info.count + 4;
-    } else if (eligibleRounds.length >= 50) {
-      data.pass = true;
-      data.info.count = data.info.count + 3;
-    } else if (eligibleRounds.length >= 25) {
-      data.pass = true;
-      data.info.count = data.info.count + 2;
-    } else if (eligibleRounds.length >= 10) {
-      data.pass = true;
-      data.info.count++;
-    }
-  } else if (data.info.count === 1) {
-    if (eligibleRounds.length >= 200) {
-      data.pass = true;
-      data.info.count = data.info.count + 4;
-    } else if (eligibleRounds.length >= 100) {
-      data.pass = true;
-      data.info.count = data.info.count + 3;
-    } else if (eligibleRounds.length >= 50) {
-      data.pass = true;
-      data.info.count = data.info.count + 2;
-    } else if (eligibleRounds.length >= 25) {
-      data.pass = true;
-      data.info.count = data.info.count + 1;
-    }
-  } else if (data.info.count === 2) {
-    if (eligibleRounds.length >= 200) {
-      data.pass = true;
-      data.info.count = data.info.count + 3;
-    } else if (eligibleRounds.length >= 100) {
-      data.pass = true;
-      data.info.count = data.info.count + 2;
-    } else if (eligibleRounds.length >= 50) {
-      data.pass = true;
-      data.info.count = data.info.count + 1;
-    }
-  } else if (data.info.count === 3) {
-    if (eligibleRounds.length >= 200) {
-      data.pass = true;
-      data.info.count = data.info.count + 2;
-    } else if (eligibleRounds.length >= 100) {
-      data.pass = true;
-      data.info.count = data.info.count + 1;
-    }
-  } else if (data.info.count === 4) {
-    if (eligibleRounds.length >= 200) {
-      data.pass = true;
-      data.info.count = data.info.count + 1;
-    }
+  switch (data.info.count) {
+    case 0:
+      if (count >= 10) {
+        data.pass = true;
+        data.info.count++;
+      }
+      break;
+    case 1:
+      if (count >= 25) {
+        data.pass = true;
+        data.info.count++;
+      }
+      break;
+    case 2:
+      if (count >= 50) {
+        data.pass = true;
+        data.info.count++;
+      }
+      break;
+    case 3:
+      if (count >= 100) {
+        data.pass = true;
+        data.info.count++;
+      }
+      break;
+    case 4:
+      if (count >= 200) {
+        data.pass = true;
+        data.info.count++;
+      }
+      break;
+    default:
+      data.pass = false;
   }
 
   return data;
