@@ -21,27 +21,27 @@ const playCourseMultipleTimes = (available, courseData) => {
   } else if (roundsPlayed === 25) {
     data.pass = true;
     data.info.count++;
-    for (let i = 0; i < data.info.data.length; i++) {
-      if (data.info.data[i].course === courseData.courseInfo.name) {
+
+    data.info.data.forEach(item => {
+      if (item.course === courseData.courseInfo.name)
         data.info.data.push({ course: courseData.courseInfo.name, count: 25 });
-      }
-    }
+    });
   } else if (roundsPlayed === 50) {
     data.pass = true;
     data.info.count++;
-    for (let i = 0; i < data.info.data.length; i++) {
-      if (data.info.data[i].course === courseData.courseInfo.name) {
+
+    data.info.data.forEach(item => {
+      if (item.course === courseData.courseInfo.name)
         data.info.data.push({ course: courseData.courseInfo.name, count: 50 });
-      }
-    }
+    });
   } else if (roundsPlayed === 100) {
     data.pass = true;
     data.info.count++;
-    for (let i = 0; i < data.info.data.length; i++) {
-      if (data.info.data[i].course === courseData.courseInfo.name) {
+
+    data.info.data.forEach(item => {
+      if (item.course === courseData.courseInfo.name)
         data.info.data.push({ course: courseData.courseInfo.name, count: 100 });
-      }
-    }
+    });
   }
 
   return data;
