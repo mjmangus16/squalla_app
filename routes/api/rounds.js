@@ -22,8 +22,6 @@ router.get(
       };
 
       return res.json(data);
-      // Rounds played per month over year
-      // Total rounds played & list of rounds from that year.
     });
   }
 );

@@ -4,13 +4,8 @@ const partyRound = (available, round) => {
     info: {}
   };
 
-  for (let i = 0; i < available.length; i++) {
-    if (available[i].code === 18) {
-      data.info = available[i];
-    }
-  }
-
   if (round.scores.length >= 8) {
+    data.info = available.filter(avail => avail.code === 18)[0];
     data.pass = true;
     data.info.count++;
   }
