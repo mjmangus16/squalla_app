@@ -4,24 +4,16 @@ const playMultipleCourses = (available, courses, rounds) => {
     info: {}
   };
 
-  for (let i = 0; i < available.length; i++) {
-    if (available[i].code === 4) {
-      data.info = available[i];
-    }
-  }
+  data.info = available.filter(avail => avail.code === 4)[0];
 
-  let coursesContainer = [];
-  for (let i = 0; i < rounds.length; i++) {
-    coursesContainer.push(rounds[i].course);
-  }
+  let coursesContainer = rounds.map(round => round.course);
 
   data.info.data = [];
 
-  for (let j = 0; j < courses.length; j++) {
-    if (coursesContainer.includes(courses[j].name)) {
-      data.info.data.push(courses[j].name);
-    }
-  }
+  courses.forEach(course => {
+    if (coursesContainer.includes(course.name))
+      data.info.data.push(course.name);
+  });
 
   if (data.info.data.length === 5 && data.info.count === 0) {
     data.pass = true;

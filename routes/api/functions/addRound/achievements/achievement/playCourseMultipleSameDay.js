@@ -10,10 +10,8 @@ const playCourseMultipleSameDay = (available, myRounds, round) => {
   let count = 0;
 
   let updatedRounds = myRounds.filter(
-    myRound => myRound.course === round.course
+    myRound => myRound.course === round.course && myRound.date === date
   );
-
-  updatedRounds = updatedRounds.filter(myRound => myRound.date === date);
 
   updatedRounds.forEach(myRound => {
     if (myRound.holes >= 18) {

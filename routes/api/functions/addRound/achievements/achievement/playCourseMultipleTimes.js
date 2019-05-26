@@ -12,11 +12,7 @@ const playCourseMultipleTimes = (available, courseData) => {
     roundsPlayed = courseData.courseInfo.history.length;
   }
 
-  for (let i = 0; i < available.length; i++) {
-    if (available[i].code === 3) {
-      data.info = available[i];
-    }
-  }
+  data.info = available.filter(avail => avail.code === 3)[0];
 
   if (roundsPlayed === 10) {
     data.pass = true;
