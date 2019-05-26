@@ -4,27 +4,24 @@ const playWithSomeoneFirstTime = (available, round, username) => {
     info: {}
   };
 
+  data.info = available.filter(avail => avail.code === 12)[0];
+
   let playersInRound = [];
 
-  for (let i = 0; i < available.length; i++) {
-    if (available[i].code === 12) {
-      data.info = available[i];
+  round.scores.forEach(score => {
+    if (score.username !== username) {
+      playersInRound.push(score.username);
     }
-  }
+  });
 
-  for (let i = 0; i < round.scores.length; i++) {
-    if (round.scores[i].username !== username) {
-      playersInRound.push(round.scores[i].username);
-    }
-  }
-
-  for (let i = 0; i < playersInRound.length; i++) {
-    if (!data.info.data.includes(playersInRound[i])) {
+  playersInRound.forEach(player => {
+    if (!data.info.data.includes(player)) {
       data.pass = true;
       data.info.count++;
-      data.info.data.push(playersInRound[i]);
+      data.info.data.push(player);
     }
-  }
+  });
+
   return data;
 };
 
