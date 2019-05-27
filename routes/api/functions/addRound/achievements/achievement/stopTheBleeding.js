@@ -4,35 +4,28 @@ const stopTheBleeding = (available, round, rounds, username) => {
     info: {}
   };
 
-  let count = 0;
-
   if (rounds.length >= 4) {
-    let roundsArray = [rounds[1], rounds[2], rounds[3]];
-
-    for (let i = 0; i < available.length; i++) {
-      if (available[i].code === 22) {
-        data.info = available[i];
-      }
-    }
-
-    for (let i = 0; i < roundsArray.length; i++) {
-      for (let y = 0; y < roundsArray[i].scores.length; y++) {
-        if (roundsArray[i].scores[y].username === username) {
-          if (roundsArray[i].scores[y].performance < 0) {
-            count++;
-          }
-        }
-      }
-    }
-
+    let count = 0;
     let earned = false;
 
-    for (let i = 0; i < round.scores.length; i++) {
-      if (round.scores[i].username === username) {
-        if (round.scores[i].performance >= 0) {
-          earned = true;
-        }
+    rounds.scores.forEach(score => {
+      if (score.username === username && score.performance >= 0) {
+        earned = true;
       }
+    });
+
+    if (earned) {
+      let roundsArray = [rounds[1], rounds[2], rounds[3]];
+
+      data.info = available.filter(avail => avail.code === 22)[0];
+
+      roundsArray.forEach(round => {
+        round.scores.forEach(score => {
+          if (score.username === username && score.performance < 0) {
+            count++;
+          }
+        });
+      });
     }
 
     if (count === 3 && earned === true) {
