@@ -163,6 +163,9 @@ router.post(
               teeData.rating = course.rating;
 
               profile.rounds.unshift(round);
+              profile.rounds.sort(
+                (a, b) => new Date(b.date) - new Date(a.date)
+              );
 
               profile = updateStats(
                 profile,
