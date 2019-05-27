@@ -4,15 +4,9 @@ const two_threeCoursesSameDay = (available, myRounds, round) => {
     info: {}
   };
 
-  let sameDayRounds = [];
-
-  for (let i = 0; i < myRounds.length; i++) {
-    if (myRounds[i].date === round.date && myRounds[i].holes >= 18) {
-      sameDayRounds.push(myRounds[i].course);
-    }
-  }
-
-  sameDayRounds = [...new Set(sameDayRounds)];
+  let sameDayRounds = myRounds.filter(
+    myRound => myRound.date === round.date && myRound.holes >= 18
+  );
 
   if (sameDayRounds.length >= 2 && sameDayRounds.length <= 3) {
     if (sameDayRounds.length === 2) {

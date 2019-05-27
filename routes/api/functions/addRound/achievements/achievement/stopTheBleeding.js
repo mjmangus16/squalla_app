@@ -8,7 +8,9 @@ const stopTheBleeding = (available, round, rounds, username) => {
     let count = 0;
     let earned = false;
 
-    rounds.scores.forEach(score => {
+    data.info = available.filter(avail => avail.code === 22)[0];
+
+    round.scores.forEach(score => {
       if (score.username === username && score.performance >= 0) {
         earned = true;
       }
@@ -16,8 +18,6 @@ const stopTheBleeding = (available, round, rounds, username) => {
 
     if (earned) {
       let roundsArray = [rounds[1], rounds[2], rounds[3]];
-
-      data.info = available.filter(avail => avail.code === 22)[0];
 
       roundsArray.forEach(round => {
         round.scores.forEach(score => {
