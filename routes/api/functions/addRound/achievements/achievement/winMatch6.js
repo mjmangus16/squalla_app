@@ -6,11 +6,7 @@ const winMatch6 = (available, round, username) => {
 
   let sortable = [];
 
-  for (let i = 0; i < available.length; i++) {
-    if (available[i].code === 20) {
-      data.info = available[i];
-    }
-  }
+  data.info = available.filter(avail => avail.code === 20)[0];
 
   if (round.scores.length >= 6 && round.scores.length < 10) {
     for (let i = 0; i < round.scores.length; i++) {

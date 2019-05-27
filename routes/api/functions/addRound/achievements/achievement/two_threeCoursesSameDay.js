@@ -10,17 +10,9 @@ const two_threeCoursesSameDay = (available, myRounds, round) => {
 
   if (sameDayRounds.length >= 2 && sameDayRounds.length <= 3) {
     if (sameDayRounds.length === 2) {
-      for (let i = 0; i < available.length; i++) {
-        if (available[i].code === 7) {
-          data.info = available[i];
-        }
-      }
+      data.info = available.filter(avail => avail.code === 7)[0];
     } else if (sameDayRounds.length === 3) {
-      for (let i = 0; i < available.length; i++) {
-        if (available[i].code === 6) {
-          data.info = available[i];
-        }
-      }
+      data.info = available.filter(avail => avail.code === 6)[0];
     }
 
     data.pass = true;

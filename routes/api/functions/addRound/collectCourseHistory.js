@@ -14,8 +14,8 @@ const collectCourseHistory = (course, roundHistory, username, tees) => {
             data.score = player.score;
           }
         });
+        courseHistory.push(data);
       }
-      courseHistory.push(data);
     }
   });
 
