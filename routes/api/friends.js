@@ -21,7 +21,11 @@ router.get(
           .then(profile => {
             let achieveData = {};
             const data = {
-              roundsPerFriend: getRoundsPerFriend(profile)
+              roundsPerFriend: getRoundsPerFriend(
+                profile.friends,
+                profile.rounds,
+                profile.username
+              )
             };
 
             const popularityContestEarned = determinePopularityContestEarned(

@@ -4,8 +4,6 @@ const winMatch10 = (available, round, username) => {
     info: {}
   };
 
-  let sortable = [];
-
   data.info = available.filter(avail => avail.code === 21)[0];
 
   if (round.scores.length > 10) {

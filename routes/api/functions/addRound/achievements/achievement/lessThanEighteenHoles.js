@@ -5,8 +5,7 @@ const lessThanEighteenHoles = (available, round) => {
   };
 
   if (round.holes < 18) {
-    data.info = available.filter(avail => avail.code === 1)[0];
-
+    data.info = available.filter(avail => avail.code === 8)[0];
     if (!data.info.data.includes(round.course)) {
       data.info.data.push(round.course);
       data.info.count++;
@@ -15,6 +14,7 @@ const lessThanEighteenHoles = (available, round) => {
       data.pass = false;
     }
   }
+
   return data;
 };
 

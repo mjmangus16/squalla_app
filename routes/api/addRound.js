@@ -96,25 +96,24 @@ router.post(
       return res.json(errors);
     }
 
-    for (let i = 0; i < players.length; i++) {
-      let score = {
-        username: players[i],
+    players.forEach((player, i) => {
+      round.scores.push({
+        username: player,
         score: scores[i],
         experience: 0,
         performance: 0,
         achievementPoints: 0
-      };
-      round.scores.push(score);
-    }
-
-    if (round.league !== null) {
-      League.findOne({ name: round.league }).then(league => {
-        if (league) {
-          league = getLeagueData(league, round);
-          league.save();
-        }
       });
-    }
+    });
+
+    // if (round.league !== null) {
+    //   League.findOne({ name: round.league }).then(league => {
+    //     if (league) {
+    //       league = getLeagueData(league, round);
+    //       league.save();
+    //     }
+    //   });
+    // }
 
     for (let i = 0; i < players.length; i++) {
       Profile.findOne({ username: round.scores[i].username })
@@ -163,9 +162,6 @@ router.post(
               teeData.rating = course.rating;
 
               profile.rounds.unshift(round);
-              profile.rounds.sort(
-                (a, b) => new Date(b.date) - new Date(a.date)
-              );
 
               profile = updateStats(
                 profile,
@@ -196,22 +192,18 @@ router.post(
 
               let extraPerformancePoints = 0;
 
-              for (let i = 0; i < achievesEarned.length; i++) {
-                if (achievesEarned[i].code === 22) {
-                  extraPerformancePoints++;
-                  for (let i = 0; i < profile.rounds[0].scores.length; i++) {
-                    if (
-                      profile.rounds[0].scores[i].username === profile.username
-                    ) {
-                      profile.rounds[0].scores[i].performance++;
-                    }
+              if (achievesEarned.filter(achieve => achieve.code === 22)[0]) {
+                for (let i = 0; i < profile.rounds[0].scores.length; i++) {
+                  if (
+                    profile.rounds[0].scores[i].username === profile.username
+                  ) {
+                    profile.rounds[0].scores[i].performance++;
                   }
                 }
               }
 
               profile.performancePoints =
                 profile.performancePoints + extraPerformancePoints;
-              // console.log(achievesEarned);
 
               const achieveInfo = updateAchievements(achievesEarned);
               profile.achievementPoints =
@@ -244,6 +236,10 @@ router.post(
               );
 
               profile.experience = profile.experience + userExp;
+
+              profile.rounds.sort(
+                (a, b) => new Date(b.date) - new Date(a.date)
+              );
 
               let oldLevel = profile.level;
               profile.level = getLevel(profile.experience, 0, 50, 1);
