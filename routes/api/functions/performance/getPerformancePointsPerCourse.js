@@ -33,9 +33,7 @@ const getPerformancePointsPerCourse = profile => {
     return 0;
   });
 
-  if (coursesPerformance.length > 10) {
-    coursesPerformance.splice(9, coursesPerformance.length);
-  }
+  coursesPerformance = coursesPerformance.splice(0, 10);
 
   return coursesPerformance;
 };
