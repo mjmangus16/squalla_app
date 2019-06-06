@@ -8,6 +8,8 @@ const getPerformancePointsPerCourse = profile => {
     rating: 0
   }));
 
+  console.log("After Map: ", coursesPerformance);
+
   for (let i = 0; i < coursesPerformance.length; i++) {
     for (let y = 0; y < rounds.length; y++) {
       if (coursesPerformance[i].course === rounds[y].course) {
@@ -23,6 +25,8 @@ const getPerformancePointsPerCourse = profile => {
     }
   }
 
+  console.log("Before Sort: ", coursesPerformance);
+
   coursesPerformance.sort((a, b) => {
     if (a.rounds < b.rounds) {
       return 1;
@@ -34,7 +38,10 @@ const getPerformancePointsPerCourse = profile => {
   });
   if (coursesPerformance.length > 10) {
     coursesPerformance.splice(0, 10);
+    console.log("After Splice: ", coursesPerformance);
   }
+
+  console.log("Before Return: ", coursesPerformance);
 
   return coursesPerformance;
 };
