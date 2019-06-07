@@ -40,10 +40,17 @@ const getRoundsPerFriend = (friends, rounds, username) => {
       }
       for (let j = 0; j < rounds[y].scores.length; j++) {
         if (myFriends[i].friend === rounds[y].scores[j].username) {
-          myFriends[i].rounds++;
           let friendScore = rounds[y].scores[j].score;
-          if (myScore < friendScore) {
-            myFriends[i].wins++;
+          if (rounds[y].holes >= 18) {
+            myFriends[i].rounds++;
+            if (myScore < friendScore) {
+              myFriends[i].wins++;
+            }
+          } else {
+            myFriends[i].rounds = myFriends[i].rounds + 0.5;
+            if (myScore < friendScore) {
+              myFriends[i].wins = myFriends[i].wins + 0.5;
+            }
           }
         }
       }
