@@ -7,7 +7,6 @@ const getPerformanceOverall = (rounds, username) => {
   };
 
   rounds.forEach(round => {
-    console.log(round);
     round.scores.forEach(score => {
       if (score.username === username) {
         if (score.performance === 2) {

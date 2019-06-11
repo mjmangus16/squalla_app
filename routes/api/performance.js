@@ -24,7 +24,11 @@ router.get(
           profile.performancePoints,
           profile.username
         ),
-        performancePointsPerCourse: getPerformancePointsPerCourse(profile),
+        performancePointsPerCourse: getPerformancePointsPerCourse(
+          profile.courses,
+          profile.rounds,
+          profile.username
+        ),
         performanceTrendByMonth: getPerformanceTrendByMonth(profile),
         performanceOverall: getPerformanceOverall(
           profile.rounds,

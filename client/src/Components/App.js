@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../redux/actions/authActions";
@@ -95,7 +95,7 @@ class App extends Component {
 
     return (
       <Router>
-        <Fragment>
+        <>
           <CssBaseline />
           <Login
             open={login}
@@ -131,7 +131,7 @@ class App extends Component {
             <Route
               exact
               path="/"
-              component={() => (
+              render={() => (
                 <Home
                   auth={isAuthenticated}
                   registerHandler={this.registerToggle}
@@ -139,11 +139,11 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/dashboard" render={Dashboard} />
             <Route
               exact
               path="/notifications"
-              component={() => (
+              render={() => (
                 <Notifications
                   notifications={notifications}
                   clearAllNotifications={this.props.clearAllNotifications}
@@ -159,7 +159,7 @@ class App extends Component {
             <Route exact path="/friends" component={Friends} />
             <Route exact path="/addRound" component={AddRound} />
           </div>
-        </Fragment>
+        </>
       </Router>
     );
   }
