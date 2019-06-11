@@ -6,23 +6,30 @@ const getPerformanceOverall = (rounds, username) => {
     minus: 0
   };
 
-  for (let i = 0; i < rounds.length; i++) {
-    for (let y = 0; y < rounds[i].scores.length; y++) {
-      if (rounds[i].scores[y].username === username) {
-        if (rounds[i].scores[y].performance === 2) {
+  rounds.forEach(round => {
+    console.log(round);
+    round.scores.forEach(score => {
+      if (score.username === username) {
+        if (score.performance === 2) {
           overall.plus2++;
-        } else if (rounds[i].scores[y].performance === 1) {
+        } else if (score.performance === 1) {
           overall.plus1++;
-        } else if (rounds[i].scores[y].performance === 0.5) {
+        } else if (score.performance === 0.5) {
           overall.plus1 = overall.plus1 + 0.5;
-        } else if (rounds[i].scores[y].performance === 0) {
-          overall.even++;
-        } else if (rounds[i].scores[y].performance === -1) {
+        } else if (score.performance === 0) {
+          if (round.holes >= 18) {
+            overall.even++;
+          } else {
+            overall.even = overall.even + 0.5;
+          }
+        } else if (score.performance === -0.5) {
+          overall.minus = overall.minus + 0.5;
+        } else if (score.performance === -1) {
           overall.minus++;
         }
       }
-    }
-  }
+    });
+  });
 
   return overall;
 };

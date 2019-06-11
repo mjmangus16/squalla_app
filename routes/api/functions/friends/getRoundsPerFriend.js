@@ -5,31 +5,6 @@ const getRoundsPerFriend = (friends, rounds, username) => {
     wins: 0
   }));
 
-  // myFriends.forEach(friend => {
-  //   rounds.forEach(round => {
-  //     let myScore = round.scores.filter(score => score.username === username)[0]
-  //       .score;
-  //     console.log(myScore);
-  //     round.scores.forEach(score => {
-  //       if (score.username === friend) {
-  //         if (round.holes >= 18) {
-  //           friend.rounds++;
-  //         } else {
-  //           friend.rounds = friend.rounds + 0.5;
-  //         }
-
-  //         if (score.score < myScore) {
-  //           if (round.holes >= 18) {
-  //             friend.wins++;
-  //           } else {
-  //             friend.wins = friend.wins + 0.5;
-  //           }
-  //         }
-  //       }
-  //     });
-  //   });
-  // });
-
   for (let i = 0; i < myFriends.length; i++) {
     for (let y = 0; y < rounds.length; y++) {
       let myScore;

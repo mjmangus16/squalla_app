@@ -1,7 +1,5 @@
 const getPointsEarnedPerMonth = (rounds, username) => {
   let year = {};
-  let jan, feb, mar, may, jun, jul, aug, sep, oct, nov, dec;
-  let myscores;
 
   let date = new Date();
   let index = date.getMonth();

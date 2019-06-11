@@ -8,11 +8,11 @@ const getRecentRound = (rounds, username) => {
       course: round.course
     };
 
-    for (let i = 0; i < round.scores.length; i++) {
-      if (round.scores[i].username === username) {
-        data.score = round.scores[i].score;
+    data.score = round.scores.filter(score => {
+      if (score.username === username) {
+        return score.score;
       }
-    }
+    })[0].score;
   } else {
     data = {
       date: "N/A",
