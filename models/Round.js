@@ -15,7 +15,7 @@ const RoundSchema = new Schema({
     required: true
   },
   course: {
-    type: Object,
+    type: String,
     required: true
   },
   scores: {
@@ -24,6 +24,10 @@ const RoundSchema = new Schema({
   },
   holes: {
     type: Number,
+    required: true
+  },
+  tees: {
+    type: String,
     required: true
   }
 });

@@ -139,7 +139,7 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/dashboard" render={Dashboard} />
+            <Route exact path="/dashboard" component={Dashboard} />
             <Route
               exact
               path="/notifications"

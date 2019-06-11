@@ -5,6 +5,7 @@ const passport = require("passport");
 const Profile = require("../../models/Profile");
 const Achievement = require("../../models/Achievement");
 const League = require("../../models/League");
+const Round = require("../../models/Round");
 
 // Load Input Validation
 const validateAddRoundInput = require("../../validation/addRound");
@@ -61,15 +62,15 @@ router.post(
       course.elevation
     );
 
-    const round = {
-      date: req.body.date,
-      course: req.body.course,
-      tees: req.body.tees,
-      holes: req.body.holes,
-      owner: req.user.username,
-      league: league,
-      scores: []
-    };
+    // const round = {
+    //   date: req.body.date,
+    //   course: req.body.course,
+    //   tees: req.body.tees,
+    //   holes: req.body.holes,
+    //   owner: req.user.username,
+    //   league: league,
+    //   scores: []
+    // };
 
     let players = [];
     let scores = [];
@@ -96,14 +97,32 @@ router.post(
       return res.json(errors);
     }
 
-    players.forEach((player, i) => {
-      round.scores.push({
-        username: player,
-        score: scores[i],
-        experience: 0,
-        performance: 0,
-        achievementPoints: 0
-      });
+    // players.forEach((player, i) => {
+    //   round.scores.push({
+    //     username: player,
+    //     score: scores[i],
+    //     experience: 0,
+    //     performance: 0,
+    //     achievementPoints: 0
+    //   });
+    // });
+
+    const round = new Round({
+      date: req.body.date,
+      course: req.body.course,
+      tees: req.body.tees,
+      holes: req.body.holes,
+      owner: req.user.username,
+      league: league,
+      scores: players.map((player, i) => {
+        return {
+          username: player,
+          score: scores[i],
+          experience: 0,
+          performance: 0,
+          achievementPoints: 0
+        };
+      })
     });
 
     // if (round.league !== null) {
