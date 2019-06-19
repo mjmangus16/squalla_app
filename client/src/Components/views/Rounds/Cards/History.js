@@ -17,6 +17,8 @@ import { blue } from "@material-ui/core/colors";
 
 import HistoryInfo from "./HistoryInfo";
 
+import roundsUtils from "../../../../utils/roundsUtils";
+
 const styles = theme => ({
   card: {
     width: "100%",
@@ -52,7 +54,8 @@ const styles = theme => ({
   },
   textField: {
     marginLeft: 16,
-    marginTop: 8
+    marginTop: 8,
+    marginBottom: 8
   }
 });
 
@@ -97,7 +100,6 @@ class History extends Component {
   render() {
     const { classes, data, username } = this.props;
     const { dialog, round, rounds } = this.state;
-    console.log(rounds);
 
     const historyContent = rounds.map(myRound => (
       <TableRow key={data.indexOf(myRound)}>
@@ -108,13 +110,13 @@ class History extends Component {
           {myRound.course}
         </TableCell>
         <TableCell align="center" className={classes.cellPadding}>
-          {getScore(myRound, username)}
+          {roundsUtils.getScore(myRound, username)}
         </TableCell>
         <TableCell align="center" className={classes.cellPadding}>
-          {getPerformance(myRound, username)}
+          {roundsUtils.getPerformance(myRound, username)}
         </TableCell>
         <TableCell align="center" className={classes.cellPadding}>
-          {getExperience(myRound, username)}
+          {roundsUtils.getExperience(myRound, username)}
         </TableCell>
         <TableCell align="center" className={classes.cellPadding}>
           <IconButton onClick={() => this.handleDialogOpen(myRound)}>
@@ -132,7 +134,7 @@ class History extends Component {
         />
         <CardHeader
           title="History"
-          subheader={`${getRoundsPlayed(data)} Rounds Played`}
+          subheader={`${roundsUtils.getRoundsPlayed(data)} Rounds Played`}
           classes={{
             title: classes.headerTitle,
             subheader: classes.subheader
@@ -140,7 +142,7 @@ class History extends Component {
         />
         <TextField
           id="standard-search"
-          label="Find By Course"
+          label="Filter By Course"
           type="search"
           className={classes.textField}
           margin="normal"
@@ -187,57 +189,3 @@ class History extends Component {
 }
 
 export default withStyles(styles)(History);
-
-const getScore = (round, username) => {
-  let data;
-
-  for (let i = 0; i < round.scores.length; i++) {
-    if (round.scores[i].username === username) {
-      data = round.scores[i].score;
-    }
-  }
-  return data;
-};
-
-const getExperience = (round, username) => {
-  let data;
-
-  for (let i = 0; i < round.scores.length; i++) {
-    if (round.scores[i].username === username) {
-      data = round.scores[i].experience;
-    }
-  }
-  return data;
-};
-
-const getPerformance = (round, username) => {
-  let data;
-
-  for (let i = 0; i < round.scores.length; i++) {
-    if (round.scores[i].username === username) {
-      data = round.scores[i].performance;
-    }
-  }
-
-  if (data > 0) {
-    data = "+" + data;
-  }
-
-  // TEST
-
-  return data;
-};
-
-const getRoundsPlayed = rounds => {
-  let data = 0;
-
-  for (let i = 0; i < rounds.length; i++) {
-    if (rounds[i].holes < 18) {
-      data = data + 0.5;
-    } else {
-      data++;
-    }
-  }
-
-  return data;
-};

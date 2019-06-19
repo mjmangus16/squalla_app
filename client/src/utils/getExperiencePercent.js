@@ -1,7 +1,5 @@
 const getExperiencePercent = exp => {
   const getPercent = (min, max) => {
-    console.log(min, max, exp);
-
     let total = max - min;
     let total2 = exp - min;
 
