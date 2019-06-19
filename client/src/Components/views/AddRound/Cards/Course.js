@@ -38,40 +38,14 @@ class CourseInput extends Component {
     courseSelected: ""
   };
 
-  redTeeSelected = () => {
+  teeSelected = tee => {
     this.setState({
-      redTee: true,
-      whiteTee: false,
-      blueTee: false,
-      goldTee: false
+      redTee: tee === "Red" ? true : false,
+      whiteTee: tee === "White" ? true : false,
+      blueTee: tee === "Blue" ? true : false,
+      goldTee: tee === "Gold" ? true : false
     });
-  };
-
-  whiteTeeSelected = () => {
-    this.setState({
-      redTee: false,
-      whiteTee: true,
-      blueTee: false,
-      goldTee: false
-    });
-  };
-
-  blueTeeSelected = () => {
-    this.setState({
-      redTee: false,
-      whiteTee: false,
-      blueTee: true,
-      goldTee: false
-    });
-  };
-
-  goldTeeSelected = () => {
-    this.setState({
-      redTee: false,
-      whiteTee: false,
-      blueTee: false,
-      goldTee: true
-    });
+    this.props.teeHandler(tee);
   };
 
   courseHandler = course => {
@@ -103,10 +77,7 @@ class CourseInput extends Component {
             <Grid item xs={3} sm={3}>
               <Button
                 variant={redTee ? "contained" : "outlined"}
-                onClick={() => {
-                  this.redTeeSelected();
-                  teeHandler("Red");
-                }}
+                onClick={() => this.teeSelected("Red")}
                 className={redTee ? classes.redTee : null}
                 fullWidth
               >
@@ -116,10 +87,7 @@ class CourseInput extends Component {
             <Grid item xs={3} sm={3}>
               <Button
                 variant={whiteTee ? "contained" : "outlined"}
-                onClick={() => {
-                  this.whiteTeeSelected();
-                  teeHandler("White");
-                }}
+                onClick={() => this.teeSelected("White")}
                 className={whiteTee ? classes.whiteTee : null}
                 fullWidth
               >
@@ -129,10 +97,7 @@ class CourseInput extends Component {
             <Grid item xs={3} sm={3}>
               <Button
                 variant={blueTee ? "contained" : "outlined"}
-                onClick={() => {
-                  this.blueTeeSelected();
-                  teeHandler("Blue");
-                }}
+                onClick={() => this.teeSelected("Blue")}
                 className={blueTee ? classes.blueTee : null}
                 fullWidth
               >
@@ -142,10 +107,7 @@ class CourseInput extends Component {
             <Grid item xs={3}>
               <Button
                 variant={goldTee ? "contained" : "outlined"}
-                onClick={() => {
-                  this.goldTeeSelected();
-                  teeHandler("Gold");
-                }}
+                onClick={() => this.teeSelected("Gold")}
                 className={goldTee ? classes.goldTee : null}
                 fullWidth
               >
