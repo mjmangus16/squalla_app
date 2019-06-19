@@ -30,6 +30,7 @@ const styles = theme => ({
   contentContainerOpen: {
     marginTop: 76,
     height: "calc(100% - 64px)",
+    marginBottom: 25,
     [theme.breakpoints.up("xs")]: {
       marginLeft: 225
     },
@@ -40,7 +41,8 @@ const styles = theme => ({
   contentContainerClosed: {
     marginTop: 76,
     height: "calc(100% - 64px)",
-    marginLeft: 0
+    marginLeft: 0,
+    marginBottom: 25
   }
 });
 

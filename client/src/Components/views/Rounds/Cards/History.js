@@ -9,7 +9,8 @@ import {
   TableHead,
   TableRow,
   IconButton,
-  withStyles
+  withStyles,
+  TextField
 } from "@material-ui/core";
 import InfoIcon from "@material-ui/icons/Info";
 import { blue } from "@material-ui/core/colors";
@@ -19,7 +20,7 @@ import HistoryInfo from "./HistoryInfo";
 const styles = theme => ({
   card: {
     width: "100%",
-    height: 500
+    height: 575
   },
   headerTitle: {
     [theme.breakpoints.down("xs")]: {
@@ -48,12 +49,17 @@ const styles = theme => ({
   cellPadding: {
     paddingLeft: 10,
     paddingRight: 10
+  },
+  textField: {
+    marginLeft: 16,
+    marginTop: 8
   }
 });
 
 class History extends Component {
   state = {
     dialog: false,
+    rounds: [],
     round: {
       date: "",
       course: "",
@@ -64,6 +70,10 @@ class History extends Component {
     }
   };
 
+  componentDidMount() {
+    this.setState({ rounds: this.props.data });
+  }
+
   handleDialogOpen = round => {
     this.setState({ dialog: true, round: round });
   };
@@ -73,11 +83,23 @@ class History extends Component {
       dialog: false
     });
   };
+
+  searchCourseInput = value => {
+    this.setState(() => {
+      return {
+        rounds: this.props.data.filter(round =>
+          round.course.toLowerCase().includes(value.toLowerCase())
+        )
+      };
+    });
+  };
+
   render() {
     const { classes, data, username } = this.props;
-    const { dialog, round } = this.state;
+    const { dialog, round, rounds } = this.state;
+    console.log(rounds);
 
-    const historyContent = data.map(myRound => (
+    const historyContent = rounds.map(myRound => (
       <TableRow key={data.indexOf(myRound)}>
         <TableCell align="center" className={classes.cellPadding}>
           {myRound.date}
@@ -115,6 +137,14 @@ class History extends Component {
             title: classes.headerTitle,
             subheader: classes.subheader
           }}
+        />
+        <TextField
+          id="standard-search"
+          label="Find By Course"
+          type="search"
+          className={classes.textField}
+          margin="normal"
+          onChange={e => this.searchCourseInput(e.target.value)}
         />
         <CardContent className={classes.cardContent}>
           <div className={classes.tableContainer}>
