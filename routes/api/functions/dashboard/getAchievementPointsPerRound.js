@@ -3,7 +3,7 @@ const getAchievementPointsPerRound = (rounds, achievePoints, username) => {
   let currentPoints = achievePoints;
 
   if (rounds.length > 9) {
-    rounds = rounds.slice(0, 10);
+    rounds = rounds.slice(0, 9);
   }
 
   rounds.forEach(round => {

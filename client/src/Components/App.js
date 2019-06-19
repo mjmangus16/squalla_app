@@ -10,7 +10,7 @@ import {
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { CssBaseline, withStyles } from "@material-ui/core";
 
-import { Header } from "./Layout/index";
+import Header from "./Layout/Header";
 import Drawer from "./Layout/Drawer";
 
 import Register from "./Auth/Register";
