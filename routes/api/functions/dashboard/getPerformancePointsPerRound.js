@@ -15,7 +15,6 @@ const getPerformancePointsPerRound = (rounds, perfPoints, username) => {
     });
   });
 
-  points.splice(0, 1);
   points.push(currentPoints);
   return points;
 };

@@ -36,7 +36,7 @@ class Level extends Component {
 
   render() {
     const { classes, level } = this.props;
-
+    console.log(getExperiencePercent(this.props.experience, this.props.level));
     return (
       <Card raised className={classes.card}>
         <CardContent>
